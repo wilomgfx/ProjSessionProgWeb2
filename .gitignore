@@ -194,3 +194,9 @@ FakesAssemblies/
 
 # Visual Studio 6 workspace options file
 *.opt
+
+#bin folder
+bin/
+
+#SQL Related folders
+App_Data/
