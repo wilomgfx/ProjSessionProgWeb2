@@ -187,8 +187,20 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Congres.cs" />
+    <Compile Include="Models\Evenement.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Kiosque.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\PlageHoraire.cs" />
+    <Compile Include="Models\Salle.cs" />
+    <Compile Include="Models\Spectacle.cs" />
+    <Compile Include="Models\Tournoi.cs" />
+    <Compile Include="Models\Transaction.cs" />
+    <Compile Include="Models\TypeConference.cs" />
+    <Compile Include="Models\TypeKiosque.cs" />
+    <Compile Include="Models\TypeSpectacle.cs" />
+    <Compile Include="Models\TypeTournoi.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
