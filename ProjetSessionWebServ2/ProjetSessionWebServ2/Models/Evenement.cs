@@ -27,6 +27,6 @@ namespace ProjetSessionWebServ2.Models
 
         public Salle Salle { get; set; }
 
-
+        public bool Actif { get; set; }
     }
 }
