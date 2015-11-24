@@ -177,6 +177,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="DAL\ConferenceRepository.cs" />
     <Compile Include="DAL\ExempleRepo.cs" />
     <Compile Include="DAL\GenericRepository.cs" />
     <Compile Include="DAL\IGenericRepository.cs" />
@@ -187,6 +188,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Conference.cs" />
     <Compile Include="Models\Congres.cs" />
     <Compile Include="Models\Evenement.cs" />
     <Compile Include="Models\IdentityModels.cs" />
