@@ -19,6 +19,7 @@ namespace ProjetSessionWebServ2.Controllers
         public ActionResult Index()
         {
             return View(unitOfWork.ConferenceRepository.ObtenirConference());
+            //return View(unitOfWork.ConferenceRepository.ObtenirConference().Where(t=>t.Actif == true));
             //return View(db.Evenements.ToList());
         }
 
@@ -53,6 +54,7 @@ namespace ProjetSessionWebServ2.Controllers
         {
             if (ModelState.IsValid)
             {
+                conference.Actif = true;
                 unitOfWork.ConferenceRepository.InsertConference(conference);
                 unitOfWork.Save();
                 //db.Evenements.Add(conference);
@@ -117,7 +119,9 @@ namespace ProjetSessionWebServ2.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Conference conference = unitOfWork.ConferenceRepository.ObtenirConferenceParID(id);
-            unitOfWork.ConferenceRepository.DeleteConference(conference);
+            conference.Actif = false;
+            unitOfWork.ConferenceRepository.UpdateConference(conference);
+            //unitOfWork.ConferenceRepository.DeleteConference(conference);
             unitOfWork.Save();
             //db.Evenements.Remove(conference);
             //db.SaveChanges();
