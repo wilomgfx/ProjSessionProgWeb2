@@ -18,8 +18,8 @@ namespace ProjetSessionWebServ2.DAL
             {
                 return Get();
             }
-        public void InsertForfait(Conference Conference) { Insert(Conference); }
-        public void DeleteForfait(Conference Conference) { Delete(Conference); }
-        public void UpdateForfait(Conference Conference) { Update(Conference); }
+        public void InsertConference(Conference Conference) { Insert(Conference); }
+        public void DeleteConference(Conference Conference) { Delete(Conference); }
+        public void UpdateConference(Conference Conference) { Update(Conference); }
     }
 }
