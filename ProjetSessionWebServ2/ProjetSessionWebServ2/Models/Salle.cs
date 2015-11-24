@@ -7,6 +7,6 @@ namespace ProjetSessionWebServ2.Models
 {
     public class Salle
     {
-
+        public int Id { get; set; }
     }
 }

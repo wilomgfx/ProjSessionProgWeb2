@@ -5,8 +5,8 @@ using System.Web;
 
 namespace ProjetSessionWebServ2.Models
 {
-    public class Tournoi
+    public class Tournoi : Evenement
     {
-
+        public TypeTournoi TypeTournoi { get; set; }
     }
 }

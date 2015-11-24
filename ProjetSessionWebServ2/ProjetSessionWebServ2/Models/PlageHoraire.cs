@@ -7,6 +7,6 @@ namespace ProjetSessionWebServ2.Models
 {
     public class PlageHoraire
     {
-
+        public int Id { get; set; }
     }
 }
