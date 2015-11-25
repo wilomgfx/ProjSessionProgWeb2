@@ -179,12 +179,14 @@
     <Compile Include="Controllers\EvenementController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\TournoisController.cs" />
     <Compile Include="DAL\ConferenceRepository.cs" />
     <Compile Include="DAL\EvenementRepository.cs" />
     <Compile Include="DAL\ExempleRepo.cs" />
     <Compile Include="DAL\GenericRepository.cs" />
     <Compile Include="DAL\IGenericRepository.cs" />
     <Compile Include="DAL\IUnitOfWork.cs" />
+    <Compile Include="DAL\TournoiRepository.cs" />
     <Compile Include="DAL\UnitOfWork.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -193,10 +195,12 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Conference.cs" />
     <Compile Include="Models\Congres.cs" />
+    <Compile Include="Models\Equipe.cs" />
     <Compile Include="Models\Evenement.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Kiosque.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Partie.cs" />
     <Compile Include="Models\PlageHoraire.cs" />
     <Compile Include="Models\Salle.cs" />
     <Compile Include="Models\Spectacle.cs" />
@@ -293,6 +297,11 @@
     <Content Include="Views\Evenement\Details.cshtml" />
     <Content Include="Views\Evenement\Edit.cshtml" />
     <Content Include="Views\Evenement\Index.cshtml" />
+    <Content Include="Views\Tournois\Create.cshtml" />
+    <Content Include="Views\Tournois\Delete.cshtml" />
+    <Content Include="Views\Tournois\Details.cshtml" />
+    <Content Include="Views\Tournois\Edit.cshtml" />
+    <Content Include="Views\Tournois\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
