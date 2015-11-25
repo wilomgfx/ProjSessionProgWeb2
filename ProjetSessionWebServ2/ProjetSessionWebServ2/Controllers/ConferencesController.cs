@@ -18,7 +18,7 @@ namespace ProjetSessionWebServ2.Controllers
         // GET: Conferences
         public ActionResult Index()
         {
-            return View(unitOfWork.ConferenceRepository.ObtenirConference());
+            return View(unitOfWork.ConferenceRepository.ObtenirConferences());
             //return View(unitOfWork.ConferenceRepository.ObtenirConference().Where(t=>t.Actif == true));
             //return View(db.Evenements.ToList());
         }

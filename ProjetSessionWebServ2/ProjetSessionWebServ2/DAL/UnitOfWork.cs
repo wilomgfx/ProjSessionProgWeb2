@@ -44,6 +44,21 @@ namespace GestionPhotoImmobilier.DAL
             }
         }
 
+        private TournoiRepository tournoiRepository;
+
+        public TournoiRepository TournoiRepository
+        {
+            get
+            {
+
+                if (this.tournoiRepository == null)
+                {
+                    this.tournoiRepository = new TournoiRepository(context);
+                }
+                return tournoiRepository;
+            }
+        }
+
         //private ExempleRepo exempleRepository;
 
         //public ExempleRepo ExempleReposiroy
@@ -58,7 +73,7 @@ namespace GestionPhotoImmobilier.DAL
         //        return exempleRepository;
         //    }
         //}
-        
+
         public void Save()
         {
             try

@@ -14,7 +14,7 @@ namespace ProjetSessionWebServ2.DAL
             {
                 return GetByID(id);
             }
-        public IEnumerable<Conference> ObtenirConference()
+        public IEnumerable<Conference> ObtenirConferences()
             {
                 return Get();
             }
