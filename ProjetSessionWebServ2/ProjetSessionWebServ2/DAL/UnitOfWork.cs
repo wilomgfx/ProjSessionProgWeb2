@@ -13,6 +13,37 @@ namespace GestionPhotoImmobilier.DAL
 
         
         private ApplicationDbContext context = new ApplicationDbContext();
+
+        private ConferenceRepository conferenceRepository;
+
+        public ConferenceRepository ConferenceRepository
+        {
+            get
+            {
+
+                if (this.conferenceRepository == null)
+                {
+                    this.conferenceRepository = new ConferenceRepository(context);
+                }
+                return conferenceRepository;
+            }
+        }
+
+        private EvenementRepository evenementRepository;
+
+        public EvenementRepository EvenementRepository
+        {
+            get
+            {
+
+                if (this.evenementRepository == null)
+                {
+                    this.evenementRepository = new EvenementRepository(context);
+                }
+                return evenementRepository;
+            }
+        }
+
         //private ExempleRepo exempleRepository;
 
         //public ExempleRepo ExempleReposiroy
