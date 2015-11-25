@@ -42,6 +42,7 @@ namespace ProjetSessionWebServ2.Controllers
         // GET: /Evenement/Create
         public ActionResult Create()
         {
+            ViewBag.DropDownValue = new SelectList(new[] { Evenement.TypeEvent.TypeTournoi.ToString(), Evenement.TypeEvent.TypeKiosque.ToString(), Evenement.TypeEvent.TypeSpectacle.ToString(), Evenement.TypeEvent.TypeConference.ToString(), Evenement.TypeEvent.TypeAutre.ToString() });
             return View();
         }
 
