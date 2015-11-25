@@ -11,120 +11,120 @@ using GestionPhotoImmobilier.DAL;
 
 namespace ProjetSessionWebServ2.Controllers
 {
-    public class ConferencesController : Controller
+    public class EvenementController : Controller
     {
-       // private ApplicationDbContext db = new ApplicationDbContext()Default1;
-        private UnitOfWork unitOfWork = new UnitOfWork();
-        // GET: Conferences
+        //private ApplicationDbContext db = new ApplicationDbContext();
+        private UnitOfWork unitofwork = new UnitOfWork();
+
+        // GET: /Evenement/
         public ActionResult Index()
         {
-            return View(unitOfWork.ConferenceRepository.ObtenirConference());
-            //return View(unitOfWork.ConferenceRepository.ObtenirConference().Where(t=>t.Actif == true));
             //return View(db.Evenements.ToList());
+            return View(unitofwork.EvenementRepository.ObtenirEvenements().ToList());
         }
 
-        // GET: Conferences/Details/5
+        // GET: /Evenement/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Conference conference = unitOfWork.ConferenceRepository.ObtenirConferenceParID(id);
-           
-            if (conference == null)
+            //Evenement evenement = db.Evenements.Find(id);
+            Evenement evenement = unitofwork.EvenementRepository.ObtenirEvenementParID(id);
+            if (evenement == null)
             {
                 return HttpNotFound();
             }
-            return View(conference);
+            return View(evenement);
         }
 
-        // GET: Conferences/Create
+        // GET: /Evenement/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Conferences/Create
+        // POST: /Evenement/Create
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeEvenement")] Conference conference)
+        public ActionResult Create([Bind(Include="Id,Nom,Description,TypeEvenement,Actif")] Evenement evenement)
         {
             if (ModelState.IsValid)
             {
-                conference.Actif = true;
-                unitOfWork.ConferenceRepository.InsertConference(conference);
-                unitOfWork.Save();
-                //db.Evenements.Add(conference);
+                //db.Evenements.Add(evenement);
                 //db.SaveChanges();
+                unitofwork.EvenementRepository.Insert(evenement);
+                unitofwork.Save();
                 return RedirectToAction("Index");
             }
 
-            return View(conference);
+            return View(evenement);
         }
 
-        // GET: Conferences/Edit/5
+        // GET: /Evenement/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Conference conference = unitOfWork.ConferenceRepository.ObtenirConferenceParID(id);
-            if (conference == null)
+            //Evenement evenement = db.Evenements.Find(id);
+            Evenement evenement = unitofwork.EvenementRepository.ObtenirEvenementParID(id);
+            if (evenement == null)
             {
                 return HttpNotFound();
             }
-            return View(conference);
+            return View(evenement);
         }
 
-        // POST: Conferences/Edit/5
+        // POST: /Evenement/Edit/5
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nom,Description,TypeEvenement")] Conference conference)
+        public ActionResult Edit([Bind(Include="Id,Nom,Description,TypeEvenement,Actif")] Evenement evenement)
         {
             if (ModelState.IsValid)
             {
-                unitOfWork.ConferenceRepository.UpdateConference(conference);
-                unitOfWork.Save();
-                //db.Entry(conference).State = EntityState.Modified;
-                //db.SaveChanges();
+                //db.Entry(evenement).State = EntityState.Modified;
+                // db.SaveChanges();
+                unitofwork.EvenementRepository.UpdateEvenement(evenement);
+                unitofwork.Save();
                 return RedirectToAction("Index");
             }
-            return View(conference);
+            return View(evenement);
         }
 
-        // GET: Conferences/Delete/5
+        // GET: /Evenement/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Conference conference = unitOfWork.ConferenceRepository.ObtenirConferenceParID(id);
-            if (conference == null)
+            //Evenement evenement = db.Evenements.Find(id);
+            Evenement evenement = unitofwork.EvenementRepository.ObtenirEvenementParID(id);
+            if (evenement == null)
             {
                 return HttpNotFound();
             }
-            return View(conference);
+            return View(evenement);
         }
 
-        // POST: Conferences/Delete/5
+        // POST: /Evenement/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Conference conference = unitOfWork.ConferenceRepository.ObtenirConferenceParID(id);
-            conference.Actif = false;
-            unitOfWork.ConferenceRepository.UpdateConference(conference);
-            //unitOfWork.ConferenceRepository.DeleteConference(conference);
-            unitOfWork.Save();
-            //db.Evenements.Remove(conference);
+            //Evenement evenement = db.Evenements.Find(id);
+            Evenement evenement = unitofwork.EvenementRepository.ObtenirEvenementParID(id);
+            //db.Evenements.Remove(evenement);
             //db.SaveChanges();
+            unitofwork.EvenementRepository.DeleteEvenement(evenement);
+            unitofwork.Save();
             return RedirectToAction("Index");
         }
 
@@ -132,8 +132,8 @@ namespace ProjetSessionWebServ2.Controllers
         {
             if (disposing)
             {
-                unitOfWork.Dispose();
-               // db.Dispose();
+                //db.Dispose();
+                unitofwork.Dispose();
             }
             base.Dispose(disposing);
         }

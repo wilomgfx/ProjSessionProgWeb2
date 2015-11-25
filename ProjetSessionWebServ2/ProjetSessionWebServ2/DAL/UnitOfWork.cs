@@ -29,6 +29,21 @@ namespace GestionPhotoImmobilier.DAL
             }
         }
 
+        private EvenementRepository evenementRepository;
+
+        public EvenementRepository EvenementRepository
+        {
+            get
+            {
+
+                if (this.evenementRepository == null)
+                {
+                    this.evenementRepository = new EvenementRepository(context);
+                }
+                return evenementRepository;
+            }
+        }
+
         //private ExempleRepo exempleRepository;
 
         //public ExempleRepo ExempleReposiroy

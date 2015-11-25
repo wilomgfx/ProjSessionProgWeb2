@@ -176,6 +176,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ConferencesController.cs" />
+    <Compile Include="Controllers\EvenementController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="DAL\ConferenceRepository.cs" />
@@ -286,6 +287,11 @@
     <Content Include="Views\Conferences\Details.cshtml" />
     <Content Include="Views\Conferences\Edit.cshtml" />
     <Content Include="Views\Conferences\Index.cshtml" />
+    <Content Include="Views\Evenement\Create.cshtml" />
+    <Content Include="Views\Evenement\Delete.cshtml" />
+    <Content Include="Views\Evenement\Details.cshtml" />
+    <Content Include="Views\Evenement\Edit.cshtml" />
+    <Content Include="Views\Evenement\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
