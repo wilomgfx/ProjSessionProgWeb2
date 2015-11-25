@@ -180,6 +180,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="DAL\ConferenceRepository.cs" />
+    <Compile Include="DAL\EvenementRepository.cs" />
     <Compile Include="DAL\ExempleRepo.cs" />
     <Compile Include="DAL\GenericRepository.cs" />
     <Compile Include="DAL\IGenericRepository.cs" />
