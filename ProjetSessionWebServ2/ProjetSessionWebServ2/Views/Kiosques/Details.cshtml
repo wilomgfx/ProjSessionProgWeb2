@@ -1,4 +1,4 @@
-﻿@model ProjetSessionWebServ2.Models.Conference
+﻿@model ProjetSessionWebServ2.Models.Kiosque
 
 @{
     ViewBag.Title = "Details";
@@ -7,7 +7,7 @@
 <h2>Details</h2>
 
 <div>
-    <h4>Conference</h4>
+    <h4>Kiosque</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -27,22 +27,19 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.TypeEvenement)
+            @Html.DisplayNameFor(model => model.TypeKiosque)
         </dt>
+
         <dd>
-            @Html.DisplayFor(model => model.TypeEvenement)
+            @Html.DisplayFor(model => model.TypeKiosque)
         </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.Actif)
         </dt>
+
         <dd>
             @Html.DisplayFor(model => model.Actif)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.TypeConference)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.TypeConference.Nom)
         </dd>
 
     </dl>

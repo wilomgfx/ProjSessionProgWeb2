@@ -14,6 +14,20 @@ namespace ProjetSessionWebServ2.DAL
         
         private ApplicationDbContext context = new ApplicationDbContext();
 
+        private TypeConferenceRepository typeConferenceRepository;
+
+        public TypeConferenceRepository TypeConferenceRepository
+        {
+            get
+            {
+                if (this.typeConferenceRepository == null)
+                {
+                    this.typeConferenceRepository = new TypeConferenceRepository(context);
+                }
+                return typeConferenceRepository;
+            }
+        }
+
         private ConferenceRepository conferenceRepository;
 
         public ConferenceRepository ConferenceRepository
@@ -59,18 +73,64 @@ namespace ProjetSessionWebServ2.DAL
             }
         }
 
-        private SpectacleRepository spectacleRepository;
+        private KiosqueRepository kiosqueRepository;
 
-        public SpectacleRepository SpectacleRepository
+        public KiosqueRepository KiosqueRepository
         {
             get
             {
 
-                if (this.spectacleRepository == null)
+                if (this.kiosqueRepository == null)
                 {
-                    this.spectacleRepository = new SpectacleRepository(context);
+                    this.kiosqueRepository = new KiosqueRepository(context);
                 }
-                return spectacleRepository;
+                return kiosqueRepository;
+            }
+        }
+
+        private TypeKiosqueRepository typeKiosqueRepository;
+
+        public TypeKiosqueRepository TypeKiosqueRepository
+        {
+            get
+            {
+
+                if (this.typeKiosqueRepository == null)
+                {
+                    this.typeKiosqueRepository = new TypeKiosqueRepository(context);
+                }
+                return typeKiosqueRepository;
+            }
+        }
+
+        private SpectacleRepository spectacleRepository;
+       // private SpectacleRepository spectacleRepository;
+
+         public SpectacleRepository SpectacleRepository
+         {
+             get
+             {
+
+                 if (this.spectacleRepository == null)
+                 {
+                     this.spectacleRepository = new SpectacleRepository(context);
+                 }
+                 return spectacleRepository;
+             }
+         }
+
+        private TypeSpectacleRepository typeSpectacleRepository;
+
+        public TypeSpectacleRepository TypeSpectacleRepository
+        {
+            get
+            {
+
+                if (this.typeSpectacleRepository == null)
+                {
+                    this.typeSpectacleRepository = new TypeSpectacleRepository(context);
+                }
+                return typeSpectacleRepository;
             }
         }
 

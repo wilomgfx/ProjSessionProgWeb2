@@ -11,121 +11,110 @@ using ProjetSessionWebServ2.DAL;
 
 namespace ProjetSessionWebServ2.Controllers
 {
-    public class SpectaclesController : Controller
+    public class TypeConferencesController : Controller
     {
         private UnitOfWork unitOfWork = new UnitOfWork();
 
-        // GET: Spectacles
+        // GET: TypeConferences
         public ActionResult Index()
         {
-            var stuff = unitOfWork.SpectacleRepository.ObtenirSpectacles();
-            return View(stuff);
+            return View(unitOfWork.TypeConferenceRepository.ObtenirTypeConferences().ToList());
         }
 
-        // GET: Spectacles/Details/5
+        // GET: TypeConferences/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Spectacle spectacle = unitOfWork.SpectacleRepository.ObtenirSpectacleParID(id);
-
-            if (spectacle == null)
+            TypeConference typeConference = unitOfWork.TypeConferenceRepository.ObtenirTypeConferenceParID(id);
+            if (typeConference == null)
             {
                 return HttpNotFound();
             }
-            return View(spectacle);
+            return View(typeConference);
         }
 
-        // GET: Spectacles/Create
+        // GET: TypeConferences/Create
         public ActionResult Create()
         {
-            SelectList TypeSpectacleId = new SelectList(unitOfWork.TypeSpectacleRepository.ObtenirTypeSpectacles(), "Id", "Nom");
-            ViewBag.TypeSpectacleId = TypeSpectacleId;
             return View();
         }
 
-        // POST: Spectacles/Create
+        // POST: TypeConferences/Create
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeSpectacle,Actif")] Spectacle spectacle)
+        public ActionResult Create([Bind(Include = "Id,Nom")] TypeConference typeConference)
         {
             if (ModelState.IsValid)
             {
-                spectacle.TypeEvenement = Evenement.TypeEvent.TypeSpectacle;
-                spectacle.Actif = true;
-                unitOfWork.SpectacleRepository.InsertSpectacle(spectacle);
+                unitOfWork.TypeConferenceRepository.InsertTypeConference(typeConference);
                 unitOfWork.Save();
                 return RedirectToAction("Index");
             }
-            SelectList TypeSpectacleId = new SelectList(unitOfWork.TypeSpectacleRepository.ObtenirTypeSpectacles(), "Id", "Nom");
-            ViewBag.TypeSpectacleId = TypeSpectacleId;
-            return View(spectacle);
+
+            return View(typeConference);
         }
 
-        // GET: Spectacles/Edit/5
+        // GET: TypeConferences/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Spectacle spectacle = unitOfWork.SpectacleRepository.ObtenirSpectacleParID(id);
-            if (spectacle == null)
+            TypeConference typeConference = unitOfWork.TypeConferenceRepository.ObtenirTypeConferenceParID(id);
+            if (typeConference == null)
             {
                 return HttpNotFound();
             }
-            SelectList TypeSpectacleId = new SelectList(unitOfWork.TypeSpectacleRepository.ObtenirTypeSpectacles(), "Id", "Nom");
-            ViewBag.TypeSpectacleId = TypeSpectacleId;
-            return View(spectacle);
+            return View(typeConference);
         }
 
-        // POST: Spectacles/Edit/5
+        // POST: TypeConferences/Edit/5
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nom,Description,TypeSpectacle,Actif")] Spectacle spectacle)
+        public ActionResult Edit([Bind(Include = "Id,Nom")] TypeConference typeConference)
         {
             if (ModelState.IsValid)
             {
-                spectacle.TypeEvenement = Evenement.TypeEvent.TypeSpectacle;
-                unitOfWork.SpectacleRepository.UpdateSpectacle(spectacle);
+                unitOfWork.TypeConferenceRepository.UpdateTypeConference(typeConference);
                 unitOfWork.Save();
                 return RedirectToAction("Index");
             }
-            SelectList TypeSpectacleId = new SelectList(unitOfWork.TypeSpectacleRepository.ObtenirTypeSpectacles(), "Id", "Nom");
-            ViewBag.TypeSpectacleId = TypeSpectacleId;
-            return View(spectacle);
+            return View(typeConference);
         }
 
-        // GET: Spectacles/Delete/5
+        // GET: TypeConferences/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Spectacle spectacle = unitOfWork.SpectacleRepository.ObtenirSpectacleParID(id);
-            if (spectacle == null)
+            TypeConference typeConference = unitOfWork.TypeConferenceRepository.ObtenirTypeConferenceParID(id);
+            if (typeConference == null)
             {
                 return HttpNotFound();
             }
-            return View(spectacle);
+            return View(typeConference);
         }
 
-        // POST: Spectacles/Delete/5
+        // POST: TypeConferences/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Spectacle spectacle = unitOfWork.SpectacleRepository.ObtenirSpectacleParID(id);
-            spectacle.Actif = false;
-            unitOfWork.SpectacleRepository.UpdateSpectacle(spectacle);
+            TypeConference typeConference = unitOfWork.TypeConferenceRepository.ObtenirTypeConferenceParID(id);
+
+            unitOfWork.TypeConferenceRepository.DeleteTypeConference(typeConference);
             unitOfWork.Save();
+
             return RedirectToAction("Index");
         }
 

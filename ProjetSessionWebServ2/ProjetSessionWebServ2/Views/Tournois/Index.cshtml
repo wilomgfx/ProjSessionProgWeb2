@@ -9,6 +9,15 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+@using (Html.BeginForm("SearchTournoi", "Tournois", FormMethod.Post, htmlAttributes: new { @class = "col-lg-6 col-md-offset-4" }))
+{
+    <h3>Search for tournaments</h3>
+    <div class="row">
+        <input name="search" id="name" type="text" class="form-control col-lg-6" placeholder="name or words to search" />
+        <input type="submit" value="Search" class="btn btn-default"/>
+    </div>
+}
+<br />
 <table class="table">
     <tr>
         <th>

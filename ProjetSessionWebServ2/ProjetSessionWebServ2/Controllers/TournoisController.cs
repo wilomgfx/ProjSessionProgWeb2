@@ -8,7 +8,6 @@ using System.Web;
 using System.Web.Mvc;
 using ProjetSessionWebServ2.Models;
 using ProjetSessionWebServ2.DAL;
-using ProjetSessionWebServ2.DAL;
 
 namespace ProjetSessionWebServ2.Controllers
 {
@@ -21,6 +20,15 @@ namespace ProjetSessionWebServ2.Controllers
         public ActionResult Index()
         {
             return View(uow.TournoiRepository.ObtenirTournois());
+        }
+        [HttpPost]
+        public ActionResult SearchTournoi(FormCollection collection)
+        {
+            string nameToSearch = collection["search"];
+
+            IEnumerable<Tournoi> lstTournoi = uow.TournoiRepository.ObtenirTournoiParNom(nameToSearch);
+
+            return View("Index", lstTournoi);
         }
 
         // GET: Tournois/Details/5

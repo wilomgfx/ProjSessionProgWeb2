@@ -31,6 +31,12 @@ namespace ProjetSessionWebServ2.DAL
             return GetByID(id).Description;
         }
 
+        public IEnumerable<Tournoi> ObtenirTournoiParNom(string nom)
+        {
+            IEnumerable<Tournoi> lstFiltered = Get(t => t.Nom.Equals(nom)).ToList();
+            return lstFiltered.Count() == 0 ? ObtenirTournois() : lstFiltered;
+        }
+
         public List<PlageHoraire> ObtenirPlageHoraireTournoi(int? id)
         {
             return GetByID(id).PlageHoraires;
