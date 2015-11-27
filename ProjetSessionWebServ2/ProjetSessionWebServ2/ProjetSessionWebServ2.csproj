@@ -192,15 +192,11 @@
     <Compile Include="DAL\IUnitOfWork.cs" />
     <Compile Include="DAL\KiosqueRepository.cs" />
     <Compile Include="DAL\SpectacleRepository.cs" />
-    <Compile Include="DAL\TournoiRepository.cs" />
-    <Compile Include="DAL\TypeSpectacleRepository.cs" />
-    <Compile Include="Controllers\TypeSpectaclesController.cs" />
     <Compile Include="DAL\TypeKiosqueRepository.cs" />
-    <Compile Include="DAL\TypeKiosqueRepository.cs" />
-    <Compile Include="DAL\TypeSpectacleRepository.cs" />
     <Compile Include="Controllers\TypeSpectaclesController.cs" />
     <Compile Include="DAL\TournoiRepository.cs" />
     <Compile Include="DAL\TypeConferenceRepository.cs" />
+    <Compile Include="DAL\TypeSpectacleRepository.cs" />
     <Compile Include="DAL\UnitOfWork.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -326,7 +322,6 @@
     <Content Include="Views\TypeSpectacles\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Content Include="Views\Kiosques\Create.cshtml" />
     <Content Include="Views\Kiosques\Delete.cshtml" />
     <Content Include="Views\Kiosques\Details.cshtml" />
@@ -344,7 +339,6 @@
     <Content Include="Views\TypeSpectacles\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Content Include="Views\TypeConferences\Create.cshtml" />
     <Content Include="Views\TypeConferences\Delete.cshtml" />
     <Content Include="Views\TypeConferences\Details.cshtml" />
@@ -354,6 +348,9 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
