@@ -37,6 +37,7 @@ namespace ProjetSessionWebServ2.Models
 
         public System.Data.Entity.DbSet<ProjetSessionWebServ2.Models.TypeKiosque> TypeKiosques { get; set; }
 
+        public DbSet<TypeConference> TypeConferences { get; set; }
 
     }
 }
