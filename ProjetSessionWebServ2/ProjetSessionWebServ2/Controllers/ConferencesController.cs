@@ -30,18 +30,23 @@ namespace ProjetSessionWebServ2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Conference conference = unitOfWork.ConferenceRepository.ObtenirConferenceParID(id);
-           
-            if (conference == null)
+          //  Conference conference = unitOfWork.ConferenceRepository.ObtenirConferenceParID(id);
+            Conference confenrence2 = unitOfWork.ConferenceRepository.ObtenirConferences().Where(u=>u.Id.Equals(id)).FirstOrDefault();
+            if (confenrence2 == null)
             {
                 return HttpNotFound();
             }
-            return View(conference);
+
+            return View(confenrence2);
         }
 
         // GET: Conferences/Create
         public ActionResult Create()
         {
+
+            SelectList TypeConferenceId = new SelectList(unitOfWork.TypeConferenceRepository.ObtenirTypeConferences(), "Id", "Nom");
+            ViewBag.TypeConferenceIdViewBag = TypeConferenceId;
+
             return View();
         }
 
@@ -50,8 +55,13 @@ namespace ProjetSessionWebServ2.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeEvenement")] Conference conference)
+        public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeConferenceId")] Conference conference, int TypeConferenceIdViewBag)
         {
+            conference.TypeEvenement = Evenement.TypeEvent.TypeConference;
+
+            conference.TypeConferenceId = TypeConferenceIdViewBag;
+            TypeConference typeConferenceRevenu = unitOfWork.TypeConferenceRepository.ObtenirTypeConferences().Where(u => u.Id.Equals(TypeConferenceIdViewBag)).FirstOrDefault();
+            conference.TypeConference = typeConferenceRevenu;
             if (ModelState.IsValid)
             {
                 conference.Actif = true;
@@ -61,6 +71,8 @@ namespace ProjetSessionWebServ2.Controllers
                 //db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            SelectList TypeConferenceId2 = new SelectList(unitOfWork.TypeConferenceRepository.ObtenirTypeConferences(), "Id", "Nom");
+            ViewBag.TypeConferenceIdViewBag = TypeConferenceId2;
 
             return View(conference);
         }
@@ -72,7 +84,12 @@ namespace ProjetSessionWebServ2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+         
+
             Conference conference = unitOfWork.ConferenceRepository.ObtenirConferenceParID(id);
+
+            SelectList TypeConferenceId = new SelectList(unitOfWork.TypeConferenceRepository.ObtenirTypeConferences(), "Id", "Nom", conference.TypeConference.Id);
+            ViewBag.TypeConferenceIdViewBag = TypeConferenceId;
             if (conference == null)
             {
                 return HttpNotFound();
@@ -85,8 +102,11 @@ namespace ProjetSessionWebServ2.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nom,Description,TypeEvenement")] Conference conference)
+        public ActionResult Edit([Bind(Include = "Id,Nom,Description,TypeEvenement,TypeConferenceId, Actif")] Conference conference, int TypeConferenceIdViewBag)
         {
+            TypeConference typeConferenceRevenu = unitOfWork.TypeConferenceRepository.ObtenirTypeConferences().Where(u => u.Id.Equals(TypeConferenceIdViewBag)).FirstOrDefault();
+            conference.TypeConferenceId = TypeConferenceIdViewBag;
+            conference.TypeConference = typeConferenceRevenu;
             if (ModelState.IsValid)
             {
                 unitOfWork.ConferenceRepository.UpdateConference(conference);
@@ -95,6 +115,8 @@ namespace ProjetSessionWebServ2.Controllers
                 //db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            SelectList TypeConferenceId2 = new SelectList(unitOfWork.TypeConferenceRepository.ObtenirTypeConferences(), "Id", "Nom", conference.TypeConference.Id);
+            ViewBag.TypeConferenceIdViewBag = TypeConferenceId2;
             return View(conference);
         }
 

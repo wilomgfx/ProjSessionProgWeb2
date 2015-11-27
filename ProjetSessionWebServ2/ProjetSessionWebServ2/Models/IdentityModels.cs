@@ -34,7 +34,7 @@ namespace ProjetSessionWebServ2.Models
         }
 
         public DbSet<Evenement> Evenements { get; set; }
-
+        public DbSet<TypeConference> TypeConferences { get; set; }
 
     }
 }

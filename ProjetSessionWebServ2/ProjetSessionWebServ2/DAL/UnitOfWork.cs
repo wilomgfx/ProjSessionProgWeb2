@@ -14,6 +14,20 @@ namespace GestionPhotoImmobilier.DAL
         
         private ApplicationDbContext context = new ApplicationDbContext();
 
+        private TypeConferenceRepository typeConferenceRepository;
+
+        public TypeConferenceRepository TypeConferenceRepository
+        {
+            get
+            {
+                if (this.typeConferenceRepository == null)
+                {
+                    this.typeConferenceRepository = new TypeConferenceRepository(context);
+                }
+                return typeConferenceRepository;
+            }
+        }
+
         private ConferenceRepository conferenceRepository;
 
         public ConferenceRepository ConferenceRepository
@@ -59,9 +73,9 @@ namespace GestionPhotoImmobilier.DAL
             }
         }
 
-        private SpectacleRepository spectacleRepository;
+       // private SpectacleRepository spectacleRepository;
 
-        public SpectacleRepository SpectacleRepository
+       /* public SpectacleRepository SpectacleRepository
         {
             get
             {
@@ -72,7 +86,7 @@ namespace GestionPhotoImmobilier.DAL
                 }
                 return spectacleRepository;
             }
-        }
+        }*/
 
         //private ExempleRepo exempleRepository;
 

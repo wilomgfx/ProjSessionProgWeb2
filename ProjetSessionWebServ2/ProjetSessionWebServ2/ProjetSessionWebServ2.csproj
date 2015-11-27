@@ -180,14 +180,15 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\TournoisController.cs" />
+    <Compile Include="Controllers\TypeConferencesController.cs" />
     <Compile Include="DAL\ConferenceRepository.cs" />
     <Compile Include="DAL\EvenementRepository.cs" />
     <Compile Include="DAL\ExempleRepo.cs" />
     <Compile Include="DAL\GenericRepository.cs" />
     <Compile Include="DAL\IGenericRepository.cs" />
     <Compile Include="DAL\IUnitOfWork.cs" />
-    <Compile Include="DAL\SpectacleRepository.cs" />
     <Compile Include="DAL\TournoiRepository.cs" />
+    <Compile Include="DAL\TypeConferenceRepository.cs" />
     <Compile Include="DAL\UnitOfWork.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -308,6 +309,11 @@
     <Content Include="Views\Spectacles\Details.cshtml" />
     <Content Include="Views\Spectacles\Edit.cshtml" />
     <Content Include="Views\Spectacles\Index.cshtml" />
+    <Content Include="Views\TypeConferences\Create.cshtml" />
+    <Content Include="Views\TypeConferences\Delete.cshtml" />
+    <Content Include="Views\TypeConferences\Details.cshtml" />
+    <Content Include="Views\TypeConferences\Edit.cshtml" />
+    <Content Include="Views\TypeConferences\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
