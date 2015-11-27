@@ -59,20 +59,50 @@ namespace GestionPhotoImmobilier.DAL
             }
         }
 
-        private SpectacleRepository spectacleRepository;
+        private KiosqueRepository kiosqueRepository;
 
-        public SpectacleRepository SpectacleRepository
+        public KiosqueRepository KiosqueRepository
         {
             get
             {
 
-                if (this.spectacleRepository == null)
+                if (this.kiosqueRepository == null)
                 {
-                    this.spectacleRepository = new SpectacleRepository(context);
+                    this.kiosqueRepository = new KiosqueRepository(context);
                 }
-                return spectacleRepository;
+                return kiosqueRepository;
             }
         }
+
+        private TypeKiosqueRepository typeKiosqueRepository;
+
+        public TypeKiosqueRepository TypeKiosqueRepository
+        {
+            get
+            {
+
+                if (this.typeKiosqueRepository == null)
+                {
+                    this.typeKiosqueRepository = new TypeKiosqueRepository(context);
+                }
+                return typeKiosqueRepository;
+            }
+        }        
+
+        //private SpectacleRepository spectacleRepository;
+
+        //public SpectacleRepository SpectacleRepository
+        //{
+        //    get
+        //    {
+
+        //        if (this.spectacleRepository == null)
+        //        {
+        //            this.spectacleRepository = new SpectacleRepository(context);
+        //        }
+        //        return spectacleRepository;
+        //    }
+        //}
 
         //private ExempleRepo exempleRepository;
 
