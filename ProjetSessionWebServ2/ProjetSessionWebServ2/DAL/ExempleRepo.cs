@@ -5,7 +5,7 @@ using System.Web;
 
 
 
-namespace GestionPhotoImmobilier.DAL
+namespace ProjetSessionWebServ2.DAL
 {
     public class ExempleRepo /*: GenericRepository<Forfait>*/
     {
