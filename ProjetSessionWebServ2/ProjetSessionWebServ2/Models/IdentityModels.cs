@@ -35,8 +35,6 @@ namespace ProjetSessionWebServ2.Models
 
         public DbSet<Evenement> Evenements { get; set; }
 
-        public System.Data.Entity.DbSet<ProjetSessionWebServ2.Models.TypeSpectacle> TypeSpectacles { get; set; }
-
 
     }
 }

@@ -59,6 +59,36 @@ namespace ProjetSessionWebServ2.DAL
             }
         }
 
+        private KiosqueRepository kiosqueRepository;
+
+        public KiosqueRepository KiosqueRepository
+        {
+            get
+            {
+
+                if (this.kiosqueRepository == null)
+                {
+                    this.kiosqueRepository = new KiosqueRepository(context);
+                }
+                return kiosqueRepository;
+            }
+        }
+
+        private TypeKiosqueRepository typeKiosqueRepository;
+
+        public TypeKiosqueRepository TypeKiosqueRepository
+        {
+            get
+            {
+
+                if (this.typeKiosqueRepository == null)
+                {
+                    this.typeKiosqueRepository = new TypeKiosqueRepository(context);
+                }
+                return typeKiosqueRepository;
+            }
+        }
+
         private SpectacleRepository spectacleRepository;
 
         public SpectacleRepository SpectacleRepository

@@ -25,15 +25,27 @@
         <dd>
             @Html.DisplayFor(model => model.Description)
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.TypeEvenement)
+            @Html.DisplayNameFor(model => model.Salle.NoSalle)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.TypeEvenement)
+            @Html.DisplayFor(model => model.Salle.NoSalle)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Salle.Dimension.Largeur)
+        </dt>
 
+        <dd>
+            @Html.DisplayFor(model => model.Salle.Dimension.Largeur)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Salle.Dimension.Longueur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Salle.Dimension.Longueur)
+        </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Actif)
         </dt>
