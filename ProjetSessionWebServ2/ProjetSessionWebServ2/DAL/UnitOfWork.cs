@@ -14,6 +14,20 @@ namespace ProjetSessionWebServ2.DAL
         
         private ApplicationDbContext context = new ApplicationDbContext();
 
+        private TypeConferenceRepository typeConferenceRepository;
+
+        public TypeConferenceRepository TypeConferenceRepository
+        {
+            get
+            {
+                if (this.typeConferenceRepository == null)
+                {
+                    this.typeConferenceRepository = new TypeConferenceRepository(context);
+                }
+                return typeConferenceRepository;
+            }
+        }
+
         private ConferenceRepository conferenceRepository;
 
         public ConferenceRepository ConferenceRepository
@@ -59,9 +73,40 @@ namespace ProjetSessionWebServ2.DAL
             }
         }
 
-        private SpectacleRepository spectacleRepository;
+        private KiosqueRepository kiosqueRepository;
 
-        public SpectacleRepository SpectacleRepository
+        public KiosqueRepository KiosqueRepository
+        {
+            get
+            {
+
+                if (this.kiosqueRepository == null)
+                {
+                    this.kiosqueRepository = new KiosqueRepository(context);
+                }
+                return kiosqueRepository;
+            }
+        }
+
+        private TypeKiosqueRepository typeKiosqueRepository;
+
+        public TypeKiosqueRepository TypeKiosqueRepository
+        {
+            get
+            {
+
+                if (this.typeKiosqueRepository == null)
+                {
+                    this.typeKiosqueRepository = new TypeKiosqueRepository(context);
+                }
+                return typeKiosqueRepository;
+            }
+        }
+
+        private SpectacleRepository spectacleRepository;
+       // private SpectacleRepository spectacleRepository;
+
+       /* public SpectacleRepository SpectacleRepository
         {
             get
             {
@@ -72,7 +117,7 @@ namespace ProjetSessionWebServ2.DAL
                 }
                 return spectacleRepository;
             }
-        }
+        }*/
 
         //private ExempleRepo exempleRepository;
 

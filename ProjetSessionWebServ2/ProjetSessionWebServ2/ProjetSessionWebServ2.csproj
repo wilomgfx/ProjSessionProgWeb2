@@ -178,17 +178,24 @@
     <Compile Include="Controllers\ConferencesController.cs" />
     <Compile Include="Controllers\EvenementController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KiosquesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SpectaclesController.cs" />
     <Compile Include="Controllers\TournoisController.cs" />
+    <Compile Include="Controllers\TypeKiosquesController.cs" />
+    <Compile Include="Controllers\TypeConferencesController.cs" />
     <Compile Include="DAL\ConferenceRepository.cs" />
     <Compile Include="DAL\EvenementRepository.cs" />
     <Compile Include="DAL\ExempleRepo.cs" />
     <Compile Include="DAL\GenericRepository.cs" />
     <Compile Include="DAL\IGenericRepository.cs" />
     <Compile Include="DAL\IUnitOfWork.cs" />
+    <Compile Include="DAL\KiosqueRepository.cs" />
     <Compile Include="DAL\SpectacleRepository.cs" />
     <Compile Include="DAL\TournoiRepository.cs" />
+    <Compile Include="DAL\TypeKiosqueRepository.cs" />
+    <Compile Include="DAL\TournoiRepository.cs" />
+    <Compile Include="DAL\TypeConferenceRepository.cs" />
     <Compile Include="DAL\UnitOfWork.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -197,6 +204,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Conference.cs" />
     <Compile Include="Models\Congres.cs" />
+    <Compile Include="Models\Dimension.cs" />
     <Compile Include="Models\Equipe.cs" />
     <Compile Include="Models\Evenement.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -205,6 +213,7 @@
     <Compile Include="Models\Partie.cs" />
     <Compile Include="Models\PlageHoraire.cs" />
     <Compile Include="Models\Salle.cs" />
+    <Compile Include="Models\Section.cs" />
     <Compile Include="Models\Spectacle.cs" />
     <Compile Include="Models\Tournoi.cs" />
     <Compile Include="Models\Transaction.cs" />
@@ -309,6 +318,21 @@
     <Content Include="Views\Spectacles\Details.cshtml" />
     <Content Include="Views\Spectacles\Edit.cshtml" />
     <Content Include="Views\Spectacles\Index.cshtml" />
+    <Content Include="Views\Kiosques\Create.cshtml" />
+    <Content Include="Views\Kiosques\Delete.cshtml" />
+    <Content Include="Views\Kiosques\Details.cshtml" />
+    <Content Include="Views\Kiosques\Edit.cshtml" />
+    <Content Include="Views\Kiosques\Index.cshtml" />
+    <Content Include="Views\TypeKiosques\Create.cshtml" />
+    <Content Include="Views\TypeKiosques\Delete.cshtml" />
+    <Content Include="Views\TypeKiosques\Details.cshtml" />
+    <Content Include="Views\TypeKiosques\Edit.cshtml" />
+    <Content Include="Views\TypeKiosques\Index.cshtml" />
+    <Content Include="Views\TypeConferences\Create.cshtml" />
+    <Content Include="Views\TypeConferences\Delete.cshtml" />
+    <Content Include="Views\TypeConferences\Details.cshtml" />
+    <Content Include="Views\TypeConferences\Edit.cshtml" />
+    <Content Include="Views\TypeConferences\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

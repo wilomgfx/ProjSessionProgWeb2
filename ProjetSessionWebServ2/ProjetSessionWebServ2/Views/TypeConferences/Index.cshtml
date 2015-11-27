@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ProjetSessionWebServ2.Models.Conference>
+﻿@model IEnumerable<ProjetSessionWebServ2.Models.TypeConference>
 
 @{
     ViewBag.Title = "Index";
@@ -14,12 +14,6 @@
         <th>
             @Html.DisplayNameFor(model => model.Nom)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TypeConference)
-        </th>
         <th></th>
     </tr>
 
@@ -27,12 +21,6 @@
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Nom)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TypeConference.Nom)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
