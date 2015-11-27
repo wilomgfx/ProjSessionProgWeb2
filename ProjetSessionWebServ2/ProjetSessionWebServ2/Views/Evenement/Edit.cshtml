@@ -34,20 +34,13 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.TypeEvenement, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Salle.NoSalle, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.TypeEvenement)
-                @Html.ValidationMessageFor(model => model.TypeEvenement)
+                @Html.EditorFor(model => model.Salle.NoSalle)
+                @Html.ValidationMessageFor(model => model.Salle.NoSalle)
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Actif, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Actif)
-                @Html.ValidationMessageFor(model => model.Actif)
-            </div>
-        </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

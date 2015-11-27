@@ -7,7 +7,7 @@ using System.Data.Entity;
 using System.Data;
 using ProjetSessionWebServ2.Models;
 
-namespace GestionPhotoImmobilier.DAL
+namespace ProjetSessionWebServ2.DAL
 {
     public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
     {
