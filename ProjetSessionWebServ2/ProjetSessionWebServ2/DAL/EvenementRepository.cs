@@ -16,7 +16,7 @@ namespace ProjetSessionWebServ2.DAL
             }
         public IEnumerable<Evenement> ObtenirEvenements()
         {
-            return Get();
+            return Get(null,null,"Salle");
         }
         public IEnumerable<Evenement> ObtenirEvenementParType(ProjetSessionWebServ2.Models.Evenement.TypeEvent type)
             {
