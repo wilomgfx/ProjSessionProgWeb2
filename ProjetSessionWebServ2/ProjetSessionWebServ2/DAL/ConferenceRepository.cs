@@ -1,4 +1,4 @@
-﻿using GestionPhotoImmobilier.DAL;
+﻿using ProjetSessionWebServ2.DAL;
 using ProjetSessionWebServ2.Models;
 using System;
 using System.Collections.Generic;
@@ -16,7 +16,7 @@ namespace ProjetSessionWebServ2.DAL
             }
         public IEnumerable<Conference> ObtenirConferences()
             {
-                return Get();
+                return Get(null,null,"TypeConference");
             }
         public void InsertConference(Conference Conference) { Insert(Conference); }
         public void DeleteConference(Conference Conference) { Delete(Conference); }

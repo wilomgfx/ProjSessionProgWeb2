@@ -1,4 +1,4 @@
-﻿using GestionPhotoImmobilier.DAL;
+﻿using ProjetSessionWebServ2.DAL;
 using ProjetSessionWebServ2.Models;
 using System;
 using System.Collections.Generic;
@@ -29,6 +29,12 @@ namespace ProjetSessionWebServ2.DAL
         public string ObtenirDescriptionTournoi(int? id)
         {
             return GetByID(id).Description;
+        }
+
+        public IEnumerable<Tournoi> ObtenirTournoiParNom(string nom)
+        {
+            IEnumerable<Tournoi> lstFiltered = Get(t => t.Nom.Equals(nom)).ToList();
+            return lstFiltered.Count() == 0 ? ObtenirTournois() : lstFiltered;
         }
 
         public List<PlageHoraire> ObtenirPlageHoraireTournoi(int? id)

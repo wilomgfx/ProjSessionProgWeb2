@@ -33,20 +33,34 @@
             </div>
         </div>
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.TypeEvenement, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EnumDropDownListFor(model => model.TypeEvenement, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.TypeEvenement, "", new { @class = "text-danger" })
             </div>
-        </div>
-
+        </div>*@
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+            @Html.LabelFor(model => model.TypeConference, "TypeConference", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("TypeConferenceIdViewBag", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TypeConference, "", new { @class = "text-danger" })
             </div>
         </div>
-    </div>
+        <div class="form-group">
+            @Html.DisplayNameFor(model => model.Actif)
+            <div class="col-md-10" style="display:none" >
+                @Html.EditorFor(model => model.Actif, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            @Html.DisplayFor(model => model.Actif)
+        </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
 }
 
 <div>

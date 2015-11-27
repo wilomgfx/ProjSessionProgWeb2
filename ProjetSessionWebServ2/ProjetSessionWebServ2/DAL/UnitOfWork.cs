@@ -6,13 +6,27 @@ using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
 
-namespace GestionPhotoImmobilier.DAL
+namespace ProjetSessionWebServ2.DAL
 {
     public class UnitOfWork : IUnitOfWork
     {
 
         
         private ApplicationDbContext context = new ApplicationDbContext();
+
+        private TypeConferenceRepository typeConferenceRepository;
+
+        public TypeConferenceRepository TypeConferenceRepository
+        {
+            get
+            {
+                if (this.typeConferenceRepository == null)
+                {
+                    this.typeConferenceRepository = new TypeConferenceRepository(context);
+                }
+                return typeConferenceRepository;
+            }
+        }
 
         private ConferenceRepository conferenceRepository;
 
@@ -87,22 +101,38 @@ namespace GestionPhotoImmobilier.DAL
                 }
                 return typeKiosqueRepository;
             }
-        }        
+        }
 
-        //private SpectacleRepository spectacleRepository;
+        private SpectacleRepository spectacleRepository;
+       // private SpectacleRepository spectacleRepository;
 
-        //public SpectacleRepository SpectacleRepository
-        //{
-        //    get
-        //    {
+         public SpectacleRepository SpectacleRepository
+         {
+             get
+             {
 
-        //        if (this.spectacleRepository == null)
-        //        {
-        //            this.spectacleRepository = new SpectacleRepository(context);
-        //        }
-        //        return spectacleRepository;
-        //    }
-        //}
+                 if (this.spectacleRepository == null)
+                 {
+                     this.spectacleRepository = new SpectacleRepository(context);
+                 }
+                 return spectacleRepository;
+             }
+         }
+
+        private TypeSpectacleRepository typeSpectacleRepository;
+
+        public TypeSpectacleRepository TypeSpectacleRepository
+        {
+            get
+            {
+
+                if (this.typeSpectacleRepository == null)
+                {
+                    this.typeSpectacleRepository = new TypeSpectacleRepository(context);
+                }
+                return typeSpectacleRepository;
+            }
+        }
 
         //private ExempleRepo exempleRepository;
 
