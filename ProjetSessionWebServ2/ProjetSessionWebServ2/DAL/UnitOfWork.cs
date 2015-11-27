@@ -14,6 +14,20 @@ namespace ProjetSessionWebServ2.DAL
         
         private ApplicationDbContext context = new ApplicationDbContext();
 
+        private TypeConferenceRepository typeConferenceRepository;
+
+        public TypeConferenceRepository TypeConferenceRepository
+        {
+            get
+            {
+                if (this.typeConferenceRepository == null)
+                {
+                    this.typeConferenceRepository = new TypeConferenceRepository(context);
+                }
+                return typeConferenceRepository;
+            }
+        }
+
         private ConferenceRepository conferenceRepository;
 
         public ConferenceRepository ConferenceRepository
@@ -90,8 +104,9 @@ namespace ProjetSessionWebServ2.DAL
         }
 
         private SpectacleRepository spectacleRepository;
+       // private SpectacleRepository spectacleRepository;
 
-        public SpectacleRepository SpectacleRepository
+       /* public SpectacleRepository SpectacleRepository
         {
             get
             {
@@ -102,7 +117,7 @@ namespace ProjetSessionWebServ2.DAL
                 }
                 return spectacleRepository;
             }
-        }
+        }*/
 
         private TypeSpectacleRepository typeSpectacleRepository;
 
