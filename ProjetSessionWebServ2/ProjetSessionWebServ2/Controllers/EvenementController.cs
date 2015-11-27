@@ -31,7 +31,8 @@ namespace ProjetSessionWebServ2.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             //Evenement evenement = db.Evenements.Find(id);
-            Evenement evenement = unitofwork.EvenementRepository.ObtenirEvenementParID(id);
+            //Evenement evenement = unitofwork.EvenementRepository.ObtenirEvenementParID(id);
+            Evenement evenement = unitofwork.EvenementRepository.ObtenirEvenements().Where(e => e.Id.Equals(id)).FirstOrDefault();
             if (evenement == null)
             {
                 return HttpNotFound();
@@ -42,7 +43,6 @@ namespace ProjetSessionWebServ2.Controllers
         // GET: /Evenement/Create
         public ActionResult Create()
         {
-            ViewBag.DropDownValue = new SelectList(new[] { Evenement.TypeEvent.TypeTournoi.ToString(), Evenement.TypeEvent.TypeKiosque.ToString(), Evenement.TypeEvent.TypeSpectacle.ToString(), Evenement.TypeEvent.TypeConference.ToString(), Evenement.TypeEvent.TypeAutre.ToString() });
             return View();
         }
 
@@ -51,12 +51,15 @@ namespace ProjetSessionWebServ2.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="Id,Nom,Description,TypeEvenement,Actif")] Evenement evenement)
+        public ActionResult Create([Bind(Include = "Id,Nom,Description,Salle,Actif")] Evenement evenement, Salle salle)
         {
             if (ModelState.IsValid)
             {
                 //db.Evenements.Add(evenement);
                 //db.SaveChanges();
+                evenement.TypeEvenement = Evenement.TypeEvent.TypeAutre;
+                evenement.Actif = true;
+                evenement.Salle = salle;
                 unitofwork.EvenementRepository.Insert(evenement);
                 unitofwork.Save();
                 return RedirectToAction("Index");
@@ -73,7 +76,8 @@ namespace ProjetSessionWebServ2.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             //Evenement evenement = db.Evenements.Find(id);
-            Evenement evenement = unitofwork.EvenementRepository.ObtenirEvenementParID(id);
+            //Evenement evenement = unitofwork.EvenementRepository.ObtenirEvenementParID(id);
+            Evenement evenement = unitofwork.EvenementRepository.ObtenirEvenements().Where(e => e.Id.Equals(id)).FirstOrDefault();
             if (evenement == null)
             {
                 return HttpNotFound();
@@ -86,12 +90,13 @@ namespace ProjetSessionWebServ2.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="Id,Nom,Description,TypeEvenement,Actif")] Evenement evenement)
+        public ActionResult Edit([Bind(Include = "Id,Nom,Description,Salle,Actif")] Evenement evenement, Salle salle)
         {
             if (ModelState.IsValid)
             {
                 //db.Entry(evenement).State = EntityState.Modified;
                 // db.SaveChanges();
+                evenement.Salle = salle;
                 unitofwork.EvenementRepository.UpdateEvenement(evenement);
                 unitofwork.Save();
                 return RedirectToAction("Index");
@@ -124,7 +129,9 @@ namespace ProjetSessionWebServ2.Controllers
             Evenement evenement = unitofwork.EvenementRepository.ObtenirEvenementParID(id);
             //db.Evenements.Remove(evenement);
             //db.SaveChanges();
-            unitofwork.EvenementRepository.DeleteEvenement(evenement);
+            //unitofwork.EvenementRepository.DeleteEvenement(evenement);
+            evenement.Actif = false;
+            unitofwork.EvenementRepository.UpdateEvenement(evenement);
             unitofwork.Save();
             return RedirectToAction("Index");
         }

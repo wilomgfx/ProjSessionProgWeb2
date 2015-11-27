@@ -193,12 +193,14 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Conference.cs" />
     <Compile Include="Models\Congres.cs" />
+    <Compile Include="Models\Dimension.cs" />
     <Compile Include="Models\Evenement.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Kiosque.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PlageHoraire.cs" />
     <Compile Include="Models\Salle.cs" />
+    <Compile Include="Models\Section.cs" />
     <Compile Include="Models\Spectacle.cs" />
     <Compile Include="Models\Tournoi.cs" />
     <Compile Include="Models\Transaction.cs" />
