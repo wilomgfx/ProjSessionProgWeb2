@@ -192,6 +192,9 @@
     <Compile Include="DAL\KiosqueRepository.cs" />
     <Compile Include="DAL\SpectacleRepository.cs" />
     <Compile Include="DAL\TournoiRepository.cs" />
+    <Compile Include="DAL\TypeSpectacleRepository.cs" />
+    <Compile Include="Controllers\TypeSpectaclesController.cs" />
+    <Compile Include="DAL\TypeKiosqueRepository.cs" />
     <Compile Include="DAL\TypeKiosqueRepository.cs" />
     <Compile Include="DAL\TypeSpectacleRepository.cs" />
     <Compile Include="Controllers\TypeSpectaclesController.cs" />
@@ -313,6 +316,14 @@
     <Content Include="Views\Spectacles\Details.cshtml" />
     <Content Include="Views\Spectacles\Edit.cshtml" />
     <Content Include="Views\Spectacles\Index.cshtml" />
+    <Content Include="Views\TypeSpectacles\Create.cshtml" />
+    <Content Include="Views\TypeSpectacles\Delete.cshtml" />
+    <Content Include="Views\TypeSpectacles\Details.cshtml" />
+    <Content Include="Views\TypeSpectacles\Edit.cshtml" />
+    <Content Include="Views\TypeSpectacles\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
     <Content Include="Views\Kiosques\Create.cshtml" />
     <Content Include="Views\Kiosques\Delete.cshtml" />
     <Content Include="Views\Kiosques\Details.cshtml" />
