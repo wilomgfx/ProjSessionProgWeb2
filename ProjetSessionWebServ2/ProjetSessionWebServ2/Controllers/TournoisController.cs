@@ -21,6 +21,15 @@ namespace ProjetSessionWebServ2.Controllers
         {
             return View(uow.TournoiRepository.ObtenirTournois());
         }
+        [HttpPost]
+        public ActionResult SearchTournoi(FormCollection collection)
+        {
+            string nameToSearch = collection["search"];
+
+            IEnumerable<Tournoi> lstTournoi = uow.TournoiRepository.ObtenirTournoiParNom(nameToSearch);
+
+            return View("Index", lstTournoi);
+        }
 
         // GET: Tournois/Details/5
         public ActionResult Details(int? id)
