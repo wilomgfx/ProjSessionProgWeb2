@@ -123,6 +123,7 @@ namespace ProjetSessionWebServ2.Controllers
             //Evenement evenement = db.Evenements.Find(id);
             Evenement evenement = unitofwork.EvenementRepository.ObtenirEvenementParID(id);
             evenement.Actif = false;
+            unitofwork.EvenementRepository.UpdateEvenement(evenement);
             //db.Evenements.Remove(evenement);
             //db.SaveChanges();
             unitofwork.Save();
