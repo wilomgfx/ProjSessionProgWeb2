@@ -122,9 +122,9 @@ namespace ProjetSessionWebServ2.Controllers
         {
             //Evenement evenement = db.Evenements.Find(id);
             Evenement evenement = unitofwork.EvenementRepository.ObtenirEvenementParID(id);
+            evenement.Actif = false;
             //db.Evenements.Remove(evenement);
             //db.SaveChanges();
-            unitofwork.EvenementRepository.DeleteEvenement(evenement);
             unitofwork.Save();
             return RedirectToAction("Index");
         }
