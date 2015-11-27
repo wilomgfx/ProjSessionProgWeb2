@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ProjetSessionWebServ2.Models.Spectacle>
+﻿@model IEnumerable<ProjetSessionWebServ2.Models.TypeSpectacle>
 
 @{
     ViewBag.Title = "Index";
@@ -14,15 +14,6 @@
         <th>
             @Html.DisplayNameFor(model => model.Nom)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TypeSpectacle)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Actif)
-        </th>
         <th></th>
     </tr>
 
@@ -30,15 +21,6 @@
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Nom)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TypeSpectacle.Nom)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Actif)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

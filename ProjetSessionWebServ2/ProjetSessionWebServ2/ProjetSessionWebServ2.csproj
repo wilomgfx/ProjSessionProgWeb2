@@ -193,7 +193,12 @@
     <Compile Include="DAL\KiosqueRepository.cs" />
     <Compile Include="DAL\SpectacleRepository.cs" />
     <Compile Include="DAL\TournoiRepository.cs" />
+    <Compile Include="DAL\TypeSpectacleRepository.cs" />
+    <Compile Include="Controllers\TypeSpectaclesController.cs" />
     <Compile Include="DAL\TypeKiosqueRepository.cs" />
+    <Compile Include="DAL\TypeKiosqueRepository.cs" />
+    <Compile Include="DAL\TypeSpectacleRepository.cs" />
+    <Compile Include="Controllers\TypeSpectaclesController.cs" />
     <Compile Include="DAL\TournoiRepository.cs" />
     <Compile Include="DAL\TypeConferenceRepository.cs" />
     <Compile Include="DAL\UnitOfWork.cs" />
@@ -225,10 +230,6 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\ProjSessionWebServ2.mdf" />
-    <Content Include="App_Data\ProjSessionWebServ2_log.ldf">
-      <DependentUpon>ProjSessionWebServ2.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -318,6 +319,14 @@
     <Content Include="Views\Spectacles\Details.cshtml" />
     <Content Include="Views\Spectacles\Edit.cshtml" />
     <Content Include="Views\Spectacles\Index.cshtml" />
+    <Content Include="Views\TypeSpectacles\Create.cshtml" />
+    <Content Include="Views\TypeSpectacles\Delete.cshtml" />
+    <Content Include="Views\TypeSpectacles\Details.cshtml" />
+    <Content Include="Views\TypeSpectacles\Edit.cshtml" />
+    <Content Include="Views\TypeSpectacles\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
     <Content Include="Views\Kiosques\Create.cshtml" />
     <Content Include="Views\Kiosques\Delete.cshtml" />
     <Content Include="Views\Kiosques\Details.cshtml" />
@@ -328,13 +337,20 @@
     <Content Include="Views\TypeKiosques\Details.cshtml" />
     <Content Include="Views\TypeKiosques\Edit.cshtml" />
     <Content Include="Views\TypeKiosques\Index.cshtml" />
+    <Content Include="Views\TypeSpectacles\Create.cshtml" />
+    <Content Include="Views\TypeSpectacles\Delete.cshtml" />
+    <Content Include="Views\TypeSpectacles\Details.cshtml" />
+    <Content Include="Views\TypeSpectacles\Edit.cshtml" />
+    <Content Include="Views\TypeSpectacles\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
     <Content Include="Views\TypeConferences\Create.cshtml" />
     <Content Include="Views\TypeConferences\Delete.cshtml" />
     <Content Include="Views\TypeConferences\Details.cshtml" />
     <Content Include="Views\TypeConferences\Edit.cshtml" />
     <Content Include="Views\TypeConferences\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
