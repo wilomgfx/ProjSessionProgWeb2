@@ -189,6 +189,8 @@
     <Compile Include="DAL\IUnitOfWork.cs" />
     <Compile Include="DAL\SpectacleRepository.cs" />
     <Compile Include="DAL\TournoiRepository.cs" />
+    <Compile Include="DAL\TypeSpectacleRepository.cs" />
+    <Compile Include="Controllers\TypeSpectaclesController.cs" />
     <Compile Include="DAL\UnitOfWork.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -216,10 +218,6 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\ProjSessionWebServ2.mdf" />
-    <Content Include="App_Data\ProjSessionWebServ2_log.ldf">
-      <DependentUpon>ProjSessionWebServ2.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -309,8 +307,15 @@
     <Content Include="Views\Spectacles\Details.cshtml" />
     <Content Include="Views\Spectacles\Edit.cshtml" />
     <Content Include="Views\Spectacles\Index.cshtml" />
+    <Content Include="Views\TypeSpectacles\Create.cshtml" />
+    <Content Include="Views\TypeSpectacles\Delete.cshtml" />
+    <Content Include="Views\TypeSpectacles\Details.cshtml" />
+    <Content Include="Views\TypeSpectacles\Edit.cshtml" />
+    <Content Include="Views\TypeSpectacles\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
