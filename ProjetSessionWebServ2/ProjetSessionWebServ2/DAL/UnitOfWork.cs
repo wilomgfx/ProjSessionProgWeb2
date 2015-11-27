@@ -44,6 +44,36 @@ namespace ProjetSessionWebServ2.DAL
             }
         }
 
+        private TournoiRepository tournoiRepository;
+
+        public TournoiRepository TournoiRepository
+        {
+            get
+            {
+
+                if (this.tournoiRepository == null)
+                {
+                    this.tournoiRepository = new TournoiRepository(context);
+                }
+                return tournoiRepository;
+            }
+        }
+
+        private SpectacleRepository spectacleRepository;
+
+        public SpectacleRepository SpectacleRepository
+        {
+            get
+            {
+
+                if (this.spectacleRepository == null)
+                {
+                    this.spectacleRepository = new SpectacleRepository(context);
+                }
+                return spectacleRepository;
+            }
+        }
+
         //private ExempleRepo exempleRepository;
 
         //public ExempleRepo ExempleReposiroy
@@ -58,7 +88,7 @@ namespace ProjetSessionWebServ2.DAL
         //        return exempleRepository;
         //    }
         //}
-        
+
         public void Save()
         {
             try
