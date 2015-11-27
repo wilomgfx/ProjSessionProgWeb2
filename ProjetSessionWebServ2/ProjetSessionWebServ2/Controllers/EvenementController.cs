@@ -126,9 +126,8 @@ namespace ProjetSessionWebServ2.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             //Evenement evenement = db.Evenements.Find(id);
-            Evenement evenement = unitofwork.EvenementRepository.ObtenirEvenementParID(id);
-            evenement.Actif = false;
-            unitofwork.EvenementRepository.UpdateEvenement(evenement);
+            //Evenement evenement = unitofwork.EvenementRepository.ObtenirEvenementParID(id);
+            Evenement evenement = unitofwork.EvenementRepository.ObtenirEvenements().Where(e => e.Id.Equals(id)).FirstOrDefault();
             //db.Evenements.Remove(evenement);
             //db.SaveChanges();
             //unitofwork.EvenementRepository.DeleteEvenement(evenement);
