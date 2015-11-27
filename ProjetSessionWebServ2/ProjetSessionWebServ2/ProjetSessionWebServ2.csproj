@@ -192,12 +192,9 @@
     <Compile Include="DAL\KiosqueRepository.cs" />
     <Compile Include="DAL\SpectacleRepository.cs" />
     <Compile Include="DAL\TournoiRepository.cs" />
-<<<<<<< HEAD
     <Compile Include="DAL\TypeKiosqueRepository.cs" />
-=======
     <Compile Include="DAL\TypeSpectacleRepository.cs" />
     <Compile Include="Controllers\TypeSpectaclesController.cs" />
->>>>>>> origin/Spectacle-de-musique
     <Compile Include="DAL\UnitOfWork.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
