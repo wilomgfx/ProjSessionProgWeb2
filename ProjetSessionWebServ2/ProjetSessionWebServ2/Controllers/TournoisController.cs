@@ -7,7 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ProjetSessionWebServ2.Models;
-using GestionPhotoImmobilier.DAL;
+using ProjetSessionWebServ2.DAL;
+using ProjetSessionWebServ2.DAL;
 
 namespace ProjetSessionWebServ2.Controllers
 {

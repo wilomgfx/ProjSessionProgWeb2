@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
 
-namespace GestionPhotoImmobilier.DAL
+namespace ProjetSessionWebServ2.DAL
 {
     public interface IGenericRepository<TEntity>
     {

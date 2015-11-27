@@ -6,7 +6,7 @@ using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
 
-namespace GestionPhotoImmobilier.DAL
+namespace ProjetSessionWebServ2.DAL
 {
     public class UnitOfWork : IUnitOfWork
     {
@@ -56,6 +56,21 @@ namespace GestionPhotoImmobilier.DAL
                     this.tournoiRepository = new TournoiRepository(context);
                 }
                 return tournoiRepository;
+            }
+        }
+
+        private SpectacleRepository spectacleRepository;
+
+        public SpectacleRepository SpectacleRepository
+        {
+            get
+            {
+
+                if (this.spectacleRepository == null)
+                {
+                    this.spectacleRepository = new SpectacleRepository(context);
+                }
+                return spectacleRepository;
             }
         }
 

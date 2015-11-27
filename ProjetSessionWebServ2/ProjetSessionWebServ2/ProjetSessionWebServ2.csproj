@@ -179,6 +179,7 @@
     <Compile Include="Controllers\EvenementController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\SpectaclesController.cs" />
     <Compile Include="Controllers\TournoisController.cs" />
     <Compile Include="DAL\ConferenceRepository.cs" />
     <Compile Include="DAL\EvenementRepository.cs" />
@@ -186,6 +187,7 @@
     <Compile Include="DAL\GenericRepository.cs" />
     <Compile Include="DAL\IGenericRepository.cs" />
     <Compile Include="DAL\IUnitOfWork.cs" />
+    <Compile Include="DAL\SpectacleRepository.cs" />
     <Compile Include="DAL\TournoiRepository.cs" />
     <Compile Include="DAL\UnitOfWork.cs" />
     <Compile Include="Global.asax.cs">
@@ -302,6 +304,11 @@
     <Content Include="Views\Tournois\Details.cshtml" />
     <Content Include="Views\Tournois\Edit.cshtml" />
     <Content Include="Views\Tournois\Index.cshtml" />
+    <Content Include="Views\Spectacles\Create.cshtml" />
+    <Content Include="Views\Spectacles\Delete.cshtml" />
+    <Content Include="Views\Spectacles\Details.cshtml" />
+    <Content Include="Views\Spectacles\Edit.cshtml" />
+    <Content Include="Views\Spectacles\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

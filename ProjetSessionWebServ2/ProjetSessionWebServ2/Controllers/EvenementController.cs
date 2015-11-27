@@ -7,7 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ProjetSessionWebServ2.Models;
-using GestionPhotoImmobilier.DAL;
+using ProjetSessionWebServ2.DAL;
 
 namespace ProjetSessionWebServ2.Controllers
 {
@@ -122,9 +122,10 @@ namespace ProjetSessionWebServ2.Controllers
         {
             //Evenement evenement = db.Evenements.Find(id);
             Evenement evenement = unitofwork.EvenementRepository.ObtenirEvenementParID(id);
+            evenement.Actif = false;
+            unitofwork.EvenementRepository.UpdateEvenement(evenement);
             //db.Evenements.Remove(evenement);
             //db.SaveChanges();
-            unitofwork.EvenementRepository.DeleteEvenement(evenement);
             unitofwork.Save();
             return RedirectToAction("Index");
         }
