@@ -190,6 +190,7 @@
     <Compile Include="DAL\IGenericRepository.cs" />
     <Compile Include="DAL\IUnitOfWork.cs" />
     <Compile Include="DAL\KiosqueRepository.cs" />
+    <Compile Include="DAL\SpectacleRepository.cs" />
     <Compile Include="DAL\TournoiRepository.cs" />
     <Compile Include="DAL\TypeKiosqueRepository.cs" />
     <Compile Include="DAL\UnitOfWork.cs" />

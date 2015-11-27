@@ -87,22 +87,22 @@ namespace ProjetSessionWebServ2.DAL
                 }
                 return typeKiosqueRepository;
             }
-        }        
+        }
 
-        //private SpectacleRepository spectacleRepository;
+        private SpectacleRepository spectacleRepository;
 
-        //public SpectacleRepository SpectacleRepository
-        //{
-        //    get
-        //    {
+        public SpectacleRepository SpectacleRepository
+        {
+            get
+            {
 
-        //        if (this.spectacleRepository == null)
-        //        {
-        //            this.spectacleRepository = new SpectacleRepository(context);
-        //        }
-        //        return spectacleRepository;
-        //    }
-        //}
+                if (this.spectacleRepository == null)
+                {
+                    this.spectacleRepository = new SpectacleRepository(context);
+                }
+                return spectacleRepository;
+            }
+        }
 
         //private ExempleRepo exempleRepository;
 

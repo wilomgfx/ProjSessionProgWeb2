@@ -1,5 +1,4 @@
-﻿using GestionPhotoImmobilier.DAL;
-using ProjetSessionWebServ2.Models;
+﻿using ProjetSessionWebServ2.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
