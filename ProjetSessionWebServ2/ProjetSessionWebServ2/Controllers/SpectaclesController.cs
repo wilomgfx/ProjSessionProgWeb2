@@ -18,7 +18,8 @@ namespace ProjetSessionWebServ2.Controllers
         // GET: Spectacles
         public ActionResult Index()
         {
-            return View(unitOfWork.SpectacleRepository.ObtenirSpectacles());
+            var stuff = unitOfWork.SpectacleRepository.ObtenirSpectacles();
+            return View(stuff);
         }
 
         // GET: Spectacles/Details/5
@@ -40,6 +41,8 @@ namespace ProjetSessionWebServ2.Controllers
         // GET: Spectacles/Create
         public ActionResult Create()
         {
+            SelectList TypeSpectacleId = new SelectList(unitOfWork.TypeSpectacleRepository.ObtenirTypeSpectacles(), "Id", "Nom");
+            ViewBag.TypeSpectacleId = TypeSpectacleId;
             return View();
         }
 
@@ -58,7 +61,8 @@ namespace ProjetSessionWebServ2.Controllers
                 unitOfWork.Save();
                 return RedirectToAction("Index");
             }
-
+            SelectList TypeSpectacleId = new SelectList(unitOfWork.TypeSpectacleRepository.ObtenirTypeSpectacles(), "Id", "Nom");
+            ViewBag.TypeSpectacleId = TypeSpectacleId;
             return View(spectacle);
         }
 
@@ -74,6 +78,8 @@ namespace ProjetSessionWebServ2.Controllers
             {
                 return HttpNotFound();
             }
+            SelectList TypeSpectacleId = new SelectList(unitOfWork.TypeSpectacleRepository.ObtenirTypeSpectacles(), "Id", "Nom");
+            ViewBag.TypeSpectacleId = TypeSpectacleId;
             return View(spectacle);
         }
 
@@ -91,6 +97,8 @@ namespace ProjetSessionWebServ2.Controllers
                 unitOfWork.Save();
                 return RedirectToAction("Index");
             }
+            SelectList TypeSpectacleId = new SelectList(unitOfWork.TypeSpectacleRepository.ObtenirTypeSpectacles(), "Id", "Nom");
+            ViewBag.TypeSpectacleId = TypeSpectacleId;
             return View(spectacle);
         }
 

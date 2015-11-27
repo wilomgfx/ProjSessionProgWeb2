@@ -106,18 +106,33 @@ namespace ProjetSessionWebServ2.DAL
         private SpectacleRepository spectacleRepository;
        // private SpectacleRepository spectacleRepository;
 
-       /* public SpectacleRepository SpectacleRepository
+         public SpectacleRepository SpectacleRepository
+         {
+             get
+             {
+
+                 if (this.spectacleRepository == null)
+                 {
+                     this.spectacleRepository = new SpectacleRepository(context);
+                 }
+                 return spectacleRepository;
+             }
+         }
+
+        private TypeSpectacleRepository typeSpectacleRepository;
+
+        public TypeSpectacleRepository TypeSpectacleRepository
         {
             get
             {
 
-                if (this.spectacleRepository == null)
+                if (this.typeSpectacleRepository == null)
                 {
-                    this.spectacleRepository = new SpectacleRepository(context);
+                    this.typeSpectacleRepository = new TypeSpectacleRepository(context);
                 }
-                return spectacleRepository;
+                return typeSpectacleRepository;
             }
-        }*/
+        }
 
         //private ExempleRepo exempleRepository;
 
