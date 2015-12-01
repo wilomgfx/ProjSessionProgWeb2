@@ -16,9 +16,22 @@ namespace ProjetSessionWebServ2.Controllers
         private UnitOfWork unitOfWork = new UnitOfWork();
 
         // GET: Spectacles
-        public ActionResult Index()
+        public ActionResult Index(FormCollection collection)
         {
             List<Spectacle> listeSpectacles = unitOfWork.SpectacleRepository.ObtenirSpectacles().ToList();
+            ViewBag.TypeSpectacles = new SelectList(unitOfWork.TypeSpectacleRepository.ObtenirTypeSpectacles(), "Nom", "Nom", string.Empty);
+            if (collection.HasKeys())
+            {
+                string type = collection[0];
+                string nom = collection[1];
+                string musicien = collection[2];
+
+                List<Spectacle> colSpectacle = unitOfWork.SpectacleRepository.ObtenirSpectacles().ToList();
+                List<Spectacle> colSpectacleApresrechecheType = colSpectacle.Where(s => s.TypeSpectacle.Nom.Contains(type)).ToList();
+                List<Spectacle> colSpectacleApresRechercheNomSpectacle = colSpectacleApresrechecheType.Where(s => s.Nom.Contains(nom)).ToList(); //A changer une fois les rôles implenté List<Spectacle> colConferenceApresRechercheConferencier = colSpectacleApresRechercheNomConference;
+
+                return View(colSpectacleApresRechercheNomSpectacle);
+            }
             return View(listeSpectacles);
         }
 
