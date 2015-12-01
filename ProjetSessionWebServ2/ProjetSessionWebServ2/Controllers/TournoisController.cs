@@ -50,6 +50,8 @@ namespace ProjetSessionWebServ2.Controllers
         // GET: Tournois/Create
         public ActionResult Create()
         {
+            SelectList TypeTournoiId = new SelectList(uow.TypeTournoiRepository.ObtenirTypeTournois(), "Id", "Nom");
+            ViewBag.TypeTournoiId = TypeTournoiId;
             return View();
         }
 
@@ -58,17 +60,21 @@ namespace ProjetSessionWebServ2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeEvenement,Actif")] Tournoi tournoi)
+        public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeEvenement,TypeTournoiId,Actif")] Tournoi tournoi)
         {
+
             if (ModelState.IsValid)
             {
-                //db.Evenements.Add(tournoi);
-                //db.SaveChanges();
+                tournoi.TypeTournoi = uow.TypeTournoiRepository.ObtenirTypeTournoiParID(tournoi.TypeTournoiId);
+                tournoi.TypeEvenement = Evenement.TypeEvent.TypeKiosque;
                 tournoi.Actif = true;
                 uow.TournoiRepository.InsertTournoi(tournoi);
                 uow.Save();
                 return RedirectToAction("Index");
             }
+
+            SelectList TypeTournoiId = new SelectList(uow.TypeTournoiRepository.ObtenirTypeTournois(), "Id", "Nom");
+            ViewBag.TypeTournoiId = TypeTournoiId;
 
             return View(tournoi);
         }
@@ -86,6 +92,10 @@ namespace ProjetSessionWebServ2.Controllers
             {
                 return HttpNotFound();
             }
+
+            SelectList TypeTournoiId = new SelectList(uow.TypeTournoiRepository.ObtenirTypeTournois(), "Id", "Nom");
+            ViewBag.TypeTournoiId = TypeTournoiId;
+
             return View(tournoi);
         }
 
@@ -94,7 +104,7 @@ namespace ProjetSessionWebServ2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nom,Description,TypeEvenement,Actif")] Tournoi tournoi)
+        public ActionResult Edit([Bind(Include = "Id,Nom,Description,TypeEvenement,TypeTournoiId,Actif")] Tournoi tournoi)
         {
             if (ModelState.IsValid)
             {
@@ -102,6 +112,10 @@ namespace ProjetSessionWebServ2.Controllers
                 uow.Save();
                 return RedirectToAction("Index");
             }
+
+            SelectList TypeTournoiId = new SelectList(uow.TypeTournoiRepository.ObtenirTypeTournois(), "Id", "Nom");
+            ViewBag.TypeTournoiId = TypeTournoiId;
+
             return View(tournoi);
         }
 

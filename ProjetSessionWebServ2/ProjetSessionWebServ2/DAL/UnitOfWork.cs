@@ -103,6 +103,20 @@ namespace ProjetSessionWebServ2.DAL
             }
         }
 
+        private TypeTournoiRepository typeTournoiRepository;
+
+        public TypeTournoiRepository TypeTournoiRepository
+        {
+            get
+            {
+                if (this.typeTournoiRepository == null)
+                {
+                    this.typeTournoiRepository = new TypeTournoiRepository(context);
+                }
+                return typeTournoiRepository;
+            }
+        }
+
         private SpectacleRepository spectacleRepository;
        // private SpectacleRepository spectacleRepository;
 
