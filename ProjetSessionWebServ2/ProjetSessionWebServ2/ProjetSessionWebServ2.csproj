@@ -180,6 +180,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KiosquesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\SallesController.cs" />
     <Compile Include="Controllers\SpectaclesController.cs" />
     <Compile Include="Controllers\TournoisController.cs" />
     <Compile Include="Controllers\TypeKiosquesController.cs" />
@@ -320,6 +321,11 @@
     <Content Include="Views\TypeSpectacles\Details.cshtml" />
     <Content Include="Views\TypeSpectacles\Edit.cshtml" />
     <Content Include="Views\TypeSpectacles\Index.cshtml" />
+    <Content Include="Views\Salles\Create.cshtml" />
+    <Content Include="Views\Salles\Delete.cshtml" />
+    <Content Include="Views\Salles\Details.cshtml" />
+    <Content Include="Views\Salles\Edit.cshtml" />
+    <Content Include="Views\Salles\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Kiosques\Create.cshtml" />
