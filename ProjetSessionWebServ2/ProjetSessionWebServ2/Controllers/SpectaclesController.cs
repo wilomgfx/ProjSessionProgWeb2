@@ -18,8 +18,8 @@ namespace ProjetSessionWebServ2.Controllers
         // GET: Spectacles
         public ActionResult Index()
         {
-            var stuff = unitOfWork.SpectacleRepository.ObtenirSpectacles();
-            return View(stuff);
+            List<Spectacle> listeSpectacles = unitOfWork.SpectacleRepository.ObtenirSpectacles().ToList();
+            return View(listeSpectacles);
         }
 
         // GET: Spectacles/Details/5
@@ -29,13 +29,12 @@ namespace ProjetSessionWebServ2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Spectacle spectacle = unitOfWork.SpectacleRepository.ObtenirSpectacleParID(id);
+            Spectacle spectacle = unitOfWork.SpectacleRepository.ObtenirSpectacles().Where(s => s.Id == id).SingleOrDefault();
 
             if (spectacle == null)
             {
                 return HttpNotFound();
             }
-            spectacle.TypeSpectacle = unitOfWork.TypeSpectacleRepository.ObtenirTypeSpectacleParID(spectacle.TypeSpectacleId);
             return View(spectacle);
         }
 

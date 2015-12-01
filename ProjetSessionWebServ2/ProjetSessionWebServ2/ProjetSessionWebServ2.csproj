@@ -198,6 +198,7 @@
     <Compile Include="DAL\TournoiRepository.cs" />
     <Compile Include="DAL\TypeConferenceRepository.cs" />
     <Compile Include="DAL\TypeSpectacleRepository.cs" />
+    <Compile Include="DAL\TypeTournoiRepository.cs" />
     <Compile Include="DAL\UnitOfWork.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
