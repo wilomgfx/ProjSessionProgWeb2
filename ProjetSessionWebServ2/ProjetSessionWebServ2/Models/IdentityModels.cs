@@ -42,5 +42,9 @@ namespace ProjetSessionWebServ2.Models
 
         public System.Data.Entity.DbSet<ProjetSessionWebServ2.Models.Salle> Salles { get; set; }
 
+        public System.Data.Entity.DbSet<ProjetSessionWebServ2.Models.Section> Sections { get; set; }
+
+        public System.Data.Entity.DbSet<ProjetSessionWebServ2.Models.Dimension> Dimensions { get; set; }
+
     }
 }

@@ -11,119 +11,114 @@ using ProjetSessionWebServ2.DAL;
 
 namespace ProjetSessionWebServ2.Controllers
 {
-    public class SallesController : Controller
+    public class DimensionsController : Controller
     {
         //private ApplicationDbContext db = new ApplicationDbContext();
         private UnitOfWork uow = new UnitOfWork();
 
-        // GET: Salles
+        // GET: Dimensions
         public ActionResult Index()
         {
-            //return View(db.Salles.ToList());
-            return View(uow.SalleRepository.ObtenirSalles().ToList());
+            return View(uow.DimensionRepository.ObtenirDimensions().ToList());
         }
 
-        // GET: Salles/Details/5
+        // GET: Dimensions/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            //Salle salle = db.Salles.Find(id);
-            Salle salle = uow.SalleRepository.ObtenirSalleParID(id);
-            if (salle == null)
+            Dimension dimension = uow.DimensionRepository.ObtenirDimensionParID(id);
+            if (dimension == null)
             {
                 return HttpNotFound();
             }
-            return View(salle);
+            return View(dimension);
         }
 
-        // GET: Salles/Create
+        // GET: Dimensions/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Salles/Create
+        // POST: Dimensions/Create
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,NoSalle")] Salle salle)
+        public ActionResult Create([Bind(Include = "Id,Longueur,Largeur")] Dimension dimension)
         {
             if (ModelState.IsValid)
             {
-                //db.Salles.Add(salle);
+                //db.Dimensions.Add(dimension);
                 //db.SaveChanges();
-                uow.SalleRepository.InsertSalle(salle);
+                uow.DimensionRepository.InsertDimension(dimension);
                 uow.Save();
                 return RedirectToAction("Index");
             }
 
-            return View(salle);
+            return View(dimension);
         }
 
-        // GET: Salles/Edit/5
+        // GET: Dimensions/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            //Salle salle = db.Salles.Find(id);
-            Salle salle = uow.SalleRepository.ObtenirSalleParID(id);
-            if (salle == null)
+            Dimension dimension = uow.DimensionRepository.ObtenirDimensionParID(id);
+            if (dimension == null)
             {
                 return HttpNotFound();
             }
-            return View(salle);
+            return View(dimension);
         }
 
-        // POST: Salles/Edit/5
+        // POST: Dimensions/Edit/5
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,NoSalle")] Salle salle)
+        public ActionResult Edit([Bind(Include = "Id,Longueur,Largeur")] Dimension dimension)
         {
             if (ModelState.IsValid)
             {
-                //db.Entry(salle).State = EntityState.Modified;
+                //db.Entry(dimension).State = EntityState.Modified;
                 //db.SaveChanges();
-                uow.SalleRepository.UpdateSalle(salle);
+                uow.DimensionRepository.UpdateDimension(dimension);
                 uow.Save();
                 return RedirectToAction("Index");
             }
-            return View(salle);
+            return View(dimension);
         }
 
-        // GET: Salles/Delete/5
+        // GET: Dimensions/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            //Salle salle = db.Salles.Find(id);
-            Salle salle = uow.SalleRepository.ObtenirSalleParID(id);
-            if (salle == null)
+            Dimension dimension = uow.DimensionRepository.ObtenirDimensionParID(id);
+            if (dimension == null)
             {
                 return HttpNotFound();
             }
-            return View(salle);
+            return View(dimension);
         }
 
-        // POST: Salles/Delete/5
+        // POST: Dimensions/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            //Salle salle = db.Salles.Find(id);
-            Salle salle = uow.SalleRepository.ObtenirSalleParID(id);
-            //db.Salles.Remove(salle);
+            Dimension dimension = uow.DimensionRepository.ObtenirDimensionParID(id);
+            //db.Dimensions.Remove(dimension);
             //db.SaveChanges();
-            uow.SalleRepository.DeleteSalle(salle);
+            uow.DimensionRepository.DeleteDimension(dimension);
             uow.Save();
             return RedirectToAction("Index");
         }
@@ -132,7 +127,7 @@ namespace ProjetSessionWebServ2.Controllers
         {
             if (disposing)
             {
-                //db.Dispose();
+               // db.Dispose();
                 uow.Dispose();
             }
             base.Dispose(disposing);
