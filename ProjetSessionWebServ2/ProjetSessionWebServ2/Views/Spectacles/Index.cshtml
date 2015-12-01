@@ -8,20 +8,10 @@
 
 @using (Html.BeginForm("Index", "Spectacles", FormMethod.Post))
 {
-    <p>
-        Rechercher par nom:
-
-        <h3>Search for tournaments</h3>
-        <div class="row">
-            <input name="search" id="name" type="text" class="form-control col-lg-6" placeholder="name or words to search" />
-            <input type="submit" value="Search" class="btn btn-default" />
-        </div>
-        Pour le type de spectacle suivant:
-        @Html.DropDownList("TypeSpectacles", (SelectList)ViewBag.TypeSpectacles, "") <br />
-        <font size="1">* le second ordre de tri est la date de sortie.</font>
-        <br />
-        <input type="submit" value="Rechercher" />
-    </p>
+    <p> Par Type de Spectacle: @Html.DropDownList("TypeSpectacles", (SelectList)ViewBag.TypeSpectacles, "") <br />
+    Par Nom: @Html.TextBox("searchNomConference", ViewBag.CurrentFilter as string) <br>
+    Par Musicien: @Html.TextBox("searchConferencier", ViewBag.CurrentFilter as string) <br>
+    <input type="submit" value="Rechercher" class="btn btn-default" /> </p>
 }
 
 <p>
