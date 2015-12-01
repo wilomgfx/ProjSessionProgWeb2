@@ -15,7 +15,7 @@ namespace ProjetSessionWebServ2.DAL
             }
         public IEnumerable<Spectacle> ObtenirSpectacles()
             {
-                return Get();
+                return Get(null, null, "TypeSpectacle");
             }
         public void InsertSpectacle(Spectacle Spectacle) { Insert(Spectacle); }
         public void DeleteSpectacle(Spectacle Spectacle) { Delete(Spectacle); }
