@@ -16,9 +16,31 @@ namespace ProjetSessionWebServ2.Controllers
        // private ApplicationDbContext db = new ApplicationDbContext()Default1;
         private UnitOfWork unitOfWork = new UnitOfWork();
         // GET: Conferences
-        public ActionResult Index()
+        public ActionResult Index(string currentFilter, string searchTypeConference, string searchNomConference, string searchConferencier)
         {
-            return View(unitOfWork.ConferenceRepository.ObtenirConferences());
+
+            if(searchConferencier == null)
+            {
+                searchConferencier = "";
+            }
+            if(searchNomConference == null)
+            {
+                searchNomConference = "";
+            }
+            if(searchTypeConference == null)
+            {
+                searchTypeConference = "";
+            }
+
+
+            List<Conference> colConference = unitOfWork.ConferenceRepository.ObtenirConferences().ToList();
+            List<Conference> colConfenreceApresrechecheType = colConference.Where(u=>u.TypeConference.Nom.Contains(searchTypeConference)).ToList();
+            List<Conference> colConfenrenceApresRechercheNomConference = colConfenreceApresrechecheType.Where(u => u.Nom.Contains(searchNomConference)).ToList();
+            //A changer une fois les rôles implenté
+            List<Conference> colConferenceApresRechercheConferencier = colConfenrenceApresRechercheNomConference;
+
+            return View(colConferenceApresRechercheConferencier);
+           // return View(unitOfWork.ConferenceRepository.ObtenirConferences());
             //return View(unitOfWork.ConferenceRepository.ObtenirConference().Where(t=>t.Actif == true));
             //return View(db.Evenements.ToList());
         }
