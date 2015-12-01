@@ -11,119 +11,114 @@ using ProjetSessionWebServ2.DAL;
 
 namespace ProjetSessionWebServ2.Controllers
 {
-    public class SallesController : Controller
+    public class SectionsController : Controller
     {
         //private ApplicationDbContext db = new ApplicationDbContext();
         private UnitOfWork uow = new UnitOfWork();
 
-        // GET: Salles
+        // GET: Sections
         public ActionResult Index()
         {
-            //return View(db.Salles.ToList());
-            return View(uow.SalleRepository.ObtenirSalles().ToList());
+            return View(uow.SectionRepository.ObtenirSections().ToList());
         }
 
-        // GET: Salles/Details/5
+        // GET: Sections/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            //Salle salle = db.Salles.Find(id);
-            Salle salle = uow.SalleRepository.ObtenirSalleParID(id);
-            if (salle == null)
+            Section section = uow.SectionRepository.ObtenirSectionParID(id);
+            if (section == null)
             {
                 return HttpNotFound();
             }
-            return View(salle);
+            return View(section);
         }
 
-        // GET: Salles/Create
+        // GET: Sections/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Salles/Create
+        // POST: Sections/Create
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,NoSalle")] Salle salle)
+        public ActionResult Create([Bind(Include = "Id,Nom")] Section section)
         {
             if (ModelState.IsValid)
             {
-                //db.Salles.Add(salle);
+                //db.Sections.Add(section);
                 //db.SaveChanges();
-                uow.SalleRepository.InsertSalle(salle);
+                uow.SectionRepository.InsertSection(section);
                 uow.Save();
                 return RedirectToAction("Index");
             }
 
-            return View(salle);
+            return View(section);
         }
 
-        // GET: Salles/Edit/5
+        // GET: Sections/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            //Salle salle = db.Salles.Find(id);
-            Salle salle = uow.SalleRepository.ObtenirSalleParID(id);
-            if (salle == null)
+            Section section = uow.SectionRepository.ObtenirSectionParID(id);
+            if (section == null)
             {
                 return HttpNotFound();
             }
-            return View(salle);
+            return View(section);
         }
 
-        // POST: Salles/Edit/5
+        // POST: Sections/Edit/5
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,NoSalle")] Salle salle)
+        public ActionResult Edit([Bind(Include = "Id,Nom")] Section section)
         {
             if (ModelState.IsValid)
             {
-                //db.Entry(salle).State = EntityState.Modified;
+                //db.Entry(section).State = EntityState.Modified;
                 //db.SaveChanges();
-                uow.SalleRepository.UpdateSalle(salle);
+                uow.SectionRepository.UpdateSection(section);
                 uow.Save();
                 return RedirectToAction("Index");
             }
-            return View(salle);
+            return View(section);
         }
 
-        // GET: Salles/Delete/5
+        // GET: Sections/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            //Salle salle = db.Salles.Find(id);
-            Salle salle = uow.SalleRepository.ObtenirSalleParID(id);
-            if (salle == null)
+            Section section = uow.SectionRepository.ObtenirSectionParID(id);
+            if (section == null)
             {
                 return HttpNotFound();
             }
-            return View(salle);
+            return View(section);
         }
 
-        // POST: Salles/Delete/5
+        // POST: Sections/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            //Salle salle = db.Salles.Find(id);
-            Salle salle = uow.SalleRepository.ObtenirSalleParID(id);
-            //db.Salles.Remove(salle);
+            Section section = uow.SectionRepository.ObtenirSectionParID(id);
+            //db.Sections.Remove(section);
             //db.SaveChanges();
-            uow.SalleRepository.DeleteSalle(salle);
+            uow.SectionRepository.DeleteSection(section);
             uow.Save();
             return RedirectToAction("Index");
         }

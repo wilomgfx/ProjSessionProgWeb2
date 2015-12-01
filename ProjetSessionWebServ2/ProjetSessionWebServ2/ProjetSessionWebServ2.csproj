@@ -176,11 +176,13 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ConferencesController.cs" />
+    <Compile Include="Controllers\DimensionsController.cs" />
     <Compile Include="Controllers\EvenementController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KiosquesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SallesController.cs" />
+    <Compile Include="Controllers\SectionsController.cs" />
     <Compile Include="Controllers\SpectaclesController.cs" />
     <Compile Include="Controllers\TournoisController.cs" />
     <Compile Include="Controllers\TypeKiosquesController.cs" />
@@ -330,6 +332,16 @@
     <Content Include="Views\Salles\Details.cshtml" />
     <Content Include="Views\Salles\Edit.cshtml" />
     <Content Include="Views\Salles\Index.cshtml" />
+    <Content Include="Views\Sections\Create.cshtml" />
+    <Content Include="Views\Sections\Delete.cshtml" />
+    <Content Include="Views\Sections\Details.cshtml" />
+    <Content Include="Views\Sections\Edit.cshtml" />
+    <Content Include="Views\Sections\Index.cshtml" />
+    <Content Include="Views\Dimensions\Create.cshtml" />
+    <Content Include="Views\Dimensions\Delete.cshtml" />
+    <Content Include="Views\Dimensions\Details.cshtml" />
+    <Content Include="Views\Dimensions\Edit.cshtml" />
+    <Content Include="Views\Dimensions\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Kiosques\Create.cshtml" />
