@@ -35,6 +35,7 @@ namespace ProjetSessionWebServ2.Controllers
             {
                 return HttpNotFound();
             }
+            spectacle.TypeSpectacle = unitOfWork.TypeSpectacleRepository.ObtenirTypeSpectacleParID(spectacle.TypeSpectacleId);
             return View(spectacle);
         }
 
@@ -51,17 +52,18 @@ namespace ProjetSessionWebServ2.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeSpectacle,Actif")] Spectacle spectacle)
+        public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeSpectacleId,Actif")] Spectacle spectacle)
         {
             if (ModelState.IsValid)
             {
                 spectacle.TypeEvenement = Evenement.TypeEvent.TypeSpectacle;
+                spectacle.TypeSpectacle = unitOfWork.TypeSpectacleRepository.ObtenirTypeSpectacleParID(spectacle.TypeSpectacleId);
                 spectacle.Actif = true;
                 unitOfWork.SpectacleRepository.InsertSpectacle(spectacle);
                 unitOfWork.Save();
                 return RedirectToAction("Index");
             }
-            SelectList TypeSpectacleId = new SelectList(unitOfWork.TypeSpectacleRepository.ObtenirTypeSpectacles(), "Id", "Nom");
+            SelectList TypeSpectacleId = new SelectList(unitOfWork.TypeSpectacleRepository.ObtenirTypeSpectacles(), "Id", "Nom", spectacle.TypeSpectacleId);
             ViewBag.TypeSpectacleId = TypeSpectacleId;
             return View(spectacle);
         }
@@ -78,7 +80,7 @@ namespace ProjetSessionWebServ2.Controllers
             {
                 return HttpNotFound();
             }
-            SelectList TypeSpectacleId = new SelectList(unitOfWork.TypeSpectacleRepository.ObtenirTypeSpectacles(), "Id", "Nom");
+            SelectList TypeSpectacleId = new SelectList(unitOfWork.TypeSpectacleRepository.ObtenirTypeSpectacles(), "Id", "Nom", spectacle.TypeSpectacleId);
             ViewBag.TypeSpectacleId = TypeSpectacleId;
             return View(spectacle);
         }
@@ -88,16 +90,17 @@ namespace ProjetSessionWebServ2.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nom,Description,TypeSpectacle,Actif")] Spectacle spectacle)
+        public ActionResult Edit([Bind(Include = "Id,Nom,Description,TypeSpectacleId,Actif")] Spectacle spectacle)
         {
             if (ModelState.IsValid)
             {
+                spectacle.TypeSpectacle = unitOfWork.TypeSpectacleRepository.ObtenirTypeSpectacleParID(spectacle.TypeSpectacleId);
                 spectacle.TypeEvenement = Evenement.TypeEvent.TypeSpectacle;
                 unitOfWork.SpectacleRepository.UpdateSpectacle(spectacle);
                 unitOfWork.Save();
                 return RedirectToAction("Index");
             }
-            SelectList TypeSpectacleId = new SelectList(unitOfWork.TypeSpectacleRepository.ObtenirTypeSpectacles(), "Id", "Nom");
+            SelectList TypeSpectacleId = new SelectList(unitOfWork.TypeSpectacleRepository.ObtenirTypeSpectacles(), "Id", "Nom", spectacle.TypeSpectacleId);
             ViewBag.TypeSpectacleId = TypeSpectacleId;
             return View(spectacle);
         }

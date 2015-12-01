@@ -19,7 +19,8 @@ namespace ProjetSessionWebServ2.Controllers
         // GET: Kiosques
         public ActionResult Index()
         {
-            return View(uow.KiosqueRepository.ObtenirKiosques());
+            var stuff = uow.KiosqueRepository.ObtenirKiosques();
+            return View(stuff);
         }
 
         // GET: Kiosques/Details/5
