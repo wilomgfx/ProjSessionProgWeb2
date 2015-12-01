@@ -40,5 +40,7 @@ namespace ProjetSessionWebServ2.Models
 
         public DbSet<TypeConference> TypeConferences { get; set; }
 
+        public System.Data.Entity.DbSet<ProjetSessionWebServ2.Models.Salle> Salles { get; set; }
+
     }
 }
