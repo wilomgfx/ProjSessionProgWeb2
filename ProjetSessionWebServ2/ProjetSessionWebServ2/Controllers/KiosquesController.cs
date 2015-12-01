@@ -31,7 +31,7 @@ namespace ProjetSessionWebServ2.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             //Kiosque Kiosque = db.Evenements.Find(id);
-            Kiosque Kiosque = uow.KiosqueRepository.ObtenirKiosqueParID(id);
+            Kiosque Kiosque = uow.KiosqueRepository.ObtenirKiosques().Where(k => k.Id == id).SingleOrDefault();
             if (Kiosque == null)
             {
                 return HttpNotFound();
