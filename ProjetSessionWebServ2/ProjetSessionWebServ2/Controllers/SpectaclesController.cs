@@ -16,10 +16,41 @@ namespace ProjetSessionWebServ2.Controllers
         private UnitOfWork unitOfWork = new UnitOfWork();
 
         // GET: Spectacles
-        public ActionResult Index()
+        public ActionResult Index(FormCollection collection)
         {
             List<Spectacle> listeSpectacles = unitOfWork.SpectacleRepository.ObtenirSpectacles().ToList();
-            return View(listeSpectacles);
+            //if (collection.HasKeys())
+            //{
+            //    string rechercher = collection[0];
+            //    string photographe = collection[1];
+            //    switch (optionTri)
+            //    {
+            //        case "date":
+            //            if (photographe != "")
+            //            { return View(unitOfWork.SeanceRepository.GetSeancesFromPhotographID(photographId).OrderBy(t => t.DateSeance).ThenByDescending(x => x.DateSeance)); }
+            //            else
+            //            { return View(listeSpectacles.ToList().OrderBy(t => t.DateSeance).ThenByDescending(x => x.DateSeance)); }
+            //        case "nbphoto":
+            //            if (photographe != "")
+            //            { return View(unitOfWork.SeanceRepository.GetSeancesFromPhotographID(photographId).OrderByDescending(t => t.NbPhotos).ThenByDescending(x => x.DateSeance)); }
+            //            else
+            //            { return View(listeSpectacles.ToList().OrderByDescending(t => t.NbPhotos).ThenByDescending(x => x.DateSeance)); }
+            //        case "duree":
+            //            if (photographe != "")
+            //            { return View(unitOfWork.SeanceRepository.GetSeancesFromPhotographID(photographId).OrderByDescending(t => t.DureeMinutes).ThenByDescending(x => x.DateSeance)); }
+            //            else
+            //            { return View(listeSpectacles.ToList().OrderByDescending(t => t.DureeMinutes).ThenByDescending(x => x.DateSeance)); }
+            //        case "maison":
+            //            if (photographe != "")
+            //            { return View(unitOfWork.SeanceRepository.GetSeancesFromPhotographID(photographId).OrderBy(t => t.Maison.Adresse).ThenByDescending(x => x.DateSeance)); }
+            //            else
+            //            { return View(listeSpectacles.ToList().OrderBy(t => t.Maison).ThenByDescending(x => x.DateSeance)); }
+            //        default:
+            //            return View(listeSpectacles.ToList());
+            //    }
+            //}
+            ViewBag.TypeSpectacles = new SelectList(unitOfWork.TypeSpectacleRepository.ObtenirTypeSpectacles(), "Nom", "Nom", string.Empty);
+            return View(listeSpectacles.ToList());
         }
 
         // GET: Spectacles/Details/5
