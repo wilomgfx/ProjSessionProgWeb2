@@ -9,6 +9,24 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+@{    
+        using (Html.BeginForm("Index", "Conferences", FormMethod.Get))
+        {
+            <p>
+                Par Type de Conférence: @Html.TextBox("searchTypeConference", ViewBag.CurrentFilter as string) <br>
+                Par Nom: @Html.TextBox("searchNomConference", ViewBag.CurrentFilter as string) <br>
+                Par Conferencier: @Html.TextBox("searchConferencier", ViewBag.CurrentFilter as string) <br>
+                <input type="submit" value="Rechercher" class="btn btn-default" />
+            </p>
+
+        }
+    
+}
+
+
+
+
 <table class="table">
     <tr>
         <th>
