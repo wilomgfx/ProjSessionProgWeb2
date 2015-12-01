@@ -33,7 +33,7 @@ namespace ProjetSessionWebServ2.DAL
 
         public IEnumerable<Tournoi> ObtenirTournoiParNom(string nom)
         {
-            IEnumerable<Tournoi> lstFiltered = Get(t => t.Nom.Equals(nom)).ToList();
+            IEnumerable<Tournoi> lstFiltered = Get(t => t.Nom.Contains(nom)).ToList();
             return lstFiltered.Count() == 0 ? ObtenirTournois() : lstFiltered;
         }
 
