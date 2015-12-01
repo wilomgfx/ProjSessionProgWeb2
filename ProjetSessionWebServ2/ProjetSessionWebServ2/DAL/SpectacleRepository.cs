@@ -18,7 +18,6 @@ namespace ProjetSessionWebServ2.DAL
                 return Get(null, null, "TypeSpectacle");
         }
 
-        // WARNING
         public IEnumerable<Spectacle> ObtenirSpectacleParTypeSpectacle(TypeSpectacle type)
         {
             return Get().Where(s => s.TypeSpectacle.Nom.Equals(type.Nom));
