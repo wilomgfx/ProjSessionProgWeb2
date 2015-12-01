@@ -214,7 +214,6 @@
     <Compile Include="Models\Congres.cs" />
     <Compile Include="Models\Dimension.cs" />
     <Compile Include="Models\Equipe.cs" />
-    <Compile Include="Models\EquipeAvancement.cs" />
     <Compile Include="Models\Evenement.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Kiosque.cs" />
