@@ -47,10 +47,11 @@ namespace ProjetSessionWebServ2.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Description,Adresse,Nom,DateDebut,DateFin")] Congres congres)
+        public ActionResult Create([Bind(Include = "Id,Description,Adresse,Nom,DateDebut,DateFin,Actif")] Congres congres)
         {
             if (ModelState.IsValid)
             {
+                congres.Actif = true;
                 unitOfWork.CongresRepository.InsertCongres(congres);
                 unitOfWork.Save();
                 return RedirectToAction("Index");
@@ -79,7 +80,7 @@ namespace ProjetSessionWebServ2.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Description,Adresse,Nom,DateDebut,DateFin")] Congres congres)
+        public ActionResult Edit([Bind(Include = "Id,Description,Adresse,Nom,DateDebut,DateFin,Actif")] Congres congres)
         {
             if (ModelState.IsValid)
             {
@@ -92,38 +93,38 @@ namespace ProjetSessionWebServ2.Controllers
 
         // GET: Congres/Delete/5
 
-        //public ActionResult Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Congres congres = unitOfWork.CongresRepository.ObtenirCongresParID(id);
-        //    if (congres == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(congres);
-        //}
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Congres congres = unitOfWork.CongresRepository.ObtenirCongresParID(id);
+            if (congres == null)
+            {
+                return HttpNotFound();
+            }
+            return View(congres);
+        }
 
-        //// POST: Congres/Delete/5
+        // POST: Congres/Delete/5
 
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult DeleteConfirmed(int id)
-        //{
-        //    Congres congres = unitOfWork.CongresRepository.ObtenirCongresParID(id);
-        //    congres.Actif = false;
-        //    unitOfWork.CongresRepository.UpdateCongres(congres);
-            //unitOfWork.Save();
-            //return RedirectToAction("Index");
-        //}
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Congres congres = unitOfWork.CongresRepository.ObtenirCongresParID(id);
+            congres.Actif = false;
+            unitOfWork.CongresRepository.UpdateCongres(congres);
+            unitOfWork.Save();
+            return RedirectToAction("Index");
+        }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                db.Dispose();
+                unitOfWork.Dispose();
             }
             base.Dispose(disposing);
         }

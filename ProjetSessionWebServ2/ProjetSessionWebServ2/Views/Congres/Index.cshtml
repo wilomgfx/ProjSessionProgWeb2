@@ -26,6 +26,9 @@
         <th>
             @Html.DisplayNameFor(model => model.DateFin)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Actif)
+        </th>
         <th></th>
     </tr>
 
@@ -45,6 +48,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.DateFin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Actif)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
