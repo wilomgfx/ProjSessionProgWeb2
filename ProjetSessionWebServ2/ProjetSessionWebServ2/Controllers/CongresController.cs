@@ -7,17 +7,18 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ProjetSessionWebServ2.Models;
+using ProjetSessionWebServ2.DAL;
 
 namespace ProjetSessionWebServ2.Controllers
 {
     public class CongresController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private UnitOfWork unitOfWork = new UnitOfWork();
 
         // GET: Congres
         public ActionResult Index()
         {
-            return View(db.Congres.ToList());
+            return View(unitOfWork.CongresRepository.ObtenirCongres().ToList());
         }
 
         // GET: Congres/Details/5
@@ -27,7 +28,7 @@ namespace ProjetSessionWebServ2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Congres congres = db.Congres.Find(id);
+            Congres congres = unitOfWork.CongresRepository.ObtenirCongresParID(id);
             if (congres == null)
             {
                 return HttpNotFound();
@@ -50,8 +51,8 @@ namespace ProjetSessionWebServ2.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Congres.Add(congres);
-                db.SaveChanges();
+                unitOfWork.CongresRepository.InsertCongres(congres);
+                unitOfWork.Save();
                 return RedirectToAction("Index");
             }
 
@@ -65,7 +66,7 @@ namespace ProjetSessionWebServ2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Congres congres = db.Congres.Find(id);
+            Congres congres = unitOfWork.CongresRepository.ObtenirCongresParID(id);
             if (congres == null)
             {
                 return HttpNotFound();
@@ -82,38 +83,41 @@ namespace ProjetSessionWebServ2.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(congres).State = EntityState.Modified;
-                db.SaveChanges();
+                unitOfWork.CongresRepository.UpdateCongres(congres);
+                unitOfWork.Save();
                 return RedirectToAction("Index");
             }
             return View(congres);
         }
 
         // GET: Congres/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Congres congres = db.Congres.Find(id);
-            if (congres == null)
-            {
-                return HttpNotFound();
-            }
-            return View(congres);
-        }
 
-        // POST: Congres/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Congres congres = db.Congres.Find(id);
-            db.Congres.Remove(congres);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Congres congres = unitOfWork.CongresRepository.ObtenirCongresParID(id);
+        //    if (congres == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(congres);
+        //}
+
+        //// POST: Congres/Delete/5
+
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    Congres congres = unitOfWork.CongresRepository.ObtenirCongresParID(id);
+        //    congres.Actif = false;
+        //    unitOfWork.CongresRepository.UpdateCongres(congres);
+            //unitOfWork.Save();
+            //return RedirectToAction("Index");
+        //}
 
         protected override void Dispose(bool disposing)
         {
