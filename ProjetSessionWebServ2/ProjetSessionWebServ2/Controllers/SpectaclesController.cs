@@ -109,6 +109,8 @@ namespace ProjetSessionWebServ2.Controllers
                 spectacle.TypeSpectacle = unitOfWork.TypeSpectacleRepository.ObtenirTypeSpectacleParID(spectacle.TypeSpectacleId);
                 spectacle.TypeEvenement = Evenement.TypeEvent.TypeSpectacle;
                 unitOfWork.SpectacleRepository.UpdateSpectacle(spectacle);
+                //Salle salletest = unitOfWork.SalleRepository.ObtenirSalleParID(1);
+                //spectacle.Salle = salletest;
                 unitOfWork.Save();
                 return RedirectToAction("Index");
             }
