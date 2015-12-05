@@ -28,6 +28,20 @@ namespace ProjetSessionWebServ2.DAL
             }
         }
 
+        private CongresRepository congresRepository;
+
+        public CongresRepository CongresRepository
+        {
+            get
+            {
+                if (this.congresRepository == null)
+                {
+                    this.congresRepository = new CongresRepository(context);
+                }
+                return congresRepository;
+            }
+        }
+
         private SalleRepository salleRepository;
 
         public SalleRepository SalleRepository
