@@ -19,7 +19,8 @@ namespace ProjetSessionWebServ2.Controllers
         // GET: Kiosques
         public ActionResult Index()
         {
-            return View(uow.KiosqueRepository.ObtenirKiosques());
+            var stuff = uow.KiosqueRepository.ObtenirKiosques();
+            return View(stuff);
         }
 
         // GET: Kiosques/Details/5
@@ -30,7 +31,7 @@ namespace ProjetSessionWebServ2.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             //Kiosque Kiosque = db.Evenements.Find(id);
-            Kiosque Kiosque = uow.KiosqueRepository.ObtenirKiosqueParID(id);
+            Kiosque Kiosque = uow.KiosqueRepository.ObtenirKiosques().Where(k => k.Id == id).SingleOrDefault();
             if (Kiosque == null)
             {
                 return HttpNotFound();

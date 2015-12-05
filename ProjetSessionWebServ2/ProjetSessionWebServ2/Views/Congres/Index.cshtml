@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ProjetSessionWebServ2.Models.Spectacle>
+﻿@model IEnumerable<ProjetSessionWebServ2.Models.Congres>
 
 @{
     ViewBag.Title = "Index";
@@ -6,27 +6,25 @@
 
 <h2>Index</h2>
 
-@using (Html.BeginForm("Index", "Spectacles", FormMethod.Post))
-{
-    <p> Par Type de Spectacle: @Html.DropDownList("TypeSpectacles", (SelectList)ViewBag.TypeSpectacles, "") <br />
-    Par Nom: @Html.TextBox("searchNomConference", ViewBag.CurrentFilter as string) <br>
-    Par Musicien: @Html.TextBox("searchConferencier", ViewBag.CurrentFilter as string) <br>
-    <input type="submit" value="Rechercher" class="btn btn-default" /> </p>
-}
-
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Nom)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Description)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TypeSpectacle)
+            @Html.DisplayNameFor(model => model.Adresse)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateDebut)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateFin)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Actif)
@@ -37,13 +35,19 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Nom)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.TypeSpectacle.Nom)
+            @Html.DisplayFor(modelItem => item.Adresse)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateDebut)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateFin)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Actif)
