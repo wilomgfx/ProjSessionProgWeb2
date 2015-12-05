@@ -16,10 +16,23 @@ namespace ProjetSessionWebServ2.Controllers
         private UnitOfWork unitOfWork = new UnitOfWork();
 
         // GET: Spectacles
-        public ActionResult Index()
+        public ActionResult Index(FormCollection collection)
         {
-            var stuff = unitOfWork.SpectacleRepository.ObtenirSpectacles();
-            return View(stuff);
+            List<Spectacle> listeSpectacles = unitOfWork.SpectacleRepository.ObtenirSpectacles().ToList();
+            ViewBag.TypeSpectacles = new SelectList(unitOfWork.TypeSpectacleRepository.ObtenirTypeSpectacles(), "Nom", "Nom", string.Empty);
+            if (collection.HasKeys())
+            {
+                string type = collection[0];
+                string nom = collection[1];
+                string musicien = collection[2];
+
+                List<Spectacle> colSpectacle = unitOfWork.SpectacleRepository.ObtenirSpectacles().ToList();
+                List<Spectacle> colSpectacleApresrechecheType = colSpectacle.Where(s => s.TypeSpectacle.Nom.Contains(type)).ToList();
+                List<Spectacle> colSpectacleApresRechercheNomSpectacle = colSpectacleApresrechecheType.Where(s => s.Nom.Contains(nom)).ToList(); //A changer une fois les rôles implenté List<Spectacle> colConferenceApresRechercheConferencier = colSpectacleApresRechercheNomConference;
+
+                return View(colSpectacleApresRechercheNomSpectacle);
+            }
+            return View(listeSpectacles);
         }
 
         // GET: Spectacles/Details/5
@@ -29,7 +42,7 @@ namespace ProjetSessionWebServ2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Spectacle spectacle = unitOfWork.SpectacleRepository.ObtenirSpectacleParID(id);
+            Spectacle spectacle = unitOfWork.SpectacleRepository.ObtenirSpectacles().Where(s => s.Id == id).SingleOrDefault();
 
             if (spectacle == null)
             {
@@ -51,17 +64,18 @@ namespace ProjetSessionWebServ2.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeSpectacle,Actif")] Spectacle spectacle)
+        public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeSpectacleId,Actif")] Spectacle spectacle)
         {
             if (ModelState.IsValid)
             {
                 spectacle.TypeEvenement = Evenement.TypeEvent.TypeSpectacle;
+                spectacle.TypeSpectacle = unitOfWork.TypeSpectacleRepository.ObtenirTypeSpectacleParID(spectacle.TypeSpectacleId);
                 spectacle.Actif = true;
                 unitOfWork.SpectacleRepository.InsertSpectacle(spectacle);
                 unitOfWork.Save();
                 return RedirectToAction("Index");
             }
-            SelectList TypeSpectacleId = new SelectList(unitOfWork.TypeSpectacleRepository.ObtenirTypeSpectacles(), "Id", "Nom");
+            SelectList TypeSpectacleId = new SelectList(unitOfWork.TypeSpectacleRepository.ObtenirTypeSpectacles(), "Id", "Nom", spectacle.TypeSpectacleId);
             ViewBag.TypeSpectacleId = TypeSpectacleId;
             return View(spectacle);
         }
@@ -78,7 +92,7 @@ namespace ProjetSessionWebServ2.Controllers
             {
                 return HttpNotFound();
             }
-            SelectList TypeSpectacleId = new SelectList(unitOfWork.TypeSpectacleRepository.ObtenirTypeSpectacles(), "Id", "Nom");
+            SelectList TypeSpectacleId = new SelectList(unitOfWork.TypeSpectacleRepository.ObtenirTypeSpectacles(), "Id", "Nom", spectacle.TypeSpectacleId);
             ViewBag.TypeSpectacleId = TypeSpectacleId;
             return View(spectacle);
         }
@@ -88,16 +102,17 @@ namespace ProjetSessionWebServ2.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nom,Description,TypeSpectacle,Actif")] Spectacle spectacle)
+        public ActionResult Edit([Bind(Include = "Id,Nom,Description,TypeSpectacleId,Actif")] Spectacle spectacle)
         {
             if (ModelState.IsValid)
             {
+                spectacle.TypeSpectacle = unitOfWork.TypeSpectacleRepository.ObtenirTypeSpectacleParID(spectacle.TypeSpectacleId);
                 spectacle.TypeEvenement = Evenement.TypeEvent.TypeSpectacle;
                 unitOfWork.SpectacleRepository.UpdateSpectacle(spectacle);
                 unitOfWork.Save();
                 return RedirectToAction("Index");
             }
-            SelectList TypeSpectacleId = new SelectList(unitOfWork.TypeSpectacleRepository.ObtenirTypeSpectacles(), "Id", "Nom");
+            SelectList TypeSpectacleId = new SelectList(unitOfWork.TypeSpectacleRepository.ObtenirTypeSpectacles(), "Id", "Nom", spectacle.TypeSpectacleId);
             ViewBag.TypeSpectacleId = TypeSpectacleId;
             return View(spectacle);
         }

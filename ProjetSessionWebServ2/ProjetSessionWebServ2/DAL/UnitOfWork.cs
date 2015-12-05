@@ -28,6 +28,61 @@ namespace ProjetSessionWebServ2.DAL
             }
         }
 
+        private CongresRepository congresRepository;
+
+        public CongresRepository CongresRepository
+        {
+            get
+            {
+                if (this.congresRepository == null)
+                {
+                    this.congresRepository = new CongresRepository(context);
+                }
+                return congresRepository;
+            }
+        }
+
+        private SalleRepository salleRepository;
+
+        public SalleRepository SalleRepository
+        {
+            get
+            {
+                if (this.salleRepository == null)
+                {
+                    this.salleRepository = new SalleRepository(context);
+                }
+                return salleRepository;
+            }
+        }
+
+        private SectionRepository sectionRepository;
+
+        public SectionRepository SectionRepository
+        {
+            get
+            {
+                if (this.sectionRepository == null)
+                {
+                    this.sectionRepository = new SectionRepository(context);
+                }
+                return sectionRepository;
+            }
+        }
+
+        private DimensionRepository dimensionRepository;
+
+        public DimensionRepository DimensionRepository
+        {
+            get
+            {
+                if (this.dimensionRepository == null)
+                {
+                    this.dimensionRepository = new DimensionRepository(context);
+                }
+                return dimensionRepository;
+            }
+        }
         private ConferenceRepository conferenceRepository;
 
         public ConferenceRepository ConferenceRepository
@@ -100,6 +155,20 @@ namespace ProjetSessionWebServ2.DAL
                     this.typeKiosqueRepository = new TypeKiosqueRepository(context);
                 }
                 return typeKiosqueRepository;
+            }
+        }
+
+        private TypeTournoiRepository typeTournoiRepository;
+
+        public TypeTournoiRepository TypeTournoiRepository
+        {
+            get
+            {
+                if (this.typeTournoiRepository == null)
+                {
+                    this.typeTournoiRepository = new TypeTournoiRepository(context);
+                }
+                return typeTournoiRepository;
             }
         }
 
