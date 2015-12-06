@@ -17,6 +17,12 @@
         <th>
             @Html.DisplayNameFor(model => model.DateEtHeureFin)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Evenement.TypeEvenement)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Evenement)
+        </th>
         <th></th>
     </tr>
 
@@ -28,6 +34,12 @@
         <td>
             @Html.DisplayFor(modelItem => item.DateEtHeureFin)
         </td>
+        <th>
+            @Html.DisplayFor(modelItem => item.Evenement.TypeEvenement)
+        </th>
+        <th>
+            @Html.DisplayFor(modelItem => item.Evenement.Nom)
+        </th>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
             @Html.ActionLink("Details", "Details", new { id=item.Id }) |

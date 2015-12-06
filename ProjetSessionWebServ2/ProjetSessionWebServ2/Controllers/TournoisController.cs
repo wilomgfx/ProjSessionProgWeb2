@@ -70,6 +70,14 @@ namespace ProjetSessionWebServ2.Controllers
                 tournoi.Actif = true;
                 uow.TournoiRepository.InsertTournoi(tournoi);
                 uow.Save();
+
+                //PlageHoraire
+                //PlageHoraire plageHoraire = new PlageHoraire();
+                //plageHoraire.DateEtHeureDebut =
+                //plageHoraire.DateEtHeureFin = 
+                //plageHoraire.Evenement = 
+
+
                 return RedirectToAction("Index");
             }
 
