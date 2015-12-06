@@ -203,6 +203,20 @@ namespace ProjetSessionWebServ2.DAL
             }
         }
 
+        private PlageHoraireRepository plageHoraireRepository;
+
+        public PlageHoraireRepository PlageHoraireRepository
+        {
+            get
+            {
+                if(this.plageHoraireRepository == null)
+                {
+                    this.plageHoraireRepository = new PlageHoraireRepository(context);
+                }
+                return plageHoraireRepository;
+            }
+        }
+
         //private ExempleRepo exempleRepository;
 
         //public ExempleRepo ExempleReposiroy
