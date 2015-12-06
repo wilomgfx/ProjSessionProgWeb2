@@ -12,7 +12,7 @@ namespace ProjetSessionWebServ2.DAL
     {
 
         
-        private ApplicationDbContext context = new ApplicationDbContext();
+        public ApplicationDbContext context = new ApplicationDbContext();
 
         private TypeConferenceRepository typeConferenceRepository;
 
