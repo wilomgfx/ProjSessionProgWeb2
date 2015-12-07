@@ -203,6 +203,21 @@ namespace ProjetSessionWebServ2.DAL
             }
         }
 
+        private EquipeRepository equipeRepository;
+
+        public EquipeRepository EquipeRepository
+        {
+            get
+            {
+
+                if (this.equipeRepository == null)
+                {
+                    this.equipeRepository = new EquipeRepository(context);
+                }
+                return equipeRepository;
+            }
+        }
+
         //private ExempleRepo exempleRepository;
 
         //public ExempleRepo ExempleReposiroy
