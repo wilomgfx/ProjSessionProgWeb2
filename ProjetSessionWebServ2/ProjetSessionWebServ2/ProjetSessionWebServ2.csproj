@@ -229,6 +229,7 @@
     <Compile Include="Models\Salle.cs" />
     <Compile Include="Models\Section.cs" />
     <Compile Include="Models\Spectacle.cs" />
+    <Compile Include="Models\Taille.cs" />
     <Compile Include="Models\Tournoi.cs" />
     <Compile Include="Models\Transaction.cs" />
     <Compile Include="Models\TypeConference.cs" />
