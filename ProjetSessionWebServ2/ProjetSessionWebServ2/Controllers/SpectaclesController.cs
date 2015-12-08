@@ -55,7 +55,7 @@ namespace ProjetSessionWebServ2.Controllers
         }
 
         // GET: Spectacles/Create
-        [Authorize(Roles = "musicien")]
+        [CustomUserAttribute(Roles = "musicien", AccessLevel = "Create")]
         public ActionResult Create()
         {
             SelectList TypeSpectacleId = new SelectList(unitOfWork.TypeSpectacleRepository.ObtenirTypeSpectacles(), "Id", "Nom");
@@ -93,7 +93,7 @@ namespace ProjetSessionWebServ2.Controllers
         }
 
         // GET: Spectacles/Edit/5
-        [Authorize(Roles = "administrateur,musicien")]
+        [CustomUserAttribute(Roles = "administrateur,musicien", AccessLevel = "Edit")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -133,7 +133,7 @@ namespace ProjetSessionWebServ2.Controllers
         }
 
         // GET: Spectacles/Delete/5
-        [Authorize(Roles = "administrateur,musicien")]
+        [CustomUserAttribute(Roles = "administrateur,musicien", AccessLevel = "Delete")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

@@ -191,6 +191,7 @@
     <Compile Include="Controllers\TypeConferencesController.cs" />
     <Compile Include="DAL\ConferenceRepository.cs" />
     <Compile Include="DAL\CongresRepository.cs" />
+    <Compile Include="DAL\CustomUserAttribute.cs" />
     <Compile Include="DAL\DimensionRepository.cs" />
     <Compile Include="DAL\EvenementRepository.cs" />
     <Compile Include="DAL\ExempleRepo.cs" />
@@ -359,6 +360,7 @@
     <Content Include="Views\PlageHoraires\Delete.cshtml" />
     <Content Include="Views\PlageHoraires\Details.cshtml" />
     <Content Include="Views\PlageHoraires\Edit.cshtml" />
+    <Content Include="Views\Home\BadRoleError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Kiosques\Create.cshtml" />
