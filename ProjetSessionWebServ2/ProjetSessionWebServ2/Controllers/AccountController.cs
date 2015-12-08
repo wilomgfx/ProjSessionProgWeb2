@@ -9,12 +9,16 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ProjetSessionWebServ2.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
+using ProjetSessionWebServ2.DAL;
 
 namespace ProjetSessionWebServ2.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
+        private ApplicationDbContext context = new ApplicationDbContext();
+        private UnitOfWork unitOfWork = new UnitOfWork();
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -139,6 +143,36 @@ namespace ProjetSessionWebServ2.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            RoleManager<IdentityRole> RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            
+             // SelectList TypeConferenceId2 = new SelectList(unitOfWork.TypeConferenceRepository.ObtenirTypeConferences(), "Id", "Nom");
+           // ViewBag.TypeConferenceIdViewBag = TypeConferenceId2;
+          
+
+            RoleManager.Create(new IdentityRole("test"));
+
+            //Verifie si les role ont deja ete creer en regardant si l'un d'entre eux est dans la bd
+            bool roleDejaCreer = false;
+            foreach (IdentityRole role in RoleManager.Roles)
+            {
+                if(role.Name.Equals("conferencier"))
+                {
+                    roleDejaCreer = true;
+                }
+            }//si les role n<ont pas ete creer, le faire
+            if(!roleDejaCreer)
+            {
+                RoleManager.Create(new IdentityRole("conferencier"));
+                RoleManager.Create(new IdentityRole("artiste"));
+                RoleManager.Create(new IdentityRole("particippant"));
+                RoleManager.Create(new IdentityRole("kiosqueur"));
+                RoleManager.Create(new IdentityRole("administrateur"));
+            }
+            SelectList selectRoleList = new SelectList(RoleManager.Roles, "Id", "Name");
+            ViewBag.rolelist = selectRoleList;
+
+
+
             return View();
         }
 
@@ -147,8 +181,11 @@ namespace ProjetSessionWebServ2.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model, string rolelist)
         {
+            RoleManager<IdentityRole> RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            IdentityRole role = RoleManager.Roles.Where(u => u.Id.Equals(rolelist)).FirstOrDefault();
+            model.Role = role;
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
@@ -156,12 +193,28 @@ namespace ProjetSessionWebServ2.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+
+                    //Ajoute le role au user qui viens detre creer
+                    UserManager<ApplicationUser> userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+                    userManager.Users.Where(u => u.Email.Equals(model.Email)).FirstOrDefault();
+                    userManager.AddToRole(userManager.Users.Where(u => u.Email.Equals(model.Email)).FirstOrDefault().Id, role.Name);
+                   
+                   
                     // Pour plus d'informations sur l'activation de la confirmation du compte et la réinitialisation du mot de passe, consultez http://go.microsoft.com/fwlink/?LinkID=320771
                     // Envoyer un message électronique avec ce lien
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirmez votre compte", "Confirmez votre compte en cliquant <a href=\"" + callbackUrl + "\">ici</a>");
+
+
+
+                    //Cree une transaction suite a l'inscription d'un nouvel utilisateur
+                    Transaction nouvelleTransaction = new Transaction();
+                    nouvelleTransaction.DateAchat = DateTime.Now;
+                    nouvelleTransaction.Montant = 25;
+                    nouvelleTransaction.TypeAchat = "Frais Inscription";
+                    unitOfWork.TransactionRepository.InsertTransaction(nouvelleTransaction);
+                    unitOfWork.Save();
 
                     return RedirectToAction("Index", "Home");
                 }

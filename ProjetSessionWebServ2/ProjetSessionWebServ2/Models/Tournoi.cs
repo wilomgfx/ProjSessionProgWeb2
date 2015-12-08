@@ -13,6 +13,8 @@ namespace ProjetSessionWebServ2.Models
 
         public virtual List<Equipe> Equipes { get; set; }
 
-        public virtual List<Partie> Parties { get; set; } 
+        public virtual List<Partie> Parties { get; set; }
+
+        public virtual List<EquipeAvancement> Avancements { get; set; }
     }
 }
