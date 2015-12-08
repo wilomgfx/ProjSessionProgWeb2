@@ -38,6 +38,9 @@
         <th>
             @Html.DisplayNameFor(model => model.TypeConference)
         </th>
+        <th>
+            @Html.DisplayName("Conferencier")
+        </th>
         <th></th>
     </tr>
 
@@ -51,6 +54,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.TypeConference.Nom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Users.FirstOrDefault().UserName)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
