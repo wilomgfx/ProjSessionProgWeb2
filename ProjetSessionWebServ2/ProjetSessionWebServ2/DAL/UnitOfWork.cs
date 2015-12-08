@@ -14,6 +14,20 @@ namespace ProjetSessionWebServ2.DAL
         
         public ApplicationDbContext context = new ApplicationDbContext();
 
+        private TransactionRepository transactionRepository;
+
+        public TransactionRepository TransactionRepository
+        {
+            get
+            {
+                if (this.transactionRepository == null)
+                {
+                    this.transactionRepository = new TransactionRepository(context);
+                }
+                return transactionRepository;
+            }
+        }
+
         private TypeConferenceRepository typeConferenceRepository;
 
         public TypeConferenceRepository TypeConferenceRepository

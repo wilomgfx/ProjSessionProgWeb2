@@ -24,7 +24,18 @@
     
 }
 
+@{
+    using (Html.BeginForm("Index", "Conferences", FormMethod.Get))
+    {
+        <p>
+           
+            @Html.Hidden("trieConference", ViewBag.CurrentFilter as string) <br>
+            <input type="submit" value="Trier par type de conference" class="btn btn-default" />
+        </p>
 
+    }
+
+}
 
 
 <table class="table">
