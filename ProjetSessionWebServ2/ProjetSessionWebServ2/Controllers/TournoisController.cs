@@ -74,8 +74,8 @@ namespace ProjetSessionWebServ2.Controllers
                 //PlageHoraire
                 //PlageHoraire plageHoraire = new PlageHoraire();
                 //plageHoraire.DateEtHeureDebut =
-                //plageHoraire.DateEtHeureFin = 
-                //plageHoraire.Evenement = 
+                //plageHoraire.DateEtHeureFin =
+                //plageHoraire.Evenement =
 
 
                 return RedirectToAction("Index");
