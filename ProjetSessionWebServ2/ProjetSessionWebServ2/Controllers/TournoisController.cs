@@ -61,25 +61,29 @@ namespace ProjetSessionWebServ2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeEvenement,TypeTournoiId,Actif")] TournoiVM tournoiVM)
+        public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeEvenement,TypeTournoiId,Actif")] Tournoi tournoi,FormCollection collection)
         {
-
             if (ModelState.IsValid)
             {
-                tournoiVM.Tournoi.TypeTournoi = uow.TypeTournoiRepository.ObtenirTypeTournoiParID(tournoiVM.Tournoi.TypeTournoiId);
-                tournoiVM.Tournoi.TypeEvenement = Evenement.TypeEvent.TypeKiosque;
-                tournoiVM.Tournoi.Actif = true;
-                uow.TournoiRepository.InsertTournoi(tournoiVM.Tournoi);
+
+                tournoi.TypeTournoi = uow.TypeTournoiRepository.ObtenirTypeTournoiParID(tournoi.TypeTournoiId);
+                tournoi.TypeEvenement = Evenement.TypeEvent.TypeKiosque;
+                tournoi.Actif = true;
+                uow.TournoiRepository.InsertTournoi(tournoi);
                 uow.Save();
 
                 //Creating all the PlageHoraires
-                //for(int i = 0;i < tournoiVM.PlageHoraires.Count;i++)
-                //{
-                //    PlageHoraire newPlageHoraire = new PlageHoraire();
-                //    newPlageHoraire.DateEtHeureDebut = tournoiVM.PlageHoraires[i].DateEtHeureDebut;
-                //    newPlageHoraire.DateEtHeureFin = tournoiVM.PlageHoraires[i].DateEtHeureFin;
-                //    newPlageHoraire.Evenement = tournoiVM.Tournoi;
-                //}
+                PlageHoraire newPlageHoraire = new PlageHoraire();
+                DateTime dateTournoi = DateTime.Parse(collection["DateTournoi"]);
+                int heureDebut = int.Parse(collection["HeureDebut"]);
+                int heureFin = int.Parse(collection["HeureFin"]);
+                DateTime dateEtHeureDebut = dateTournoi.AddHours(heureDebut);
+                DateTime dateEtHeureFin = dateTournoi.AddHours(heureFin);
+                newPlageHoraire.DateEtHeureDebut = dateEtHeureDebut;
+                newPlageHoraire.DateEtHeureFin = dateEtHeureFin;
+                newPlageHoraire.Evenement = tournoi;
+                uow.PlageHoraireRepository.InsertPlageHoraire(newPlageHoraire);
+                uow.Save();
 
 
                 return RedirectToAction("Index");
@@ -88,7 +92,7 @@ namespace ProjetSessionWebServ2.Controllers
             SelectList TypeTournoiId = new SelectList(uow.TypeTournoiRepository.ObtenirTypeTournois(), "Id", "Nom");
             ViewBag.TypeTournoiId = TypeTournoiId;
 
-            return View(tournoiVM);
+            return View(tournoi);
         }
 
         // GET: Tournois/Edit/5
