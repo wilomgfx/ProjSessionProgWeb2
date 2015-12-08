@@ -1,0 +1,43 @@
+﻿
+@model IEnumerable<ProjetSessionWebServ2.Models.Transaction>
+
+@{
+    ViewBag.Title = "RapportDesVentes";
+}
+
+<h2 style="margin-top:50px;">RapportDesVentes</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DateAchat)
+        </th>  
+        <th>
+            @Html.DisplayNameFor(model => model.TypeAchat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Montant)
+        </th>
+    </tr>
+@if(Model != null)
+{
+    decimal total = 0;
+    foreach (var item in Model)
+    {
+        total += item.Montant;
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateAchat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TypeAchat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Montant)
+            </td>
+        </tr>
+    }
+    <tr><td>Total : @total</td></tr>
+}
+
+</table>
