@@ -22,6 +22,6 @@ namespace ProjetSessionWebServ2.Models
             Tres_Grand
         };
 
-        public Taille Taille { get; set;}
+        public Taille TailleSalle { get; set;}
     }
 }
