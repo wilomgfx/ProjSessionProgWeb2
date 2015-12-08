@@ -24,7 +24,7 @@ namespace ProjetSessionWebServ2.Controllers
         // GET: Conferences
         public ActionResult Index(string currentFilter, string searchTypeConference, string searchNomConference, string searchConferencier, string trieConference)
         {
-
+            ViewBag.searchTypeConference = new SelectList(unitOfWork.TypeConferenceRepository.ObtenirTypeConferences(), "Nom", "Nom", string.Empty);
             List<Conference> lstConferenceApresTrie = new List<Conference>();
             if (trieConference == null)// On trie selon les parametre
             {
