@@ -182,6 +182,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KiosquesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PlageHorairesController.cs" />
     <Compile Include="Controllers\SallesController.cs" />
     <Compile Include="Controllers\SectionsController.cs" />
     <Compile Include="Controllers\SpectaclesController.cs" />
@@ -197,9 +198,11 @@
     <Compile Include="DAL\IGenericRepository.cs" />
     <Compile Include="DAL\IUnitOfWork.cs" />
     <Compile Include="DAL\KiosqueRepository.cs" />
+    <Compile Include="DAL\PlageHoraireRepository.cs" />
     <Compile Include="DAL\SalleRepository.cs" />
     <Compile Include="DAL\SectionRepository.cs" />
     <Compile Include="DAL\SpectacleRepository.cs" />
+    <Compile Include="DAL\TransactionRepository.cs" />
     <Compile Include="DAL\TypeKiosqueRepository.cs" />
     <Compile Include="Controllers\TypeSpectaclesController.cs" />
     <Compile Include="DAL\TournoiRepository.cs" />
@@ -350,6 +353,12 @@
     <Content Include="Views\Congres\Details.cshtml" />
     <Content Include="Views\Congres\Edit.cshtml" />
     <Content Include="Views\Congres\Index.cshtml" />
+    <Content Include="Views\Congres\RapportDesVentes.cshtml" />
+    <Content Include="Views\PlageHoraires\Index.cshtml" />
+    <Content Include="Views\PlageHoraires\Create.cshtml" />
+    <Content Include="Views\PlageHoraires\Delete.cshtml" />
+    <Content Include="Views\PlageHoraires\Details.cshtml" />
+    <Content Include="Views\PlageHoraires\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Kiosques\Create.cshtml" />
