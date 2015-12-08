@@ -23,7 +23,7 @@ namespace ProjetSessionWebServ2.Controllers
         //private ApplicationDbContext context = new ApplicationDbContext();
         // GET: Conferences
         public ActionResult Index(string currentFilter, string searchTypeConference, string searchNomConference, string searchConferencier, string trieConference)
-        {
+        {   
             ViewBag.searchTypeConference = new SelectList(unitOfWork.TypeConferenceRepository.ObtenirTypeConferences(), "Nom", "Nom", string.Empty);
             List<Conference> lstConferenceApresTrie = new List<Conference>();
             if (trieConference == null)// On trie selon les parametre
@@ -94,7 +94,7 @@ namespace ProjetSessionWebServ2.Controllers
         // GET: Conferences/Create
         public ActionResult Create()
         {
-
+            ViewBag.Congres = new SelectList(unitOfWork.CongresRepository.ObtenirCongres(), "Id", "Nom");
             SelectList TypeConferenceId = new SelectList(unitOfWork.TypeConferenceRepository.ObtenirTypeConferences(), "Id", "Nom");
             ViewBag.TypeConferenceIdViewBag = TypeConferenceId;
 
@@ -106,10 +106,8 @@ namespace ProjetSessionWebServ2.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeConferenceId")] Conference conference, int TypeConferenceIdViewBag)
+        public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeConferenceId")] Conference conference, int TypeConferenceIdViewBag, int Congres)
         {
-
-
 
             conference.TypeEvenement = Evenement.TypeEvent.TypeConference;
 
@@ -138,6 +136,10 @@ namespace ProjetSessionWebServ2.Controllers
             }
             SelectList TypeConferenceId2 = new SelectList(unitOfWork.TypeConferenceRepository.ObtenirTypeConferences(), "Id", "Nom");
             ViewBag.TypeConferenceIdViewBag = TypeConferenceId2;
+
+
+            Congres congres = unitOfWork.CongresRepository.ObtenirCongres().Where(u => u.Id.Equals("Id")).FirstOrDefault();
+            congres.Evenements.Add(conference);
 
             return View(conference);
         }
