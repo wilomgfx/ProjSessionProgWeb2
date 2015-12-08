@@ -163,8 +163,8 @@ namespace ProjetSessionWebServ2.Controllers
             if(!roleDejaCreer)
             {
                 RoleManager.Create(new IdentityRole("conferencier"));
-                RoleManager.Create(new IdentityRole("artiste"));
-                RoleManager.Create(new IdentityRole("particippant"));
+                RoleManager.Create(new IdentityRole("musicien"));
+                RoleManager.Create(new IdentityRole("participant"));
                 RoleManager.Create(new IdentityRole("kiosqueur"));
                 RoleManager.Create(new IdentityRole("administrateur"));
             }
