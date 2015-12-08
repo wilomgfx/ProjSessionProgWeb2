@@ -15,7 +15,7 @@ namespace ProjetSessionWebServ2.DAL
         }
         public IEnumerable<Congres> ObtenirCongres()
         {
-            return Get();
+            return Get(null,null,"Evenements");
         }
 
         public IEnumerable<Congres> ObtenirCongresParNom(string nom)
