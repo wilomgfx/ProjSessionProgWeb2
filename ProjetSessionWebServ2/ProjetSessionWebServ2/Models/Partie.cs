@@ -7,5 +7,6 @@ namespace ProjetSessionWebServ2.Models
         public enum NomRound { QuartFinal, DemiFinal, Final };
         public List<Equipe> Equipes { get; set; }
         public string Gagnant { get; set; }
+        public virtual PlageHoraire PlageHoraire { get; set; }
     }
 }
