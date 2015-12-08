@@ -69,10 +69,6 @@ namespace ProjetSessionWebServ2.Controllers
             {
 
                 tournoi.TypeTournoi = uow.TypeTournoiRepository.ObtenirTypeTournoiParID(tournoi.TypeTournoiId);
-                tournoi.TypeEvenement = Evenement.TypeEvent.TypeKiosque;
-                tournoi.Actif = true;
-                uow.TournoiRepository.InsertTournoi(tournoi);
-                tournoi.TypeTournoi = uow.TypeTournoiRepository.ObtenirTypeTournoiParID(tournoi.TypeTournoiId);
                 tournoi.TypeEvenement = Evenement.TypeEvent.TypeTournoi;
                 tournoi.Actif = true;
 
@@ -83,7 +79,7 @@ namespace ProjetSessionWebServ2.Controllers
                 uow.TournoiRepository.InsertTournoi(tournoi);
                 uow.Save();
 
-                //Creating all the PlageHoraires
+                //Creating the plage horaire
                 PlageHoraire newPlageHoraire = new PlageHoraire();
                 DateTime dateTournoi = DateTime.Parse(collection["DateTournoi"]);
                 int heureDebut = int.Parse(collection["HeureDebut"]);
