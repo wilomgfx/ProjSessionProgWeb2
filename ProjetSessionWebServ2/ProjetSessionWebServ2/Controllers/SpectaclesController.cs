@@ -8,9 +8,12 @@ using System.Web;
 using System.Web.Mvc;
 using ProjetSessionWebServ2.Models;
 using ProjetSessionWebServ2.DAL;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace ProjetSessionWebServ2.Controllers
 {
+    [Authorize]
     public class SpectaclesController : Controller
     {
         private UnitOfWork unitOfWork = new UnitOfWork();
@@ -52,6 +55,7 @@ namespace ProjetSessionWebServ2.Controllers
         }
 
         // GET: Spectacles/Create
+        [CustomUserAttribute(Roles = "musicien", AccessLevel = "Create")]
         public ActionResult Create()
         {
             SelectList TypeSpectacleId = new SelectList(unitOfWork.TypeSpectacleRepository.ObtenirTypeSpectacles(), "Id", "Nom");
@@ -71,6 +75,14 @@ namespace ProjetSessionWebServ2.Controllers
                 spectacle.TypeEvenement = Evenement.TypeEvent.TypeSpectacle;
                 spectacle.TypeSpectacle = unitOfWork.TypeSpectacleRepository.ObtenirTypeSpectacleParID(spectacle.TypeSpectacleId);
                 spectacle.Actif = true;
+                UserManager<ApplicationUser> UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(unitOfWork.context));
+                ApplicationUser utilisateur = UserManager.FindById(User.Identity.GetUserId());
+                if (spectacle.Users == null)
+                {
+                    spectacle.Users = new List<ApplicationUser>();
+                }
+
+                spectacle.Users.Add(utilisateur);
                 unitOfWork.SpectacleRepository.InsertSpectacle(spectacle);
                 unitOfWork.Save();
                 return RedirectToAction("Index");
@@ -81,6 +93,7 @@ namespace ProjetSessionWebServ2.Controllers
         }
 
         // GET: Spectacles/Edit/5
+        [CustomUserAttribute(Roles = "administrateur,musicien", AccessLevel = "Edit")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -109,6 +122,8 @@ namespace ProjetSessionWebServ2.Controllers
                 spectacle.TypeSpectacle = unitOfWork.TypeSpectacleRepository.ObtenirTypeSpectacleParID(spectacle.TypeSpectacleId);
                 spectacle.TypeEvenement = Evenement.TypeEvent.TypeSpectacle;
                 unitOfWork.SpectacleRepository.UpdateSpectacle(spectacle);
+                //Salle salletest = unitOfWork.SalleRepository.ObtenirSalleParID(1);
+                //spectacle.Salle = salletest;
                 unitOfWork.Save();
                 return RedirectToAction("Index");
             }
@@ -118,6 +133,7 @@ namespace ProjetSessionWebServ2.Controllers
         }
 
         // GET: Spectacles/Delete/5
+        [CustomUserAttribute(Roles = "administrateur,musicien", AccessLevel = "Delete")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
