@@ -202,6 +202,7 @@
     <Compile Include="DAL\SalleRepository.cs" />
     <Compile Include="DAL\SectionRepository.cs" />
     <Compile Include="DAL\SpectacleRepository.cs" />
+    <Compile Include="DAL\TransactionRepository.cs" />
     <Compile Include="DAL\TypeKiosqueRepository.cs" />
     <Compile Include="Controllers\TypeSpectaclesController.cs" />
     <Compile Include="DAL\TournoiRepository.cs" />
@@ -352,6 +353,7 @@
     <Content Include="Views\Congres\Details.cshtml" />
     <Content Include="Views\Congres\Edit.cshtml" />
     <Content Include="Views\Congres\Index.cshtml" />
+    <Content Include="Views\Congres\RapportDesVentes.cshtml" />
     <Content Include="Views\PlageHoraires\Index.cshtml" />
     <Content Include="Views\PlageHoraires\Create.cshtml" />
     <Content Include="Views\PlageHoraires\Delete.cshtml" />

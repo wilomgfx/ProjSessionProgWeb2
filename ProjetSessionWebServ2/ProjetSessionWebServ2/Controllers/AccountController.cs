@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ProjetSessionWebServ2.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
+using ProjetSessionWebServ2.DAL;
 
 namespace ProjetSessionWebServ2.Controllers
 {
@@ -17,6 +18,7 @@ namespace ProjetSessionWebServ2.Controllers
     public class AccountController : Controller
     {
         private ApplicationDbContext context = new ApplicationDbContext();
+        private UnitOfWork unitOfWork = new UnitOfWork();
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -203,6 +205,16 @@ namespace ProjetSessionWebServ2.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirmez votre compte", "Confirmez votre compte en cliquant <a href=\"" + callbackUrl + "\">ici</a>");
+
+
+
+                    //Cree une transaction suite a l'inscription d'un nouvel utilisateur
+                    Transaction nouvelleTransaction = new Transaction();
+                    nouvelleTransaction.DateAchat = DateTime.Now;
+                    nouvelleTransaction.Montant = 25;
+                    nouvelleTransaction.TypeAchat = "Frais Inscription";
+                    unitOfWork.TransactionRepository.InsertTransaction(nouvelleTransaction);
+                    unitOfWork.Save();
 
                     return RedirectToAction("Index", "Home");
                 }
