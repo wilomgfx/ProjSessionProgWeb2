@@ -15,6 +15,9 @@
             @Html.DisplayNameFor(model => model.NoSalle)
         </th>
         <th>
+            Taille 
+        </th>
+        <th>
             largeur
         </th>
         <th>
@@ -32,6 +35,9 @@
             @Html.DisplayFor(modelItem => item.NoSalle)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.TailleSalle)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.Dimension.Largeur)
         </td>
         <td>
@@ -43,11 +49,14 @@
             @Html.ActionLink("Supprimer", "Delete", new { id=item.Id })
         </td>
     </tr>
-    @foreach (var section in item.Sections)
+    foreach (var section in item.Sections)
     {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => section.Nom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => section.TailleSection)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => section.Dimension.Largeur)

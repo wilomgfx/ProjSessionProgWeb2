@@ -13,6 +13,6 @@ namespace ProjetSessionWebServ2.Models
 
         public List<ApplicationUser> Joueurs { get; set; }
 
-        public int PointageTotal { get; set; }
+        //public int PointageTotal { get; set; }
     }
 }
