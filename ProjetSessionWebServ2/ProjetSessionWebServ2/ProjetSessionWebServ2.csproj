@@ -192,6 +192,7 @@
     <Compile Include="Controllers\TypeTournoisController.cs" />
     <Compile Include="DAL\ConferenceRepository.cs" />
     <Compile Include="DAL\CongresRepository.cs" />
+    <Compile Include="DAL\CustomUserAttribute.cs" />
     <Compile Include="DAL\DimensionRepository.cs" />
     <Compile Include="DAL\EquipeRepository.cs" />
     <Compile Include="DAL\EvenementRepository.cs" />
@@ -366,12 +367,16 @@
     <Content Include="Views\PlageHoraires\Delete.cshtml" />
     <Content Include="Views\PlageHoraires\Details.cshtml" />
     <Content Include="Views\PlageHoraires\Edit.cshtml" />
+<<<<<<< HEAD
+    <Content Include="Views\Home\BadRoleError.cshtml" />
+=======
     <Content Include="Views\TypeTournois\Create.cshtml" />
     <Content Include="Views\TypeTournois\Delete.cshtml" />
     <Content Include="Views\TypeTournois\Details.cshtml" />
     <Content Include="Views\TypeTournois\Edit.cshtml" />
     <Content Include="Views\TypeTournois\Index.cshtml" />
     <Content Include="Views\Tournois\Participate.cshtml" />
+>>>>>>> refs/remotes/origin/master
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Kiosques\Create.cshtml" />
