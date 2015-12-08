@@ -8,19 +8,70 @@ using System.Web;
 using System.Web.Mvc;
 using ProjetSessionWebServ2.Models;
 using ProjetSessionWebServ2.DAL;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace ProjetSessionWebServ2.Controllers
 {
+    [Authorize]
     public class KiosquesController : Controller
     {
         //private ApplicationDbContext db = new ApplicationDbContext();
         private UnitOfWork uow = new UnitOfWork();
 
         // GET: Kiosques
-        public ActionResult Index()
+        public ActionResult Index(string currentFilter, string searchTypeKiosque, string searchNomKiosque, string searchKiosqueur, string trieKiosque)
         {
-            var stuff = uow.KiosqueRepository.ObtenirKiosques();
-            return View(stuff);
+            ViewBag.searchTypeKiosque = new SelectList(uow.TypeKiosqueRepository.ObtenirTypeKiosques(), "Nom", "Nom", string.Empty);
+            List<Kiosque> lstKiosqueApresTrie = new List<Kiosque>();
+            if (trieKiosque == null)// On trie selon les parametre
+            {
+                if (searchKiosqueur == null)
+                {
+                    searchKiosqueur = "";
+                }
+                if (searchNomKiosque == null)
+                {
+                    searchNomKiosque = "";
+                }
+                if (searchTypeKiosque == null)
+                {
+                    searchTypeKiosque = "";
+                }
+
+                //Trie selon les parametre de recherche entre par l'utilisateur
+                List<Kiosque> colKiosque = uow.KiosqueRepository.ObtenirKiosques().ToList();
+
+                List<Kiosque> colKiosqueApresrechecheType = colKiosque.Where(u => u.TypeKiosque.Nom.Contains(searchTypeKiosque)).ToList();
+                List<Kiosque> colKiosqueeApresRechercheNomKiosque = colKiosqueApresrechecheType.Where(u => u.Nom.Contains(searchNomKiosque)).ToList();
+                List<Kiosque> colKiosqueApresRechercheKiosqueur = new List<Kiosque>();
+
+                if(!searchKiosqueur.Equals(""))
+                {
+                    foreach (Kiosque Kiosque in colKiosqueeApresRechercheNomKiosque)
+                    {
+                        foreach (ApplicationUser user in Kiosque.Users)
+                        {
+                            if (user.UserName.ToLower().Contains(searchKiosqueur.ToLower()))
+                            {
+                                colKiosqueApresRechercheKiosqueur.Add(Kiosque);
+                            }
+                        }
+                    }
+
+                    lstKiosqueApresTrie = colKiosqueApresRechercheKiosqueur;
+                }
+                else 
+                {
+                    lstKiosqueApresTrie = colKiosqueeApresRechercheNomKiosque;
+                }         
+            }
+            else // On trie par type de Kiosque
+            {
+                lstKiosqueApresTrie = uow.KiosqueRepository.ObtenirKiosques().OrderBy(x => x.TypeKiosque.Nom).ToList();
+            }
+
+            return View(lstKiosqueApresTrie);
         }
 
         // GET: Kiosques/Details/5
@@ -39,6 +90,7 @@ namespace ProjetSessionWebServ2.Controllers
             return View(Kiosque);
         }
 
+        [Authorize(Roles = "kiosqueur")]
         // GET: Kiosques/Create
         public ActionResult Create()
         {
@@ -58,6 +110,16 @@ namespace ProjetSessionWebServ2.Controllers
 
             if (ModelState.IsValid)
             {
+
+                UserManager<ApplicationUser> UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(uow.context));
+                ApplicationUser utilisateur = UserManager.FindById(User.Identity.GetUserId());
+                if (Kiosque.Users == null)
+                {
+                    Kiosque.Users = new List<ApplicationUser>();
+                }
+
+                Kiosque.Users.Add(utilisateur);
+
                 //db.Evenements.Add(Kiosque);
                 //db.SaveChanges();
                 Kiosque.TypeKiosque = uow.TypeKiosqueRepository.ObtenirTypeKiosqueParID(Kiosque.TypeKiosqueId);
@@ -74,6 +136,7 @@ namespace ProjetSessionWebServ2.Controllers
             return View(Kiosque);
         }
 
+        [Authorize(Roles = "kiosqueur")]
         // GET: Kiosques/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -116,6 +179,7 @@ namespace ProjetSessionWebServ2.Controllers
             return View(Kiosque);
         }
 
+        [Authorize(Roles = "kiosqueur")]
         // GET: Kiosques/Delete/5
         public ActionResult Delete(int? id)
         {

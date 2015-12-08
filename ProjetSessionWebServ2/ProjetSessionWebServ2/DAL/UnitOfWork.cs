@@ -14,6 +14,20 @@ namespace ProjetSessionWebServ2.DAL
         
         public ApplicationDbContext context = new ApplicationDbContext();
 
+        private TransactionRepository transactionRepository;
+
+        public TransactionRepository TransactionRepository
+        {
+            get
+            {
+                if (this.transactionRepository == null)
+                {
+                    this.transactionRepository = new TransactionRepository(context);
+                }
+                return transactionRepository;
+            }
+        }
+
         private TypeConferenceRepository typeConferenceRepository;
 
         public TypeConferenceRepository TypeConferenceRepository
@@ -203,17 +217,33 @@ namespace ProjetSessionWebServ2.DAL
             }
         }
 
+
         private PlageHoraireRepository plageHoraireRepository;
 
         public PlageHoraireRepository PlageHoraireRepository
         {
             get
             {
-                if(this.plageHoraireRepository == null)
+                if (this.plageHoraireRepository == null)
                 {
                     this.plageHoraireRepository = new PlageHoraireRepository(context);
                 }
                 return plageHoraireRepository;
+            }
+        }
+
+        private EquipeRepository equipeRepository;
+
+        public EquipeRepository EquipeRepository
+        {
+            get
+            {
+
+                if (this.equipeRepository == null)
+                {
+                    this.equipeRepository = new EquipeRepository(context);
+                }
+                return equipeRepository;
             }
         }
 

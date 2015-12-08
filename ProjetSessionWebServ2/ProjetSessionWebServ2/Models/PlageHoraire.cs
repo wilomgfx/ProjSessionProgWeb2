@@ -20,6 +20,5 @@ namespace ProjetSessionWebServ2.Models
 
         public virtual Evenement Evenement { get; set; }
 
-
     }
 }

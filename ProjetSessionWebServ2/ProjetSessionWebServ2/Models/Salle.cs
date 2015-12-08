@@ -14,5 +14,6 @@ namespace ProjetSessionWebServ2.Models
         public virtual List<Section> Sections { get; set; }
 
         public virtual Dimension Dimension { get; set; }
+        public Taille TailleSalle { get; set;}
     }
 }

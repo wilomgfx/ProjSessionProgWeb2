@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ProjetSessionWebServ2.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
+using ProjetSessionWebServ2.DAL;
 
 namespace ProjetSessionWebServ2.Controllers
 {
@@ -17,6 +18,7 @@ namespace ProjetSessionWebServ2.Controllers
     public class AccountController : Controller
     {
         private ApplicationDbContext context = new ApplicationDbContext();
+        private UnitOfWork unitOfWork = new UnitOfWork();
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -161,8 +163,8 @@ namespace ProjetSessionWebServ2.Controllers
             if(!roleDejaCreer)
             {
                 RoleManager.Create(new IdentityRole("conferencier"));
-                RoleManager.Create(new IdentityRole("artiste"));
-                RoleManager.Create(new IdentityRole("particippant"));
+                RoleManager.Create(new IdentityRole("musicien"));
+                RoleManager.Create(new IdentityRole("participant"));
                 RoleManager.Create(new IdentityRole("kiosqueur"));
                 RoleManager.Create(new IdentityRole("administrateur"));
             }
@@ -190,7 +192,7 @@ namespace ProjetSessionWebServ2.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    
 
                     //Ajoute le role au user qui viens detre creer
                     UserManager<ApplicationUser> userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
@@ -203,6 +205,18 @@ namespace ProjetSessionWebServ2.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirmez votre compte", "Confirmez votre compte en cliquant <a href=\"" + callbackUrl + "\">ici</a>");
+
+
+
+                    //Cree une transaction suite a l'inscription d'un nouvel utilisateur
+                    Transaction nouvelleTransaction = new Transaction();
+                    nouvelleTransaction.DateAchat = DateTime.Now;
+                    nouvelleTransaction.Montant = 25;
+                    nouvelleTransaction.TypeAchat = "Frais Inscription";
+                    unitOfWork.TransactionRepository.InsertTransaction(nouvelleTransaction);
+                    unitOfWork.Save();
+
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     return RedirectToAction("Index", "Home");
                 }

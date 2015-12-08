@@ -14,7 +14,7 @@
         using (Html.BeginForm("Index", "Conferences", FormMethod.Get))
         {
             <p>
-                Par Type de Conférence: @Html.TextBox("searchTypeConference", ViewBag.CurrentFilter as string) <br>
+                Par Type de Conférence: @Html.DropDownList("searchTypeConference", (SelectList)ViewBag.TypeSpectacles, "") <br>
                 Par Nom: @Html.TextBox("searchNomConference", ViewBag.CurrentFilter as string) <br>
                 Par Conferencier: @Html.TextBox("searchConferencier", ViewBag.CurrentFilter as string) <br>
                 <input type="submit" value="Rechercher" class="btn btn-default" />
@@ -24,7 +24,18 @@
     
 }
 
+@{
+    using (Html.BeginForm("Index", "Conferences", FormMethod.Get))
+    {
+        <p>
+           
+            @Html.Hidden("trieConference", ViewBag.CurrentFilter as string) <br>
+            <input type="submit" value="Trier par type de conference" class="btn btn-default" />
+        </p>
 
+    }
+
+}
 
 
 <table class="table">

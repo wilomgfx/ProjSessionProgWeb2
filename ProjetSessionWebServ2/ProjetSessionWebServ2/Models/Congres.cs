@@ -15,21 +15,18 @@ namespace ProjetSessionWebServ2.Models
         public string Adresse { get; set; }
 
         public string Nom { get; set; }
+
         public bool Actif { get; set; }
+
         [DataType(DataType.Date)]
         public DateTime DateDebut { get; set; }
+
         [DataType(DataType.Date)]
         public DateTime DateFin { get; set; }
 
         public virtual List<ApplicationUser> Users { get; set; }
 
-        public virtual List<Tournoi> Tournois { get; set; }
-
         public virtual List<Evenement> Evenements { get; set; }
-
-        public virtual List<Spectacle> Spectacles { get; set; }
-
-        public virtual List<Kiosque> Kiosques { get; set; }
 
         public virtual List<PlageHoraire> PlageHoraires { get; set; }
 

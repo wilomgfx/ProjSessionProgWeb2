@@ -9,6 +9,34 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+@{
+    using (Html.BeginForm("Index", "Kiosques", FormMethod.Get))
+    {
+        <p>
+            Par Type de Kiosque: @Html.DropDownList("searchTypeKiosque", (SelectList)ViewBag.searchTypeKiosque, "") <br>
+            Par Nom: @Html.TextBox("searchNomKiosque", ViewBag.CurrentFilter as string) <br>
+            Par Kiosqueur: @Html.TextBox("searchKiosqueur", ViewBag.CurrentFilter as string) <br>
+            <input type="submit" value="Rechercher" class="btn btn-default" />
+        </p>
+
+    }
+
+}
+
+@{
+    using (Html.BeginForm("Index", "Kiosques", FormMethod.Get))
+    {
+        <p>
+
+            @Html.Hidden("trieKiosque", ViewBag.CurrentFilter as string) <br>
+            <input type="submit" value="Trier par type de kiosque" class="btn btn-default" />
+        </p>
+
+    }
+
+}
+
 <table class="table">
     <tr>
         <th>
@@ -32,7 +60,18 @@
             @Html.DisplayFor(modelItem => item.Nom)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Description)
+            @*@Html.DisplayFor(modelItem => item.Description)*@
+            @{
+                if(item.Description.Length < 50)
+                {
+                   <p>@item.Description</p>
+                }
+                else
+                {
+                    <p>@(item.Description.Substring(0, 50).ToString() + "...")</p>
+                }
+            }
+            
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.TypeKiosque.Nom)
