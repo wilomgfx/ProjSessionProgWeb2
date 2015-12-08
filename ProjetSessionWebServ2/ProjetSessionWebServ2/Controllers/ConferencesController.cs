@@ -8,39 +8,65 @@ using System.Web;
 using System.Web.Mvc;
 using ProjetSessionWebServ2.Models;
 using ProjetSessionWebServ2.DAL;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System.Web.Security;
+using Microsoft.Owin;
 
 namespace ProjetSessionWebServ2.Controllers
 {
+    [Authorize]
     public class ConferencesController : Controller
     {
-       // private ApplicationDbContext db = new ApplicationDbContext()Default1;
+        // private ApplicationDbContext db = new ApplicationDbContext()Default1;
         private UnitOfWork unitOfWork = new UnitOfWork();
+        //private ApplicationDbContext context = new ApplicationDbContext();
         // GET: Conferences
-        public ActionResult Index(string currentFilter, string searchTypeConference, string searchNomConference, string searchConferencier)
+        public ActionResult Index(string currentFilter, string searchTypeConference, string searchNomConference, string searchConferencier, string trieConference)
         {
 
-            if(searchConferencier == null)
+            List<Conference> lstConferenceApresTrie = new List<Conference>();
+            if (trieConference == null)// On trie selon les parametre
             {
-                searchConferencier = "";
-            }
-            if(searchNomConference == null)
-            {
-                searchNomConference = "";
-            }
-            if(searchTypeConference == null)
-            {
-                searchTypeConference = "";
-            }
+                if (searchConferencier == null)
+                {
+                    searchConferencier = "";
+                }
+                if (searchNomConference == null)
+                {
+                    searchNomConference = "";
+                }
+                if (searchTypeConference == null)
+                {
+                    searchTypeConference = "";
+                }
+
+                //Trie selon les parametre de recherche entre par l'utilisateur
+                List<Conference> colConference = unitOfWork.ConferenceRepository.ObtenirConferences().ToList();
+                List<Conference> colConfenreceApresrechecheType = colConference.Where(u => u.TypeConference.Nom.Contains(searchTypeConference)).ToList();
+                List<Conference> colConfenrenceApresRechercheNomConference = colConfenreceApresrechecheType.Where(u => u.Nom.Contains(searchNomConference)).ToList();
+                List<Conference> colConferenceApresRechercheConferencier = new List<Conference>();
 
 
-            List<Conference> colConference = unitOfWork.ConferenceRepository.ObtenirConferences().ToList();
-            List<Conference> colConfenreceApresrechecheType = colConference.Where(u=>u.TypeConference.Nom.Contains(searchTypeConference)).ToList();
-            List<Conference> colConfenrenceApresRechercheNomConference = colConfenreceApresrechecheType.Where(u => u.Nom.Contains(searchNomConference)).ToList();
-            //A changer une fois les rôles implenté
-            List<Conference> colConferenceApresRechercheConferencier = colConfenrenceApresRechercheNomConference;
+                foreach (Conference conference in colConfenrenceApresRechercheNomConference)
+                {
+                    foreach (ApplicationUser user in conference.Users)
+                    {
+                        if (user.UserName.ToLower().Contains(searchConferencier.ToLower()))
+                        {
+                            colConferenceApresRechercheConferencier.Add(conference);
+                        }
+                    }
+                }
+                lstConferenceApresTrie = colConferenceApresRechercheConferencier;
+            }
+            else // On trie par type de conference
+            {
+                lstConferenceApresTrie = unitOfWork.ConferenceRepository.ObtenirConferences().OrderBy(x => x.TypeConference.Nom).ToList();
+            }
 
-            return View(colConferenceApresRechercheConferencier);
-           // return View(unitOfWork.ConferenceRepository.ObtenirConferences());
+            return View(lstConferenceApresTrie);
+            // return View(unitOfWork.ConferenceRepository.ObtenirConferences());
             //return View(unitOfWork.ConferenceRepository.ObtenirConference().Where(t=>t.Actif == true));
             //return View(db.Evenements.ToList());
         }
@@ -52,8 +78,11 @@ namespace ProjetSessionWebServ2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-          //  Conference conference = unitOfWork.ConferenceRepository.ObtenirConferenceParID(id);
-            Conference confenrence2 = unitOfWork.ConferenceRepository.ObtenirConferences().Where(u=>u.Id.Equals(id)).FirstOrDefault();
+            //  Conference conference = unitOfWork.ConferenceRepository.ObtenirConferenceParID(id);
+            Conference confenrence2 = unitOfWork.ConferenceRepository.ObtenirConferences().Where(u => u.Id.Equals(id)).FirstOrDefault();
+
+
+
             if (confenrence2 == null)
             {
                 return HttpNotFound();
@@ -61,7 +90,7 @@ namespace ProjetSessionWebServ2.Controllers
 
             return View(confenrence2);
         }
-
+        [Authorize(Roles = "conferencier")]
         // GET: Conferences/Create
         public ActionResult Create()
         {
@@ -79,6 +108,9 @@ namespace ProjetSessionWebServ2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeConferenceId")] Conference conference, int TypeConferenceIdViewBag)
         {
+
+
+
             conference.TypeEvenement = Evenement.TypeEvent.TypeConference;
 
             conference.TypeConferenceId = TypeConferenceIdViewBag;
@@ -87,6 +119,17 @@ namespace ProjetSessionWebServ2.Controllers
             if (ModelState.IsValid)
             {
                 conference.Actif = true;
+
+                //UserManager<ApplicationUser> userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+
+                UserManager<ApplicationUser> UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(unitOfWork.context));
+                ApplicationUser utilisateur = UserManager.FindById(User.Identity.GetUserId());
+                if (conference.Users == null)
+                {
+                    conference.Users = new List<ApplicationUser>();
+                }
+
+                conference.Users.Add(utilisateur);
                 unitOfWork.ConferenceRepository.InsertConference(conference);
                 unitOfWork.Save();
                 //db.Evenements.Add(conference);
@@ -98,7 +141,7 @@ namespace ProjetSessionWebServ2.Controllers
 
             return View(conference);
         }
-
+        [Authorize(Roles = "administrateur,conferencier")]
         // GET: Conferences/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -106,7 +149,7 @@ namespace ProjetSessionWebServ2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-         
+
 
             Conference conference = unitOfWork.ConferenceRepository.ObtenirConferenceParID(id);
 
@@ -141,7 +184,7 @@ namespace ProjetSessionWebServ2.Controllers
             ViewBag.TypeConferenceIdViewBag = TypeConferenceId2;
             return View(conference);
         }
-
+        [Authorize(Roles = "administrateur,conferencier")]
         // GET: Conferences/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -177,7 +220,7 @@ namespace ProjetSessionWebServ2.Controllers
             if (disposing)
             {
                 unitOfWork.Dispose();
-               // db.Dispose();
+                // db.Dispose();
             }
             base.Dispose(disposing);
         }

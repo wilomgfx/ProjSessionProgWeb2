@@ -46,5 +46,8 @@ namespace ProjetSessionWebServ2.Models
 
         public System.Data.Entity.DbSet<ProjetSessionWebServ2.Models.Dimension> Dimensions { get; set; }
 
+        public System.Data.Entity.DbSet<ProjetSessionWebServ2.Models.Congres> Congres { get; set; }
+
+        public System.Data.Entity.DbSet<ProjetSessionWebServ2.Models.PlageHoraire> PlageHoraires { get; set; }
     }
 }

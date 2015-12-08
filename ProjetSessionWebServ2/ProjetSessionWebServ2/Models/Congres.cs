@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -15,19 +16,17 @@ namespace ProjetSessionWebServ2.Models
 
         public string Nom { get; set; }
 
+        public bool Actif { get; set; }
+
+        [DataType(DataType.Date)]
         public DateTime DateDebut { get; set; }
 
+        [DataType(DataType.Date)]
         public DateTime DateFin { get; set; }
 
         public virtual List<ApplicationUser> Users { get; set; }
 
-        public virtual List<Tournoi> Tournois { get; set; }
-
         public virtual List<Evenement> Evenements { get; set; }
-
-        public virtual List<Spectacle> Spectacles { get; set; }
-
-        public virtual List<Kiosque> Kiosques { get; set; }
 
         public virtual List<PlageHoraire> PlageHoraires { get; set; }
 
