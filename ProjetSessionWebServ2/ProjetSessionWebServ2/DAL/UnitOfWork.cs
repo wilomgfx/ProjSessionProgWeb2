@@ -217,6 +217,7 @@ namespace ProjetSessionWebServ2.DAL
             }
         }
 
+
         private PlageHoraireRepository plageHoraireRepository;
 
         public PlageHoraireRepository PlageHoraireRepository
@@ -228,6 +229,19 @@ namespace ProjetSessionWebServ2.DAL
                     this.plageHoraireRepository = new PlageHoraireRepository(context);
                 }
                 return plageHoraireRepository;
+
+        private EquipeRepository equipeRepository;
+
+        public EquipeRepository EquipeRepository
+        {
+            get
+            {
+
+                if (this.equipeRepository == null)
+                {
+                    this.equipeRepository = new EquipeRepository(context);
+                }
+                return equipeRepository;
             }
         }
 
