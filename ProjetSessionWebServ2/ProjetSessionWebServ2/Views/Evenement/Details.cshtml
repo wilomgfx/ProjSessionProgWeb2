@@ -23,7 +23,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Description)
+            @Html.TextAreaFor(model => model.Description, new { @class = "form-control", cols = "100" })
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Salle.NoSalle)
