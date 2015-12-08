@@ -17,10 +17,24 @@
         <dd>
             @Html.DisplayFor(model => model.NoSalle)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Dimension.Largeur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dimension.Largeur)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Dimension.Longueur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dimension.Longueur)
+        </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Modifier", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Retour a la liste", "Index")
 </p>

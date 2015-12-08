@@ -163,8 +163,8 @@ namespace ProjetSessionWebServ2.Controllers
             if(!roleDejaCreer)
             {
                 RoleManager.Create(new IdentityRole("conferencier"));
-                RoleManager.Create(new IdentityRole("artiste"));
-                RoleManager.Create(new IdentityRole("particippant"));
+                RoleManager.Create(new IdentityRole("musicien"));
+                RoleManager.Create(new IdentityRole("participant"));
                 RoleManager.Create(new IdentityRole("kiosqueur"));
                 RoleManager.Create(new IdentityRole("administrateur"));
             }
@@ -192,7 +192,7 @@ namespace ProjetSessionWebServ2.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    
 
                     //Ajoute le role au user qui viens detre creer
                     UserManager<ApplicationUser> userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
@@ -215,6 +215,8 @@ namespace ProjetSessionWebServ2.Controllers
                     nouvelleTransaction.TypeAchat = "Frais Inscription";
                     unitOfWork.TransactionRepository.InsertTransaction(nouvelleTransaction);
                     unitOfWork.Save();
+
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     return RedirectToAction("Index", "Home");
                 }

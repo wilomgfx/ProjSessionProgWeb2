@@ -63,7 +63,7 @@ namespace ProjetSessionWebServ2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeEvenement,TypeTournoiId,Actif")] Tournoi tournoi)
+        public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeEvenement,TypeTournoiId,Actif")] TournoiVM tournoiVM)
         {
 
             if (ModelState.IsValid)
@@ -76,14 +76,17 @@ namespace ProjetSessionWebServ2.Controllers
                 tournoi.Avancements = new List<EquipeAvancement>();
                 tournoi.Parties = new List<Partie>();
 
-                uow.TournoiRepository.InsertTournoi(tournoi);
+                uow.TournoiRepository.InsertTournoi(tournoiVM.Tournoi);
                 uow.Save();
 
-                //PlageHoraire
-                //PlageHoraire plageHoraire = new PlageHoraire();
-                //plageHoraire.DateEtHeureDebut =
-                //plageHoraire.DateEtHeureFin =
-                //plageHoraire.Evenement =
+                //Creating all the PlageHoraires
+                //for(int i = 0;i < tournoiVM.PlageHoraires.Count;i++)
+                //{
+                //    PlageHoraire newPlageHoraire = new PlageHoraire();
+                //    newPlageHoraire.DateEtHeureDebut = tournoiVM.PlageHoraires[i].DateEtHeureDebut;
+                //    newPlageHoraire.DateEtHeureFin = tournoiVM.PlageHoraires[i].DateEtHeureFin;
+                //    newPlageHoraire.Evenement = tournoiVM.Tournoi;
+                //}
 
 
                 return RedirectToAction("Index");
@@ -92,7 +95,7 @@ namespace ProjetSessionWebServ2.Controllers
             SelectList TypeTournoiId = new SelectList(uow.TypeTournoiRepository.ObtenirTypeTournois(), "Id", "Nom", tournoi.TypeTournoiId);
             ViewBag.TypeTournoiId = TypeTournoiId;
 
-            return View(tournoi);
+            return View(tournoiVM);
         }
 
         // GET: Tournois/Edit/5

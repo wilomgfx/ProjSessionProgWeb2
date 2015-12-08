@@ -14,5 +14,14 @@ namespace ProjetSessionWebServ2.Models
         public virtual List<Section> Sections { get; set; }
 
         public virtual Dimension Dimension { get; set; }
+
+        public enum Taille
+        {   Petit,
+            Moyen,
+            Grand,
+            Tres_Grand
+        };
+
+        public Taille Taille { get; set;}
     }
 }
