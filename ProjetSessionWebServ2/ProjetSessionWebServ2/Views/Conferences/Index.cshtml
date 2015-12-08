@@ -9,6 +9,35 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+@{    
+        using (Html.BeginForm("Index", "Conferences", FormMethod.Get))
+        {
+            <p>
+                Par Type de Conférence: @Html.TextBox("searchTypeConference", ViewBag.CurrentFilter as string) <br>
+                Par Nom: @Html.TextBox("searchNomConference", ViewBag.CurrentFilter as string) <br>
+                Par Conferencier: @Html.TextBox("searchConferencier", ViewBag.CurrentFilter as string) <br>
+                <input type="submit" value="Rechercher" class="btn btn-default" />
+            </p>
+
+        }
+    
+}
+
+@{
+    using (Html.BeginForm("Index", "Conferences", FormMethod.Get))
+    {
+        <p>
+           
+            @Html.Hidden("trieConference", ViewBag.CurrentFilter as string) <br>
+            <input type="submit" value="Trier par type de conference" class="btn btn-default" />
+        </p>
+
+    }
+
+}
+
+
 <table class="table">
     <tr>
         <th>
@@ -19,6 +48,9 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.TypeConference)
+        </th>
+        <th>
+            @Html.DisplayName("Conferencier")
         </th>
         <th></th>
     </tr>
@@ -33,6 +65,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.TypeConference.Nom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Users.FirstOrDefault().UserName)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

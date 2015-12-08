@@ -1,0 +1,67 @@
+﻿@model IEnumerable<ProjetSessionWebServ2.Models.Salle>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Ajouter une nouvelle Salle", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NoSalle)
+        </th>
+        <th>
+            largeur
+        </th>
+        <th>
+            Longueur
+        </th>
+        <th>
+            Disponible 
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NoSalle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Dimension.Largeur)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Dimension.Longueur)
+        </td>
+        <td>
+            @Html.ActionLink("Modifier", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("voir Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Supprimer", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+    @foreach (var section in item.Sections)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => section.Nom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => section.Dimension.Largeur)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => section.Dimension.Longueur)
+            </td>
+            <td>
+                @Html.ActionLink("Modifier", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("voir Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Supprimer", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+}
+
+</table>

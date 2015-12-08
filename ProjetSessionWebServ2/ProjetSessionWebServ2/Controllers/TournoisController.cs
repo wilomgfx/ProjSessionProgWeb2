@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using ProjetSessionWebServ2.Models;
 using ProjetSessionWebServ2.DAL;
+using ProjetSessionWebServ2.ViewModels;
 
 namespace ProjetSessionWebServ2.Controllers
 {
@@ -50,6 +51,8 @@ namespace ProjetSessionWebServ2.Controllers
         // GET: Tournois/Create
         public ActionResult Create()
         {
+            SelectList TypeTournoiId = new SelectList(uow.TypeTournoiRepository.ObtenirTypeTournois(), "Id", "Nom");
+            ViewBag.TypeTournoiId = TypeTournoiId;
             return View();
         }
 
@@ -58,19 +61,34 @@ namespace ProjetSessionWebServ2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeEvenement,Actif")] Tournoi tournoi)
+        public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeEvenement,TypeTournoiId,Actif")] TournoiVM tournoiVM)
         {
+
             if (ModelState.IsValid)
             {
-                //db.Evenements.Add(tournoi);
-                //db.SaveChanges();
-                tournoi.Actif = true;
-                uow.TournoiRepository.InsertTournoi(tournoi);
+                tournoiVM.Tournoi.TypeTournoi = uow.TypeTournoiRepository.ObtenirTypeTournoiParID(tournoiVM.Tournoi.TypeTournoiId);
+                tournoiVM.Tournoi.TypeEvenement = Evenement.TypeEvent.TypeKiosque;
+                tournoiVM.Tournoi.Actif = true;
+                uow.TournoiRepository.InsertTournoi(tournoiVM.Tournoi);
                 uow.Save();
+
+                //Creating all the PlageHoraires
+                //for(int i = 0;i < tournoiVM.PlageHoraires.Count;i++)
+                //{
+                //    PlageHoraire newPlageHoraire = new PlageHoraire();
+                //    newPlageHoraire.DateEtHeureDebut = tournoiVM.PlageHoraires[i].DateEtHeureDebut;
+                //    newPlageHoraire.DateEtHeureFin = tournoiVM.PlageHoraires[i].DateEtHeureFin;
+                //    newPlageHoraire.Evenement = tournoiVM.Tournoi;
+                //}
+
+
                 return RedirectToAction("Index");
             }
 
-            return View(tournoi);
+            SelectList TypeTournoiId = new SelectList(uow.TypeTournoiRepository.ObtenirTypeTournois(), "Id", "Nom");
+            ViewBag.TypeTournoiId = TypeTournoiId;
+
+            return View(tournoiVM);
         }
 
         // GET: Tournois/Edit/5
@@ -86,6 +104,10 @@ namespace ProjetSessionWebServ2.Controllers
             {
                 return HttpNotFound();
             }
+
+            SelectList TypeTournoiId = new SelectList(uow.TypeTournoiRepository.ObtenirTypeTournois(), "Id", "Nom");
+            ViewBag.TypeTournoiId = TypeTournoiId;
+
             return View(tournoi);
         }
 
@@ -94,7 +116,7 @@ namespace ProjetSessionWebServ2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nom,Description,TypeEvenement,Actif")] Tournoi tournoi)
+        public ActionResult Edit([Bind(Include = "Id,Nom,Description,TypeEvenement,TypeTournoiId,Actif")] Tournoi tournoi)
         {
             if (ModelState.IsValid)
             {
@@ -102,6 +124,10 @@ namespace ProjetSessionWebServ2.Controllers
                 uow.Save();
                 return RedirectToAction("Index");
             }
+
+            SelectList TypeTournoiId = new SelectList(uow.TypeTournoiRepository.ObtenirTypeTournois(), "Id", "Nom");
+            ViewBag.TypeTournoiId = TypeTournoiId;
+
             return View(tournoi);
         }
 

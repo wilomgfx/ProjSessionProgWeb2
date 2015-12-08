@@ -6,6 +6,14 @@
 
 <h2>Index</h2>
 
+@using (Html.BeginForm("Index", "Spectacles", FormMethod.Post))
+{
+    <p> Par Type de Spectacle: @Html.DropDownList("TypeSpectacles", (SelectList)ViewBag.TypeSpectacles, "") <br />
+    Par Nom: @Html.TextBox("searchNomConference", ViewBag.CurrentFilter as string) <br>
+    Par Musicien: @Html.TextBox("searchConferencier", ViewBag.CurrentFilter as string) <br>
+    <input type="submit" value="Rechercher" class="btn btn-default" /> </p>
+}
+
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
