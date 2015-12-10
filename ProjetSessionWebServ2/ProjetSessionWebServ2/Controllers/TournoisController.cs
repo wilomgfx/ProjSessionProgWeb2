@@ -72,13 +72,8 @@ namespace ProjetSessionWebServ2.Controllers
         {
             if (ModelState.IsValid)
             {
-                tournoiVM.Tournoi.TypeTournoi = uow.TypeTournoiRepository.ObtenirTypeTournoiParID(tournoiVM.Tournoi.TypeTournoiId);
-                tournoiVM.Tournoi.TypeEvenement = Evenement.TypeEvent.TypeKiosque;
-                tournoiVM.Tournoi.Actif = true;
-                Congres congres = uow.CongresRepository.ObtenirCongres().Where(u => u.Id.Equals(Congres)).FirstOrDefault();
-                tournoiVM.Tournoi.Congres = congres;
-                uow.TournoiRepository.InsertTournoi(tournoiVM.Tournoi);
-
+                Congres congres = uow.CongresRepository.ObtenirCongres().Where(u => u.Id.Equals(collection["Congres"])).FirstOrDefault();
+                   
                 tournoi.TypeTournoi = uow.TypeTournoiRepository.ObtenirTypeTournoiParID(tournoi.TypeTournoiId);
                 tournoi.TypeEvenement = Evenement.TypeEvent.TypeTournoi;
                 tournoi.Actif = true;
@@ -86,7 +81,7 @@ namespace ProjetSessionWebServ2.Controllers
                 tournoi.Equipes = new List<Equipe>();
                 tournoi.Avancements = new List<EquipeAvancement>();
                 tournoi.Parties = new List<Partie>();
-
+                tournoi.Congres = congres;
                 uow.TournoiRepository.InsertTournoi(tournoi);
                 uow.Save();
 
