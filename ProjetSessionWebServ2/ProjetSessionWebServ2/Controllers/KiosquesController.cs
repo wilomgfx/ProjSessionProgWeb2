@@ -94,6 +94,7 @@ namespace ProjetSessionWebServ2.Controllers
         // GET: Kiosques/Create
         public ActionResult Create()
         {
+            ViewBag.Congres = new SelectList(uow.CongresRepository.ObtenirCongres(), "Id", "Nom");
             SelectList TypeKiosqueId = new SelectList(uow.TypeKiosqueRepository.ObtenirTypeKiosques(), "Id", "Nom");
             ViewBag.TypeKiosqueId = TypeKiosqueId;
             return View();
@@ -104,7 +105,7 @@ namespace ProjetSessionWebServ2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeKiosqueId,Actif")] Kiosque Kiosque)
+        public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeKiosqueId,Actif")] Kiosque Kiosque, int Congres)
         {
             Kiosque.Actif = true;
 
@@ -125,6 +126,9 @@ namespace ProjetSessionWebServ2.Controllers
                 Kiosque.TypeKiosque = uow.TypeKiosqueRepository.ObtenirTypeKiosqueParID(Kiosque.TypeKiosqueId);
                 Kiosque.TypeEvenement = Evenement.TypeEvent.TypeKiosque;
                 Kiosque.Actif = true;
+                Congres congres = uow.CongresRepository.ObtenirCongres().Where(u => u.Id.Equals(Congres)).FirstOrDefault();
+                Kiosque.Congres = congres;
+
                 uow.KiosqueRepository.InsertKiosque(Kiosque);
                 uow.Save();
                 return RedirectToAction("Index");

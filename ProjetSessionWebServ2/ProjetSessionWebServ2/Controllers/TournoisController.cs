@@ -53,6 +53,7 @@ namespace ProjetSessionWebServ2.Controllers
         // GET: Tournois/Create
         public ActionResult Create()
         {
+            ViewBag.Congres = new SelectList(uow.CongresRepository.ObtenirCongres(), "Id", "Nom");
             SelectList TypeTournoiId = new SelectList(uow.TypeTournoiRepository.ObtenirTypeTournois(), "Id", "Nom");
             ViewBag.TypeTournoiId = TypeTournoiId;
             return View();
@@ -63,11 +64,16 @@ namespace ProjetSessionWebServ2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+
+       // public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeEvenement,TypeTournoiId,Actif")] TournoiVM tournoiVM, int Congres)
+
         public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeEvenement,TypeTournoiId,Actif")] Tournoi tournoi,FormCollection collection)
+
         {
             if (ModelState.IsValid)
             {
-
+                Congres congres = uow.CongresRepository.ObtenirCongres().Where(u => u.Id.Equals(collection["Congres"])).FirstOrDefault();
+                   
                 tournoi.TypeTournoi = uow.TypeTournoiRepository.ObtenirTypeTournoiParID(tournoi.TypeTournoiId);
                 tournoi.TypeEvenement = Evenement.TypeEvent.TypeTournoi;
                 tournoi.Actif = true;
@@ -75,7 +81,7 @@ namespace ProjetSessionWebServ2.Controllers
                 tournoi.Equipes = new List<Equipe>();
                 tournoi.Avancements = new List<EquipeAvancement>();
                 tournoi.Parties = new List<Partie>();
-
+                tournoi.Congres = congres;
                 uow.TournoiRepository.InsertTournoi(tournoi);
                 uow.Save();
 

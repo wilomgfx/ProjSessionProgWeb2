@@ -367,6 +367,13 @@
     <Content Include="Views\PlageHoraires\Delete.cshtml" />
     <Content Include="Views\PlageHoraires\Details.cshtml" />
     <Content Include="Views\PlageHoraires\Edit.cshtml" />
+
+    <Content Include="Views\Congres\ListeEvenementConference.cshtml" />
+    <Content Include="Views\Congres\ListeEvenementSpectacle.cshtml" />
+    <Content Include="Views\Congres\ListeEvenementKiosque.cshtml" />
+    <Content Include="Views\Congres\ListeEvenementTournoi.cshtml" />
+    <Content Include="Views\Congres\ListeEvenementAutre.cshtml" />
+
     <Content Include="Views\Home\BadRoleError.cshtml" />
     <Content Include="Views\TypeTournois\Create.cshtml" />
     <Content Include="Views\TypeTournois\Delete.cshtml" />
@@ -374,6 +381,7 @@
     <Content Include="Views\TypeTournois\Edit.cshtml" />
     <Content Include="Views\TypeTournois\Index.cshtml" />
     <Content Include="Views\Tournois\Participate.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Kiosques\Create.cshtml" />
