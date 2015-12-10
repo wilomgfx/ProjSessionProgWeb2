@@ -58,6 +58,7 @@ namespace ProjetSessionWebServ2.Controllers
         [CustomUserAttribute(Roles = "musicien", AccessLevel = "Create")]
         public ActionResult Create()
         {
+            ViewBag.Congres = new SelectList(unitOfWork.CongresRepository.ObtenirCongres(), "Id", "Nom");
             SelectList TypeSpectacleId = new SelectList(unitOfWork.TypeSpectacleRepository.ObtenirTypeSpectacles(), "Id", "Nom");
             ViewBag.TypeSpectacleId = TypeSpectacleId;
             return View();
@@ -68,13 +69,18 @@ namespace ProjetSessionWebServ2.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeSpectacleId,Actif")] Spectacle spectacle)
+        public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeSpectacleId,Actif")] Spectacle spectacle, int Congres)
         {
             if (ModelState.IsValid)
             {
                 spectacle.TypeEvenement = Evenement.TypeEvent.TypeSpectacle;
                 spectacle.TypeSpectacle = unitOfWork.TypeSpectacleRepository.ObtenirTypeSpectacleParID(spectacle.TypeSpectacleId);
                 spectacle.Actif = true;
+
+
+                Congres congres = unitOfWork.CongresRepository.ObtenirCongres().Where(u => u.Id.Equals(Congres)).FirstOrDefault();
+                spectacle.Congres = congres;
+
                 UserManager<ApplicationUser> UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(unitOfWork.context));
                 ApplicationUser utilisateur = UserManager.FindById(User.Identity.GetUserId());
                 if (spectacle.Users == null)
@@ -83,6 +89,7 @@ namespace ProjetSessionWebServ2.Controllers
                 }
 
                 spectacle.Users.Add(utilisateur);
+
                 unitOfWork.SpectacleRepository.InsertSpectacle(spectacle);
                 unitOfWork.Save();
                 return RedirectToAction("Index");

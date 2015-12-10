@@ -43,6 +43,7 @@ namespace ProjetSessionWebServ2.Controllers
         // GET: /Evenement/Create
         public ActionResult Create()
         {
+            ViewBag.Congres = new SelectList(unitofwork.CongresRepository.ObtenirCongres(), "Id", "Nom");
             return View();
         }
 
@@ -51,7 +52,7 @@ namespace ProjetSessionWebServ2.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nom,Description,Salle,Actif")] Evenement evenement, Salle salle)
+        public ActionResult Create([Bind(Include = "Id,Nom,Description,Salle,Actif")] Evenement evenement, Salle salle, int Congres)
         {
             if (ModelState.IsValid)
             {
@@ -60,6 +61,9 @@ namespace ProjetSessionWebServ2.Controllers
                 evenement.TypeEvenement = Evenement.TypeEvent.TypeAutre;
                 evenement.Actif = true;
                 evenement.Salle = salle;
+                Congres congres = unitofwork.CongresRepository.ObtenirCongres().Where(u => u.Id.Equals(Congres)).FirstOrDefault();
+                evenement.Congres = congres;
+
                 unitofwork.EvenementRepository.Insert(evenement);
                 unitofwork.Save();
                 return RedirectToAction("Index");
