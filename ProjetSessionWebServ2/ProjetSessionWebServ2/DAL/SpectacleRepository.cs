@@ -15,7 +15,7 @@ namespace ProjetSessionWebServ2.DAL
         }
         public IEnumerable<Spectacle> ObtenirSpectacles()
         {
-                return Get(null, null, "TypeSpectacle");
+            return Get(null, null, "TypeSpectacle,Congres");
         }
 
         public IEnumerable<Spectacle> ObtenirSpectacleParTypeSpectacle(TypeSpectacle type)

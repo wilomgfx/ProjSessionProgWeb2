@@ -361,7 +361,11 @@
     <Content Include="Views\PlageHoraires\Delete.cshtml" />
     <Content Include="Views\PlageHoraires\Details.cshtml" />
     <Content Include="Views\PlageHoraires\Edit.cshtml" />
-    <Content Include="Views\Congres\ListeEvenement.cshtml" />
+    <Content Include="Views\Congres\ListeEvenementConference.cshtml" />
+    <Content Include="Views\Congres\ListeEvenementSpectacle.cshtml" />
+    <Content Include="Views\Congres\ListeEvenementKiosque.cshtml" />
+    <Content Include="Views\Congres\ListeEvenementTournoi.cshtml" />
+    <Content Include="Views\Congres\ListeEvenementAutre.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Kiosques\Create.cshtml" />

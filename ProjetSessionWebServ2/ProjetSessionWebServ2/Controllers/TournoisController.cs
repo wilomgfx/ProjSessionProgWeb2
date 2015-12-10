@@ -51,6 +51,7 @@ namespace ProjetSessionWebServ2.Controllers
         // GET: Tournois/Create
         public ActionResult Create()
         {
+            ViewBag.Congres = new SelectList(uow.CongresRepository.ObtenirCongres(), "Id", "Nom");
             SelectList TypeTournoiId = new SelectList(uow.TypeTournoiRepository.ObtenirTypeTournois(), "Id", "Nom");
             ViewBag.TypeTournoiId = TypeTournoiId;
             return View();
@@ -61,7 +62,7 @@ namespace ProjetSessionWebServ2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeEvenement,TypeTournoiId,Actif")] TournoiVM tournoiVM)
+        public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeEvenement,TypeTournoiId,Actif")] TournoiVM tournoiVM, int Congres)
         {
 
             if (ModelState.IsValid)
@@ -69,6 +70,8 @@ namespace ProjetSessionWebServ2.Controllers
                 tournoiVM.Tournoi.TypeTournoi = uow.TypeTournoiRepository.ObtenirTypeTournoiParID(tournoiVM.Tournoi.TypeTournoiId);
                 tournoiVM.Tournoi.TypeEvenement = Evenement.TypeEvent.TypeKiosque;
                 tournoiVM.Tournoi.Actif = true;
+                Congres congres = uow.CongresRepository.ObtenirCongres().Where(u => u.Id.Equals(Congres)).FirstOrDefault();
+                tournoiVM.Tournoi.Congres = congres;
                 uow.TournoiRepository.InsertTournoi(tournoiVM.Tournoi);
                 uow.Save();
 

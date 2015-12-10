@@ -110,7 +110,7 @@ namespace ProjetSessionWebServ2.Controllers
         {
 
             conference.TypeEvenement = Evenement.TypeEvent.TypeConference;
-
+            
             conference.TypeConferenceId = TypeConferenceIdViewBag;
             TypeConference typeConferenceRevenu = unitOfWork.TypeConferenceRepository.ObtenirTypeConferences().Where(u => u.Id.Equals(TypeConferenceIdViewBag)).FirstOrDefault();
             conference.TypeConference = typeConferenceRevenu;
@@ -126,8 +126,10 @@ namespace ProjetSessionWebServ2.Controllers
                 {
                     conference.Users = new List<ApplicationUser>();
                 }
+                Congres congres = unitOfWork.CongresRepository.ObtenirCongres().Where(u => u.Id.Equals(Congres)).FirstOrDefault();
 
                 conference.Users.Add(utilisateur);
+                conference.Congres = congres;
                 unitOfWork.ConferenceRepository.InsertConference(conference);
                 unitOfWork.Save();
                 //db.Evenements.Add(conference);
@@ -138,8 +140,7 @@ namespace ProjetSessionWebServ2.Controllers
             ViewBag.TypeConferenceIdViewBag = TypeConferenceId2;
 
 
-            Congres congres = unitOfWork.CongresRepository.ObtenirCongres().Where(u => u.Id.Equals("Id")).FirstOrDefault();
-            congres.Evenements.Add(conference);
+           
 
             return View(conference);
         }
