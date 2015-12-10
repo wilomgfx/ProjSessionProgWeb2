@@ -20,7 +20,7 @@ namespace ProjetSessionWebServ2.Controllers
         public ActionResult Index()
         {
             //return View(db.Evenements.ToList());
-            return View(unitofwork.EvenementRepository.ObtenirEvenements().ToList());
+            return View(unitofwork.EvenementRepository.ObtenirEvenementParType(Evenement.TypeEvent.TypeAutre).ToList());
         }
 
         // GET: /Evenement/Details/5

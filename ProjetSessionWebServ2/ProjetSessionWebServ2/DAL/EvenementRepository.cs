@@ -20,7 +20,7 @@ namespace ProjetSessionWebServ2.DAL
         }
         public IEnumerable<Evenement> ObtenirEvenementParType(ProjetSessionWebServ2.Models.Evenement.TypeEvent type)
             {
-                return Get().Where(e => e.TypeEvenement.Equals(type));
+                return Get(null, null, "Salle,Congres").Where(e => e.TypeEvenement.Equals(type));
             }
         public string ObtenirDescriptionEvenement(int? id)
         {
