@@ -14,6 +14,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace ProjetSessionWebServ2.Controllers
 {
+    [Authorize]
     public class TournoisController : Controller
     {
         //private ApplicationDbContext db = new ApplicationDbContext();
