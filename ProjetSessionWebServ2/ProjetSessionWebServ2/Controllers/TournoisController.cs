@@ -72,7 +72,8 @@ namespace ProjetSessionWebServ2.Controllers
         {
             if (ModelState.IsValid)
             {
-                Congres congres = uow.CongresRepository.ObtenirCongres().Where(u => u.Id.Equals(collection["Congres"])).FirstOrDefault();
+                int congresId = int.Parse(collection["Congres"]);
+                Congres congres = uow.CongresRepository.ObtenirCongres().Where(u => u.Id == congresId).FirstOrDefault();
                    
                 tournoi.TypeTournoi = uow.TypeTournoiRepository.ObtenirTypeTournoiParID(tournoi.TypeTournoiId);
                 tournoi.TypeEvenement = Evenement.TypeEvent.TypeTournoi;
