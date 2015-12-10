@@ -9,6 +9,8 @@ using System.Web.Mvc;
 using ProjetSessionWebServ2.Models;
 using ProjetSessionWebServ2.DAL;
 using ProjetSessionWebServ2.ViewModels;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace ProjetSessionWebServ2.Controllers
 {
@@ -40,7 +42,7 @@ namespace ProjetSessionWebServ2.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             //Tournoi tournoi = db.Evenements.Find(id);
-            Tournoi tournoi = uow.TournoiRepository.ObtenirTournoiParID(id);
+            Tournoi tournoi = uow.TournoiRepository.ObtenirTournois().Where(t => t.Id == id).SingleOrDefault();
             if (tournoi == null)
             {
                 return HttpNotFound();
@@ -62,9 +64,12 @@ namespace ProjetSessionWebServ2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeEvenement,TypeTournoiId,Actif")] TournoiVM tournoiVM, int Congres)
-        {
 
+       // public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeEvenement,TypeTournoiId,Actif")] TournoiVM tournoiVM, int Congres)
+
+        public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeEvenement,TypeTournoiId,Actif")] Tournoi tournoi,FormCollection collection)
+
+        {
             if (ModelState.IsValid)
             {
                 tournoiVM.Tournoi.TypeTournoi = uow.TypeTournoiRepository.ObtenirTypeTournoiParID(tournoiVM.Tournoi.TypeTournoiId);
@@ -73,25 +78,39 @@ namespace ProjetSessionWebServ2.Controllers
                 Congres congres = uow.CongresRepository.ObtenirCongres().Where(u => u.Id.Equals(Congres)).FirstOrDefault();
                 tournoiVM.Tournoi.Congres = congres;
                 uow.TournoiRepository.InsertTournoi(tournoiVM.Tournoi);
+
+                tournoi.TypeTournoi = uow.TypeTournoiRepository.ObtenirTypeTournoiParID(tournoi.TypeTournoiId);
+                tournoi.TypeEvenement = Evenement.TypeEvent.TypeTournoi;
+                tournoi.Actif = true;
+
+                tournoi.Equipes = new List<Equipe>();
+                tournoi.Avancements = new List<EquipeAvancement>();
+                tournoi.Parties = new List<Partie>();
+
+                uow.TournoiRepository.InsertTournoi(tournoi);
                 uow.Save();
 
-                //Creating all the PlageHoraires
-                //for(int i = 0;i < tournoiVM.PlageHoraires.Count;i++)
-                //{
-                //    PlageHoraire newPlageHoraire = new PlageHoraire();
-                //    newPlageHoraire.DateEtHeureDebut = tournoiVM.PlageHoraires[i].DateEtHeureDebut;
-                //    newPlageHoraire.DateEtHeureFin = tournoiVM.PlageHoraires[i].DateEtHeureFin;
-                //    newPlageHoraire.Evenement = tournoiVM.Tournoi;
-                //}
+                //Creating the plage horaire
+                PlageHoraire newPlageHoraire = new PlageHoraire();
+                DateTime dateTournoi = DateTime.Parse(collection["DateTournoi"]);
+                int heureDebut = int.Parse(collection["HeureDebut"]);
+                int heureFin = int.Parse(collection["HeureFin"]);
+                DateTime dateEtHeureDebut = dateTournoi.AddHours(heureDebut);
+                DateTime dateEtHeureFin = dateTournoi.AddHours(heureFin);
+                newPlageHoraire.DateEtHeureDebut = dateEtHeureDebut;
+                newPlageHoraire.DateEtHeureFin = dateEtHeureFin;
+                newPlageHoraire.Evenement = tournoi;
+                uow.PlageHoraireRepository.InsertPlageHoraire(newPlageHoraire);
+                uow.Save();
 
 
                 return RedirectToAction("Index");
             }
 
-            SelectList TypeTournoiId = new SelectList(uow.TypeTournoiRepository.ObtenirTypeTournois(), "Id", "Nom");
+            SelectList TypeTournoiId = new SelectList(uow.TypeTournoiRepository.ObtenirTypeTournois(), "Id", "Nom", tournoi.TypeTournoiId);
             ViewBag.TypeTournoiId = TypeTournoiId;
 
-            return View(tournoiVM);
+            return View(tournoi);
         }
 
         // GET: Tournois/Edit/5
@@ -108,7 +127,7 @@ namespace ProjetSessionWebServ2.Controllers
                 return HttpNotFound();
             }
 
-            SelectList TypeTournoiId = new SelectList(uow.TypeTournoiRepository.ObtenirTypeTournois(), "Id", "Nom");
+            SelectList TypeTournoiId = new SelectList(uow.TypeTournoiRepository.ObtenirTypeTournois(), "Id", "Nom", tournoi.TypeTournoiId);
             ViewBag.TypeTournoiId = TypeTournoiId;
 
             return View(tournoi);
@@ -123,12 +142,14 @@ namespace ProjetSessionWebServ2.Controllers
         {
             if (ModelState.IsValid)
             {
+                tournoi.TypeTournoi = uow.TypeTournoiRepository.ObtenirTypeTournoiParID(tournoi.TypeTournoiId);
+                tournoi.TypeEvenement = Evenement.TypeEvent.TypeTournoi;
                 uow.TournoiRepository.UpdateTournoi(tournoi);
                 uow.Save();
                 return RedirectToAction("Index");
             }
 
-            SelectList TypeTournoiId = new SelectList(uow.TypeTournoiRepository.ObtenirTypeTournois(), "Id", "Nom");
+            SelectList TypeTournoiId = new SelectList(uow.TypeTournoiRepository.ObtenirTypeTournois(), "Id", "Nom", tournoi.TypeTournoiId);
             ViewBag.TypeTournoiId = TypeTournoiId;
 
             return View(tournoi);
@@ -162,6 +183,78 @@ namespace ProjetSessionWebServ2.Controllers
             uow.Save();
             //db.Evenements.Remove(tournoi);
             //db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Participate(int? tournamentId, int? teamid)
+        {
+            if (tournamentId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Tournoi tournoi = uow.TournoiRepository.ObtenirTournoiCompletParId(tournamentId);
+            if (tournoi == null)
+            {
+                return HttpNotFound();
+            }
+
+            Tournoi_Equipe model = new Tournoi_Equipe();
+            model.tournoi = tournoi;
+
+
+            if(teamid != null)
+            {
+                Equipe team = tournoi.Equipes.Find(t => t.Id == teamid);
+
+                Equipe realTeam = uow.EquipeRepository.ObtenirEquipeCompletParId(team.Id);
+
+                model.equipe = realTeam;
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        //[ValidateAntiForgeryToken]
+        public ActionResult Participate(FormCollection formCollection)
+        {
+            Tournoi tourn = uow.TournoiRepository.ObtenirTournoiCompletParId(int.Parse(formCollection["tournamentid"]));
+
+            if(formCollection["teamid"].Equals("-1"))
+            {
+                Equipe team = new Equipe();
+                team.Nom = formCollection["teamname"];
+
+                string id = User.Identity.GetUserId();
+
+                if (id != null)
+                {
+                    //TODO: Get current user. Might need a UserRepository or something.
+                    //UserManager<ApplicationUser> UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(uow.));
+                    //ApplicationUser user = UserManager.FindById(User.Identity.GetUserId());
+                    //ApplicationUser user = db.Users.Include(u => u.Cart).Where(u => u.Id.Equals(id)).FirstOrDefault();
+                }
+                //team.Joueurs.Add();
+
+                team.Joueurs = new List<ApplicationUser>();
+
+                tourn.Equipes.Add(team);
+
+                uow.TournoiRepository.UpdateTournoi(tourn);
+                uow.Save();
+            }
+            else
+            {
+                Equipe team = uow.EquipeRepository.ObtenirEquipeCompletParId(int.Parse(formCollection["teamid"]));
+
+                // TODO: Add player to team.
+
+                uow.TournoiRepository.UpdateTournoi(tourn);
+                uow.Save();
+            }
+            
+            
+
             return RedirectToAction("Index");
         }
 
