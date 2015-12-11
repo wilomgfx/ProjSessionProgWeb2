@@ -220,6 +220,8 @@ namespace ProjetSessionWebServ2.Controllers
 
                     return RedirectToAction("Index", "Home");
                 }
+                SelectList selectRoleList = new SelectList(RoleManager.Roles, "Id", "Name");
+                ViewBag.rolelist = selectRoleList;
                 AddErrors(result);
             }
 

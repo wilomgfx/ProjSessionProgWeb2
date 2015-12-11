@@ -21,6 +21,12 @@ namespace ProjetSessionWebServ2.Controllers
             return View(unitOfWork.CongresRepository.ObtenirCongres().ToList());
         }
 
+        public ActionResult HoraireCongres(int? id)
+        {
+            List<PlageHoraire> plageHoraires = unitOfWork.PlageHoraireRepository.Get(c => c.Congres.Id == id).ToList();
+            return View(plageHoraires);
+        }
+
         // GET: Congres/Details/5
         public ActionResult Details(int? id)
         {
@@ -30,11 +36,11 @@ namespace ProjetSessionWebServ2.Controllers
             }
             Congres congres = unitOfWork.CongresRepository.ObtenirCongresParID(id);
             
-            ViewBag.ListeConference = unitOfWork.ConferenceRepository.ObtenirConferences().Where(u => u.Congres.Id.Equals(id) && u.Actif.Equals(true)).ToList();
-            ViewBag.ListeSpectacle = unitOfWork.SpectacleRepository.ObtenirSpectacles().Where(u => u.Congres.Id.Equals(id) && u.Actif.Equals(true)).ToList();
-            ViewBag.ListeKiosque = unitOfWork.KiosqueRepository.ObtenirKiosques().Where(u => u.Congres.Id.Equals(id) && u.Actif.Equals(true)).ToList();
-            ViewBag.ListeAutre = unitOfWork.EvenementRepository.ObtenirEvenements().Where(u => u.Congres.Id.Equals(id) && u.Actif.Equals(true) && u.TypeEvenement.Equals(ProjetSessionWebServ2.Models.Evenement.TypeEvent.TypeAutre)).ToList();
-            ViewBag.ListeTournoi = unitOfWork.TournoiRepository.ObtenirTournois().Where(u => u.Congres.Id.Equals(id) && u.Actif.Equals(true)).ToList();
+            ViewBag.ListeConference = unitOfWork.ConferenceRepository.ObtenirConferences().Where(u => u.Congres.Id.Equals(id)).ToList();// && u.Actif.Equals(true)).ToList();
+            ViewBag.ListeSpectacle = unitOfWork.SpectacleRepository.ObtenirSpectacles().Where(u => u.Congres.Id.Equals(id)).ToList();// && u.Actif.Equals(true)).ToList();
+            ViewBag.ListeKiosque = unitOfWork.KiosqueRepository.ObtenirKiosques().Where(u => u.Congres.Id.Equals(id)).ToList();// && u.Actif.Equals(true)).ToList();
+            ViewBag.ListeAutre = unitOfWork.EvenementRepository.ObtenirEvenements().Where(u => u.Congres.Id.Equals(id) && u.TypeEvenement.Equals(ProjetSessionWebServ2.Models.Evenement.TypeEvent.TypeAutre)).ToList();// && u.Actif.Equals(true)
+            ViewBag.ListeTournoi = unitOfWork.TournoiRepository.ObtenirTournois().Where(u => u.Congres.Id.Equals(id)).ToList(); // && u.Actif.Equals(true)).ToList();
             
 
             if (congres == null)
@@ -119,6 +125,13 @@ namespace ProjetSessionWebServ2.Controllers
         {      
             return View(unitOfWork.TransactionRepository.ObtenirTransactions());
         }
+        [Authorize(Roles = "administrateur")]
+        public ActionResult AdminPanel()
+        {
+            return View();
+        }
+
+
 
         // POST: Congres/Delete/5
 

@@ -90,7 +90,7 @@ namespace ProjetSessionWebServ2.Controllers
             return View(Kiosque);
         }
 
-        [Authorize(Roles = "kiosqueur")]
+        [CustomUserAttribute(Roles = "administrateur,kiosqueur", AccessLevel = "Create")]
         // GET: Kiosques/Create
         public ActionResult Create()
         {
@@ -105,12 +105,15 @@ namespace ProjetSessionWebServ2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeKiosqueId,Actif")] Kiosque Kiosque, int Congres)
+        public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeKiosqueId,Actif")] Kiosque Kiosque, FormCollection collection)
         {
             Kiosque.Actif = true;
 
             if (ModelState.IsValid)
             {
+
+                int congresId = int.Parse(collection["Congres"]);
+                Congres congres = uow.CongresRepository.ObtenirCongres().Where(u => u.Id == congresId).FirstOrDefault();
 
                 UserManager<ApplicationUser> UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(uow.context));
                 ApplicationUser utilisateur = UserManager.FindById(User.Identity.GetUserId());
@@ -126,11 +129,32 @@ namespace ProjetSessionWebServ2.Controllers
                 Kiosque.TypeKiosque = uow.TypeKiosqueRepository.ObtenirTypeKiosqueParID(Kiosque.TypeKiosqueId);
                 Kiosque.TypeEvenement = Evenement.TypeEvent.TypeKiosque;
                 Kiosque.Actif = true;
-                Congres congres = uow.CongresRepository.ObtenirCongres().Where(u => u.Id.Equals(Congres)).FirstOrDefault();
                 Kiosque.Congres = congres;
 
                 uow.KiosqueRepository.InsertKiosque(Kiosque);
                 uow.Save();
+
+
+                //Creating the plage horaire
+                PlageHoraire newPlageHoraire = new PlageHoraire();
+                DateTime dateTournoi = DateTime.Parse(collection["DateKiosque"]);
+                int heureDebut = int.Parse(collection["HeureDebut"]);
+                int heureFin = int.Parse(collection["HeureFin"]);
+                DateTime dateEtHeureDebut = dateTournoi.AddHours(heureDebut);
+                DateTime dateEtHeureFin = dateTournoi.AddHours(heureFin);
+                newPlageHoraire.DateEtHeureDebut = dateEtHeureDebut;
+                newPlageHoraire.DateEtHeureFin = dateEtHeureFin;
+                newPlageHoraire.Evenement = Kiosque;
+                uow.PlageHoraireRepository.InsertPlageHoraire(newPlageHoraire);
+                uow.Save();
+
+                Transaction nouvelleTransaction = new Transaction();
+                nouvelleTransaction.DateAchat = DateTime.Now;
+                nouvelleTransaction.Montant = 100;
+                nouvelleTransaction.TypeAchat = "Location d'un kiosque";
+                uow.TransactionRepository.InsertTransaction(nouvelleTransaction);
+                uow.Save();
+
                 return RedirectToAction("Index");
             }
 
@@ -140,7 +164,7 @@ namespace ProjetSessionWebServ2.Controllers
             return View(Kiosque);
         }
 
-        [Authorize(Roles = "kiosqueur")]
+        [CustomUserAttribute(Roles = "administrateur,kiosqueur", AccessLevel = "Edit")]
         // GET: Kiosques/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -183,7 +207,7 @@ namespace ProjetSessionWebServ2.Controllers
             return View(Kiosque);
         }
 
-        [Authorize(Roles = "kiosqueur")]
+        [CustomUserAttribute(Roles = "administrateur,kiosqueur", AccessLevel = "Delete")]
         // GET: Kiosques/Delete/5
         public ActionResult Delete(int? id)
         {

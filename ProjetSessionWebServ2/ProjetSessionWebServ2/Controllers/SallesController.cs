@@ -42,6 +42,8 @@ namespace ProjetSessionWebServ2.Controllers
         // GET: Salles/Create
         public ActionResult Create()
         {
+            //SelectList TailleSalle = new SelectList(, "Id", "Nom");
+            //ViewBag.TypeKiosqueId = TypeKiosqueId;
             return View();
         }
 
@@ -50,12 +52,18 @@ namespace ProjetSessionWebServ2.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,NoSalle")] Salle salle)
+        public ActionResult Create([Bind(Include = "Id,NoSalle,TailleSalle")] Salle salle, FormCollection collection)
         {
             if (ModelState.IsValid)
             {
+                int largeur = int.Parse(collection["Dimension.Largeur"]);
+                int longueur = int.Parse(collection["Dimension.Longueur"]);
                 //db.Salles.Add(salle);
                 //db.SaveChanges();
+                Dimension d = new Dimension();
+                d.Largeur = largeur;
+                d.Longueur = longueur;
+                salle.Dimension = d;
                 uow.SalleRepository.InsertSalle(salle);
                 uow.Save();
                 return RedirectToAction("Index");

@@ -25,7 +25,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.TailleSalle, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.TailleSalle, new { htmlAttributes = new { @class = "form-control" } })
+                @*@Html.EditorFor(model => model.TailleSalle, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.DropDownList("TailleSalle", EnumHelper.GetSelectList(typeof(ProjetSessionWebServ2.Models.Taille)), "Selectionner la Taille", new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.TailleSalle, "", new { @class = "text-danger" })
             </div>
         </div>

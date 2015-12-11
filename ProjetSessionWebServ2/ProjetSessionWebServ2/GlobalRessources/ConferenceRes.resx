@@ -138,6 +138,9 @@
   <data name="Create" xml:space="preserve">
     <value>Creer</value>
   </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
   <data name="Delete" xml:space="preserve">
     <value>Supprimer</value>
   </data>
@@ -146,6 +149,12 @@
   </data>
   <data name="Edit" xml:space="preserve">
     <value>Modifier</value>
+  </data>
+  <data name="HeureDebut" xml:space="preserve">
+    <value>Heure de debut</value>
+  </data>
+  <data name="HeureFin" xml:space="preserve">
+    <value>Heure de fin</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Nom</value>

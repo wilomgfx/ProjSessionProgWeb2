@@ -14,6 +14,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace ProjetSessionWebServ2.Controllers
 {
+    [Authorize]
     public class TournoisController : Controller
     {
         //private ApplicationDbContext db = new ApplicationDbContext();
@@ -50,6 +51,7 @@ namespace ProjetSessionWebServ2.Controllers
             return View(tournoi);
         }
 
+        [CustomUserAttribute(Roles = "administrateur", AccessLevel = "Create")]
         // GET: Tournois/Create
         public ActionResult Create()
         {
@@ -109,6 +111,7 @@ namespace ProjetSessionWebServ2.Controllers
             return View(tournoi);
         }
 
+        [CustomUserAttribute(Roles = "administrateur", AccessLevel = "Edit")]
         // GET: Tournois/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -151,6 +154,7 @@ namespace ProjetSessionWebServ2.Controllers
             return View(tournoi);
         }
 
+        [CustomUserAttribute(Roles = "administrateur", AccessLevel = "Delete")]
         // GET: Tournois/Delete/5
         public ActionResult Delete(int? id)
         {
