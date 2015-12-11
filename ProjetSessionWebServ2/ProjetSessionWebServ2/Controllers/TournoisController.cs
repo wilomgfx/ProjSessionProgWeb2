@@ -70,8 +70,24 @@ namespace ProjetSessionWebServ2.Controllers
        // public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeEvenement,TypeTournoiId,Actif")] TournoiVM tournoiVM, int Congres)
 
         public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeEvenement,TypeTournoiId,Actif")] Tournoi tournoi,FormCollection collection)
-
         {
+            DateTime dateTournoi;
+            int heureDebut;
+            int heureFin;
+            ViewBag.Congres = new SelectList(uow.CongresRepository.ObtenirCongres(), "Id", "Nom");
+            SelectList TypeTournoiId = new SelectList(uow.TypeTournoiRepository.ObtenirTypeTournois(), "Id", "Nom", tournoi.TypeTournoiId);
+            try
+            {
+                dateTournoi = DateTime.Parse(collection["DateTournoi"]);
+                heureDebut = int.Parse(collection["HeureDebut"]);
+                heureFin = int.Parse(collection["HeureFin"]);
+            }
+            catch (Exception e)
+            {
+                TempData["message"] = "La date de l'événement doit être une date valide sous le format AAAA-MM-JJ. L'heure de début et l'heure de fin doivent être des chiffres";
+                ViewBag.TypeTournoiId = TypeTournoiId;
+                return View(tournoi);
+            }
             if (ModelState.IsValid)
             {
                 int congresId = int.Parse(collection["Congres"]);
@@ -90,9 +106,6 @@ namespace ProjetSessionWebServ2.Controllers
 
                 //Creating the plage horaire
                 PlageHoraire newPlageHoraire = new PlageHoraire();
-                DateTime dateTournoi = DateTime.Parse(collection["DateTournoi"]);
-                int heureDebut = int.Parse(collection["HeureDebut"]);
-                int heureFin = int.Parse(collection["HeureFin"]);
                 DateTime dateEtHeureDebut = dateTournoi.AddHours(heureDebut);
                 DateTime dateEtHeureFin = dateTournoi.AddHours(heureFin);
                 newPlageHoraire.DateEtHeureDebut = dateEtHeureDebut;
@@ -106,7 +119,6 @@ namespace ProjetSessionWebServ2.Controllers
                 return RedirectToAction("Index");
             }
 
-            SelectList TypeTournoiId = new SelectList(uow.TypeTournoiRepository.ObtenirTypeTournois(), "Id", "Nom", tournoi.TypeTournoiId);
             ViewBag.TypeTournoiId = TypeTournoiId;
 
             return View(tournoi);

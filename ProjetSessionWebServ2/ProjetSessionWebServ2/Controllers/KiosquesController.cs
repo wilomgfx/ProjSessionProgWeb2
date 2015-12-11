@@ -109,6 +109,23 @@ namespace ProjetSessionWebServ2.Controllers
         {
             Kiosque.Actif = true;
 
+            DateTime dateKiosque;
+            int heureDebut;
+            int heureFin;
+            ViewBag.Congres = new SelectList(uow.CongresRepository.ObtenirCongres(), "Id", "Nom");
+            SelectList typesKiosques = new SelectList(uow.TypeKiosqueRepository.ObtenirTypeKiosques(), "Id", "Nom", Kiosque.TypeKiosqueId);
+            try
+            {
+                dateKiosque = DateTime.Parse(collection["DateKiosque"]);
+                heureDebut = int.Parse(collection["HeureDebut"]);
+                heureFin = int.Parse(collection["HeureFin"]);
+            }
+            catch (Exception e)
+            {
+                TempData["message"] = "La date de l'événement doit être une date valide sous le format AAAA-MM-JJ. L'heure de début et l'heure de fin doivent être des chiffres";
+                ViewBag.TypeKiosqueId = typesKiosques;
+                return View(Kiosque);
+            }
             if (ModelState.IsValid)
             {
 
@@ -137,11 +154,8 @@ namespace ProjetSessionWebServ2.Controllers
 
                 //Creating the plage horaire
                 PlageHoraire newPlageHoraire = new PlageHoraire();
-                DateTime dateTournoi = DateTime.Parse(collection["DateKiosque"]);
-                int heureDebut = int.Parse(collection["HeureDebut"]);
-                int heureFin = int.Parse(collection["HeureFin"]);
-                DateTime dateEtHeureDebut = dateTournoi.AddHours(heureDebut);
-                DateTime dateEtHeureFin = dateTournoi.AddHours(heureFin);
+                DateTime dateEtHeureDebut = dateKiosque.AddHours(heureDebut);
+                DateTime dateEtHeureFin = dateKiosque.AddHours(heureFin);
                 newPlageHoraire.DateEtHeureDebut = dateEtHeureDebut;
                 newPlageHoraire.DateEtHeureFin = dateEtHeureFin;
                 newPlageHoraire.Evenement = Kiosque;
@@ -159,7 +173,6 @@ namespace ProjetSessionWebServ2.Controllers
                 return RedirectToAction("Index");
             }
 
-            SelectList typesKiosques = new SelectList(uow.TypeKiosqueRepository.ObtenirTypeKiosques(), "Id", "Nom", Kiosque.TypeKiosqueId);
             ViewBag.TypeKiosqueId = typesKiosques;
 
             return View(Kiosque);
