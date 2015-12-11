@@ -53,19 +53,12 @@ namespace ProjetSessionWebServ2.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,NoSalle,TailleSalle")] Salle salle, Dimension Dimension)
-        public ActionResult Create([Bind(Include = "Id,NoSalle,TailleSalle")] Salle salle, FormCollection collection)
         {
             if (ModelState.IsValid)
             {
-                int largeur = int.Parse(collection["Dimension.Largeur"]);
-                int longueur = int.Parse(collection["Dimension.Longueur"]);
                 //db.Salles.Add(salle);
                 //db.SaveChanges();
                 salle.Dimension = Dimension;
-                Dimension d = new Dimension();
-                d.Largeur = largeur;
-                d.Longueur = longueur;
-                salle.Dimension = d;
                 uow.SalleRepository.InsertSalle(salle);
                 uow.Save();
                 return RedirectToAction("Index");
