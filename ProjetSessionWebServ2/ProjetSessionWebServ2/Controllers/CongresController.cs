@@ -158,11 +158,11 @@ namespace ProjetSessionWebServ2.Controllers
         }
 
 
-        public ActionResult ChangerLangue(string langue)
+        public void ChangerLangue(string langue)
         {
             Session["Culture"] = new CultureInfo(langue);            
 
-            return new EmptyResult();
+            //return new EmptyResult();
            // return RedirectToAction("Index");
         }
     }
