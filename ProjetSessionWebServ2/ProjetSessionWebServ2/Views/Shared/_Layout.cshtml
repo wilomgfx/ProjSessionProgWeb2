@@ -24,6 +24,8 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Congres", "Index", "Congres")</li>
                     <li>@Html.ActionLink("Admin Panel", "AdminPanel", "Congres")</li>
+                    <li>@Html.ActionLink("Francais", "ChangerLangue", "Congres", new { langue = "fr" }, new { id = "fr" })</li>
+                    <li>@Html.ActionLink("English", "ChangerLangue", "Congres",  new { langue = "en" }, new { id = "en" })</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -40,5 +42,40 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+    <script type="text/javascript">
+            $("#fr").click(function(e){
+                var href = $(this).attr("href");
+                e.preventDefault();
+                $.ajax({
+                    type : "GET",
+                    url: href,
+                    success: function(){
+                        location.reload();
+                    },
+                    fail: function (error) {
+                        alert(error);
+                    }
+
+            });
+
+            });
+            $("#en").click(function (e) {
+                var href = $(this).attr("href");
+                e.preventDefault();
+                $.ajax({
+                    type: "GET",
+                    url: href,
+                    success: function () {
+                        location.reload();
+                    },
+                    fail: function (error) {
+                        alert(error);
+                    }
+
+                });
+
+            });
+    </script>
 </body>
 </html>

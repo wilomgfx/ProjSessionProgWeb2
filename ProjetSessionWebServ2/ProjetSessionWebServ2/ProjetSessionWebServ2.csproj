@@ -216,6 +216,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="GlobalRessources\ConferenceRes.Designer.cs" />
+    <Compile Include="GlobalRessources\ConferenceRes.en.Designer.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Conference.cs" />
@@ -411,6 +413,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="GlobalRessources\ConferenceRes.en.resx" />
+    <EmbeddedResource Include="GlobalRessources\ConferenceRes.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
