@@ -149,8 +149,6 @@ namespace ProjetSessionWebServ2.Controllers
            // ViewBag.TypeConferenceIdViewBag = TypeConferenceId2;
           
 
-            RoleManager.Create(new IdentityRole("test"));
-
             //Verifie si les role ont deja ete creer en regardant si l'un d'entre eux est dans la bd
             bool roleDejaCreer = false;
             foreach (IdentityRole role in RoleManager.Roles)
