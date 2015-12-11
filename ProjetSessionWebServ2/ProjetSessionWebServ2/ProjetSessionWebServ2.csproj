@@ -393,6 +393,7 @@
     <Content Include="Views\Congres\ListeEvenementSpectacle.cshtml" />
     <Content Include="Views\Congres\ListeEvenementTournoi.cshtml" />
     <Content Include="Views\Congres\HoraireCongres.cshtml" />
+    <Content Include="Views\Congres\AdminPanel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Kiosques\Create.cshtml" />

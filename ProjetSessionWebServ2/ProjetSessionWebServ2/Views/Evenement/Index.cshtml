@@ -20,6 +20,15 @@
         <th>
             @Html.DisplayNameFor(model => model.Salle)
         </th>
+        <th>
+            @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.ConferenceRes.Date)
+        </th>
+        <th>
+            @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.ConferenceRes.HeureDebut)
+        </th>
+        <th>
+            @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.ConferenceRes.HeureFin)
+        </th>
         <th></th>
     </tr>
 
@@ -38,6 +47,16 @@
                     @Html.DisplayFor(modelItem => item.Salle.NoSalle)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.PlageHoraires[0].DateEtHeureDebut.Value.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlageHoraires[0].DateEtHeureDebut.Value.Hour)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlageHoraires[0].DateEtHeureFin.Value.Hour)
+                </td>
+                <td>
+<td>
                     @Html.ActionLink("Modifier", "Edit", new { id = item.Id }) |
                     @Html.ActionLink("Voir Detail", "Details", new { id = item.Id }) |
                     @Html.ActionLink("Supprimer", "Delete", new { id = item.Id })
@@ -68,6 +87,16 @@
                     @Html.DisplayFor(modelItem => item.Salle.NoSalle)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.PlageHoraires[0].DateEtHeureDebut.Value.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlageHoraires[0].DateEtHeureDebut.Value.Hour)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlageHoraires[0].DateEtHeureFin.Value.Hour)
+                </td>
+                <td>
+<td>
                     @Html.ActionLink("Modifier", "Edit", new { id = item.Id }) |
                     @Html.ActionLink("Voir Detail", "Details", new { id = item.Id }) |
                     @Html.ActionLink("Supprimer", "Delete", new { id = item.Id })

@@ -31,6 +31,15 @@
         <th>
             @Html.DisplayNameFor(model => model.Actif)
         </th>
+        <th>
+            @Html.DisplayName("Date")
+        </th>
+        <th>
+            @Html.DisplayName("Heure Debut")
+        </th>
+        <th>
+            @Html.DisplayName("Heure Fin")
+        </th>
         <th></th>
     </tr>
 
@@ -47,6 +56,15 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Actif)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PlageHoraires[0].DateEtHeureDebut.Value.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PlageHoraires[0].DateEtHeureDebut.Value.Hour)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PlageHoraires[0].DateEtHeureFin.Value.Hour)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
