@@ -90,7 +90,7 @@ namespace ProjetSessionWebServ2.Controllers
 
             return View(confenrence2);
         }
-        [Authorize(Roles = "conferencier")]
+        [Authorize(Roles = "conferencier,administrateur")]
         // GET: Conferences/Create
         public ActionResult Create()
         {
@@ -188,6 +188,7 @@ namespace ProjetSessionWebServ2.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "administrateur,conferencier")]
         public ActionResult Edit([Bind(Include = "Id,Nom,Description,TypeEvenement,TypeConferenceId, Actif")] Conference conference, int TypeConferenceIdViewBag)
         {
             TypeConference typeConferenceRevenu = unitOfWork.TypeConferenceRepository.ObtenirTypeConferences().Where(u => u.Id.Equals(TypeConferenceIdViewBag)).FirstOrDefault();
@@ -224,6 +225,7 @@ namespace ProjetSessionWebServ2.Controllers
         // POST: Conferences/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "administrateur")]
         public ActionResult DeleteConfirmed(int id)
         {
             Conference conference = unitOfWork.ConferenceRepository.ObtenirConferenceParID(id);

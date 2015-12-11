@@ -52,7 +52,7 @@ namespace ProjetSessionWebServ2.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nom,Description,Salle,Actif")] Evenement evenement, Salle salle, int Congres)
+        public ActionResult Create([Bind(Include = "Id,Nom,Description,Salle,Actif")] Evenement evenement, Salle salle, int Congres, string DateConference, string HeureDebut, string HeureFin)
         {
             if (ModelState.IsValid)
             {
@@ -66,6 +66,20 @@ namespace ProjetSessionWebServ2.Controllers
 
                 unitofwork.EvenementRepository.Insert(evenement);
                 unitofwork.Save();
+
+
+                PlageHoraire newPlageHoraire = new PlageHoraire();
+                DateTime dateTournoi = DateTime.Parse(DateConference);
+                int heureDebut = int.Parse(HeureDebut);
+                int heureFin = int.Parse(HeureFin);
+                DateTime dateEtHeureDebut = dateTournoi.AddHours(heureDebut);
+                DateTime dateEtHeureFin = dateTournoi.AddHours(heureFin);
+                newPlageHoraire.DateEtHeureDebut = dateEtHeureDebut;
+                newPlageHoraire.DateEtHeureFin = dateEtHeureFin;
+                newPlageHoraire.Evenement = evenement;
+                unitofwork.PlageHoraireRepository.InsertPlageHoraire(newPlageHoraire);
+                unitofwork.Save();
+
                 return RedirectToAction("Index");
             }
 

@@ -69,7 +69,7 @@ namespace ProjetSessionWebServ2.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeSpectacleId,Actif")] Spectacle spectacle, int Congres)
+        public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeSpectacleId,Actif")] Spectacle spectacle, int Congres, string DateSpectacle, string HeureDebut, string HeureFin)
         {
             if (ModelState.IsValid)
             {
@@ -92,6 +92,20 @@ namespace ProjetSessionWebServ2.Controllers
 
                 unitOfWork.SpectacleRepository.InsertSpectacle(spectacle);
                 unitOfWork.Save();
+
+
+                PlageHoraire newPlageHoraire = new PlageHoraire();
+                DateTime dateTournoi = DateTime.Parse(DateSpectacle);
+                int heureDebut = int.Parse(HeureDebut);
+                int heureFin = int.Parse(HeureFin);
+                DateTime dateEtHeureDebut = dateTournoi.AddHours(heureDebut);
+                DateTime dateEtHeureFin = dateTournoi.AddHours(heureFin);
+                newPlageHoraire.DateEtHeureDebut = dateEtHeureDebut;
+                newPlageHoraire.DateEtHeureFin = dateEtHeureFin;
+                newPlageHoraire.Evenement = spectacle;
+                unitOfWork.PlageHoraireRepository.InsertPlageHoraire(newPlageHoraire);
+                unitOfWork.Save();
+
                 return RedirectToAction("Index");
             }
             SelectList TypeSpectacleId = new SelectList(unitOfWork.TypeSpectacleRepository.ObtenirTypeSpectacles(), "Id", "Nom", spectacle.TypeSpectacleId);
