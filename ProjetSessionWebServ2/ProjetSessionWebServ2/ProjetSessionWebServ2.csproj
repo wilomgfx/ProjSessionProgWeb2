@@ -435,9 +435,9 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
-<<<<<<< HEAD
+
   <ItemGroup />
-=======
+
   <ItemGroup>
     <EmbeddedResource Include="GlobalRessources\ConferenceRes.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -461,7 +461,7 @@
     <EmbeddedResource Include="GlobalRessources\ConferenceRes.en.resx" />
     <EmbeddedResource Include="GlobalRessources\ConferenceRes.resx" />
   </ItemGroup>
->>>>>>> refs/remotes/origin/master
+
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
