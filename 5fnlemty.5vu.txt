@@ -1,0 +1,105 @@
+﻿Merge remote-tracking branch 'refs/remotes/origin/master' into Evenement
+
+# Conflicts:
+#	ProjetSessionWebServ2/ProjetSessionWebServ2/Controllers/SallesController.cs
+#	ProjetSessionWebServ2/ProjetSessionWebServ2/ProjetSessionWebServ2.csproj
+#	ProjetSessionWebServ2/ProjetSessionWebServ2/Views/Salles/Create.cshtml
+#
+# It looks like you may be committing a merge.
+# If this is not correct, please remove the file
+#	.git/MERGE_HEAD
+# and try again.
+
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# Committer: sDesmecht <0934818@LLBD0605INFO17.laboratoire.collegeem.qc.ca>
+#
+# On branch Evenement
+# Your branch is up-to-date with 'origin/Evenement'.
+#
+# All conflicts fixed but you are still merging.
+#
+# Changes to be committed:
+#	renamed:    ProjetSessionWebServ2/ProjetSessionWebServ2/App_Start/BundleConfig.cs -> ProjetSessionWebServ2/ProjetSessionWebServ2/Content/App_Start/BundleConfig.cs
+#	renamed:    ProjetSessionWebServ2/ProjetSessionWebServ2/App_Start/FilterConfig.cs -> ProjetSessionWebServ2/ProjetSessionWebServ2/Content/App_Start/FilterConfig.cs
+#	renamed:    ProjetSessionWebServ2/ProjetSessionWebServ2/App_Start/IdentityConfig.cs -> ProjetSessionWebServ2/ProjetSessionWebServ2/Content/App_Start/IdentityConfig.cs
+#	renamed:    ProjetSessionWebServ2/ProjetSessionWebServ2/App_Start/RouteConfig.cs -> ProjetSessionWebServ2/ProjetSessionWebServ2/Content/App_Start/RouteConfig.cs
+#	renamed:    ProjetSessionWebServ2/ProjetSessionWebServ2/App_Start/Startup.Auth.cs -> ProjetSessionWebServ2/ProjetSessionWebServ2/Content/App_Start/Startup.Auth.cs
+#	modified:   ProjetSessionWebServ2/ProjetSessionWebServ2/Controllers/AccountController.cs
+#	modified:   ProjetSessionWebServ2/ProjetSessionWebServ2/Controllers/ConferencesController.cs
+#	modified:   ProjetSessionWebServ2/ProjetSessionWebServ2/Controllers/CongresController.cs
+#	modified:   ProjetSessionWebServ2/ProjetSessionWebServ2/Controllers/EvenementController.cs
+#	modified:   ProjetSessionWebServ2/ProjetSessionWebServ2/Controllers/HomeController.cs
+#	modified:   ProjetSessionWebServ2/ProjetSessionWebServ2/Controllers/KiosquesController.cs
+#	modified:   ProjetSessionWebServ2/ProjetSessionWebServ2/Controllers/SallesController.cs
+#	modified:   ProjetSessionWebServ2/ProjetSessionWebServ2/Controllers/SpectaclesController.cs
+#	modified:   ProjetSessionWebServ2/ProjetSessionWebServ2/Controllers/TournoisController.cs
+#	new file:   ProjetSessionWebServ2/ProjetSessionWebServ2/Controllers/TypeTournoisController.cs
+#	modified:   ProjetSessionWebServ2/ProjetSessionWebServ2/DAL/ConferenceRepository.cs
+#	new file:   ProjetSessionWebServ2/ProjetSessionWebServ2/DAL/CustomUserAttribute.cs
+#	new file:   ProjetSessionWebServ2/ProjetSessionWebServ2/DAL/EquipeRepository.cs
+#	modified:   ProjetSessionWebServ2/ProjetSessionWebServ2/DAL/EvenementRepository.cs
+#	modified:   ProjetSessionWebServ2/ProjetSessionWebServ2/DAL/KiosqueRepository.cs
+#	modified:   ProjetSessionWebServ2/ProjetSessionWebServ2/DAL/SpectacleRepository.cs
+#	modified:   ProjetSessionWebServ2/ProjetSessionWebServ2/DAL/TournoiRepository.cs
+#	modified:   ProjetSessionWebServ2/ProjetSessionWebServ2/DAL/UnitOfWork.cs
+#	modified:   ProjetSessionWebServ2/ProjetSessionWebServ2/Global.asax.cs
+#	new file:   ProjetSessionWebServ2/ProjetSessionWebServ2/GlobalRessources/ConferenceRes.Designer.cs
+#	new file:   ProjetSessionWebServ2/ProjetSessionWebServ2/GlobalRessources/ConferenceRes.en.Designer.cs
+#	new file:   ProjetSessionWebServ2/ProjetSessionWebServ2/GlobalRessources/ConferenceRes.en.resx
+#	new file:   ProjetSessionWebServ2/ProjetSessionWebServ2/GlobalRessources/ConferenceRes.resx
+#	new file:   ProjetSessionWebServ2/ProjetSessionWebServ2/GlobalRessources/HomeRes.Designer.cs
+#	new file:   ProjetSessionWebServ2/ProjetSessionWebServ2/GlobalRessources/HomeRes.en.Designer.cs
+#	new file:   ProjetSessionWebServ2/ProjetSessionWebServ2/GlobalRessources/HomeRes.en.resx
+#	new file:   ProjetSessionWebServ2/ProjetSessionWebServ2/GlobalRessources/HomeRes.resx
+#	modified:   ProjetSessionWebServ2/ProjetSessionWebServ2/Models/AccountViewModels.cs
+#	modified:   ProjetSessionWebServ2/ProjetSessionWebServ2/Models/Dimension.cs
+#	modified:   ProjetSessionWebServ2/ProjetSessionWebServ2/Models/Equipe.cs
+#	modified:   ProjetSessionWebServ2/ProjetSessionWebServ2/Models/Evenement.cs
+#	modified:   ProjetSessionWebServ2/ProjetSessionWebServ2/Models/IdentityModels.cs
+#	modified:   ProjetSessionWebServ2/ProjetSessionWebServ2/Models/PlageHoraire.cs
+#	modified:   ProjetSessionWebServ2/ProjetSessionWebServ2/ProjetSessionWebServ2.csproj
+#	modified:   ProjetSessionWebServ2/ProjetSessionWebServ2/Scripts/_references.js
+#	modified:   ProjetSessionWebServ2/ProjetSessionWebServ2/ViewModels/TournoiVM.cs
+#	new file:   ProjetSessionWebServ2/ProjetSessionWebServ2/ViewModels/Tournoi_Equipe.cs
+#	modified:   ProjetSessionWebServ2/ProjetSessionWebServ2/Views/Conferences/Create.cshtml
+#	modified:   ProjetSessionWebServ2/ProjetSessionWebServ2/Views/Conferences/Delete.cshtml
+#	modified:   ProjetSessionWebServ2/ProjetSessionWebServ2/Views/Conferences/Details.cshtml
+#	modified:   ProjetSessionWebServ2/ProjetSessionWebServ2/Views/Conferences/Edit.cshtml
+#	modified:   ProjetSessionWebServ2/ProjetSessionWebServ2/Views/Conferences/Index.cshtml
+#	new file:   ProjetSessionWebServ2/ProjetSessionWebServ2/Views/Congres/AdminPanel.cshtml
+#	modified:   ProjetSessionWebServ2/ProjetSessionWebServ2/Views/Congres/Details.cshtml
+#	new file:   ProjetSessionWebServ2/ProjetSessionWebServ2/Views/Congres/HoraireCongres.cshtml
+#	modified:   ProjetSessionWebServ2/ProjetSessionWebServ2/Views/Congres/Index.cshtml
+#	new file:   ProjetSessionWebServ2/ProjetSessionWebServ2/Views/Congres/ListeEvenementAutre.cshtml
+#	new file:   ProjetSessionWebServ2/ProjetSessionWebServ2/Views/Congres/ListeEvenementConference.cshtml
+#	new file:   ProjetSessionWebServ2/ProjetSessionWebServ2/Views/Congres/ListeEvenementKiosque.cshtml
+#	new file:   ProjetSessionWebServ2/ProjetSessionWebServ2/Views/Congres/ListeEvenementSpectacle.cshtml
+#	new file:   ProjetSessionWebServ2/ProjetSessionWebServ2/Views/Congres/ListeEvenementTournoi.cshtml
+#	modified:   ProjetSessionWebServ2/ProjetSessionWebServ2/Views/Evenement/Create.cshtml
+#	modified:   ProjetSessionWebServ2/ProjetSessionWebServ2/Views/Evenement/Details.cshtml
+#	modified:   ProjetSessionWebServ2/ProjetSessionWebServ2/Views/Evenement/Index.cshtml
+#	new file:   ProjetSessionWebServ2/ProjetSessionWebServ2/Views/Home/BadRoleError.cshtml
+#	modified:   ProjetSessionWebServ2/ProjetSessionWebServ2/Views/Home/Index.cshtml
+#	modified:   ProjetSessionWebServ2/ProjetSessionWebServ2/Views/Kiosques/Create.cshtml
+#	modified:   ProjetSessionWebServ2/ProjetSessionWebServ2/Views/Kiosques/Index.cshtml
+#	modified:   ProjetSessionWebServ2/ProjetSessionWebServ2/Views/PlageHoraires/Index.cshtml
+#	modified:   ProjetSessionWebServ2/ProjetSessionWebServ2/Views/Salles/Create.cshtml
+#	modified:   ProjetSessionWebServ2/ProjetSessionWebServ2/Views/Salles/Index.cshtml
+#	modified:   ProjetSessionWebServ2/ProjetSessionWebServ2/Views/Shared/_Layout.cshtml
+#	modified:   ProjetSessionWebServ2/ProjetSessionWebServ2/Views/Spectacles/Create.cshtml
+#	modified:   ProjetSessionWebServ2/ProjetSessionWebServ2/Views/Spectacles/Details.cshtml
+#	modified:   ProjetSessionWebServ2/ProjetSessionWebServ2/Views/Spectacles/Index.cshtml
+#	modified:   ProjetSessionWebServ2/ProjetSessionWebServ2/Views/Tournois/Create.cshtml
+#	modified:   ProjetSessionWebServ2/ProjetSessionWebServ2/Views/Tournois/Details.cshtml
+#	modified:   ProjetSessionWebServ2/ProjetSessionWebServ2/Views/Tournois/Index.cshtml
+#	new file:   ProjetSessionWebServ2/ProjetSessionWebServ2/Views/Tournois/Participate.cshtml
+#	new file:   ProjetSessionWebServ2/ProjetSessionWebServ2/Views/TypeTournois/Create.cshtml
+#	new file:   ProjetSessionWebServ2/ProjetSessionWebServ2/Views/TypeTournois/Delete.cshtml
+#	new file:   ProjetSessionWebServ2/ProjetSessionWebServ2/Views/TypeTournois/Details.cshtml
+#	new file:   ProjetSessionWebServ2/ProjetSessionWebServ2/Views/TypeTournois/Edit.cshtml
+#	new file:   ProjetSessionWebServ2/ProjetSessionWebServ2/Views/TypeTournois/Index.cshtml
+#
+

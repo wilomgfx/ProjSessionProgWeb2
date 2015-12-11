@@ -7,14 +7,22 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Ajouter une nouvelle section", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Nom)
+            Nom
         </th>
-        <th></th>
+        <th>
+            Taille Section
+        </th>
+        <th>
+            Largeur
+        </th>
+        <th>
+            Longueur
+        </th>
     </tr>
 
 @foreach (var item in Model) {
@@ -23,9 +31,18 @@
             @Html.DisplayFor(modelItem => item.Nom)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.DisplayFor(modelItem => item.TailleSection)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Dimension.Largeur)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Dimension.Longueur)
+        </td>
+        <td>
+            @Html.ActionLink("Modifier", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("voir Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Supprimer", "Delete", new { id=item.Id })
         </td>
     </tr>
 }

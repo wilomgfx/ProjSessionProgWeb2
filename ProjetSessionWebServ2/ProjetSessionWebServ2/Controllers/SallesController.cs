@@ -52,18 +52,13 @@ namespace ProjetSessionWebServ2.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,NoSalle,TailleSalle")] Salle salle, FormCollection collection)
+        public ActionResult Create([Bind(Include = "Id,NoSalle,TailleSalle")] Salle salle, Dimension Dimension)
         {
             if (ModelState.IsValid)
             {
-                int largeur = int.Parse(collection["Dimension.Largeur"]);
-                int longueur = int.Parse(collection["Dimension.Longueur"]);
                 //db.Salles.Add(salle);
                 //db.SaveChanges();
-                Dimension d = new Dimension();
-                d.Largeur = largeur;
-                d.Longueur = longueur;
-                salle.Dimension = d;
+                salle.Dimension = Dimension;
                 uow.SalleRepository.InsertSalle(salle);
                 uow.Save();
                 return RedirectToAction("Index");
@@ -93,7 +88,7 @@ namespace ProjetSessionWebServ2.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,NoSalle")] Salle salle)
+        public ActionResult Edit([Bind(Include = "Id,NoSalle")] Salle salle, Dimension Dimension, Section Section, Taille taille)
         {
             if (ModelState.IsValid)
             {
