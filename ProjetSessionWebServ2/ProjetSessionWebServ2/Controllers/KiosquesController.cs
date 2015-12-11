@@ -148,6 +148,13 @@ namespace ProjetSessionWebServ2.Controllers
                 uow.PlageHoraireRepository.InsertPlageHoraire(newPlageHoraire);
                 uow.Save();
 
+                Transaction nouvelleTransaction = new Transaction();
+                nouvelleTransaction.DateAchat = DateTime.Now;
+                nouvelleTransaction.Montant = 100;
+                nouvelleTransaction.TypeAchat = "Location d'un kiosque";
+                uow.TransactionRepository.InsertTransaction(nouvelleTransaction);
+                uow.Save();
+
                 return RedirectToAction("Index");
             }
 

@@ -106,6 +106,12 @@ namespace ProjetSessionWebServ2.Controllers
                 unitOfWork.PlageHoraireRepository.InsertPlageHoraire(newPlageHoraire);
                 unitOfWork.Save();
 
+                Transaction nouvelleTransaction = new Transaction();
+                nouvelleTransaction.DateAchat = DateTime.Now;
+                nouvelleTransaction.Montant = 1000;
+                nouvelleTransaction.TypeAchat = "Location pour un tournoi";
+                unitOfWork.TransactionRepository.InsertTransaction(nouvelleTransaction);
+                unitOfWork.Save();
                 return RedirectToAction("Index");
             }
             SelectList TypeSpectacleId = new SelectList(unitOfWork.TypeSpectacleRepository.ObtenirTypeSpectacles(), "Id", "Nom", spectacle.TypeSpectacleId);

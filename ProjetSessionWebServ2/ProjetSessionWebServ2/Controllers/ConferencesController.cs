@@ -148,8 +148,13 @@ namespace ProjetSessionWebServ2.Controllers
                 unitOfWork.PlageHoraireRepository.InsertPlageHoraire(newPlageHoraire);
                 unitOfWork.Save();
 
-
-
+               
+                Transaction nouvelleTransaction = new Transaction();
+                nouvelleTransaction.DateAchat = DateTime.Now;
+                nouvelleTransaction.Montant = 500;
+                nouvelleTransaction.TypeAchat = "Location pour une conference";
+                unitOfWork.TransactionRepository.InsertTransaction(nouvelleTransaction);
+                unitOfWork.Save();
                 //db.Evenements.Add(conference);
                 //db.SaveChanges();
                 return RedirectToAction("Index");
