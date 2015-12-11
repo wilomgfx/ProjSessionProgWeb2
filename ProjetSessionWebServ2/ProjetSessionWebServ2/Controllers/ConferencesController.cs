@@ -114,6 +114,24 @@ namespace ProjetSessionWebServ2.Controllers
             conference.TypeConferenceId = TypeConferenceIdViewBag;
             TypeConference typeConferenceRevenu = unitOfWork.TypeConferenceRepository.ObtenirTypeConferences().Where(u => u.Id.Equals(TypeConferenceIdViewBag)).FirstOrDefault();
             conference.TypeConference = typeConferenceRevenu;
+
+            DateTime dateConference;
+            int heureDebut;
+            int heureFin;
+            SelectList TypeConferenceId2 = new SelectList(unitOfWork.TypeConferenceRepository.ObtenirTypeConferences(), "Id", "Nom");
+            ViewBag.Congres = new SelectList(unitOfWork.CongresRepository.ObtenirCongres(), "Id", "Nom");
+            try
+            {
+                dateConference = DateTime.Parse(DateConference);
+                heureDebut = int.Parse(HeureDebut);
+                heureFin = int.Parse(HeureFin);
+            }
+            catch (Exception e)
+            {
+                TempData["message"] = "La date de conférence doit être une date valide sous le format AAAA-MM-JJ. L'heure de début et l'heure de fin doivent être des chiffres";
+                ViewBag.TypeConferenceIdViewBag = TypeConferenceId2;
+                return View(conference);
+            }
             if (ModelState.IsValid)
             {
                 conference.Actif = true;
@@ -137,14 +155,12 @@ namespace ProjetSessionWebServ2.Controllers
 
 
                 PlageHoraire newPlageHoraire = new PlageHoraire();
-                DateTime dateTournoi = DateTime.Parse(DateConference);
-                int heureDebut = int.Parse(HeureDebut);
-                int heureFin = int.Parse(HeureFin);
-                DateTime dateEtHeureDebut = dateTournoi.AddHours(heureDebut);
-                DateTime dateEtHeureFin = dateTournoi.AddHours(heureFin);
+                DateTime dateEtHeureDebut = dateConference.AddHours(heureDebut);
+                DateTime dateEtHeureFin = dateConference.AddHours(heureFin);
                 newPlageHoraire.DateEtHeureDebut = dateEtHeureDebut;
                 newPlageHoraire.DateEtHeureFin = dateEtHeureFin;
                 newPlageHoraire.Evenement = conference;
+                newPlageHoraire.Congres = congres;
                 unitOfWork.PlageHoraireRepository.InsertPlageHoraire(newPlageHoraire);
                 unitOfWork.Save();
 
@@ -159,7 +175,6 @@ namespace ProjetSessionWebServ2.Controllers
                 //db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            SelectList TypeConferenceId2 = new SelectList(unitOfWork.TypeConferenceRepository.ObtenirTypeConferences(), "Id", "Nom");
             ViewBag.TypeConferenceIdViewBag = TypeConferenceId2;
 
 

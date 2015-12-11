@@ -14,6 +14,7 @@
     <div class="form-horizontal">
         <h4>Spectacle</h4>
         <hr />
+        <div style="color: red;font-weight:900;">@TempData["message"]</div>
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
         <div class="form-group">
