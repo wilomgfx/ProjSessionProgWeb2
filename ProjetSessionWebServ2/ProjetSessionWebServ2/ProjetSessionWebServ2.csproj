@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -216,6 +216,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="GlobalRessources\ConferenceRes.en.Designer.cs">
+      <DependentUpon>ConferenceRes.en.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="GlobalRessources\ConferenceRes.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ConferenceRes.resx</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Conference.cs" />
@@ -244,9 +254,12 @@
     <Compile Include="ViewModels\Tournoi_Equipe.cs" />
     <Compile Include="ViewModels\SalleVM.cs" />
     <Compile Include="ViewModels\TournoiVM.cs" />
-
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\ProjSessionWebServ2.mdf" />
+    <Content Include="App_Data\ProjSessionWebServ2_log.ldf">
+      <DependentUpon>ProjSessionWebServ2.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -367,16 +380,20 @@
     <Content Include="Views\PlageHoraires\Delete.cshtml" />
     <Content Include="Views\PlageHoraires\Details.cshtml" />
     <Content Include="Views\PlageHoraires\Edit.cshtml" />
-<<<<<<< HEAD
     <Content Include="Views\Home\BadRoleError.cshtml" />
-=======
     <Content Include="Views\TypeTournois\Create.cshtml" />
     <Content Include="Views\TypeTournois\Delete.cshtml" />
     <Content Include="Views\TypeTournois\Details.cshtml" />
     <Content Include="Views\TypeTournois\Edit.cshtml" />
     <Content Include="Views\TypeTournois\Index.cshtml" />
     <Content Include="Views\Tournois\Participate.cshtml" />
->>>>>>> refs/remotes/origin/master
+    <Content Include="Views\Congres\ListeEvenementAutre.cshtml" />
+    <Content Include="Views\Congres\ListeEvenementConference.cshtml" />
+    <Content Include="Views\Congres\ListeEvenementKiosque.cshtml" />
+    <Content Include="Views\Congres\ListeEvenementSpectacle.cshtml" />
+    <Content Include="Views\Congres\ListeEvenementTournoi.cshtml" />
+    <Content Include="Views\Congres\HoraireCongres.cshtml" />
+    <Content Include="Views\Congres\AdminPanel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Kiosques\Create.cshtml" />
@@ -407,7 +424,14 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <EmbeddedResource Include="GlobalRessources\ConferenceRes.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ConferenceRes.en.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GlobalRessources\ConferenceRes.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ConferenceRes.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

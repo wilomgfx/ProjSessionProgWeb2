@@ -11,7 +11,7 @@
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container-fluid">
+        <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
@@ -22,15 +22,8 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Accueil", "Index", "Home")</li>
-                    <li>@Html.ActionLink("À propos de", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Kiosque", "Index", "Kiosques")</li>
-                    <li>@Html.ActionLink("Tournois", "Index", "Tournois")</li>
-                    <li>@Html.ActionLink("Spectacle", "Index", "Spectacles")</li>
-                    <li>@Html.ActionLink("PlageHoraires", "Index", "PlageHoraires")</li>
                     <li>@Html.ActionLink("Congres", "Index", "Congres")</li>
-                    <li>@Html.ActionLink("Conferences", "Index", "Conferences")</li>
+                    <li>@Html.ActionLink("Admin Panel", "AdminPanel", "Congres")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

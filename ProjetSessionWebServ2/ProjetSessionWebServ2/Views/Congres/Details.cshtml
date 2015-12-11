@@ -64,3 +64,9 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+@Html.Partial("ListeEvenementConference", (List<ProjetSessionWebServ2.Models.Conference>) ViewBag.ListeConference)
+@Html.Partial("ListeEvenementSpectacle", (List<ProjetSessionWebServ2.Models.Spectacle>)ViewBag.ListeSpectacle)
+@Html.Partial("ListeEvenementKiosque", (List<ProjetSessionWebServ2.Models.Kiosque>)ViewBag.ListeKiosque)
+@Html.Partial("ListeEvenementAutre", (List<ProjetSessionWebServ2.Models.Evenement>)ViewBag.ListeAutre)
+@Html.Partial("ListeEvenementTournoi", (List<ProjetSessionWebServ2.Models.Tournoi>)ViewBag.ListeTournoi)
+

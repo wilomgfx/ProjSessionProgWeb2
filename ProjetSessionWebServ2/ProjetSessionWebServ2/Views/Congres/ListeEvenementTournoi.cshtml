@@ -1,0 +1,74 @@
+﻿@model List<ProjetSessionWebServ2.Models.Tournoi>
+
+@{
+    ViewBag.Title = "Events du congres";
+}
+
+<h1>Tournoi</h1>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Nom")
+        </th>
+        <th>
+            @Html.DisplayName("Description")
+        </th>
+        <th>
+            @Html.DisplayName("Type de Tournois")
+        </th>
+        <th>
+            @Html.DisplayName("NoSalle")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.Actif.Equals(false))
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nom)  <strong>(Cancelled)</strong>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TypeEvenement)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Salle.NoSalle)
+            </td>
+            <td>
+                @Html.ActionLink("Modifier", "Edit", "Tournois", new { id = item.Id }, null) |
+                @Html.ActionLink("Voir Detail", "Details", "Tournois", new { id = item.Id }, null) |
+                @Html.ActionLink("Supprimer", "Delete", "Tournois", new { id = item.Id }, null)
+            </td>
+        </tr>
+        }
+        else
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TypeEvenement)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Salle.NoSalle)
+                </td>
+                <td>
+                    @Html.ActionLink("Modifier", "Edit", "Tournois", new { id = item.Id },null) |
+                    @Html.ActionLink("Voir Detail", "Details", "Tournois", new { id = item.Id },null) |
+                    @Html.ActionLink("Supprimer", "Delete","Tournois", new { id = item.Id },null)
+                </td>
+            </tr>
+        }
+    }
+
+</table>
