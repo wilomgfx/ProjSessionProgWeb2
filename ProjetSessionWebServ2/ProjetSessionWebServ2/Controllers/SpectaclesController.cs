@@ -55,9 +55,10 @@ namespace ProjetSessionWebServ2.Controllers
         }
 
         // GET: Spectacles/Create
-        [CustomUserAttribute(Roles = "musicien", AccessLevel = "Create")]
+        [CustomUserAttribute(Roles = "musicien,administrateur", AccessLevel = "Create")]
         public ActionResult Create()
         {
+            ViewBag.Congres = new SelectList(unitOfWork.CongresRepository.ObtenirCongres(), "Id", "Nom");
             SelectList TypeSpectacleId = new SelectList(unitOfWork.TypeSpectacleRepository.ObtenirTypeSpectacles(), "Id", "Nom");
             ViewBag.TypeSpectacleId = TypeSpectacleId;
             return View();
@@ -68,13 +69,18 @@ namespace ProjetSessionWebServ2.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeSpectacleId,Actif")] Spectacle spectacle)
+        public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeSpectacleId,Actif")] Spectacle spectacle, int Congres, string DateSpectacle, string HeureDebut, string HeureFin)
         {
             if (ModelState.IsValid)
             {
                 spectacle.TypeEvenement = Evenement.TypeEvent.TypeSpectacle;
                 spectacle.TypeSpectacle = unitOfWork.TypeSpectacleRepository.ObtenirTypeSpectacleParID(spectacle.TypeSpectacleId);
                 spectacle.Actif = true;
+
+
+                Congres congres = unitOfWork.CongresRepository.ObtenirCongres().Where(u => u.Id.Equals(Congres)).FirstOrDefault();
+                spectacle.Congres = congres;
+
                 UserManager<ApplicationUser> UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(unitOfWork.context));
                 ApplicationUser utilisateur = UserManager.FindById(User.Identity.GetUserId());
                 if (spectacle.Users == null)
@@ -83,7 +89,28 @@ namespace ProjetSessionWebServ2.Controllers
                 }
 
                 spectacle.Users.Add(utilisateur);
+
                 unitOfWork.SpectacleRepository.InsertSpectacle(spectacle);
+                unitOfWork.Save();
+
+
+                PlageHoraire newPlageHoraire = new PlageHoraire();
+                DateTime dateTournoi = DateTime.Parse(DateSpectacle);
+                int heureDebut = int.Parse(HeureDebut);
+                int heureFin = int.Parse(HeureFin);
+                DateTime dateEtHeureDebut = dateTournoi.AddHours(heureDebut);
+                DateTime dateEtHeureFin = dateTournoi.AddHours(heureFin);
+                newPlageHoraire.DateEtHeureDebut = dateEtHeureDebut;
+                newPlageHoraire.DateEtHeureFin = dateEtHeureFin;
+                newPlageHoraire.Evenement = spectacle;
+                unitOfWork.PlageHoraireRepository.InsertPlageHoraire(newPlageHoraire);
+                unitOfWork.Save();
+
+                Transaction nouvelleTransaction = new Transaction();
+                nouvelleTransaction.DateAchat = DateTime.Now;
+                nouvelleTransaction.Montant = 1000;
+                nouvelleTransaction.TypeAchat = "Location pour un tournoi";
+                unitOfWork.TransactionRepository.InsertTransaction(nouvelleTransaction);
                 unitOfWork.Save();
                 return RedirectToAction("Index");
             }
