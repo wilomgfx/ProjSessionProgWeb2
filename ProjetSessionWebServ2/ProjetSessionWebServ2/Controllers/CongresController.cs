@@ -119,6 +119,13 @@ namespace ProjetSessionWebServ2.Controllers
         {      
             return View(unitOfWork.TransactionRepository.ObtenirTransactions());
         }
+        [Authorize(Roles = "administrateur")]
+        public ActionResult AdminPanel()
+        {
+            return View();
+        }
+
+
 
         // POST: Congres/Delete/5
 

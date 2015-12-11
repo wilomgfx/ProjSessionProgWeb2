@@ -392,6 +392,7 @@
     <Content Include="Views\Congres\ListeEvenementKiosque.cshtml" />
     <Content Include="Views\Congres\ListeEvenementSpectacle.cshtml" />
     <Content Include="Views\Congres\ListeEvenementTournoi.cshtml" />
+    <Content Include="Views\Congres\AdminPanel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Kiosques\Create.cshtml" />
