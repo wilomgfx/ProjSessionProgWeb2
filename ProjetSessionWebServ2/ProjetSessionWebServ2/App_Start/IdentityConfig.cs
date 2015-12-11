@@ -53,7 +53,11 @@ namespace ProjetSessionWebServ2
             // Configurer la logique de validation pour les mots de passe
             manager.PasswordValidator = new PasswordValidator
             {
-                RequiredLength = 1,
+                RequiredLength = 6,
+                RequireNonLetterOrDigit = true,
+                RequireDigit = true,
+                RequireLowercase = true,
+                RequireUppercase = true,
             };
 
             // Configurer les valeurs par défaut du verrouillage de l'utilisateur
