@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using ProjetSessionWebServ2.Models;
 using ProjetSessionWebServ2.DAL;
+using System.Globalization;
+using System.Threading;
 
 namespace ProjetSessionWebServ2.Controllers
 {
@@ -153,6 +155,15 @@ namespace ProjetSessionWebServ2.Controllers
                 unitOfWork.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+
+        public ActionResult ChangerLangue(string langue)
+        {
+            Session["Culture"] = new CultureInfo(langue);            
+
+            return new EmptyResult();
+           // return RedirectToAction("Index");
         }
     }
 }
