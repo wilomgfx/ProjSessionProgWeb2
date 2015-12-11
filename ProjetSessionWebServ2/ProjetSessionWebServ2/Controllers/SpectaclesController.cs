@@ -55,7 +55,7 @@ namespace ProjetSessionWebServ2.Controllers
         }
 
         // GET: Spectacles/Create
-        [CustomUserAttribute(Roles = "musicien", AccessLevel = "Create")]
+        [CustomUserAttribute(Roles = "musicien,administrateur", AccessLevel = "Create")]
         public ActionResult Create()
         {
             ViewBag.Congres = new SelectList(unitOfWork.CongresRepository.ObtenirCongres(), "Id", "Nom");
