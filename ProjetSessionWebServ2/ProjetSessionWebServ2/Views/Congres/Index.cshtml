@@ -3,9 +3,10 @@
 @{
     ViewBag.Title = "Index";
 }
-
+@Html.ActionLink("Francais", "ChangerLangue", new { langue = "fr" }) |
+@Html.ActionLink("English", "ChangerLangue", new { langue = "en" }) |
 <h2>Index</h2>
-
+@ProjetSessionWebServ2.GlobalRessources.ConferenceRes.Create
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
