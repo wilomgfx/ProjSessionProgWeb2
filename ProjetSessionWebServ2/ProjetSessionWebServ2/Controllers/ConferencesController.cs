@@ -145,6 +145,7 @@ namespace ProjetSessionWebServ2.Controllers
                 newPlageHoraire.DateEtHeureDebut = dateEtHeureDebut;
                 newPlageHoraire.DateEtHeureFin = dateEtHeureFin;
                 newPlageHoraire.Evenement = conference;
+                newPlageHoraire.Congres = congres;
                 unitOfWork.PlageHoraireRepository.InsertPlageHoraire(newPlageHoraire);
                 unitOfWork.Save();
 
