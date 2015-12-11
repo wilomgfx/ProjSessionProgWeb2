@@ -23,10 +23,15 @@
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.TailleSalle, htmlAttributes: new { @class = "control-label col-md-2" })
+           @Html.LabelFor(model => model.TailleSalle, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.TailleSalle, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TailleSalle, "", new { @class = "text-danger" })
+                @Html.DropDownList("TailleSalle", new List<SelectListItem>
+            {
+              new SelectListItem{ Text = "Petite", Value = "0" },
+              new SelectListItem{ Text = "Moyenne", Value = "1" },
+              new SelectListItem{ Text = "Grande", Value = "2" },
+              new SelectListItem{ Text = "Tres_Grande", Value = "3" }
+            })
             </div>
         </div>
         <div class="form-group">

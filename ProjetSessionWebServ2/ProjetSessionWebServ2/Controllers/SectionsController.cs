@@ -48,12 +48,13 @@ namespace ProjetSessionWebServ2.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nom")] Section section)
+        public ActionResult Create([Bind(Include = "Id,Nom,TailleSection")] Section section, Dimension Dimension/*, Taille TailleSection*/)
         {
             if (ModelState.IsValid)
             {
                 //db.Sections.Add(section);
-                //db.SaveChanges();
+                //db.SaveChanges
+                section.Dimension = Dimension;
                 uow.SectionRepository.InsertSection(section);
                 uow.Save();
                 return RedirectToAction("Index");
@@ -82,7 +83,7 @@ namespace ProjetSessionWebServ2.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nom")] Section section)
+        public ActionResult Edit([Bind(Include = "Id,Nom")] Section section, Dimension Dimension, Taille taille)
         {
             if (ModelState.IsValid)
             {
