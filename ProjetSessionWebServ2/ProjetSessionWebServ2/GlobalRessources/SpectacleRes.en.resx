@@ -147,6 +147,18 @@
   <data name="Nom" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="ParMusicien" xml:space="preserve">
+    <value>Par Musicien</value>
+  </data>
+  <data name="ParNom" xml:space="preserve">
+    <value>Par Nom</value>
+  </data>
+  <data name="ParTypeDeSpectacle" xml:space="preserve">
+    <value>Par Type de Spectacle</value>
+  </data>
+  <data name="Rechercher" xml:space="preserve">
+    <value>Rechercher</value>
+  </data>
   <data name="Salle" xml:space="preserve">
     <value>Room</value>
   </data>

@@ -117,61 +117,37 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Actif" xml:space="preserve">
-    <value>Actif</value>
-  </data>
   <data name="AreDelete" xml:space="preserve">
-    <value>Etes-vous sure de vouloir supprimer ce Spectacle?</value>
+    <value>Are you sure you want to delete this?</value>
   </data>
   <data name="BackToList" xml:space="preserve">
-    <value>Retour a la liste</value>
+    <value>Back To List?</value>
   </data>
   <data name="Create" xml:space="preserve">
-    <value>Creer un Spectacle</value>
-  </data>
-  <data name="DateSpectacle" xml:space="preserve">
-    <value>Date du Spectacle</value>
+    <value>Create</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>Supprimer un Spectacle</value>
+    <value>Delete</value>
   </data>
   <data name="Edit" xml:space="preserve">
-    <value>Modifer</value>
-  </data>
-  <data name="HeureDebut" xml:space="preserve">
-    <value>Heure du Debut</value>
-  </data>
-  <data name="HeureFin" xml:space="preserve">
-    <value>Heure de Fin</value>
+    <value>Edit</value>
   </data>
   <data name="Nom" xml:space="preserve">
-    <value>Nom</value>
-  </data>
-  <data name="ParMusicien" xml:space="preserve">
-    <value>Par Musicien</value>
-  </data>
-  <data name="ParNom" xml:space="preserve">
-    <value>Par Nom</value>
-  </data>
-  <data name="ParTypeDeSpectacle" xml:space="preserve">
-    <value>Par Type de Spectacle</value>
-  </data>
-  <data name="Rechercher" xml:space="preserve">
-    <value>Rechercher</value>
-  </data>
-  <data name="Salle" xml:space="preserve">
-    <value>Salle</value>
+    <value>Name</value>
   </data>
   <data name="Save" xml:space="preserve">
-    <value>Enregistrer</value>
+    <value>Save</value>
   </data>
-  <data name="Spectacle" xml:space="preserve">
-    <value>Spectacle</value>
+  <data name="TypeConference" xml:space="preserve">
+    <value>Conference Type</value>
   </data>
-  <data name="TypeEvenement" xml:space="preserve">
-    <value>Type de Evenement</value>
+  <data name="TypeKiosque" xml:space="preserve">
+    <value>Kiosque Type</value>
   </data>
   <data name="TypeSpectacle" xml:space="preserve">
-    <value>Typde de Spectacle</value>
+    <value>Show Type</value>
+  </data>
+  <data name="TypeTournois" xml:space="preserve">
+    <value>Tournament Type</value>
   </data>
 </root>

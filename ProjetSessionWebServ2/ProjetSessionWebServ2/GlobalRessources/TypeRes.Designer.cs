@@ -22,14 +22,14 @@ namespace ProjetSessionWebServ2.GlobalRessources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class SpectacleRes {
+    public class TypeRes {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal SpectacleRes() {
+        internal TypeRes() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace ProjetSessionWebServ2.GlobalRessources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ProjetSessionWebServ2.GlobalRessources.SpectacleRes", typeof(SpectacleRes).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ProjetSessionWebServ2.GlobalRessources.TypeRes", typeof(TypeRes).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,16 +61,7 @@ namespace ProjetSessionWebServ2.GlobalRessources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Actif.
-        /// </summary>
-        public static string Actif {
-            get {
-                return ResourceManager.GetString("Actif", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Etes-vous sure de vouloir supprimer ce Spectacle?.
+        ///   Recherche une chaîne localisée semblable à Etes vous sure de vouloir supprimer ceci ?.
         /// </summary>
         public static string AreDelete {
             get {
@@ -79,7 +70,7 @@ namespace ProjetSessionWebServ2.GlobalRessources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Retour a la liste.
+        ///   Recherche une chaîne localisée semblable à Retour a la Liste.
         /// </summary>
         public static string BackToList {
             get {
@@ -88,7 +79,7 @@ namespace ProjetSessionWebServ2.GlobalRessources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Creer un Spectacle.
+        ///   Recherche une chaîne localisée semblable à Creer.
         /// </summary>
         public static string Create {
             get {
@@ -97,16 +88,7 @@ namespace ProjetSessionWebServ2.GlobalRessources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Date du Spectacle.
-        /// </summary>
-        public static string DateSpectacle {
-            get {
-                return ResourceManager.GetString("DateSpectacle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Supprimer un Spectacle.
+        ///   Recherche une chaîne localisée semblable à Supprimer.
         /// </summary>
         public static string Delete {
             get {
@@ -115,29 +97,11 @@ namespace ProjetSessionWebServ2.GlobalRessources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Modifer.
+        ///   Recherche une chaîne localisée semblable à Modifier.
         /// </summary>
         public static string Edit {
             get {
                 return ResourceManager.GetString("Edit", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Heure du Debut.
-        /// </summary>
-        public static string HeureDebut {
-            get {
-                return ResourceManager.GetString("HeureDebut", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Heure de Fin.
-        /// </summary>
-        public static string HeureFin {
-            get {
-                return ResourceManager.GetString("HeureFin", resourceCulture);
             }
         }
         
@@ -151,52 +115,7 @@ namespace ProjetSessionWebServ2.GlobalRessources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Par Musicien.
-        /// </summary>
-        public static string ParMusicien {
-            get {
-                return ResourceManager.GetString("ParMusicien", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Par Nom.
-        /// </summary>
-        public static string ParNom {
-            get {
-                return ResourceManager.GetString("ParNom", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Par Type de Spectacle.
-        /// </summary>
-        public static string ParTypeDeSpectacle {
-            get {
-                return ResourceManager.GetString("ParTypeDeSpectacle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Rechercher.
-        /// </summary>
-        public static string Rechercher {
-            get {
-                return ResourceManager.GetString("Rechercher", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Salle.
-        /// </summary>
-        public static string Salle {
-            get {
-                return ResourceManager.GetString("Salle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Enregistrer.
+        ///   Recherche une chaîne localisée semblable à Sauvegarder.
         /// </summary>
         public static string Save {
             get {
@@ -205,29 +124,38 @@ namespace ProjetSessionWebServ2.GlobalRessources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Spectacle.
+        ///   Recherche une chaîne localisée semblable à Type de Conference.
         /// </summary>
-        public static string Spectacle {
+        public static string TypeConference {
             get {
-                return ResourceManager.GetString("Spectacle", resourceCulture);
+                return ResourceManager.GetString("TypeConference", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Type de Evenement.
+        ///   Recherche une chaîne localisée semblable à Type de Kiosque.
         /// </summary>
-        public static string TypeEvenement {
+        public static string TypeKiosque {
             get {
-                return ResourceManager.GetString("TypeEvenement", resourceCulture);
+                return ResourceManager.GetString("TypeKiosque", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Typde de Spectacle.
+        ///   Recherche une chaîne localisée semblable à Type de Spectacle.
         /// </summary>
         public static string TypeSpectacle {
             get {
                 return ResourceManager.GetString("TypeSpectacle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Type de Tournois.
+        /// </summary>
+        public static string TypeTournois {
+            get {
+                return ResourceManager.GetString("TypeTournois", resourceCulture);
             }
         }
     }

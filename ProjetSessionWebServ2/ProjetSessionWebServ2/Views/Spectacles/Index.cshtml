@@ -8,10 +8,10 @@
 
 @using (Html.BeginForm("Index", "Spectacles", FormMethod.Post))
 {
-    <p> Par Type de Spectacle: @Html.DropDownList("TypeSpectacles", (SelectList)ViewBag.TypeSpectacles, "") <br />
-    Par Nom: @Html.TextBox("searchNomConference", ViewBag.CurrentFilter as string) <br>
-    Par Musicien: @Html.TextBox("searchConferencier", ViewBag.CurrentFilter as string) <br>
-    <input type="submit" value="Rechercher" class="btn btn-default" /> </p>
+    <p> @ProjetSessionWebServ2.GlobalRessources.SpectacleRes.ParTypeDeSpectacle: @Html.DropDownList("TypeSpectacles", (SelectList)ViewBag.TypeSpectacles, "") <br />
+    @ProjetSessionWebServ2.GlobalRessources.SpectacleRes.ParNom: @Html.TextBox("searchNomConference", ViewBag.CurrentFilter as string) <br>
+    @ProjetSessionWebServ2.GlobalRessources.SpectacleRes.ParMusicien: @Html.TextBox("searchConferencier", ViewBag.CurrentFilter as string) <br>
+        <input type="submit" value="@ProjetSessionWebServ2.GlobalRessources.SpectacleRes.Rechercher" class="btn btn-default" /> </p>
 }
 
 <p>

@@ -256,6 +256,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SpectacleRes.resx</DependentUpon>
     </Compile>
+    <Compile Include="GlobalRessources\TypeRes.en.Designer.cs">
+      <DependentUpon>TypeRes.en.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="GlobalRessources\TypeRes.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TypeRes.resx</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Conference.cs" />
@@ -381,9 +391,7 @@
     <Content Include="Views\Spectacles\Index.cshtml" />
     <Content Include="Views\TypeSpectacles\Create.cshtml" />
     <Content Include="Views\TypeSpectacles\Delete.cshtml" />
-    <Content Include="Views\TypeSpectacles\Details.cshtml" />
     <Content Include="Views\TypeSpectacles\Edit.cshtml" />
-    <Content Include="Views\TypeSpectacles\Index.cshtml" />
     <Content Include="Views\Salles\Create.cshtml" />
     <Content Include="Views\Salles\Delete.cshtml" />
     <Content Include="Views\Salles\Details.cshtml" />
@@ -436,10 +444,7 @@
     <Content Include="Views\TypeKiosques\Details.cshtml" />
     <Content Include="Views\TypeKiosques\Edit.cshtml" />
     <Content Include="Views\TypeKiosques\Index.cshtml" />
-    <Content Include="Views\TypeSpectacles\Create.cshtml" />
-    <Content Include="Views\TypeSpectacles\Delete.cshtml" />
     <Content Include="Views\TypeSpectacles\Details.cshtml" />
-    <Content Include="Views\TypeSpectacles\Edit.cshtml" />
     <Content Include="Views\TypeSpectacles\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -486,6 +491,14 @@
     <EmbeddedResource Include="GlobalRessources\SpectacleRes.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SpectacleRes.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GlobalRessources\TypeRes.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>TypeRes.en.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GlobalRessources\TypeRes.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>TypeRes.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
