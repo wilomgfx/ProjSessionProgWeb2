@@ -42,6 +42,31 @@
             @Html.DisplayFor(model => model.Actif)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.Salle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Salle.NoSalle)
+        </dd>
+        <dt>
+            @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.ConferenceRes.Date)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PlageHoraires[0].DateEtHeureDebut.Value.Date)
+        </dd>
+        <dt>
+            @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.ConferenceRes.HeureDebut)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PlageHoraires[0].DateEtHeureDebut.Value.Hour)
+        </dd>
+        <dt>
+            @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.ConferenceRes.HeureFin)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PlageHoraires[0].DateEtHeureFin.Value.Hour)
+        </dd>
     </dl>
 </div>
 <p>

@@ -18,7 +18,7 @@ namespace ProjetSessionWebServ2.DAL
         }
         public IEnumerable<Tournoi> ObtenirTournois()
         {
-            return Get();
+            return Get(null, null, "TypeTournoi,Congres");
         }
 
         public IEnumerable<Tournoi> ObtenirTournoiParType(Evenement.TypeEvent type)
@@ -33,8 +33,10 @@ namespace ProjetSessionWebServ2.DAL
 
         public IEnumerable<Tournoi> ObtenirTournoiParNom(string nom)
         {
-            IEnumerable<Tournoi> lstFiltered = Get(t => t.Nom.Contains(nom)).ToList();
-            return lstFiltered.Count() == 0 ? ObtenirTournois() : lstFiltered;
+            IEnumerable<Tournoi> lstFiltered = Get(t => t.Nom.Contains(nom), null, "TypeTournoi").ToList();
+            // TODO: Proper Handling of when there are no results. Show an error message, maybe?
+            //return lstFiltered.Count() == 0 ? ObtenirTournois() : lstFiltered;
+            return lstFiltered.Count() == 0 ? lstFiltered : lstFiltered;
         }
 
         public List<PlageHoraire> ObtenirPlageHoraireTournoi(int? id)
@@ -47,5 +49,10 @@ namespace ProjetSessionWebServ2.DAL
         //public void DeleteTournoi(Tournoi Tournoi) { Delete(Tournoi); }
 
         public void UpdateTournoi(Tournoi Tournoi) { Update(Tournoi); }
+
+        public Tournoi ObtenirTournoiCompletParId(int? id)
+        {
+            return Get(null, null, "Equipes,Parties,Avancements,TypeTournoi").Where(e => e.Id == id).SingleOrDefault();
+        }
     }
 }

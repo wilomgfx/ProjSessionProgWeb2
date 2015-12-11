@@ -4,14 +4,14 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>@ProjetSessionWebServ2.GlobalRessources.ConferenceRes.Details</h2>
 
 <div>
     <h4>Conference</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Nom)
+            @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.ConferenceRes.Name)
         </dt>
 
         <dd>
@@ -27,27 +27,44 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.TypeEvenement)
+            @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.ConferenceRes.TypeEvenement)
         </dt>
         <dd>
             @Html.DisplayFor(model => model.TypeEvenement)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Actif)
+            @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.ConferenceRes.Actif)
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Actif)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.TypeConference)
+            @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.ConferenceRes.TypeConference)
         </dt>
         <dd>
             @Html.DisplayFor(model => model.TypeConference.Nom)
         </dd>
-
+        <dt>
+            @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.ConferenceRes.Date)
+        </dt>
+        <dd>
+            @Html.DisplayFor(modelItem => model.PlageHoraires[0].DateEtHeureDebut.Value.Date)
+        </dd>
+        <dt>
+            @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.ConferenceRes.HeureDebut)
+        </dt>
+        <dd>
+            @Html.DisplayFor(modelItem => model.PlageHoraires[0].DateEtHeureDebut.Value.Hour)
+        </dd>
+        <dt>
+            @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.ConferenceRes.HeureFin)
+        </dt>
+        <dd>
+            @Html.DisplayFor(modelItem => model.PlageHoraires[0].DateEtHeureFin.Value.Hour)
+        </dd>
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink(@ProjetSessionWebServ2.GlobalRessources.ConferenceRes.Edit, "Edit", new { id = Model.Id }) |
+    @Html.ActionLink(@ProjetSessionWebServ2.GlobalRessources.ConferenceRes.BacktoList, "Index")
 </p>

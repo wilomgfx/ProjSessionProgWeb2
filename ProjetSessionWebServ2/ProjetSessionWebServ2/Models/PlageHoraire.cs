@@ -18,7 +18,9 @@ namespace ProjetSessionWebServ2.Models
         [DataType(DataType.DateTime)]
         public DateTime? DateEtHeureFin { get; set; }
 
-        //public virtual Evenement Evenement { get; set; }
+        public virtual Evenement Evenement { get; set; }
+
+        public virtual Congres Congres { get; set; }
 
     }
 }

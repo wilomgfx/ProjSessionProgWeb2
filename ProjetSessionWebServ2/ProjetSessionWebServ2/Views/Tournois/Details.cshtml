@@ -27,11 +27,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.TypeEvenement)
+            @Html.DisplayNameFor(model => model.TypeTournoi)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.TypeEvenement)
+            @Html.DisplayFor(model => model.TypeTournoi.Nom)
         </dd>
 
         <dt>
@@ -44,6 +44,32 @@
 
     </dl>
 </div>
+<div>
+    <h4>Teams participating:</h4>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Equipes)
+            </th>
+            <th></th>
+        </tr>
+
+        @Html.ActionLink("Join as a new team", "Participate", new { tournamentId = Model.Id })
+
+        @foreach (var item in Model.Equipes)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => item.Nom)
+                </td>
+                <td>
+                    @Html.ActionLink("Join this team", "Participate", new { tournamentId = Model.Id,teamid = item.Id })
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")

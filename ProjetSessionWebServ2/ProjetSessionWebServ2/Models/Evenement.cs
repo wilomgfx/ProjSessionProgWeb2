@@ -9,6 +9,7 @@ namespace ProjetSessionWebServ2.Models
     public class Evenement
     {
         public int Id { get; set; }
+        [Display(Name ="Nom evenement")]
         public string Nom {get;set;}
         public enum TypeEvent
         {
@@ -30,5 +31,8 @@ namespace ProjetSessionWebServ2.Models
         public Salle Salle { get; set; }
 
         public bool Actif { get; set; }
-    }
+
+        public virtual Congres Congres { get; set; }
+
+        }
 }
