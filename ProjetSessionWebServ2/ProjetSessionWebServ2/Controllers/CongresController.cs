@@ -21,6 +21,12 @@ namespace ProjetSessionWebServ2.Controllers
             return View(unitOfWork.CongresRepository.ObtenirCongres().ToList());
         }
 
+        public ActionResult HoraireCongres(int? id)
+        {
+            List<PlageHoraire> plageHoraires = unitOfWork.PlageHoraireRepository.Get(c => c.Congres.Id == id).ToList();
+            return View(plageHoraires);
+        }
+
         // GET: Congres/Details/5
         public ActionResult Details(int? id)
         {
