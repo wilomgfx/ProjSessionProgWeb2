@@ -98,6 +98,7 @@ namespace ProjetSessionWebServ2.Controllers
                 newPlageHoraire.DateEtHeureDebut = dateEtHeureDebut;
                 newPlageHoraire.DateEtHeureFin = dateEtHeureFin;
                 newPlageHoraire.Evenement = tournoi;
+                newPlageHoraire.Congres = congres;
                 uow.PlageHoraireRepository.InsertPlageHoraire(newPlageHoraire);
                 uow.Save();
 

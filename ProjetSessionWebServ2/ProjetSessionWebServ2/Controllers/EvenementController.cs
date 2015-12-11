@@ -77,6 +77,7 @@ namespace ProjetSessionWebServ2.Controllers
                 newPlageHoraire.DateEtHeureDebut = dateEtHeureDebut;
                 newPlageHoraire.DateEtHeureFin = dateEtHeureFin;
                 newPlageHoraire.Evenement = evenement;
+                newPlageHoraire.Congres = congres;
                 unitofwork.PlageHoraireRepository.InsertPlageHoraire(newPlageHoraire);
                 unitofwork.Save();
 
