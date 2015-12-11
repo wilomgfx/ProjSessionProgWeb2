@@ -44,7 +44,7 @@ namespace ProjetSessionWebServ2.Controllers
                 //Trie selon les parametre de recherche entre par l'utilisateur
                 List<Conference> colConference = unitOfWork.ConferenceRepository.ObtenirConferences().ToList();
                 List<Conference> colConfenreceApresrechecheType = colConference.Where(u => u.TypeConference.Nom.Contains(searchTypeConference)).ToList();
-                List<Conference> colConfenrenceApresRechercheNomConference = colConfenreceApresrechecheType.Where(u => u.Nom.Contains(searchNomConference)).ToList();
+                List<Conference> colConfenrenceApresRechercheNomConference = colConfenreceApresrechecheType.Where(u => u.Nom.ToLower().Contains(searchNomConference.ToLower())).ToList();
                 List<Conference> colConferenceApresRechercheConferencier = new List<Conference>();
 
 
