@@ -19,7 +19,6 @@
                 @ProjetSessionWebServ2.GlobalRessources.ConferenceRes.ParConferencier: @Html.TextBox("searchConferencier", ViewBag.CurrentFilter as string) <br>
                 <input type="submit" value="Rechercher" class="btn btn-default" />
             </p>
-
         }
     
 }
@@ -52,6 +51,15 @@
         <th>
             @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.ConferenceRes.Conferencier)
         </th>
+        <th>
+            @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.ConferenceRes.Date)
+        </th>
+        <th>
+            @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.ConferenceRes.HeureDebut)
+        </th>
+        <th>
+            @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.ConferenceRes.HeureFin)
+        </th>
         <th></th>
     </tr>
 
@@ -68,6 +76,15 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Users.FirstOrDefault().UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PlageHoraires[0].DateEtHeureDebut.Value.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PlageHoraires[0].DateEtHeureDebut.Value.Hour)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PlageHoraires[0].DateEtHeureFin.Value.Hour)
         </td>
         <td>
             @Html.ActionLink(@ProjetSessionWebServ2.GlobalRessources.ConferenceRes.Edit, "Edit", new { id=item.Id }) |

@@ -106,7 +106,7 @@ namespace ProjetSessionWebServ2.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeConferenceId")] Conference conference, int TypeConferenceIdViewBag, int Congres)
+        public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeConferenceId")] Conference conference, int TypeConferenceIdViewBag, int Congres, string DateConference, string HeureDebut, string HeureFin)
         {
 
             conference.TypeEvenement = Evenement.TypeEvent.TypeConference;
@@ -131,7 +131,25 @@ namespace ProjetSessionWebServ2.Controllers
                 conference.Users.Add(utilisateur);
                 conference.Congres = congres;
                 unitOfWork.ConferenceRepository.InsertConference(conference);
+                
                 unitOfWork.Save();
+
+
+
+                PlageHoraire newPlageHoraire = new PlageHoraire();
+                DateTime dateTournoi = DateTime.Parse(DateConference);
+                int heureDebut = int.Parse(HeureDebut);
+                int heureFin = int.Parse(HeureFin);
+                DateTime dateEtHeureDebut = dateTournoi.AddHours(heureDebut);
+                DateTime dateEtHeureFin = dateTournoi.AddHours(heureFin);
+                newPlageHoraire.DateEtHeureDebut = dateEtHeureDebut;
+                newPlageHoraire.DateEtHeureFin = dateEtHeureFin;
+                newPlageHoraire.Evenement = conference;
+                unitOfWork.PlageHoraireRepository.InsertPlageHoraire(newPlageHoraire);
+                unitOfWork.Save();
+
+
+
                 //db.Evenements.Add(conference);
                 //db.SaveChanges();
                 return RedirectToAction("Index");
