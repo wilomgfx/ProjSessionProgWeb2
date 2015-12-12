@@ -245,6 +245,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>TournoiRes.resx</DependentUpon>
+	  </Compile>
     <Compile Include="GlobalRessources\KiosqueRes.en.Designer.cs">
       <DependentUpon>KiosqueRes.en.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -485,7 +486,6 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ConferenceRes.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-<<<<<<< HEAD
     <EmbeddedResource Include="GlobalRessources\TournoiRes.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>TournoiRes.en.Designer.cs</LastGenOutput>
@@ -493,7 +493,7 @@
     <EmbeddedResource Include="GlobalRessources\TournoiRes.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>TournoiRes.Designer.cs</LastGenOutput>
-=======
+	  </EmbeddedResource>
     <EmbeddedResource Include="GlobalRessources\KiosqueRes.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>KiosqueRes.en.Designer.cs</LastGenOutput>
@@ -517,7 +517,6 @@
     <EmbeddedResource Include="GlobalRessources\TypeRes.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>TypeRes.Designer.cs</LastGenOutput>
->>>>>>> origin/conference
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
