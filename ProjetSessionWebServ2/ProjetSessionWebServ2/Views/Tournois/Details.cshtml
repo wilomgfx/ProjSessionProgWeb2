@@ -1,17 +1,17 @@
 ﻿@model ProjetSessionWebServ2.Models.Tournoi
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = ProjetSessionWebServ2.GlobalRessources.TournoiRes.Details;
 }
 
-<h2>Details</h2>
+<h2>@ProjetSessionWebServ2.GlobalRessources.TournoiRes.Details</h2>
 
 <div>
-    <h4>Tournoi</h4>
+    <h4>@ProjetSessionWebServ2.GlobalRessources.TournoiRes.NomController</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Nom)
+            @Html.DisplayName(ProjetSessionWebServ2.GlobalRessources.TournoiRes.NomTournoi)
         </dt>
 
         <dd>
@@ -27,15 +27,15 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.TypeEvenement)
+            @Html.DisplayName(ProjetSessionWebServ2.GlobalRessources.TournoiRes.TypeTournoi)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.TypeEvenement)
+            @Html.DisplayFor(model => model.TypeTournoi.Nom)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Actif)
+            @Html.DisplayName(ProjetSessionWebServ2.GlobalRessources.TournoiRes.Actif)
         </dt>
 
         <dd>
@@ -44,7 +44,33 @@
 
     </dl>
 </div>
+<div>
+    <h4>@ProjetSessionWebServ2.GlobalRessources.TournoiRes.TeamParticipating</h4>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayName(ProjetSessionWebServ2.GlobalRessources.TournoiRes.Equipes)
+            </th>
+            <th></th>
+        </tr>
+
+        @Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.TournoiRes.JoinAsNewTeam, "Participate", new { tournamentId = Model.Id })
+
+        @foreach (var item in Model.Equipes)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => item.Nom)
+                </td>
+                <td>
+                    @Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.TournoiRes.JoindreEquipe, "Participate", new { tournamentId = Model.Id, teamid = item.Id })
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.TournoiRes.Edit, "Edit", new { id = Model.Id }) |
+    @Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.TournoiRes.BackToList, "Index")
 </p>

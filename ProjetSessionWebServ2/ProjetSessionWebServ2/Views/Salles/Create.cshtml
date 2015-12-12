@@ -4,7 +4,7 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<h2>Ajouter une nouvelle Salle </h2>
 
 
 @using (Html.BeginForm()) 
@@ -22,7 +22,35 @@
                 @Html.ValidationMessageFor(model => model.NoSalle, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        <div class="form-group">
+           @Html.LabelFor(model => model.TailleSalle, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("TailleSalle", new List<SelectListItem>
+            {
+              new SelectListItem{ Text = "Petite", Value = "0" },
+              new SelectListItem{ Text = "Moyenne", Value = "1" },
+              new SelectListItem{ Text = "Grande", Value = "2" },
+              new SelectListItem{ Text = "Tres_Grande", Value = "3" }
+            })
+                @*@Html.EditorFor(model => model.TailleSalle, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.DropDownList("TailleSalle", EnumHelper.GetSelectList(typeof(ProjetSessionWebServ2.Models.Taille)), "Selectionner la Taille", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TailleSalle, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Dimension.Largeur, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Dimension.Largeur, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Dimension.Largeur, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Dimension.Longueur, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Dimension.Longueur, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Dimension.Longueur, "", new { @class = "text-danger" })
+            </div>
+        </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
@@ -32,7 +60,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Retour a la liste", "Index")
 </div>
 
 @section Scripts {

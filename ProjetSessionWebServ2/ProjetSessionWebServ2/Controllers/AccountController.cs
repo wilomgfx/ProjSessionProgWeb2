@@ -149,8 +149,6 @@ namespace ProjetSessionWebServ2.Controllers
            // ViewBag.TypeConferenceIdViewBag = TypeConferenceId2;
           
 
-            RoleManager.Create(new IdentityRole("test"));
-
             //Verifie si les role ont deja ete creer en regardant si l'un d'entre eux est dans la bd
             bool roleDejaCreer = false;
             foreach (IdentityRole role in RoleManager.Roles)
@@ -163,8 +161,8 @@ namespace ProjetSessionWebServ2.Controllers
             if(!roleDejaCreer)
             {
                 RoleManager.Create(new IdentityRole("conferencier"));
-                RoleManager.Create(new IdentityRole("artiste"));
-                RoleManager.Create(new IdentityRole("particippant"));
+                RoleManager.Create(new IdentityRole("musicien"));
+                RoleManager.Create(new IdentityRole("participant"));
                 RoleManager.Create(new IdentityRole("kiosqueur"));
                 RoleManager.Create(new IdentityRole("administrateur"));
             }
@@ -192,7 +190,7 @@ namespace ProjetSessionWebServ2.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    
 
                     //Ajoute le role au user qui viens detre creer
                     UserManager<ApplicationUser> userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
@@ -216,8 +214,12 @@ namespace ProjetSessionWebServ2.Controllers
                     unitOfWork.TransactionRepository.InsertTransaction(nouvelleTransaction);
                     unitOfWork.Save();
 
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
                     return RedirectToAction("Index", "Home");
                 }
+                SelectList selectRoleList = new SelectList(RoleManager.Roles, "Id", "Name");
+                ViewBag.rolelist = selectRoleList;
                 AddErrors(result);
             }
 

@@ -23,7 +23,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Description)
+            @Html.TextAreaFor(model => model.Description, new { @class = "form-control", cols = "100" })
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Salle.NoSalle)
@@ -53,7 +53,24 @@
         <dd>
             @Html.DisplayFor(model => model.Actif)
         </dd>
-
+        <dt>
+            @Html.DisplayName("Date")
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PlageHoraires[0].DateEtHeureDebut.Value.Date)
+        </dd>
+        <dt>
+            @Html.DisplayName("Heure Debut")
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PlageHoraires[0].DateEtHeureDebut.Value.Hour)
+        </dd>
+        <dt>
+            @Html.DisplayName("Heure Fin")
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PlageHoraires[0].DateEtHeureFin.Value.Hour)
+        </dd>
     </dl>
 </div>
 <p>

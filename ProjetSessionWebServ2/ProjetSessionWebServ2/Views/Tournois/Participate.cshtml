@@ -1,0 +1,106 @@
+﻿@model ProjetSessionWebServ2.ViewModels.Tournoi_Equipe
+@{
+    ViewBag.Title = @ProjetSessionWebServ2.GlobalRessources.TournoiRes.Participate;
+}
+
+<h2>@ProjetSessionWebServ2.GlobalRessources.TournoiRes.Participate</h2>
+
+<h4>@ProjetSessionWebServ2.GlobalRessources.TournoiRes.NomController: @Model.tournoi.Nom , @Model.tournoi.TypeTournoi.Nom</h4>
+
+
+@if (Model.equipe == null)
+{
+    using (Html.BeginForm())
+    {
+        //Html.AntiForgeryToken();
+        <div class="form-horizontal">
+            <h4>@ProjetSessionWebServ2.GlobalRessources.TournoiRes.JoinAsNewTeam</h4>
+            <hr />
+            <div class="form-group">
+                <label class="control-label col-md-2">@ProjetSessionWebServ2.GlobalRessources.TournoiRes.NomEquipe:</label>
+                <input type="text" value="" name="teamname" />
+            </div>
+            <div class="form-group">
+                <input type="hidden" value="-1" name="teamid" />
+            </div>
+            <div class="form-group">
+                <input type="hidden" value="@Model.tournoi.Id" name="tournamentid" />
+            </div>
+            @*<div class="form-group">
+                    @Html.LabelFor(model => model.Actif, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.Actif)
+                            @Html.ValidationMessageFor(model => model.Actif, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>*@
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="@ProjetSessionWebServ2.GlobalRessources.TournoiRes.CreateTeamAndJoin" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+}
+else
+{
+    using (Html.BeginForm())
+    {
+        Html.AntiForgeryToken();
+        <div class="form-horizontal">
+            <h4>@ProjetSessionWebServ2.GlobalRessources.TournoiRes.Equipe : @Model.equipe.Nom</h4>
+            <hr />            
+            <div class="form-group">
+                <label class="control-label col-md-2">Are you sure you wish to join this team for this tournament?</label>
+                <input type="text" value="@Model.equipe.Nom" name="teamname" readonly />
+            </div>
+            <div class="form-group">
+                <input type="hidden" value="@Model.equipe.Id" name="teamid"/>
+            </div>
+            <div class="form-group">
+                <input type="hidden" value="@Model.tournoi.Id" name="tournamentid"/>
+            </div>
+
+            <h4>@ProjetSessionWebServ2.GlobalRessources.TournoiRes.MembresEquipe</h4>
+            <table>
+                <tr>
+                    <th>@ProjetSessionWebServ2.GlobalRessources.TournoiRes.Joueurs</th>
+                </tr>               
+                @{
+                    foreach (ProjetSessionWebServ2.Models.ApplicationUser joueur in Model.equipe.Joueurs)
+                    {
+                        <tr>
+                            <td>@joueur.UserName</td>
+                        </tr>                       
+                    }
+                }
+            </table>
+                @*<div class="form-group">
+                @Html.LabelFor(model => model.Actif, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.Actif)
+                        @Html.ValidationMessageFor(model => model.Actif, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>*@
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="@ProjetSessionWebServ2.GlobalRessources.TournoiRes.JoindreEquipe" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+    }
+}
+
+
+<div>
+    @Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.TournoiRes.BackToList, "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

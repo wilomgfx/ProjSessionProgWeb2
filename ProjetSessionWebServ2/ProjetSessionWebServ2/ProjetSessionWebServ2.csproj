@@ -169,11 +169,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\IdentityConfig.cs" />
-    <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Content\App_Start\BundleConfig.cs" />
+    <Compile Include="Content\App_Start\FilterConfig.cs" />
+    <Compile Include="Content\App_Start\IdentityConfig.cs" />
+    <Compile Include="Content\App_Start\RouteConfig.cs" />
+    <Compile Include="Content\App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ConferencesController.cs" />
     <Compile Include="Controllers\CongresController.cs" />
@@ -182,21 +182,26 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KiosquesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PlageHorairesController.cs" />
     <Compile Include="Controllers\SallesController.cs" />
     <Compile Include="Controllers\SectionsController.cs" />
     <Compile Include="Controllers\SpectaclesController.cs" />
     <Compile Include="Controllers\TournoisController.cs" />
     <Compile Include="Controllers\TypeKiosquesController.cs" />
     <Compile Include="Controllers\TypeConferencesController.cs" />
+    <Compile Include="Controllers\TypeTournoisController.cs" />
     <Compile Include="DAL\ConferenceRepository.cs" />
     <Compile Include="DAL\CongresRepository.cs" />
+    <Compile Include="DAL\CustomUserAttribute.cs" />
     <Compile Include="DAL\DimensionRepository.cs" />
+    <Compile Include="DAL\EquipeRepository.cs" />
     <Compile Include="DAL\EvenementRepository.cs" />
     <Compile Include="DAL\ExempleRepo.cs" />
     <Compile Include="DAL\GenericRepository.cs" />
     <Compile Include="DAL\IGenericRepository.cs" />
     <Compile Include="DAL\IUnitOfWork.cs" />
     <Compile Include="DAL\KiosqueRepository.cs" />
+    <Compile Include="DAL\PlageHoraireRepository.cs" />
     <Compile Include="DAL\SalleRepository.cs" />
     <Compile Include="DAL\SectionRepository.cs" />
     <Compile Include="DAL\SpectacleRepository.cs" />
@@ -210,6 +215,36 @@
     <Compile Include="DAL\UnitOfWork.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="GlobalRessources\ConferenceRes.en.Designer.cs">
+      <DependentUpon>ConferenceRes.en.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="GlobalRessources\HomeRes.en.Designer.cs">
+      <DependentUpon>HomeRes.en.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="GlobalRessources\HomeRes.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HomeRes.resx</DependentUpon>
+    </Compile>
+    <Compile Include="GlobalRessources\ConferenceRes.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ConferenceRes.resx</DependentUpon>
+    </Compile>
+    <Compile Include="GlobalRessources\TournoiRes.en.Designer.cs">
+      <DependentUpon>TournoiRes.en.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="GlobalRessources\TournoiRes.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TournoiRes.resx</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -227,6 +262,7 @@
     <Compile Include="Models\Salle.cs" />
     <Compile Include="Models\Section.cs" />
     <Compile Include="Models\Spectacle.cs" />
+    <Compile Include="Models\Taille.cs" />
     <Compile Include="Models\Tournoi.cs" />
     <Compile Include="Models\Transaction.cs" />
     <Compile Include="Models\TypeConference.cs" />
@@ -235,8 +271,15 @@
     <Compile Include="Models\TypeTournoi.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\Tournoi_Equipe.cs" />
+    <Compile Include="ViewModels\SalleVM.cs" />
+    <Compile Include="ViewModels\TournoiVM.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\ProjSessionWebServ2.mdf" />
+    <Content Include="App_Data\ProjSessionWebServ2_log.ldf">
+      <DependentUpon>ProjSessionWebServ2.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -352,6 +395,25 @@
     <Content Include="Views\Congres\Edit.cshtml" />
     <Content Include="Views\Congres\Index.cshtml" />
     <Content Include="Views\Congres\RapportDesVentes.cshtml" />
+    <Content Include="Views\PlageHoraires\Index.cshtml" />
+    <Content Include="Views\PlageHoraires\Create.cshtml" />
+    <Content Include="Views\PlageHoraires\Delete.cshtml" />
+    <Content Include="Views\PlageHoraires\Details.cshtml" />
+    <Content Include="Views\PlageHoraires\Edit.cshtml" />
+    <Content Include="Views\Home\BadRoleError.cshtml" />
+    <Content Include="Views\TypeTournois\Create.cshtml" />
+    <Content Include="Views\TypeTournois\Delete.cshtml" />
+    <Content Include="Views\TypeTournois\Details.cshtml" />
+    <Content Include="Views\TypeTournois\Edit.cshtml" />
+    <Content Include="Views\TypeTournois\Index.cshtml" />
+    <Content Include="Views\Tournois\Participate.cshtml" />
+    <Content Include="Views\Congres\AdminPanel.cshtml" />
+    <Content Include="Views\Congres\HoraireCongres.cshtml" />
+    <Content Include="Views\Congres\ListeEvenementAutre.cshtml" />
+    <Content Include="Views\Congres\ListeEvenementConference.cshtml" />
+    <Content Include="Views\Congres\ListeEvenementKiosque.cshtml" />
+    <Content Include="Views\Congres\ListeEvenementSpectacle.cshtml" />
+    <Content Include="Views\Congres\ListeEvenementTournoi.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Kiosques\Create.cshtml" />
@@ -381,9 +443,34 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <EmbeddedResource Include="GlobalRessources\ConferenceRes.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ConferenceRes.en.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GlobalRessources\HomeRes.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>HomeRes.en.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GlobalRessources\HomeRes.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>HomeRes.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GlobalRessources\ConferenceRes.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ConferenceRes.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GlobalRessources\TournoiRes.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>TournoiRes.en.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GlobalRessources\TournoiRes.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>TournoiRes.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

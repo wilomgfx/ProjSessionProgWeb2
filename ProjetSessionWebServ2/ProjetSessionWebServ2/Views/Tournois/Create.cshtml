@@ -1,10 +1,10 @@
 ﻿@model ProjetSessionWebServ2.Models.Tournoi
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = ProjetSessionWebServ2.GlobalRessources.TournoiRes.Create;
 }
 
-<h2>Create</h2>
+<h2>@ProjetSessionWebServ2.GlobalRessources.TournoiRes.Create</h2>
 
 
 @using (Html.BeginForm()) 
@@ -12,11 +12,18 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Tournoi</h4>
+        <h4>@ProjetSessionWebServ2.GlobalRessources.TournoiRes.NomController</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.Nom, htmlAttributes: new { @class = "control-label col-md-2" })
+
+            @Html.Label("Congres", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Congres", null, htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label(ProjetSessionWebServ2.GlobalRessources.TournoiRes.NomTournoi, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Nom, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Nom, "", new { @class = "text-danger" })
@@ -32,33 +39,46 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.TypeEvenement, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.TypeTournoi, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("TypeTournoiId", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.TypeTournoi, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.Actif, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="form-group">
+            @Html.Label(ProjetSessionWebServ2.GlobalRessources.TournoiRes.DateTournoi, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.Actif)
-                    @Html.ValidationMessageFor(model => model.Actif, "", new { @class = "text-danger" })
-                </div>
+                @*@Html.Editor("DateTournoi", new { htmlAttributes = new { @class = "form-control" } })*@
+                <input type="date"name="DateTournoi" class="form-control"/>
+                @*@Html.ValidationMessageFor(model => model.DateTournoi, "", new { @class = "text-danger" })*@
             </div>
-        </div>*@
+        </div>
+
+        <div class="form-group">
+            @Html.Label(ProjetSessionWebServ2.GlobalRessources.TournoiRes.HeureDebut, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.Editor("HeureDebut", new { htmlAttributes = new { @class = "form-control" } })
+                @*@Html.ValidationMessageFor(model => model.HeureDebut, "", new { @class = "text-danger" })*@
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label(ProjetSessionWebServ2.GlobalRessources.TournoiRes.HeureFin, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.Editor("HeureFin", new { htmlAttributes = new { @class = "form-control" } })
+                @*@Html.ValidationMessageFor(model => model.HeureFin, "", new { @class = "text-danger" })*@
+            </div>
+        </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="@ProjetSessionWebServ2.GlobalRessources.TournoiRes.Create" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.TournoiRes.BackToList, "Index")
 </div>
 
 @section Scripts {
