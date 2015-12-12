@@ -1,10 +1,10 @@
 ﻿@model ProjetSessionWebServ2.Models.Spectacle
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = @ProjetSessionWebServ2.GlobalRessources.SpectacleRes.Create;
 }
 
-<h2>Create</h2>
+<h2>@ProjetSessionWebServ2.GlobalRessources.SpectacleRes.Create</h2>
 
 
 @using (Html.BeginForm()) 
@@ -12,7 +12,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Spectacle</h4>
+        <h4>@ProjetSessionWebServ2.GlobalRessources.SpectacleRes.Spectacle</h4>
         <hr />
         <div style="color: red;font-weight:900;">@TempData["message"]</div>
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -25,7 +25,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Nom, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label(@ProjetSessionWebServ2.GlobalRessources.SpectacleRes.Nom, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Nom, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Nom, "", new { @class = "text-danger" })
@@ -41,14 +41,14 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.TypeSpectacle, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label(@ProjetSessionWebServ2.GlobalRessources.SpectacleRes.TypeSpectacle, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("TypeSpectacleId", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.TypeSpectacle, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
-            @Html.Label("DateSpectacle", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label(@ProjetSessionWebServ2.GlobalRessources.SpectacleRes.DateSpectacle, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.Editor("DateSpectacle", new { htmlAttributes = new { @class = "form-control" } })
                 @*@Html.ValidationMessageFor(model => model.DateTournoi, "", new { @class = "text-danger" })*@
@@ -56,14 +56,14 @@
         </div>
 
         <div class="form-group">
-            @Html.Label("HeureDebut", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label(@ProjetSessionWebServ2.GlobalRessources.SpectacleRes.HeureDebut, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.Editor("HeureDebut", new { htmlAttributes = new { @class = "form-control" } })
                 @*@Html.ValidationMessageFor(model => model.HeureDebut, "", new { @class = "text-danger" })*@
             </div>
         </div>
         <div class="form-group">
-            @Html.Label("HeureFin", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label(@ProjetSessionWebServ2.GlobalRessources.SpectacleRes.HeureFin, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.Editor("HeureFin", new { htmlAttributes = new { @class = "form-control" } })
                 @*@Html.ValidationMessageFor(model => model.HeureFin, "", new { @class = "text-danger" })*@
@@ -78,7 +78,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink(@ProjetSessionWebServ2.GlobalRessources.SpectacleRes.BackToList, "Index")
 </div>
 
 @section Scripts {
