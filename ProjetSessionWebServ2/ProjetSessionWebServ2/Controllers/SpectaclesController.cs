@@ -55,7 +55,7 @@ namespace ProjetSessionWebServ2.Controllers
         }
 
         // GET: Spectacles/Create
-        [CustomUserAttribute(Roles = "musicien", AccessLevel = "Create")]
+        [CustomUserAttribute(Roles = "musicien,administrateur", AccessLevel = "Create")]
         public ActionResult Create()
         {
             ViewBag.Congres = new SelectList(unitOfWork.CongresRepository.ObtenirCongres(), "Id", "Nom");
@@ -69,8 +69,25 @@ namespace ProjetSessionWebServ2.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeSpectacleId,Actif")] Spectacle spectacle, int Congres)
+        public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeSpectacleId,Actif")] Spectacle spectacle, int Congres, string DateSpectacle, string HeureDebut, string HeureFin)
         {
+            DateTime dateSpectacle;
+            int heureDebut;
+            int heureFin;
+            SelectList TypeSpectacleId = new SelectList(unitOfWork.TypeSpectacleRepository.ObtenirTypeSpectacles(), "Id", "Nom", spectacle.TypeSpectacleId);
+            ViewBag.Congres = new SelectList(unitOfWork.CongresRepository.ObtenirCongres(), "Id", "Nom");
+            try
+            {
+                dateSpectacle = DateTime.Parse(DateSpectacle);
+                heureDebut = int.Parse(HeureDebut);
+                heureFin = int.Parse(HeureFin);
+            }
+            catch(Exception e)
+            {
+                TempData["message"] = "La date de spectacle doit être une date valide sous le format AAAA-MM-JJ. L'heure de début et l'heure de fin doivent être des chiffres";
+                ViewBag.TypeSpectacleId = TypeSpectacleId;
+                return View(spectacle);
+            }
             if (ModelState.IsValid)
             {
                 spectacle.TypeEvenement = Evenement.TypeEvent.TypeSpectacle;
@@ -92,9 +109,26 @@ namespace ProjetSessionWebServ2.Controllers
 
                 unitOfWork.SpectacleRepository.InsertSpectacle(spectacle);
                 unitOfWork.Save();
+
+
+                PlageHoraire newPlageHoraire = new PlageHoraire();
+                DateTime dateEtHeureDebut = dateSpectacle.AddHours(heureDebut);
+                DateTime dateEtHeureFin = dateSpectacle.AddHours(heureFin);
+                newPlageHoraire.DateEtHeureDebut = dateEtHeureDebut;
+                newPlageHoraire.DateEtHeureFin = dateEtHeureFin;
+                newPlageHoraire.Evenement = spectacle;
+                newPlageHoraire.Congres = congres;
+                unitOfWork.PlageHoraireRepository.InsertPlageHoraire(newPlageHoraire);
+                unitOfWork.Save();
+
+                Transaction nouvelleTransaction = new Transaction();
+                nouvelleTransaction.DateAchat = DateTime.Now;
+                nouvelleTransaction.Montant = 1000;
+                nouvelleTransaction.TypeAchat = "Location pour un dateSpectacle";
+                unitOfWork.TransactionRepository.InsertTransaction(nouvelleTransaction);
+                unitOfWork.Save();
                 return RedirectToAction("Index");
             }
-            SelectList TypeSpectacleId = new SelectList(unitOfWork.TypeSpectacleRepository.ObtenirTypeSpectacles(), "Id", "Nom", spectacle.TypeSpectacleId);
             ViewBag.TypeSpectacleId = TypeSpectacleId;
             return View(spectacle);
         }
@@ -112,6 +146,7 @@ namespace ProjetSessionWebServ2.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.Congres = new SelectList(unitOfWork.CongresRepository.ObtenirCongres(), "Id", "Nom");
             SelectList TypeSpectacleId = new SelectList(unitOfWork.TypeSpectacleRepository.ObtenirTypeSpectacles(), "Id", "Nom", spectacle.TypeSpectacleId);
             ViewBag.TypeSpectacleId = TypeSpectacleId;
             return View(spectacle);
@@ -134,6 +169,7 @@ namespace ProjetSessionWebServ2.Controllers
                 unitOfWork.Save();
                 return RedirectToAction("Index");
             }
+            ViewBag.Congres = new SelectList(unitOfWork.CongresRepository.ObtenirCongres(), "Id", "Nom");
             SelectList TypeSpectacleId = new SelectList(unitOfWork.TypeSpectacleRepository.ObtenirTypeSpectacles(), "Id", "Nom", spectacle.TypeSpectacleId);
             ViewBag.TypeSpectacleId = TypeSpectacleId;
             return View(spectacle);

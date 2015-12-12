@@ -15,7 +15,7 @@ namespace ProjetSessionWebServ2.DAL
             }
         public IEnumerable<Salle> ObtenirSalles()
             {
-                return Get(null,null,"Sections");
+                return Get(null, null, "Sections, Dimension");
             }
         
         public void InsertSalle(Salle Salle) { Insert(Salle); }

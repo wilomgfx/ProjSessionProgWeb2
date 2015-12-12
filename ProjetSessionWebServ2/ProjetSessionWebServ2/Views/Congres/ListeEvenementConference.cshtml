@@ -6,6 +6,8 @@
 
 <h1>Conference</h1>
 
+@Html.ActionLink("Créer", "Create", "Conferences")
+
 <table class="table">
     <tr>
         <th>
@@ -25,23 +27,50 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nom)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TypeConference.Nom)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Users.FirstOrDefault().UserName)
-            </td>
-            <td>       
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) 
-            </td>
-        </tr>
+        if (item.Actif.Equals(false))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nom)  <strong>(Cancelled)</strong>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TypeEvenement)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Salle.NoSalle)
+                </td>
+                <td>
+                    @Html.ActionLink("Modifier", "Edit", "Conferences", new { id = item.Id }, null) |
+                    @Html.ActionLink("Voir Detail", "Details", "Conferences", new { id = item.Id }, null) |
+                    @Html.ActionLink("Supprimer", "Delete", "Conferences", new { id = item.Id }, null)
+                </td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TypeEvenement)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Salle.NoSalle)
+                </td>
+                <td>
+                    @Html.ActionLink("Modifier", "Edit", "Conferences", new { id = item.Id }, null) |
+                    @Html.ActionLink("Voir Detail", "Details", "Conferences", new { id = item.Id }, null) |
+                    @Html.ActionLink("Supprimer", "Delete", "Conferences", new { id = item.Id }, null)
+                </td>
+            </tr>
+        }
     }
 
 </table>

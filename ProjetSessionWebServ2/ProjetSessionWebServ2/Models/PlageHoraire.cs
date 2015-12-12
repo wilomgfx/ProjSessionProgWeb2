@@ -20,5 +20,7 @@ namespace ProjetSessionWebServ2.Models
 
         public virtual Evenement Evenement { get; set; }
 
+        public virtual Congres Congres { get; set; }
+
     }
 }

@@ -20,7 +20,7 @@ namespace ProjetSessionWebServ2.Controllers
         public ActionResult Index()
         {
             //return View(db.Evenements.ToList());
-            return View(unitofwork.EvenementRepository.ObtenirEvenements().ToList());
+            return View(unitofwork.EvenementRepository.ObtenirEvenementParType(Evenement.TypeEvent.TypeAutre).ToList());
         }
 
         // GET: /Evenement/Details/5
@@ -52,8 +52,23 @@ namespace ProjetSessionWebServ2.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nom,Description,Salle,Actif")] Evenement evenement, Salle salle, int Congres)
+        public ActionResult Create([Bind(Include = "Id,Nom,Description,Salle,Actif")] Evenement evenement, Salle salle, int Congres, string DateConference, string HeureDebut, string HeureFin)
         {
+            DateTime dateEvenement;
+            int heureDebut;
+            int heureFin;
+            ViewBag.Congres = new SelectList(unitofwork.CongresRepository.ObtenirCongres(), "Id", "Nom");
+            try
+            {
+                dateEvenement = DateTime.Parse(DateConference);
+                heureDebut = int.Parse(HeureDebut);
+                heureFin = int.Parse(HeureFin);
+            }
+            catch (Exception e)
+            {
+                TempData["message"] = "La date de l'événement doit être une date valide sous le format AAAA-MM-JJ. L'heure de début et l'heure de fin doivent être des chiffres";
+                return View(evenement);
+            }
             if (ModelState.IsValid)
             {
                 //db.Evenements.Add(evenement);
@@ -66,6 +81,18 @@ namespace ProjetSessionWebServ2.Controllers
 
                 unitofwork.EvenementRepository.Insert(evenement);
                 unitofwork.Save();
+
+
+                PlageHoraire newPlageHoraire = new PlageHoraire();
+                DateTime dateEtHeureDebut = dateEvenement.AddHours(heureDebut);
+                DateTime dateEtHeureFin = dateEvenement.AddHours(heureFin);
+                newPlageHoraire.DateEtHeureDebut = dateEtHeureDebut;
+                newPlageHoraire.DateEtHeureFin = dateEtHeureFin;
+                newPlageHoraire.Evenement = evenement;
+                newPlageHoraire.Congres = congres;
+                unitofwork.PlageHoraireRepository.InsertPlageHoraire(newPlageHoraire);
+                unitofwork.Save();
+
                 return RedirectToAction("Index");
             }
 

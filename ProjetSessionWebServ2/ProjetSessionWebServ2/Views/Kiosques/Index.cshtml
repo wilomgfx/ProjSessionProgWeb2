@@ -7,16 +7,16 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink(@ProjetSessionWebServ2.GlobalRessources.KiosqueRes.Create, "Create")
 </p>
 
 @{
     using (Html.BeginForm("Index", "Kiosques", FormMethod.Get))
     {
         <p>
-            Par Type de Kiosque: @Html.DropDownList("searchTypeKiosque", (SelectList)ViewBag.searchTypeKiosque, "") <br>
-            Par Nom: @Html.TextBox("searchNomKiosque", ViewBag.CurrentFilter as string) <br>
-            Par Kiosqueur: @Html.TextBox("searchKiosqueur", ViewBag.CurrentFilter as string) <br>
+            @ProjetSessionWebServ2.GlobalRessources.KiosqueRes.ParTypeDeKiosque: @Html.DropDownList("searchTypeKiosque", (SelectList)ViewBag.searchTypeKiosque, "") <br>
+            @ProjetSessionWebServ2.GlobalRessources.KiosqueRes.ParNom: @Html.TextBox("searchNomKiosque", ViewBag.CurrentFilter as string) <br>
+            @ProjetSessionWebServ2.GlobalRessources.KiosqueRes.ParKiosqueur: @Html.TextBox("searchKiosqueur", ViewBag.CurrentFilter as string) <br>
             <input type="submit" value="Rechercher" class="btn btn-default" />
         </p>
 
@@ -30,7 +30,7 @@
         <p>
 
             @Html.Hidden("trieKiosque", ViewBag.CurrentFilter as string) <br>
-            <input type="submit" value="Trier par type de kiosque" class="btn btn-default" />
+            <input type="submit" value="@ProjetSessionWebServ2.GlobalRessources.KiosqueRes.TrierParTypeDeKiosque" class="btn btn-default" />
         </p>
 
     }
@@ -40,16 +40,16 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Nom)
+            @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.KiosqueRes.Name)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Description)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TypeKiosque)
+            @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.KiosqueRes.TypeKiosque)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Actif)
+            @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.KiosqueRes.Actif)
         </th>
         <th></th>
     </tr>
@@ -80,9 +80,9 @@
             @Html.DisplayFor(modelItem => item.Actif)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink(@ProjetSessionWebServ2.GlobalRessources.KiosqueRes.Edit, "Edit", new { id=item.Id }) |
             @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink(@ProjetSessionWebServ2.GlobalRessources.KiosqueRes.Delete, "Delete", new { id=item.Id })
         </td>
     </tr>
 }

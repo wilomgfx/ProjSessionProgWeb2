@@ -18,7 +18,7 @@
             Taille 
         </th>
         <th>
-            largeur
+            Largeur
         </th>
         <th>
             Longueur
@@ -44,6 +44,7 @@
             @Html.DisplayFor(modelItem => item.Dimension.Longueur)
         </td>
         <td>
+            @Html.ActionLink("voir Section", "Index","Sections") |
             @Html.ActionLink("Modifier", "Edit", new { id=item.Id }) |
             @Html.ActionLink("voir Details", "Details", new { id=item.Id }) |
             @Html.ActionLink("Supprimer", "Delete", new { id=item.Id })

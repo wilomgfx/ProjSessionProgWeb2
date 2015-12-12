@@ -18,7 +18,27 @@
         <dd>
             @Html.DisplayFor(model => model.NoSalle)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TailleSalle)
+        </dt>
 
+        <dd>
+            @Html.DisplayFor(model => model.TailleSalle)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Dimension.Largeur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dimension.Largeur)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Dimension.Longueur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dimension.Longueur)
+        </dd>
     </dl>
 
     @using (Html.BeginForm()) {
