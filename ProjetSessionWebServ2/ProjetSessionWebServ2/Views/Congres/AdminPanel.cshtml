@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewBag.Title = "AdminPanel";
+}
+
+<h1>AdminPanel</h1>
+
+
+<h3>Rapport des ventes</h3>
+@Html.ActionLink("Rapport des ventes", "RapportDesVentes", "Congres", null, null)
+
+<h3>Create Congres</h3>
+@Html.ActionLink("Create Congres", "Create", "Congres", null, null)
+
+<h3>Index Type d'evenement</h3>
+
+@Html.ActionLink("Index Type Tournoi", "Index", "Tournois", null, null)<br>
+@Html.ActionLink("Index Type Conference", "Index", "Conferences", null, null)<br>
+@Html.ActionLink("Index Type Spectacle", "Index", "Spectacles", null, null)<br>
+@Html.ActionLink("Index Type Kiosque", "Index", "Kiosques", null, null)
+
+<h3>Create Type d'evenement</h3>
+
+@Html.ActionLink("Create Type Tournoi", "Create", "TypeTournois", null, null)<br>
+@Html.ActionLink("Create Type Conference", "Create", "TypeConferences", null, null)<br>
+@Html.ActionLink("Create Type Spectacle", "Create", "TypeSpectacles", null, null)<br>
+@Html.ActionLink("Create Type Kiosque", "Create", "TypeKiosques", null, null)
+
+<h3>Salle</h3>
+@Html.ActionLink("Index Salle", "Index", "Salles", null, null)<br>
+@Html.ActionLink("Create Salle", "Create", "Salles", null, null)
+
+<h3>Sections</h3>
+@Html.ActionLink("Index Sections", "Index", "Sections", null, null)<br>
+@Html.ActionLink("Create Sections", "Create", "Sections", null, null)
+
+<h3>Tournois</h3>
+@Html.ActionLink("Index Tournois", "Index", "Tournois", null, null)<br>
+@Html.ActionLink("Create Tournois", "Create", "Tournois", null, null)
+
+<h3>Conferences</h3>
+@Html.ActionLink("Index Conferences", "Index", "Conferences", null, null)<br>
+@Html.ActionLink("Create Conferences", "Create", "Conferences", null, null)
+
+<h3>Spectacles</h3>
+@Html.ActionLink("Index Spectacles", "Index", "Spectacles", null, null)<br>
+@Html.ActionLink("Create Spectacles", "Create", "Spectacles", null, null)
+
+<h3>Kiosques</h3>
+@Html.ActionLink("Index Kiosques", "Index", "Kiosques", null, null)<br>
+@Html.ActionLink("Create Kiosques", "Create", "Kiosques", null, null)
+
+<h3>Autres Evenement</h3>
+@Html.ActionLink("Index Evenement", "Index", "Evenement", null, null)<br>
+@Html.ActionLink("Create Evenement", "Create", "Evenement", null, null)

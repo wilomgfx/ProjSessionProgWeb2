@@ -1,10 +1,10 @@
 ﻿@model ProjetSessionWebServ2.Models.Kiosque
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = @ProjetSessionWebServ2.GlobalRessources.KiosqueRes.Edit;
 }
 
-<h2>Edit</h2>
+<h2>@ProjetSessionWebServ2.GlobalRessources.KiosqueRes.Edit</h2>
 
 
 @using (Html.BeginForm())
@@ -18,7 +18,7 @@
         @Html.HiddenFor(model => model.Id)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Nom, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label@ProjetSessionWebServ2.GlobalRessources.KiosqueRes.Name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Nom, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Nom, "", new { @class = "text-danger" })
@@ -34,7 +34,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.TypeKiosque, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label(@ProjetSessionWebServ2.GlobalRessources.KiosqueRes.TypeKiosque, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("TypeKiosqueId", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.TypeKiosque, "", new { @class = "text-danger" })
@@ -42,7 +42,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Actif, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label(@ProjetSessionWebServ2.GlobalRessources.KiosqueRes.Actif, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="checkbox">
                     <div style="display: none">@Html.EditorFor(model => model.Actif, new { @readonly = "readonly" })</div>
@@ -60,7 +60,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink(@ProjetSessionWebServ2.GlobalRessources.KiosqueRes.BacktoList, "Index")
 </div>
 
 @section Scripts {

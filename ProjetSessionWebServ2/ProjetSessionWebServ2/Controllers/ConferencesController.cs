@@ -44,7 +44,7 @@ namespace ProjetSessionWebServ2.Controllers
                 //Trie selon les parametre de recherche entre par l'utilisateur
                 List<Conference> colConference = unitOfWork.ConferenceRepository.ObtenirConferences().ToList();
                 List<Conference> colConfenreceApresrechecheType = colConference.Where(u => u.TypeConference.Nom.Contains(searchTypeConference)).ToList();
-                List<Conference> colConfenrenceApresRechercheNomConference = colConfenreceApresrechecheType.Where(u => u.Nom.Contains(searchNomConference)).ToList();
+                List<Conference> colConfenrenceApresRechercheNomConference = colConfenreceApresrechecheType.Where(u => u.Nom.ToLower().Contains(searchNomConference.ToLower())).ToList();
                 List<Conference> colConferenceApresRechercheConferencier = new List<Conference>();
 
 
@@ -90,7 +90,7 @@ namespace ProjetSessionWebServ2.Controllers
 
             return View(confenrence2);
         }
-        [Authorize(Roles = "conferencier")]
+        [Authorize(Roles = "conferencier,administrateur")]
         // GET: Conferences/Create
         public ActionResult Create()
         {
@@ -106,7 +106,7 @@ namespace ProjetSessionWebServ2.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeConferenceId")] Conference conference, int TypeConferenceIdViewBag, int Congres)
+        public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeConferenceId")] Conference conference, int TypeConferenceIdViewBag, int Congres, string DateConference, string HeureDebut, string HeureFin)
         {
 
             conference.TypeEvenement = Evenement.TypeEvent.TypeConference;
@@ -114,6 +114,24 @@ namespace ProjetSessionWebServ2.Controllers
             conference.TypeConferenceId = TypeConferenceIdViewBag;
             TypeConference typeConferenceRevenu = unitOfWork.TypeConferenceRepository.ObtenirTypeConferences().Where(u => u.Id.Equals(TypeConferenceIdViewBag)).FirstOrDefault();
             conference.TypeConference = typeConferenceRevenu;
+
+            DateTime dateConference;
+            int heureDebut;
+            int heureFin;
+            SelectList TypeConferenceId2 = new SelectList(unitOfWork.TypeConferenceRepository.ObtenirTypeConferences(), "Id", "Nom");
+            ViewBag.Congres = new SelectList(unitOfWork.CongresRepository.ObtenirCongres(), "Id", "Nom");
+            try
+            {
+                dateConference = DateTime.Parse(DateConference);
+                heureDebut = int.Parse(HeureDebut);
+                heureFin = int.Parse(HeureFin);
+            }
+            catch (Exception e)
+            {
+                TempData["message"] = "La date de conférence doit être une date valide sous le format AAAA-MM-JJ. L'heure de début et l'heure de fin doivent être des chiffres";
+                ViewBag.TypeConferenceIdViewBag = TypeConferenceId2;
+                return View(conference);
+            }
             if (ModelState.IsValid)
             {
                 conference.Actif = true;
@@ -131,12 +149,32 @@ namespace ProjetSessionWebServ2.Controllers
                 conference.Users.Add(utilisateur);
                 conference.Congres = congres;
                 unitOfWork.ConferenceRepository.InsertConference(conference);
+                
+                unitOfWork.Save();
+
+
+
+                PlageHoraire newPlageHoraire = new PlageHoraire();
+                DateTime dateEtHeureDebut = dateConference.AddHours(heureDebut);
+                DateTime dateEtHeureFin = dateConference.AddHours(heureFin);
+                newPlageHoraire.DateEtHeureDebut = dateEtHeureDebut;
+                newPlageHoraire.DateEtHeureFin = dateEtHeureFin;
+                newPlageHoraire.Evenement = conference;
+                newPlageHoraire.Congres = congres;
+                unitOfWork.PlageHoraireRepository.InsertPlageHoraire(newPlageHoraire);
+                unitOfWork.Save();
+
+               
+                Transaction nouvelleTransaction = new Transaction();
+                nouvelleTransaction.DateAchat = DateTime.Now;
+                nouvelleTransaction.Montant = 500;
+                nouvelleTransaction.TypeAchat = "Location pour une conference";
+                unitOfWork.TransactionRepository.InsertTransaction(nouvelleTransaction);
                 unitOfWork.Save();
                 //db.Evenements.Add(conference);
                 //db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            SelectList TypeConferenceId2 = new SelectList(unitOfWork.TypeConferenceRepository.ObtenirTypeConferences(), "Id", "Nom");
             ViewBag.TypeConferenceIdViewBag = TypeConferenceId2;
 
 
@@ -170,6 +208,7 @@ namespace ProjetSessionWebServ2.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "administrateur,conferencier")]
         public ActionResult Edit([Bind(Include = "Id,Nom,Description,TypeEvenement,TypeConferenceId, Actif")] Conference conference, int TypeConferenceIdViewBag)
         {
             TypeConference typeConferenceRevenu = unitOfWork.TypeConferenceRepository.ObtenirTypeConferences().Where(u => u.Id.Equals(TypeConferenceIdViewBag)).FirstOrDefault();
@@ -206,6 +245,7 @@ namespace ProjetSessionWebServ2.Controllers
         // POST: Conferences/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "administrateur")]
         public ActionResult DeleteConfirmed(int id)
         {
             Conference conference = unitOfWork.ConferenceRepository.ObtenirConferenceParID(id);

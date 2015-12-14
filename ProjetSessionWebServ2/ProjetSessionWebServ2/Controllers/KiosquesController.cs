@@ -90,7 +90,7 @@ namespace ProjetSessionWebServ2.Controllers
             return View(Kiosque);
         }
 
-        [Authorize(Roles = "kiosqueur")]
+        [CustomUserAttribute(Roles = "administrateur,kiosqueur", AccessLevel = "Create")]
         // GET: Kiosques/Create
         public ActionResult Create()
         {
@@ -105,12 +105,32 @@ namespace ProjetSessionWebServ2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeKiosqueId,Actif")] Kiosque Kiosque, int Congres)
+        public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeKiosqueId,Actif")] Kiosque Kiosque, FormCollection collection)
         {
             Kiosque.Actif = true;
 
+            DateTime dateKiosque;
+            int heureDebut;
+            int heureFin;
+            ViewBag.Congres = new SelectList(uow.CongresRepository.ObtenirCongres(), "Id", "Nom");
+            SelectList typesKiosques = new SelectList(uow.TypeKiosqueRepository.ObtenirTypeKiosques(), "Id", "Nom", Kiosque.TypeKiosqueId);
+            try
+            {
+                dateKiosque = DateTime.Parse(collection["DateKiosque"]);
+                heureDebut = int.Parse(collection["HeureDebut"]);
+                heureFin = int.Parse(collection["HeureFin"]);
+            }
+            catch (Exception e)
+            {
+                TempData["message"] = "La date de l'événement doit être une date valide sous le format AAAA-MM-JJ. L'heure de début et l'heure de fin doivent être des chiffres";
+                ViewBag.TypeKiosqueId = typesKiosques;
+                return View(Kiosque);
+            }
             if (ModelState.IsValid)
             {
+
+                int congresId = int.Parse(collection["Congres"]);
+                Congres congres = uow.CongresRepository.ObtenirCongres().Where(u => u.Id == congresId).FirstOrDefault();
 
                 UserManager<ApplicationUser> UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(uow.context));
                 ApplicationUser utilisateur = UserManager.FindById(User.Identity.GetUserId());
@@ -126,21 +146,39 @@ namespace ProjetSessionWebServ2.Controllers
                 Kiosque.TypeKiosque = uow.TypeKiosqueRepository.ObtenirTypeKiosqueParID(Kiosque.TypeKiosqueId);
                 Kiosque.TypeEvenement = Evenement.TypeEvent.TypeKiosque;
                 Kiosque.Actif = true;
-                Congres congres = uow.CongresRepository.ObtenirCongres().Where(u => u.Id.Equals(Congres)).FirstOrDefault();
                 Kiosque.Congres = congres;
 
                 uow.KiosqueRepository.InsertKiosque(Kiosque);
                 uow.Save();
+
+
+                //Creating the plage horaire
+                PlageHoraire newPlageHoraire = new PlageHoraire();
+                DateTime dateEtHeureDebut = dateKiosque.AddHours(heureDebut);
+                DateTime dateEtHeureFin = dateKiosque.AddHours(heureFin);
+                newPlageHoraire.DateEtHeureDebut = dateEtHeureDebut;
+                newPlageHoraire.DateEtHeureFin = dateEtHeureFin;
+                newPlageHoraire.Evenement = Kiosque;
+                newPlageHoraire.Congres = congres;
+                uow.PlageHoraireRepository.InsertPlageHoraire(newPlageHoraire);
+                uow.Save();
+
+                Transaction nouvelleTransaction = new Transaction();
+                nouvelleTransaction.DateAchat = DateTime.Now;
+                nouvelleTransaction.Montant = 100;
+                nouvelleTransaction.TypeAchat = "Location d'un kiosque";
+                uow.TransactionRepository.InsertTransaction(nouvelleTransaction);
+                uow.Save();
+
                 return RedirectToAction("Index");
             }
 
-            SelectList typesKiosques = new SelectList(uow.TypeKiosqueRepository.ObtenirTypeKiosques(), "Id", "Nom", Kiosque.TypeKiosqueId);
             ViewBag.TypeKiosqueId = typesKiosques;
 
             return View(Kiosque);
         }
 
-        [Authorize(Roles = "kiosqueur")]
+        [CustomUserAttribute(Roles = "administrateur,kiosqueur", AccessLevel = "Edit")]
         // GET: Kiosques/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -183,7 +221,7 @@ namespace ProjetSessionWebServ2.Controllers
             return View(Kiosque);
         }
 
-        [Authorize(Roles = "kiosqueur")]
+        [CustomUserAttribute(Roles = "administrateur,kiosqueur", AccessLevel = "Delete")]
         // GET: Kiosques/Delete/5
         public ActionResult Delete(int? id)
         {
