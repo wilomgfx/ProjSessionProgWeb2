@@ -245,7 +245,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>TournoiRes.resx</DependentUpon>
-	  </Compile>
+    </Compile>
     <Compile Include="GlobalRessources\KiosqueRes.en.Designer.cs">
       <DependentUpon>KiosqueRes.en.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -493,7 +493,7 @@
     <EmbeddedResource Include="GlobalRessources\TournoiRes.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>TournoiRes.Designer.cs</LastGenOutput>
-	  </EmbeddedResource>
+    </EmbeddedResource>
     <EmbeddedResource Include="GlobalRessources\KiosqueRes.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>KiosqueRes.en.Designer.cs</LastGenOutput>
