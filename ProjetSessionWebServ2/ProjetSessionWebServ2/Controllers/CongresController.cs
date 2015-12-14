@@ -37,7 +37,12 @@ namespace ProjetSessionWebServ2.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Congres congres = unitOfWork.CongresRepository.ObtenirCongresParID(id);
-            
+
+            ViewBag.searchTypeConference = new SelectList(unitOfWork.TypeConferenceRepository.ObtenirTypeConferences(), "Nom", "Nom", string.Empty);
+            ViewBag.searchTypeKiosque = new SelectList(unitOfWork.TypeKiosqueRepository.ObtenirTypeKiosques(), "Nom", "Nom", string.Empty);
+            ViewBag.TypeSpectacles = new SelectList(unitOfWork.TypeSpectacleRepository.ObtenirTypeSpectacles(), "Nom", "Nom", string.Empty);
+            ViewBag.searchTypeTournoi = new SelectList(unitOfWork.TypeTournoiRepository.ObtenirTypeTournois(), "Nom", "Nom", string.Empty);
+
             ViewBag.ListeConference = unitOfWork.ConferenceRepository.ObtenirConferences().Where(u => u.Congres.Id.Equals(id)).ToList();// && u.Actif.Equals(true)).ToList();
             ViewBag.ListeSpectacle = unitOfWork.SpectacleRepository.ObtenirSpectacles().Where(u => u.Congres.Id.Equals(id)).ToList();// && u.Actif.Equals(true)).ToList();
             ViewBag.ListeKiosque = unitOfWork.KiosqueRepository.ObtenirKiosques().Where(u => u.Congres.Id.Equals(id)).ToList();// && u.Actif.Equals(true)).ToList();
