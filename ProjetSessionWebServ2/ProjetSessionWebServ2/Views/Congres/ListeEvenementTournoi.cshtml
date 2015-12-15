@@ -90,6 +90,15 @@
             <th>
                 @Html.DisplayName(ProjetSessionWebServ2.GlobalRessources.TournoiRes.Actif)
             </th>
+            <th>
+                @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.ConferenceRes.Date)
+            </th>
+            <th>
+                @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.ConferenceRes.HeureDebut)
+            </th>
+            <th>
+                @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.ConferenceRes.HeureFin)
+            </th>
             <th></th>
         </tr>
 
@@ -107,6 +116,15 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Actif)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlageHoraires[0].DateEtHeureDebut.Value.Date.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlageHoraires[0].DateEtHeureDebut.Value.Hour)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlageHoraires[0].DateEtHeureFin.Value.Hour)
                 </td>
                 <td>
                     @Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.TournoiRes.Edit, "Edit", "Tournois",new { id = item.Id },null) |
