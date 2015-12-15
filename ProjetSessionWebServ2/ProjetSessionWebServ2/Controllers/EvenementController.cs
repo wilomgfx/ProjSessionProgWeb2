@@ -138,12 +138,14 @@ namespace ProjetSessionWebServ2.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nom,Description,Salle,Actif")] Evenement evenement, Salle salle)
+        [Authorize(Roles = "administrateur")]
+        public ActionResult Edit([Bind(Include = "Id,Nom,Description,TypeEvenement,Salle,Actif")] Evenement evenement, Salle salle)
         {
             if (ModelState.IsValid)
             {
                 //db.Entry(evenement).State = EntityState.Modified;
                 // db.SaveChanges();
+                evenement.TypeEvenement = Evenement.TypeEvent.TypeAutre;
                 evenement.Salle = salle;
                 unitOfWork.EvenementRepository.UpdateEvenement(evenement);
                 unitOfWork.Save();
