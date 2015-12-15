@@ -29,7 +29,7 @@
     <h1>Autres</h1>
 
     <p>
-        @Html.ActionLink("Ajouter un nouvel evenement", "Create")
+        @Html.ActionLink("Ajouter un nouvel evenement", "Create", "Evenement")
     </p>
     @{
         using (Html.BeginForm("Index", "Evenement", FormMethod.Get))
@@ -129,9 +129,9 @@
                     </td>
                     <td>
                     <td>
-                        @Html.ActionLink("Modifier", "Edit", new { id = item.Id }) |
-                        @Html.ActionLink("Voir Detail", "Details", new { id = item.Id }) |
-                        @Html.ActionLink("Supprimer", "Delete", new { id = item.Id })
+                        @Html.ActionLink("Modifier", "Edit","Evenement", new { id = item.Id },null) |
+                        @Html.ActionLink("Voir Detail", "Details", "Evenement", new { id = item.Id }, null) |
+                        @Html.ActionLink("Supprimer", "Delete", "Evenement", new { id = item.Id }, null)
                     </td>
                 </tr>
                                 }

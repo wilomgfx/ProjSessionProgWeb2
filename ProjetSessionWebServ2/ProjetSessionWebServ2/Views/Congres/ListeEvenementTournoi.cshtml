@@ -49,7 +49,7 @@
     <h1>Tournoi</h1>
 
     <p>
-        @Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.TournoiRes.CreateNew, "Create")
+        @Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.TournoiRes.CreateNew, "Create", "Tournois")
     </p>
     @{
         using (Html.BeginForm("Index", "Tournois", FormMethod.Get))
@@ -129,6 +129,7 @@
                 <td>
                     @Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.TournoiRes.Edit, "Edit", "Tournois",new { id = item.Id },null) |
                     @Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.TournoiRes.Details, "Details", "Tournois",new { id = item.Id },null) |
+                    @Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.TournoiRes.Delete, "Details", "Tournois", new { id = item.Id }, null)
                 </td>
             </tr>
         }
