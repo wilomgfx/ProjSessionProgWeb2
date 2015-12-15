@@ -1,5 +1,4 @@
 ﻿@model ProjetSessionWebServ2.Models.Section
-
 @{
     ViewBag.Title = "Create";
 }
@@ -16,22 +15,34 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
+            @Html.LabelFor(model => model.Salle.NoSalle, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Salle", new List<SelectListItem>
+                {
+                  new SelectListItem{ Text = "A-01", Value = "0" },
+                  new SelectListItem{ Text = "B-02", Value = "1" },
+                  new SelectListItem{ Text = "C-03", Value = "2" },
+                  new SelectListItem{ Text = "D-04", Value = "3" }
+                })
+            </div>
+        </div>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
             @Html.LabelFor(model => model.Nom, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Nom, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Nom, "", new { @class = "text-danger" })
             </div>
         </div>
+    
         <div class="form-group">
             @Html.LabelFor(model => model.TailleSection, htmlAttributes: new { @class = "control-label col-md-2" })
+
             <div class="col-md-10">
-                @Html.DropDownList("TailleSection", new List<SelectListItem>
-            {
-              new SelectListItem{ Text = "Petite", Value = "0" },
-              new SelectListItem{ Text = "Moyenne", Value = "1" },
-              new SelectListItem{ Text = "Grande", Value = "2" },
-              new SelectListItem{ Text = "Tres_Grande", Value = "3" }
-            })
+
+                @*@Html.EditorFor(model => model.TailleSalle, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.DropDownList("TailleSection", EnumHelper.GetSelectList(typeof(ProjetSessionWebServ2.Models.Taille)), "Selectionner la Taille", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TailleSection, "", new { @class = "text-danger" })
             </div>
         </div>
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
