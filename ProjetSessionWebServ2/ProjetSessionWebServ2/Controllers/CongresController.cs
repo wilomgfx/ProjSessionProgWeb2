@@ -25,7 +25,7 @@ namespace ProjetSessionWebServ2.Controllers
 
         public ActionResult HoraireCongres(int? id)
         {
-            List<PlageHoraire> plageHoraires = unitOfWork.PlageHoraireRepository.Get(c => c.Congres.Id == id).ToList();
+            List<PlageHoraire> plageHoraires = unitOfWork.PlageHoraireRepository.Get(c => c.Congres.Id == id,orderBy:p => p.OrderByDescending(d=>d.DateEtHeureDebut)).Where(e => e.Evenement.Actif == true).ToList();
             return View(plageHoraires);
         }
 
