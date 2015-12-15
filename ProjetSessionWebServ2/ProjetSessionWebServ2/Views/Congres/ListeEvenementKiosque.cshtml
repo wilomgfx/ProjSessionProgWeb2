@@ -78,7 +78,7 @@
 
     }
 
-    @Html.ActionLink("Créer", "Create", "Kiosques")
+    @Html.ActionLink(@ProjetSessionWebServ2.GlobalRessources.KiosqueRes.Create, "Create", "Kiosques")
 
 
     <table class="table">
@@ -97,6 +97,15 @@
             </th>
             <th>
                 @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.KiosqueRes.Actif)
+            </th>
+            <th>
+                @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.KiosqueRes.DateKiosque)
+            </th>
+            <th>
+                @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.KiosqueRes.HeureDebut)
+            </th>
+            <th>
+                @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.KiosqueRes.HeureFin)
             </th>
             <th></th>
         </tr>
@@ -129,6 +138,15 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Actif)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlageHoraires[0].DateEtHeureDebut.Value.Date.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlageHoraires[0].DateEtHeureDebut.Value.Hour)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlageHoraires[0].DateEtHeureFin.Value.Hour)
                 </td>
                 <td>
                     @Html.ActionLink(@ProjetSessionWebServ2.GlobalRessources.KiosqueRes.Edit, "Edit", "Kiosques",new { id = item.Id },null) |

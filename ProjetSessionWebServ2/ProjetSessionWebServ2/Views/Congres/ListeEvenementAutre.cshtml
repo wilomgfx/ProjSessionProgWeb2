@@ -29,7 +29,7 @@
     <h1>Autres</h1>
 
     <p>
-        @Html.ActionLink("Ajouter un nouvel evenement", "Create", "Evenement")
+        @Html.ActionLink("Créer", "Create", "Evenement")
     </p>
     @{
         using (Html.BeginForm("Index", "Evenement", FormMethod.Get))
@@ -51,6 +51,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.First().Salle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Actif)
             </th>
             <th>
                 @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.ConferenceRes.Date)
@@ -87,6 +90,9 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Salle.NoSalle)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Actif)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.PlageHoraires[0].DateEtHeureDebut.Value.Date)
@@ -127,6 +133,9 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Salle.NoSalle)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Actif)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.PlageHoraires[0].DateEtHeureDebut.Value.Date)

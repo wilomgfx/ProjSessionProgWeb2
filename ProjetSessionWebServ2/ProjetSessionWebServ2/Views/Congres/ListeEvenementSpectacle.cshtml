@@ -44,7 +44,7 @@
 <div id="avantRechercheSpec">
     <h1>Spectacle</h1>
 
-    @Html.ActionLink("Créer", "Create", "Spectacles")
+    @Html.ActionLink(@ProjetSessionWebServ2.GlobalRessources.SpectacleRes.Create, "Create", "Spectacles")
 
     @using (Html.BeginForm("Index", "Spectacles", FormMethod.Post))
     {
@@ -82,10 +82,13 @@
                 @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.SpectacleRes.TypeSpectacle)
             </th>
             <th>
+                @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.SpectacleRes.Musicien)
+            </th>
+            <th>
                 @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.SpectacleRes.Actif)
             </th>
             <th>
-                @Html.DisplayName("Date")
+                @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.SpectacleRes.DateSpectacle)
             </th>
             <th>
                 @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.SpectacleRes.HeureDebut)
@@ -107,6 +110,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.TypeSpectacle.Nom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Users.FirstOrDefault().UserName)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Actif)

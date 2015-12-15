@@ -90,6 +90,9 @@
                 @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.ConferenceRes.Conferencier)
             </th>
             <th>
+                @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.ConferenceRes.Actif)
+            </th>
+            <th>
                 @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.ConferenceRes.Date)
             </th>
             <th>
@@ -115,6 +118,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Users.FirstOrDefault().UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Actif)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.PlageHoraires[0].DateEtHeureDebut.Value.Date.Date)
