@@ -4,47 +4,130 @@
     ViewBag.Title = "Events du congres";
 }
 
-<h1>Spectacle</h1>
-
-@Html.ActionLink("Créer", "Create", "Spectacles")
-
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayName("Nom")
-        </th>
-        <th>
-            @Html.DisplayName("Description")
-        </th>
-        <th>
-            @Html.DisplayName("Type de Spectacle")
-        </th>
-        <th>
-            @Html.DisplayName("Actif")
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nom)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TypeSpectacle.Nom)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Actif)
-            </td>
-            <td>
-               
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) 
-            </td>
-        </tr>
+<script>
+    function trieSpecS() {
+        $.ajax({
+            type: "GET",
+            url: "@Url.Content("~/Spectacles/Index")",
+            data: {
+                "trieSpectacle": "yes"
+            },
+        success: function (response) {
+            $("#avantRechercheSpec").hide();
+            $('#resultSelonRechercheSpec').html(response);
+        }
+    });
     }
 
-</table>
+    function getSpecSelonX() {
+        $.ajax({
+            type: "POST",
+            url: "@Url.Content("~/Spectacles/Index")",
+
+            data: {
+                "TypeSpectacles": $('#searchTypeKiosque').find('option:selected').text(),
+                "searchNomConference": document.getElementById("searchNomKiosque").value,
+                "searchConferencier": document.getElementById("searchKiosqueur").value,
+            },
+            success: function (response) {
+                $("#avantRechercheSpec").hide();
+                $('#resultSelonRechercheSpec').html(response);
+            }
+        });
+    }
+
+</script>
+
+<div id="resultSelonRechercheSpec">
+</div>
+
+<div id="avantRechercheSpec">
+    <h1>Spectacle</h1>
+
+    @Html.ActionLink("Créer", "Create", "Spectacles")
+
+    @using (Html.BeginForm("Index", "Spectacles", FormMethod.Post))
+    {
+        <p>
+            @ProjetSessionWebServ2.GlobalRessources.SpectacleRes.ParTypeDeSpectacle: @Html.DropDownList("TypeSpectacles", (SelectList)ViewBag.TypeSpectacles, "") <br />
+            @ProjetSessionWebServ2.GlobalRessources.SpectacleRes.ParNom: @Html.TextBox("searchNomConference", ViewBag.CurrentFilter as string) <br>
+            @ProjetSessionWebServ2.GlobalRessources.SpectacleRes.ParMusicien: @Html.TextBox("searchConferencier", ViewBag.CurrentFilter as string) <br>
+            <input type="button" onclick="getKiosqueSelonX()" value="@ProjetSessionWebServ2.GlobalRessources.SpectacleRes.Rechercher" class="btn btn-default" />
+        </p>
+    }
+    @{
+        using (Html.BeginForm("Index", "Spectacles", FormMethod.Get))
+        {
+            <p>
+
+                @Html.Hidden("trieSpectacle", ViewBag.CurrentFilter as string) <br>
+                <input type="button" onclick="trieSpecS()" value="Trier par type de spectacle" class="btn btn-default" />
+            </p>
+
+        }
+
+    }
+    <p>
+        @Html.ActionLink(@ProjetSessionWebServ2.GlobalRessources.SpectacleRes.Create, "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.SpectacleRes.Nom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Description)
+            </th>
+            <th>
+                @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.SpectacleRes.TypeSpectacle)
+            </th>
+            <th>
+                @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.SpectacleRes.Actif)
+            </th>
+            <th>
+                @Html.DisplayName("Date")
+            </th>
+            <th>
+                @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.SpectacleRes.HeureDebut)
+            </th>
+            <th>
+                @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.SpectacleRes.HeureFin)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TypeSpectacle.Nom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Actif)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlageHoraires[0].DateEtHeureDebut.Value.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlageHoraires[0].DateEtHeureDebut.Value.Hour)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlageHoraires[0].DateEtHeureFin.Value.Hour)
+                </td>
+                <td>
+                    @Html.ActionLink(@ProjetSessionWebServ2.GlobalRessources.SpectacleRes.Edit, "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink(@ProjetSessionWebServ2.GlobalRessources.SpectacleRes.Delete, "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+</div>

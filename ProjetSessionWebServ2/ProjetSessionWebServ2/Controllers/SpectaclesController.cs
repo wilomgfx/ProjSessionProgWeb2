@@ -19,7 +19,7 @@ namespace ProjetSessionWebServ2.Controllers
         private UnitOfWork unitOfWork = new UnitOfWork();
 
         // GET: Spectacles
-        public ActionResult Index(FormCollection collection)
+        public ActionResult Index(FormCollection collection,string trieSpectacle)
         {
             List<Spectacle> listeSpectacles = unitOfWork.SpectacleRepository.ObtenirSpectacles().ToList();
             ViewBag.TypeSpectacles = new SelectList(unitOfWork.TypeSpectacleRepository.ObtenirTypeSpectacles(), "Nom", "Nom", string.Empty);
@@ -34,6 +34,14 @@ namespace ProjetSessionWebServ2.Controllers
                 List<Spectacle> colSpectacleApresRechercheNomSpectacle = colSpectacleApresrechecheType.Where(s => s.Nom.Contains(nom)).ToList(); //A changer une fois les rôles implenté List<Spectacle> colConferenceApresRechercheConferencier = colSpectacleApresRechercheNomConference;
 
                 return View(colSpectacleApresRechercheNomSpectacle);
+            }
+            if (trieSpectacle != null)
+            {
+                listeSpectacles = unitOfWork.SpectacleRepository.ObtenirSpectacles().OrderBy(x => x.TypeSpectacle.Nom).ToList();
+            }
+            else
+            {
+                trieSpectacle = "";
             }
             return View(listeSpectacles);
         }
