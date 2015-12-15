@@ -18,7 +18,7 @@ namespace ProjetSessionWebServ2.DAL
         }
         public IEnumerable<Tournoi> ObtenirTournois()
         {
-            return Get(null, null, "TypeTournoi,Congres");
+            return Get(null, null, "TypeTournoi,Congres,PlageHoraires");
         }
 
         public IEnumerable<Tournoi> ObtenirTournoiParType(Evenement.TypeEvent type)

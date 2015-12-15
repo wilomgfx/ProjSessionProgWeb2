@@ -16,7 +16,7 @@ namespace ProjetSessionWebServ2.DAL
         }
         public IEnumerable<Kiosque> ObtenirKiosques()
         {
-            return Get(null, null, "TypeKiosque,Users,Congres");
+            return Get(null, null, "TypeKiosque,Users,Congres,PlageHoraires");
         }
 
         public IEnumerable<Kiosque> ObtenirKiosqueParType(Evenement.TypeEvent type)

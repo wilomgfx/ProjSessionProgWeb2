@@ -4,52 +4,105 @@
     ViewBag.Title = "Events du congres";
 }
 
-<h1>Tournoi</h1>
 
-@Html.ActionLink("Créer", "Create", "Tournois")
-
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayName("Nom")
-        </th>
-        <th>
-            @Html.DisplayName("Description")
-        </th>
-        <th>
-            @Html.DisplayName("Type de Tournois")
-        </th>
-        <th>
-            @Html.DisplayName("NoSalle")
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        if (item.Actif.Equals(false))
-        {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nom)  <strong>(Cancelled)</strong>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TypeEvenement)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Salle.NoSalle)
-            </td>
-            <td>
-                @Html.ActionLink("Modifier", "Edit", "Tournois", new { id = item.Id }, null) |
-                @Html.ActionLink("Voir Detail", "Details", "Tournois", new { id = item.Id }, null) |
-                @Html.ActionLink("Supprimer", "Delete", "Tournois", new { id = item.Id }, null)
-            </td>
-        </tr>
+<script>
+    function trieTournois() {
+        $.ajax({
+            type: "GET",
+            url: "@Url.Content("~/Tournois/Index")",
+            data: {
+                "trieTournoi": "yes"
+            },
+        success: function (response) {
+            $("#avantRecherchetou").hide();
+            $('#resultSelonRecherchetou').html(response);
         }
-        else
+    });
+    }
+
+    function getTournoiSelonX() {
+        $.ajax({
+            type: "GET",
+            url: "@Url.Content("~/Tournois/Index")",
+
+            data: {
+                "searchTypeTournoi": $('#searchTypeTournoi').find('option:selected').text(),
+                "searchNomTournoi": document.getElementById("searchNomTournoi").value,
+            },
+            success: function (response) {
+                $("#avantRecherchetou").hide();
+                $('#resultSelonRecherchetou').html(response);
+            }
+        });
+    }
+
+</script>
+
+
+
+
+<div id="resultSelonRecherchetou">
+</div>
+
+<div id="avantRecherchetou">
+
+    <h1>Tournoi</h1>
+
+    <p>
+        @Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.TournoiRes.CreateNew, "Create")
+    </p>
+    @{
+        using (Html.BeginForm("Index", "Tournois", FormMethod.Get))
+        {
+            <p>
+                @ProjetSessionWebServ2.GlobalRessources.TournoiRes.ParTypeTournoi: @Html.DropDownList("searchTypeTournoi", (SelectList)ViewBag.searchTypeTournoi, "") <br>
+                @ProjetSessionWebServ2.GlobalRessources.TournoiRes.ParNom: @Html.TextBox("searchNomTournoi", ViewBag.CurrentFilter as string) <br>
+                <input type="button" onclick="getTournoiSelonX()" value="@ProjetSessionWebServ2.GlobalRessources.TournoiRes.Rechercher" class="btn btn-default" />
+            </p>
+        }
+
+    }
+
+    @{
+        using (Html.BeginForm("Index", "Tournois", FormMethod.Get))
+        {
+            <p>
+
+                @Html.Hidden("trieTournoi", ViewBag.CurrentFilter as string) <br>
+                <input type="button" onclick="trieTournois()" value="@ProjetSessionWebServ2.GlobalRessources.TournoiRes.TrierParTypeDeTournoi" class="btn btn-default" />
+            </p>
+
+        }
+
+    }
+    <br />
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayName(ProjetSessionWebServ2.GlobalRessources.TournoiRes.NomTournoi)
+            </th>
+            <th>
+                @Html.DisplayName("Description")
+            </th>
+            <th>
+                @Html.DisplayName(ProjetSessionWebServ2.GlobalRessources.TournoiRes.TypeTournoi)
+            </th>
+            <th>
+                @Html.DisplayName(ProjetSessionWebServ2.GlobalRessources.TournoiRes.Actif)
+            </th>
+            <th>
+                @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.ConferenceRes.Date)
+            </th>
+            <th>
+                @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.ConferenceRes.HeureDebut)
+            </th>
+            <th>
+                @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.ConferenceRes.HeureFin)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
         {
             <tr>
                 <td>
@@ -59,18 +112,26 @@
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.TypeEvenement)
+                    @Html.DisplayFor(modelItem => item.TypeTournoi.Nom)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Salle.NoSalle)
+                    @Html.DisplayFor(modelItem => item.Actif)
                 </td>
                 <td>
-                    @Html.ActionLink("Modifier", "Edit", "Tournois", new { id = item.Id },null) |
-                    @Html.ActionLink("Voir Detail", "Details", "Tournois", new { id = item.Id },null) |
-                    @Html.ActionLink("Supprimer", "Delete","Tournois", new { id = item.Id },null)
+                    @Html.DisplayFor(modelItem => item.PlageHoraires[0].DateEtHeureDebut.Value.Date.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlageHoraires[0].DateEtHeureDebut.Value.Hour)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlageHoraires[0].DateEtHeureFin.Value.Hour)
+                </td>
+                <td>
+                    @Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.TournoiRes.Edit, "Edit", "Tournois",new { id = item.Id },null) |
+                    @Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.TournoiRes.Details, "Details", "Tournois",new { id = item.Id },null) |
                 </td>
             </tr>
         }
-    }
 
-</table>
+    </table>
+</div>

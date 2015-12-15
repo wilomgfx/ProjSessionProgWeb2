@@ -144,6 +144,9 @@
   <data name="HeureFin" xml:space="preserve">
     <value>Heure de Fin</value>
   </data>
+  <data name="Musicien" xml:space="preserve">
+    <value>Musicien</value>
+  </data>
   <data name="Nom" xml:space="preserve">
     <value>Nom</value>
   </data>
