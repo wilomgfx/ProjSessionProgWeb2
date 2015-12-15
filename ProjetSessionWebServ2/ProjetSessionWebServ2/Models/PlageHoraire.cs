@@ -12,10 +12,10 @@ namespace ProjetSessionWebServ2.Models
         public int Id { get; set; }
 
         //fix pour le fail de conversion de datetime2 vers datetime de entity...
-        [DataType(DataType.DateTime)]
+        [DataType(DataType.Date)]
         public DateTime? DateEtHeureDebut { get; set; }
 
-        [DataType(DataType.DateTime)]
+        [DataType(DataType.Date)]
         public DateTime? DateEtHeureFin { get; set; }
 
         public virtual Evenement Evenement { get; set; }

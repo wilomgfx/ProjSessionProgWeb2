@@ -14,13 +14,30 @@ namespace ProjetSessionWebServ2.Controllers
     public class EvenementController : Controller
     {
         //private ApplicationDbContext db = new ApplicationDbContext();
-        private UnitOfWork unitofwork = new UnitOfWork();
+        private UnitOfWork unitOfWork = new UnitOfWork();
 
         // GET: /Evenement/
-        public ActionResult Index()
+        public ActionResult Index(string currentFilter, string searchNomEvenementAutre, string trieEvenementAutre)
         {
+            ViewBag.searchsearchTypeEvenementAutre = new SelectList(unitOfWork.EvenementRepository.ObtenirEvenementParType(Evenement.TypeEvent.TypeAutre).ToList(), "Nom", "Nom", string.Empty);
+            List<Evenement> lstEvenementAutreApresTrie = new List<Evenement>();
+            if (trieEvenementAutre == null)// On trie selon les parametre
+            {
+                if (searchNomEvenementAutre == null)
+                {
+                    searchNomEvenementAutre = "";
+                }
+
+                //Trie selon les parametre de recherche entre par l'utilisateur
+                List<Evenement> colEvenementAutre = unitOfWork.EvenementRepository.ObtenirEvenementParType(Evenement.TypeEvent.TypeAutre).ToList();
+                List<Evenement> colEvenementAutreApresRechercheNomAutre = colEvenementAutre.Where(u => u.Nom.ToLower().Contains(searchNomEvenementAutre.ToLower())).ToList();
+
+                lstEvenementAutreApresTrie = colEvenementAutreApresRechercheNomAutre;
+            }
+
+            return View(lstEvenementAutreApresTrie);
             //return View(db.Evenements.ToList());
-            return View(unitofwork.EvenementRepository.ObtenirEvenementParType(Evenement.TypeEvent.TypeAutre).ToList());
+            //return View(unitofwork.EvenementRepository.ObtenirEvenementParType(Evenement.TypeEvent.TypeAutre).ToList());
         }
 
         // GET: /Evenement/Details/5
@@ -32,7 +49,7 @@ namespace ProjetSessionWebServ2.Controllers
             }
             //Evenement evenement = db.Evenements.Find(id);
             //Evenement evenement = unitofwork.EvenementRepository.ObtenirEvenementParID(id);
-            Evenement evenement = unitofwork.EvenementRepository.ObtenirEvenements().Where(e => e.Id.Equals(id)).FirstOrDefault();
+            Evenement evenement = unitOfWork.EvenementRepository.ObtenirEvenements().Where(e => e.Id.Equals(id)).FirstOrDefault();
             if (evenement == null)
             {
                 return HttpNotFound();
@@ -43,7 +60,7 @@ namespace ProjetSessionWebServ2.Controllers
         // GET: /Evenement/Create
         public ActionResult Create()
         {
-            ViewBag.Congres = new SelectList(unitofwork.CongresRepository.ObtenirCongres(), "Id", "Nom");
+            ViewBag.Congres = new SelectList(unitOfWork.CongresRepository.ObtenirCongres(), "Id", "Nom");
             return View();
         }
 
@@ -57,7 +74,7 @@ namespace ProjetSessionWebServ2.Controllers
             DateTime dateEvenement;
             int heureDebut;
             int heureFin;
-            ViewBag.Congres = new SelectList(unitofwork.CongresRepository.ObtenirCongres(), "Id", "Nom");
+            ViewBag.Congres = new SelectList(unitOfWork.CongresRepository.ObtenirCongres(), "Id", "Nom");
             try
             {
                 dateEvenement = DateTime.Parse(DateConference);
@@ -76,11 +93,11 @@ namespace ProjetSessionWebServ2.Controllers
                 evenement.TypeEvenement = Evenement.TypeEvent.TypeAutre;
                 evenement.Actif = true;
                 evenement.Salle = salle;
-                Congres congres = unitofwork.CongresRepository.ObtenirCongres().Where(u => u.Id.Equals(Congres)).FirstOrDefault();
+                Congres congres = unitOfWork.CongresRepository.ObtenirCongres().Where(u => u.Id.Equals(Congres)).FirstOrDefault();
                 evenement.Congres = congres;
 
-                unitofwork.EvenementRepository.Insert(evenement);
-                unitofwork.Save();
+                unitOfWork.EvenementRepository.Insert(evenement);
+                unitOfWork.Save();
 
 
                 PlageHoraire newPlageHoraire = new PlageHoraire();
@@ -90,8 +107,8 @@ namespace ProjetSessionWebServ2.Controllers
                 newPlageHoraire.DateEtHeureFin = dateEtHeureFin;
                 newPlageHoraire.Evenement = evenement;
                 newPlageHoraire.Congres = congres;
-                unitofwork.PlageHoraireRepository.InsertPlageHoraire(newPlageHoraire);
-                unitofwork.Save();
+                unitOfWork.PlageHoraireRepository.InsertPlageHoraire(newPlageHoraire);
+                unitOfWork.Save();
 
                 return RedirectToAction("Index");
             }
@@ -108,7 +125,7 @@ namespace ProjetSessionWebServ2.Controllers
             }
             //Evenement evenement = db.Evenements.Find(id);
             //Evenement evenement = unitofwork.EvenementRepository.ObtenirEvenementParID(id);
-            Evenement evenement = unitofwork.EvenementRepository.ObtenirEvenements().Where(e => e.Id.Equals(id)).FirstOrDefault();
+            Evenement evenement = unitOfWork.EvenementRepository.ObtenirEvenements().Where(e => e.Id.Equals(id)).FirstOrDefault();
             if (evenement == null)
             {
                 return HttpNotFound();
@@ -128,8 +145,8 @@ namespace ProjetSessionWebServ2.Controllers
                 //db.Entry(evenement).State = EntityState.Modified;
                 // db.SaveChanges();
                 evenement.Salle = salle;
-                unitofwork.EvenementRepository.UpdateEvenement(evenement);
-                unitofwork.Save();
+                unitOfWork.EvenementRepository.UpdateEvenement(evenement);
+                unitOfWork.Save();
                 return RedirectToAction("Index");
             }
             return View(evenement);
@@ -143,7 +160,7 @@ namespace ProjetSessionWebServ2.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             //Evenement evenement = db.Evenements.Find(id);
-            Evenement evenement = unitofwork.EvenementRepository.ObtenirEvenementParID(id);
+            Evenement evenement = unitOfWork.EvenementRepository.ObtenirEvenementParID(id);
             if (evenement == null)
             {
                 return HttpNotFound();
@@ -158,13 +175,13 @@ namespace ProjetSessionWebServ2.Controllers
         {
             //Evenement evenement = db.Evenements.Find(id);
             //Evenement evenement = unitofwork.EvenementRepository.ObtenirEvenementParID(id);
-            Evenement evenement = unitofwork.EvenementRepository.ObtenirEvenements().Where(e => e.Id.Equals(id)).FirstOrDefault();
+            Evenement evenement = unitOfWork.EvenementRepository.ObtenirEvenements().Where(e => e.Id.Equals(id)).FirstOrDefault();
             //db.Evenements.Remove(evenement);
             //db.SaveChanges();
             //unitofwork.EvenementRepository.DeleteEvenement(evenement);
             evenement.Actif = false;
-            unitofwork.EvenementRepository.UpdateEvenement(evenement);
-            unitofwork.Save();
+            unitOfWork.EvenementRepository.UpdateEvenement(evenement);
+            unitOfWork.Save();
             return RedirectToAction("Index");
         }
 
@@ -173,7 +190,7 @@ namespace ProjetSessionWebServ2.Controllers
             if (disposing)
             {
                 //db.Dispose();
-                unitofwork.Dispose();
+                unitOfWork.Dispose();
             }
             base.Dispose(disposing);
         }
