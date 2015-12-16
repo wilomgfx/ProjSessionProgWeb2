@@ -33,7 +33,7 @@ namespace ProjetSessionWebServ2.DAL
 
         public IEnumerable<Tournoi> ObtenirTournoiParNom(string nom)
         {
-            IEnumerable<Tournoi> lstFiltered = Get(t => t.Nom.Contains(nom), null, "TypeTournoi").ToList();
+            IEnumerable<Tournoi> lstFiltered = Get(t => t.Nom.ToLower().Contains(nom.ToLower()), null, "TypeTournoi").ToList();
             // TODO: Proper Handling of when there are no results. Show an error message, maybe?
             //return lstFiltered.Count() == 0 ? ObtenirTournois() : lstFiltered;
             return lstFiltered.Count() == 0 ? lstFiltered : lstFiltered;
