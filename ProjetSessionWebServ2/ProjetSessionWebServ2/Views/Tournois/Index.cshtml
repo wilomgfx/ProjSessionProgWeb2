@@ -39,11 +39,15 @@
         <th>
             @Html.DisplayName(ProjetSessionWebServ2.GlobalRessources.TournoiRes.NomTournoi)
         </th>
+
         <th>
             @Html.DisplayNameFor(model => model.Description)
         </th>
         <th>
             @Html.DisplayName(ProjetSessionWebServ2.GlobalRessources.TournoiRes.TypeTournoi)
+        </th>
+        <th>
+           No Salle
         </th>
         <th>
             @Html.DisplayName(ProjetSessionWebServ2.GlobalRessources.TournoiRes.Actif)
@@ -61,6 +65,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.TypeTournoi.Nom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Salle.NoSalle)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Actif)

@@ -77,8 +77,11 @@ namespace ProjetSessionWebServ2.Controllers
         public ActionResult Create()
         {
             ViewBag.Congres = new SelectList(unitOfWork.CongresRepository.ObtenirCongres(), "Id", "Nom");
+            ViewBag.lstSalle = new SelectList(unitOfWork.SalleRepository.ObtenirSalles(), "Id", "NoSalle");
             SelectList TypeTournoiId = new SelectList(unitOfWork.TypeTournoiRepository.ObtenirTypeTournois(), "Id", "Nom");
             ViewBag.TypeTournoiId = TypeTournoiId;
+            SelectList lstSalle = new SelectList(unitOfWork.SalleRepository.ObtenirSalles(), "Id", "NoSalle");
+            ViewBag.lstSalle = lstSalle;
             return View();
         }
 
@@ -90,7 +93,7 @@ namespace ProjetSessionWebServ2.Controllers
 
        // public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeEvenement,TypeTournoiId,Actif")] TournoiVM tournoiVM, int Congres)
 
-        public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeEvenement,TypeTournoiId,Actif")] Tournoi tournoi,FormCollection collection)
+        public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeEvenement,TypeTournoiId,Actif,lstSalle")] Tournoi tournoi,FormCollection collection,int? lstSalle)
         {
             DateTime dateTournoi;
             int heureDebut;
@@ -118,6 +121,7 @@ namespace ProjetSessionWebServ2.Controllers
                 tournoi.TypeEvenement = Evenement.TypeEvent.TypeTournoi;
                 tournoi.Actif = true;
 
+                tournoi.Salle = unitOfWork.SalleRepository.ObtenirSalleParID(lstSalle);
                 tournoi.Equipes = new List<Equipe>();
                 tournoi.Avancements = new List<EquipeAvancement>();
                 tournoi.Parties = new List<Partie>();
