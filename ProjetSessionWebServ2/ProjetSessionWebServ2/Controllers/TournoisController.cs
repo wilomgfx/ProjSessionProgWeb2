@@ -99,6 +99,7 @@ namespace ProjetSessionWebServ2.Controllers
             int heureDebut;
             int heureFin;
             ViewBag.Congres = new SelectList(unitOfWork.CongresRepository.ObtenirCongres(), "Id", "Nom");
+            SelectList listSalle = new SelectList(unitOfWork.SalleRepository.ObtenirSalles(), "Id", "NoSalle");
             SelectList TypeTournoiId = new SelectList(unitOfWork.TypeTournoiRepository.ObtenirTypeTournois(), "Id", "Nom", tournoi.TypeTournoiId);
             try
             {
@@ -110,6 +111,7 @@ namespace ProjetSessionWebServ2.Controllers
             {
                 TempData["message"] = "La date de l'événement doit être une date valide sous le format AAAA-MM-JJ. L'heure de début et l'heure de fin doivent être des chiffres";
                 ViewBag.TypeTournoiId = TypeTournoiId;
+                ViewBag.lstSalle = listSalle;
                 return View(tournoi);
             }
             if (ModelState.IsValid)
@@ -145,6 +147,7 @@ namespace ProjetSessionWebServ2.Controllers
             }
 
             ViewBag.TypeTournoiId = TypeTournoiId;
+            ViewBag.lstSalle = lstSalle;
 
             return View(tournoi);
         }
@@ -166,6 +169,8 @@ namespace ProjetSessionWebServ2.Controllers
 
             SelectList TypeTournoiId = new SelectList(unitOfWork.TypeTournoiRepository.ObtenirTypeTournois(), "Id", "Nom", tournoi.TypeTournoiId);
             ViewBag.TypeTournoiId = TypeTournoiId;
+            SelectList SalleCongres = new SelectList(unitOfWork.SalleRepository.ObtenirSalles(), "Id", "NoSalle");
+            ViewBag.lstSalle = SalleCongres;
 
             return View(tournoi);
         }
@@ -188,6 +193,8 @@ namespace ProjetSessionWebServ2.Controllers
 
             SelectList TypeTournoiId = new SelectList(unitOfWork.TypeTournoiRepository.ObtenirTypeTournois(), "Id", "Nom", tournoi.TypeTournoiId);
             ViewBag.TypeTournoiId = TypeTournoiId;
+            SelectList SalleCongres = new SelectList(unitOfWork.SalleRepository.ObtenirSalles(), "Id", "NoSalle");
+            ViewBag.lstSalle = SalleCongres;
 
             return View(tournoi);
         }

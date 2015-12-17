@@ -76,6 +76,9 @@
                 @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.SpectacleRes.Nom)
             </th>
             <th>
+                @Html.DisplayName("NoSalle")
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.First().Description)
             </th>
             <th>
@@ -104,6 +107,9 @@
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Nom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Salle.NoSalle)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Description)

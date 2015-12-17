@@ -199,8 +199,8 @@ namespace ProjetSessionWebServ2.Controllers
             Conference conference = unitOfWork.ConferenceRepository.ObtenirConferenceParID(id);
 
             SelectList TypeConferenceId = new SelectList(unitOfWork.TypeConferenceRepository.ObtenirTypeConferences(), "Id", "Nom", conference.TypeConference.Id);
-            SelectList lstSalle = new SelectList(unitOfWork.SalleRepository.ObtenirSalles(), "Id", "Nom");
             ViewBag.TypeConferenceIdViewBag = TypeConferenceId;
+            SelectList lstSalle = new SelectList(unitOfWork.SalleRepository.ObtenirSalles(), "Id", "NoSalle");
             ViewBag.lstSalle = lstSalle;
             if (conference == null)
             {

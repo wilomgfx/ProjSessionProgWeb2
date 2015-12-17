@@ -62,6 +62,8 @@ namespace ProjetSessionWebServ2.Controllers
         public ActionResult Create()
         {
             ViewBag.Congres = new SelectList(unitOfWork.CongresRepository.ObtenirCongres(), "Id", "Nom");
+            SelectList SalleCongres = new SelectList(unitOfWork.SalleRepository.ObtenirSalles(), "Id", "NoSalle");
+            ViewBag.lstSalle = SalleCongres;
             return View();
         }
 
@@ -70,8 +72,9 @@ namespace ProjetSessionWebServ2.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost] [CustomUserAttribute(Roles = "administrateur", AccessLevel = "Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nom,Description,Salle,Actif")] Evenement evenement, Salle salle, int Congres, string DateConference, string HeureDebut, string HeureFin)
+         public ActionResult Create([Bind(Include = "Id,Nom,Description,Actif,lstSalle")] Evenement evenement, int Congres, string DateConference, string HeureDebut, string HeureFin, int? lstSalle)
         {
+            evenement.Salle = unitOfWork.SalleRepository.ObtenirSalleParID(lstSalle);
             DateTime dateEvenement;
             int heureDebut;
             int heureFin;
@@ -93,7 +96,6 @@ namespace ProjetSessionWebServ2.Controllers
                 //db.SaveChanges();
                 evenement.TypeEvenement = Evenement.TypeEvent.TypeAutre;
                 evenement.Actif = true;
-                evenement.Salle = salle;
                 Congres congres = unitOfWork.CongresRepository.ObtenirCongres().Where(u => u.Id.Equals(Congres)).FirstOrDefault();
                 evenement.Congres = congres;
 
@@ -113,7 +115,9 @@ namespace ProjetSessionWebServ2.Controllers
 
                 return RedirectToAction("Index");
             }
-
+            ViewBag.Congres = new SelectList(unitOfWork.CongresRepository.ObtenirCongres(), "Id", "Nom");
+            SelectList SalleCongres = new SelectList(unitOfWork.SalleRepository.ObtenirSalles(), "Id", "NoSalle");
+            ViewBag.lstSalle = SalleCongres;
             return View(evenement);
         }
         [CustomUserAttribute(Roles = "administrateur", AccessLevel = "Edit")]
@@ -131,6 +135,9 @@ namespace ProjetSessionWebServ2.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.Congres = new SelectList(unitOfWork.CongresRepository.ObtenirCongres(), "Id", "Nom");
+            SelectList SalleCongres = new SelectList(unitOfWork.SalleRepository.ObtenirSalles(), "Id", "NoSalle");
+            ViewBag.lstSalle = SalleCongres;
             return View(evenement);
         }
 
@@ -140,18 +147,21 @@ namespace ProjetSessionWebServ2.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "administrateur")]
-        public ActionResult Edit([Bind(Include = "Id,Nom,Description,TypeEvenement,Salle,Actif")] Evenement evenement, Salle salle)
+        public ActionResult Edit([Bind(Include = "Id,Nom,Description,TypeEvenement,Actif,lstSalle")] Evenement evenement, int? lstSalle)
         {
+            evenement.Salle = unitOfWork.SalleRepository.ObtenirSalleParID(lstSalle);
             if (ModelState.IsValid)
             {
                 //db.Entry(evenement).State = EntityState.Modified;
                 // db.SaveChanges();
                 evenement.TypeEvenement = Evenement.TypeEvent.TypeAutre;
-                evenement.Salle = salle;
                 unitOfWork.EvenementRepository.UpdateEvenement(evenement);
                 unitOfWork.Save();
                 return RedirectToAction("Index");
             }
+            ViewBag.Congres = new SelectList(unitOfWork.CongresRepository.ObtenirCongres(), "Id", "Nom");
+            SelectList SalleCongres = new SelectList(unitOfWork.SalleRepository.ObtenirSalles(), "Id", "NoSalle");
+            ViewBag.lstSalle = SalleCongres;
             return View(evenement);
         }
         [CustomUserAttribute(Roles = "administrateur", AccessLevel = "Delete")]

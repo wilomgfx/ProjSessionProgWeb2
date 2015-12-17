@@ -85,6 +85,7 @@ namespace ProjetSessionWebServ2.Controllers
             int heureDebut;
             int heureFin;
             SelectList TypeSpectacleId = new SelectList(unitOfWork.TypeSpectacleRepository.ObtenirTypeSpectacles(), "Id", "Nom", spectacle.TypeSpectacleId);
+            SelectList SalleCongres = new SelectList(unitOfWork.SalleRepository.ObtenirSalles(), "Id", "NoSalle");
             ViewBag.Congres = new SelectList(unitOfWork.CongresRepository.ObtenirCongres(), "Id", "Nom");
             try
             {
@@ -96,6 +97,7 @@ namespace ProjetSessionWebServ2.Controllers
             {
                 TempData["message"] = "La date de spectacle doit être une date valide sous le format AAAA-MM-JJ. L'heure de début et l'heure de fin doivent être des chiffres";
                 ViewBag.TypeSpectacleId = TypeSpectacleId;
+                ViewBag.lstSalle = SalleCongres;
                 return View(spectacle);
             }
             if (ModelState.IsValid)
@@ -141,6 +143,7 @@ namespace ProjetSessionWebServ2.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.TypeSpectacleId = TypeSpectacleId;
+            ViewBag.lstSalle = SalleCongres;
             return View(spectacle);
         }
 
@@ -160,6 +163,8 @@ namespace ProjetSessionWebServ2.Controllers
             ViewBag.Congres = new SelectList(unitOfWork.CongresRepository.ObtenirCongres(), "Id", "Nom");
             SelectList TypeSpectacleId = new SelectList(unitOfWork.TypeSpectacleRepository.ObtenirTypeSpectacles(), "Id", "Nom", spectacle.TypeSpectacleId);
             ViewBag.TypeSpectacleId = TypeSpectacleId;
+            SelectList SalleCongres = new SelectList(unitOfWork.SalleRepository.ObtenirSalles(), "Id", "NoSalle");
+            ViewBag.lstSalle = SalleCongres;
             return View(spectacle);
         }
 

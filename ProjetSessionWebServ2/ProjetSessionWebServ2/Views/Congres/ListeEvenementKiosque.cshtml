@@ -87,6 +87,9 @@
                 @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.KiosqueRes.Name)
             </th>
             <th>
+                @Html.DisplayName("NoSalle")
+            </th>
+            <th>
                 @Html.DisplayName("Description")
             </th>
             <th>
@@ -115,6 +118,9 @@
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Nom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Salle.NoSalle)
                 </td>
                 <td>
                     @*@Html.DisplayFor(modelItem => item.Description)*@
