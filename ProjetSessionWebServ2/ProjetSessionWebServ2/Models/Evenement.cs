@@ -11,7 +11,6 @@ namespace ProjetSessionWebServ2.Models
         public int Id { get; set; }
         [Display(Name = "Name", ResourceType = typeof(GlobalRessources.EvenementRes))]
         public string Nom {get;set;}
-         [Display(Name = "EventType", ResourceType = typeof(GlobalRessources.EvenementRes))]
         public enum TypeEvent
         {
            TypeTournoi,
