@@ -1,55 +1,55 @@
 ﻿
 @{
-    ViewBag.Title = "AdminPanel";
+    ViewBag.Title = ProjetSessionWebServ2.GlobalRessources.AdminPanelRes.ViewName;
 }
 
-<h1>AdminPanel</h1>
+<h1>@ProjetSessionWebServ2.GlobalRessources.AdminPanelRes.ViewName</h1>
 
 
-<h3>Rapport des ventes</h3>
-@Html.ActionLink("Rapport des ventes", "RapportDesVentes", "Congres", null, null)
+<h3>@ProjetSessionWebServ2.GlobalRessources.AdminPanelRes.SalesReport</h3>
+@Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.AdminPanelRes.SalesReport, "RapportDesVentes", "Congres", null, null)
 
-<h3>Create Congres</h3>
-@Html.ActionLink("Create Congres", "Create", "Congres", null, null)
+<h3>@ProjetSessionWebServ2.GlobalRessources.AdminPanelRes.CreateCongres</h3>
+@Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.AdminPanelRes.CreateCongres, "Create", "Congres", null, null)
 
-<h3>Index Type d'evenement</h3>
+<h3>@ProjetSessionWebServ2.GlobalRessources.AdminPanelRes.IndexEventTypes</h3>
 
-@Html.ActionLink("Index Type Tournoi", "Index", "Tournois", null, null)<br>
-@Html.ActionLink("Index Type Conference", "Index", "Conferences", null, null)<br>
-@Html.ActionLink("Index Type Spectacle", "Index", "Spectacles", null, null)<br>
-@Html.ActionLink("Index Type Kiosque", "Index", "Kiosques", null, null)
+@Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.AdminPanelRes.IndexTypeTournaments, "Index", "TypeTournois", null, null)<br>
+@Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.AdminPanelRes.IndexTypeConferences, "Index", "TypeConferences", null, null)<br>
+@Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.AdminPanelRes.IndexTypeShows, "Index", "TypeSpectacles", null, null)<br>
+@Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.AdminPanelRes.IndexTypeKiosques, "Index", "TypeKiosques", null, null)
 
-<h3>Create Type d'evenement</h3>
+<h3>@ProjetSessionWebServ2.GlobalRessources.AdminPanelRes.CreateEventTypes</h3>
 
-@Html.ActionLink("Create Type Tournoi", "Create", "TypeTournois", null, null)<br>
-@Html.ActionLink("Create Type Conference", "Create", "TypeConferences", null, null)<br>
-@Html.ActionLink("Create Type Spectacle", "Create", "TypeSpectacles", null, null)<br>
-@Html.ActionLink("Create Type Kiosque", "Create", "TypeKiosques", null, null)
+@Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.AdminPanelRes.CreateTypeTournaments, "Create", "TypeTournois", null, null)<br>
+@Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.AdminPanelRes.CreateTypeConferences, "Create", "TypeConferences", null, null)<br>
+@Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.AdminPanelRes.CreateTypeShows, "Create", "TypeSpectacles", null, null)<br>
+@Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.AdminPanelRes.CreateTypeKiosques, "Create", "TypeKiosques", null, null)
 
-<h3>Salle</h3>
-@Html.ActionLink("Index Salle", "Index", "Salles", null, null)<br>
-@Html.ActionLink("Create Salle", "Create", "Salles", null, null)
+<h3>@ProjetSessionWebServ2.GlobalRessources.AdminPanelRes.Rooms</h3>
+@Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.AdminPanelRes.IndexRooms, "Index", "Salles", null, null)<br>
+@Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.AdminPanelRes.CreateRooms, "Create", "Salles", null, null)
 
-<h3>Sections</h3>
-@Html.ActionLink("Index Sections", "Index", "Sections", null, null)<br>
-@Html.ActionLink("Create Sections", "Create", "Sections", null, null)
+<h3>@ProjetSessionWebServ2.GlobalRessources.AdminPanelRes.Sections</h3>
+@Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.AdminPanelRes.IndexSections, "Index", "Sections", null, null)<br>
+@Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.AdminPanelRes.CreateSections, "Create", "Sections", null, null)
 
-<h3>Tournois</h3>
-@Html.ActionLink("Index Tournois", "Index", "Tournois", null, null)<br>
-@Html.ActionLink("Create Tournois", "Create", "Tournois", null, null)
+<h3>@ProjetSessionWebServ2.GlobalRessources.AdminPanelRes.Tournaments</h3>
+@Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.AdminPanelRes.IndexTournaments, "Index", "Tournois", null, null)<br>
+@Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.AdminPanelRes.CreateTournaments, "Create", "Tournois", null, null)
 
-<h3>Conferences</h3>
-@Html.ActionLink("Index Conferences", "Index", "Conferences", null, null)<br>
-@Html.ActionLink("Create Conferences", "Create", "Conferences", null, null)
+<h3>@ProjetSessionWebServ2.GlobalRessources.AdminPanelRes.Conferences</h3>
+@Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.AdminPanelRes.IndexConferences, "Index", "Conferences", null, null)<br>
+@Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.AdminPanelRes.CreateConferences, "Create", "Conferences", null, null)
 
-<h3>Spectacles</h3>
-@Html.ActionLink("Index Spectacles", "Index", "Spectacles", null, null)<br>
-@Html.ActionLink("Create Spectacles", "Create", "Spectacles", null, null)
+<h3>@ProjetSessionWebServ2.GlobalRessources.AdminPanelRes.Shows</h3>
+@Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.AdminPanelRes.IndexShows, "Index", "Spectacles", null, null)<br>
+@Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.AdminPanelRes.CreateShows, "Create", "Spectacles", null, null)
 
-<h3>Kiosques</h3>
-@Html.ActionLink("Index Kiosques", "Index", "Kiosques", null, null)<br>
-@Html.ActionLink("Create Kiosques", "Create", "Kiosques", null, null)
+<h3>@ProjetSessionWebServ2.GlobalRessources.AdminPanelRes.Kiosk</h3>
+@Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.AdminPanelRes.IndexKiosk, "Index", "Kiosques", null, null)<br>
+@Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.AdminPanelRes.CreateKiosk, "Create", "Kiosques", null, null)
 
-<h3>Autres Evenement</h3>
-@Html.ActionLink("Index Evenement", "Index", "Evenement", null, null)<br>
-@Html.ActionLink("Create Evenement", "Create", "Evenement", null, null)
+<h3>@ProjetSessionWebServ2.GlobalRessources.AdminPanelRes.OtherEvents</h3>
+@Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.AdminPanelRes.IndexOtherEvents, "Index", "Evenement", null, null)<br>
+@Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.AdminPanelRes.CreateOtherEvents, "Create", "Evenement", null, null)

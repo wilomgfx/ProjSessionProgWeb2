@@ -117,64 +117,91 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Actif" xml:space="preserve">
-    <value>Active</value>
+  <data name="Active" xml:space="preserve">
+    <value>Actif</value>
   </data>
-  <data name="AreDelete" xml:space="preserve">
-    <value>Do you really want to delete this show ?</value>
+  <data name="Address" xml:space="preserve">
+    <value>Adresse</value>
+  </data>
+  <data name="Amount" xml:space="preserve">
+    <value>Montant</value>
   </data>
   <data name="BackToList" xml:space="preserve">
-    <value>Back To List ?</value>
+    <value>Retour à la liste</value>
+  </data>
+  <data name="BeginDateAndHour" xml:space="preserve">
+    <value>Date et heure de début</value>
+  </data>
+  <data name="BoughtType" xml:space="preserve">
+    <value>TypeAchat</value>
+  </data>
+  <data name="Conferences" xml:space="preserve">
+    <value>Conférences</value>
+  </data>
+  <data name="ConfirmDelete" xml:space="preserve">
+    <value>Êtes vous sure de vouloir supprimer ceci ?</value>
+  </data>
+  <data name="Congres" xml:space="preserve">
+    <value>Congrès</value>
+  </data>
+  <data name="CongresEvents" xml:space="preserve">
+    <value>Événements du congrès</value>
+  </data>
+  <data name="CongresSchedule" xml:space="preserve">
+    <value>Horaire du congrès</value>
+  </data>
+  <data name="CongresScheduleOrderDesc" xml:space="preserve">
+    <value>Horaire congrès en ordre de date déscendante</value>
   </data>
   <data name="Create" xml:space="preserve">
-    <value>Create a Show</value>
+    <value>Créer</value>
   </data>
-  <data name="DateSpectacle" xml:space="preserve">
-    <value>Show Date</value>
+  <data name="DateBought" xml:space="preserve">
+    <value>DateAchat</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>Delete Show</value>
+    <value>Supprimer</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Détails</value>
   </data>
   <data name="Edit" xml:space="preserve">
-    <value>Edit</value>
+    <value>Édit</value>
   </data>
-  <data name="HeureDebut" xml:space="preserve">
-    <value>Start Hour</value>
+  <data name="EndDate" xml:space="preserve">
+    <value>Date de fin</value>
   </data>
-  <data name="HeureFin" xml:space="preserve">
-    <value>End Hour</value>
+  <data name="EndDateAndHour" xml:space="preserve">
+    <value>Date et heure de fin</value>
   </data>
-  <data name="Musicien" xml:space="preserve">
-    <value>Musician</value>
+  <data name="Kiosks" xml:space="preserve">
+    <value>Kiosques</value>
   </data>
-  <data name="Nom" xml:space="preserve">
-    <value>Name</value>
+  <data name="Name" xml:space="preserve">
+    <value>Nom</value>
   </data>
-  <data name="ParMusicien" xml:space="preserve">
-    <value>Par Musicien</value>
+  <data name="Others" xml:space="preserve">
+    <value>Autres</value>
   </data>
-  <data name="ParNom" xml:space="preserve">
-    <value>Par Nom</value>
-  </data>
-  <data name="ParTypeDeSpectacle" xml:space="preserve">
-    <value>Par Type de Spectacle</value>
-  </data>
-  <data name="Rechercher" xml:space="preserve">
-    <value>Search</value>
-  </data>
-  <data name="Salle" xml:space="preserve">
-    <value>Room</value>
+  <data name="SalesReport" xml:space="preserve">
+    <value>Rapport des ventes</value>
   </data>
   <data name="Save" xml:space="preserve">
-    <value>Save</value>
+    <value>Sauvegarder</value>
   </data>
-  <data name="Spectacle" xml:space="preserve">
-    <value>Show</value>
+  <data name="SeeFullSchedule" xml:space="preserve">
+    <value>Voir l'horaire complet</value>
   </data>
-  <data name="TypeEvenement" xml:space="preserve">
-    <value>Event Type</value>
+  <data name="Shows" xml:space="preserve">
+    <value>Spectacles</value>
   </data>
-  <data name="TypeSpectacle" xml:space="preserve">
-    <value>Show Type</value>
+  <data name="StartDate" xml:space="preserve">
+    <value>Date de début</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="Tournaments" xml:space="preserve">
+    <value>Tournois</value>
   </data>
 </root>

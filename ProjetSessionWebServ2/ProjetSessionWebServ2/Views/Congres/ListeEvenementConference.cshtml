@@ -1,55 +1,110 @@
 ﻿@model List<ProjetSessionWebServ2.Models.Conference>
 
 @{
-    ViewBag.Title = "Events du congres";
+    ViewBag.Title = ProjetSessionWebServ2.GlobalRessources.CongresRes.CongresEvents;
 }
 
-<h1>Conference</h1>
 
-@Html.ActionLink("Créer", "Create", "Conferences")
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayName("Nom")
-        </th>
-        <th>
-            @Html.DisplayName("Description")
-        </th>
-        <th>
-            @Html.DisplayName("Type de Conference")
-        </th>
-        <th>
-            @Html.DisplayName("Conferencier")
-        </th>
-        <th></th>
-    </tr>
 
-    @foreach (var item in Model)
-    {
-        if (item.Actif.Equals(false))
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nom)  <strong>(Cancelled)</strong>
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TypeEvenement)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Salle.NoSalle)
-                </td>
-                <td>
-                    @Html.ActionLink("Modifier", "Edit", "Conferences", new { id = item.Id }, null) |
-                    @Html.ActionLink("Voir Detail", "Details", "Conferences", new { id = item.Id }, null) |
-                    @Html.ActionLink("Supprimer", "Delete", "Conferences", new { id = item.Id }, null)
-                </td>
-            </tr>
+<script>
+    function trieConferences() {
+        $.ajax({
+            type: "GET",
+            url: "@Url.Content("~/Conferences/Index")", 
+            data: {
+                "trieConference": "yes"
+            },
+        success: function (response) {
+            $("#avantRecherche").hide();
+            $('#resultSelonRecherche').html(response);
         }
-        else
+    });
+    }
+
+    function getConferenceSelonX() {
+        $.ajax({
+            type: "GET",
+            url: "@Url.Content("~/Conferences/Index")",
+
+            data: {
+                "searchTypeConference": $('#searchTypeConference').find('option:selected').text(),
+                "searchNomConference": document.getElementById("searchNomConference").value,
+                "searchConferencier": document.getElementById("searchConferencier").value,
+            },
+            success: function (response) {
+                $("#avantRecherche").hide();
+                $('#resultSelonRecherche').html(response);
+            }
+        });
+    }
+    
+</script>
+
+<div id="resultSelonRecherche">
+</div>
+
+<div id="avantRecherche">
+    <h1>@ProjetSessionWebServ2.GlobalRessources.CongresRes.Conferences</h1>
+
+    @Html.ActionLink( @ProjetSessionWebServ2.GlobalRessources.ConferenceRes.Create, "Create", "Conferences")
+    @{
+        using (Html.BeginForm("Index", "Conferences", FormMethod.Get))
+        {
+            <p>
+                @ProjetSessionWebServ2.GlobalRessources.ConferenceRes.ParTypeDeConference: @Html.DropDownList("searchTypeConference", (SelectList)ViewBag.TypeSpectacles, "") <br>
+                @ProjetSessionWebServ2.GlobalRessources.ConferenceRes.ParNom: @Html.TextBox("searchNomConference", ViewBag.CurrentFilter as string) <br>
+                @ProjetSessionWebServ2.GlobalRessources.ConferenceRes.ParConferencier: @Html.TextBox("searchConferencier", ViewBag.CurrentFilter as string) <br>
+                <input type="button" onclick="getConferenceSelonX()" value="@ProjetSessionWebServ2.GlobalRessources.SpectacleRes.Rechercher" class="btn btn-default" />
+            </p>
+        }
+
+    }
+
+    @{
+        using (Html.BeginForm("Index", "Conferences", FormMethod.Get))
+        {
+            <p>
+
+                @Html.Hidden("trieConference", ViewBag.CurrentFilter as string) <br>
+                <input type="button" onclick="trieConferences()" value="@ProjetSessionWebServ2.GlobalRessources.ConferenceRes.TrierParTypeDeConference" class="btn btn-default" />
+            </p>
+
+        }
+
+    }
+
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.ConferenceRes.Name)
+            </th>
+            <th>
+                @Html.DisplayName("Description")
+            </th>
+            <th>
+                @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.ConferenceRes.TypeConference)
+            </th>
+            <th>
+                @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.ConferenceRes.Conferencier)
+            </th>
+            <th>
+                @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.ConferenceRes.Actif)
+            </th>
+            <th>
+                @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.ConferenceRes.Date)
+            </th>
+            <th>
+                @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.ConferenceRes.HeureDebut)
+            </th>
+            <th>
+                @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.ConferenceRes.HeureFin)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
         {
             <tr>
                 <td>
@@ -59,18 +114,30 @@
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.TypeEvenement)
+                    @Html.DisplayFor(modelItem => item.TypeConference.Nom)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Salle.NoSalle)
+                    @Html.DisplayFor(modelItem => item.Users.FirstOrDefault().UserName)
                 </td>
                 <td>
-                    @Html.ActionLink("Modifier", "Edit", "Conferences", new { id = item.Id }, null) |
-                    @Html.ActionLink("Voir Detail", "Details", "Conferences", new { id = item.Id }, null) |
-                    @Html.ActionLink("Supprimer", "Delete", "Conferences", new { id = item.Id }, null)
+                    @Html.DisplayFor(modelItem => item.Actif)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlageHoraires[0].DateEtHeureDebut.Value.Date.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlageHoraires[0].DateEtHeureDebut.Value.Hour)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlageHoraires[0].DateEtHeureFin.Value.Hour)
+                </td>
+                <td>
+                    @Html.ActionLink(@ProjetSessionWebServ2.GlobalRessources.ConferenceRes.Edit, "Edit", "Conferences",new { id = item.Id },null) |
+                    @Html.ActionLink(@ProjetSessionWebServ2.GlobalRessources.ConferenceRes.Details, "Details","Conferences", new { id = item.Id },null) |
+                    @Html.ActionLink(@ProjetSessionWebServ2.GlobalRessources.ConferenceRes.Delete, "Delete","Conferences", new { id = item.Id }, null)
                 </td>
             </tr>
         }
-    }
 
-</table>
+    </table>
+</div>

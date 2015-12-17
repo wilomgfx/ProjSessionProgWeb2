@@ -90,7 +90,7 @@ namespace ProjetSessionWebServ2.Controllers
 
             return View(confenrence2);
         }
-        [Authorize(Roles = "conferencier,administrateur")]
+        [CustomUserAttribute(Roles = "conferencier,administrateur", AccessLevel = "Create")]
         // GET: Conferences/Create
         public ActionResult Create()
         {
@@ -185,7 +185,8 @@ namespace ProjetSessionWebServ2.Controllers
 
             return View(conference);
         }
-        [Authorize(Roles = "administrateur,conferencier")]
+
+        [CustomUserAttribute(Roles = "conferencier,administrateur", AccessLevel = "Edit")]
         // GET: Conferences/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -232,7 +233,7 @@ namespace ProjetSessionWebServ2.Controllers
             ViewBag.TypeConferenceIdViewBag = TypeConferenceId2;
             return View(conference);
         }
-        [Authorize(Roles = "administrateur,conferencier")]
+        [CustomUserAttribute(Roles = "conferencier,administrateur", AccessLevel = "Delete")]
         // GET: Conferences/Delete/5
         public ActionResult Delete(int? id)
         {

@@ -11,6 +11,7 @@ using ProjetSessionWebServ2.DAL;
 
 namespace ProjetSessionWebServ2.Controllers
 {
+    [Authorize]
     public class PlageHorairesController : Controller
     {
         //private ApplicationDbContext db = new ApplicationDbContext();
@@ -37,7 +38,7 @@ namespace ProjetSessionWebServ2.Controllers
             }
             return View(plageHoraire);
         }
-
+         [CustomUserAttribute(Roles = "administrateur", AccessLevel = "Create")]
         // GET: PlageHoraires/Create
         public ActionResult Create()
         {
@@ -60,7 +61,7 @@ namespace ProjetSessionWebServ2.Controllers
 
             return View(plageHoraire);
         }
-
+        [CustomUserAttribute(Roles = "administrateur", AccessLevel = "Edit")]
         // GET: PlageHoraires/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -91,7 +92,7 @@ namespace ProjetSessionWebServ2.Controllers
             }
             return View(plageHoraire);
         }
-
+        [CustomUserAttribute(Roles = "administrateur", AccessLevel = "Delete")]
         // GET: PlageHoraires/Delete/5
         public ActionResult Delete(int? id)
         {

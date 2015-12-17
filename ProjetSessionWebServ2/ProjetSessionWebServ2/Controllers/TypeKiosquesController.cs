@@ -11,6 +11,7 @@ using ProjetSessionWebServ2.DAL;
 
 namespace ProjetSessionWebServ2.Controllers
 {
+    [CustomUserAttribute(Roles = "administrateur", AccessLevel = "TypeKiosquesController")]
     public class TypeKiosquesController : Controller
     {
         private UnitOfWork uow = new UnitOfWork();

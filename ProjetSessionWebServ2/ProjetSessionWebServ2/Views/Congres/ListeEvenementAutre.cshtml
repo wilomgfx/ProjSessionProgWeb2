@@ -1,75 +1,162 @@
 ﻿@model List<ProjetSessionWebServ2.Models.Evenement>
 
 @{
-    ViewBag.Title = "Events du congres";
+    ViewBag.Title = ProjetSessionWebServ2.GlobalRessources.CongresRes.CongresEvents;
 }
 
-<h1>Autres</h1>
+<script>
+        function getEvenementAutreSelonX() {
+            $.ajax({
+                type: "GET",
+                url: "@Url.Content("~/Evenement/Index")",
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayName("Nom")
-        </th>
-        <th>
-            @Html.DisplayName("Description")
-        </th>
-        <th>
-            @Html.DisplayName("Type de Conference")
-        </th>
-        <th>
-            @Html.DisplayName("Salle")
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        if (item.Actif.Equals(false))
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nom)  <strong>(Cancelled)</strong>
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TypeEvenement)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Salle.NoSalle)
-                </td>
-                <td>
-                    @Html.ActionLink("Modifier", "Edit", "Evenement", new { id = item.Id }, null) |
-                    @Html.ActionLink("Voir Detail", "Details", "Evenement", new { id = item.Id }, null) |
-                    @Html.ActionLink("Supprimer", "Delete", "Evenement", new { id = item.Id }, null)
-                </td>
-            </tr>
+                data: {
+                    "searchNomEvenementAutre": document.getElementById("searchNomEvenementAutre").value,
+                },
+                success: function (response) {
+                    $("#avantRechercheAutre").hide();
+                    $('#resultSelonRechercheAutre').html(response);
+                }
+            });
         }
-        else
+
+</script>
+
+<div id="resultSelonRechercheAutre">
+</div>
+
+<div id="avantRechercheAutre">
+    <h1>@ProjetSessionWebServ2.GlobalRessources.CongresRes.Others</h1>
+
+    <p>
+        @Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.CongresRes.Create, "Create", "Evenement")
+    </p>
+    @{
+        using (Html.BeginForm("Index", "Evenement", FormMethod.Get))
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nom)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TypeEvenement)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Salle.NoSalle)
-                </td>
-                <td>
-                    @Html.ActionLink("Modifier", "Edit","Evenement", new { id = item.Id },null) |
-                    @Html.ActionLink("Voir Detail", "Details","Evenement", new { id = item.Id },null) |
-                    @Html.ActionLink("Supprimer", "Delete","Evenement", new { id = item.Id },null)
-                </td>
-            </tr>
+            <p>
+                @ProjetSessionWebServ2.GlobalRessources.TournoiRes.ParNom: @Html.TextBox("searchNomEvenementAutre", ViewBag.CurrentFilter as string) <br>
+                <input type="button" onclick="getEvenementAutreSelonX()" value="@ProjetSessionWebServ2.GlobalRessources.TournoiRes.Rechercher" class="btn btn-default" />
+            </p>
         }
 
     }
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Nom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Salle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Actif)
+            </th>
+            <th>
+                @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.ConferenceRes.Date)
+            </th>
+            <th>
+                @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.ConferenceRes.HeureDebut)
+            </th>
+            <th>
+                @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.ConferenceRes.HeureFin)
+            </th>
+            <th></th>
+        </tr>
 
-</table>
+        @foreach (var item in Model)
+        {
+            if (item.Actif.Equals(false))
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nom)  (Annule)
+                    </td>
+                    <td>
+                        @{
+                            if (item.Description.Length < 50)
+                            {
+                                <p>@item.Description</p>
+                            }
+                            else
+                            {
+                                <p>@(item.Description.Substring(0, 50).ToString() + "...")</p>
+                            }
+                        }
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Salle.NoSalle)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Actif)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PlageHoraires[0].DateEtHeureDebut.Value.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PlageHoraires[0].DateEtHeureDebut.Value.Hour)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PlageHoraires[0].DateEtHeureFin.Value.Hour)
+                    </td>
+                    <td>
+                    <td>
+                        @Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.CongresRes.Edit, "Edit", "Evenement", new { id = item.Id }, null) |
+                        @Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.CongresRes.Details, "Details", "Evenement", new { id = item.Id }, null) |
+                        @Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.CongresRes.Delete, "Delete", "Evenement", new { id = item.Id }, null)
+                    </td>
+                </tr>
+            }
+            else
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nom)
+                    </td>
+                    <td>
+                        @*@Html.DisplayFor(modelItem => item.Description)*@
+                        @{
+                            if (item.Description.Length < 50)
+                            {
+                                <p>@item.Description</p>
+                            }
+                            else
+                            {
+                                <p>@(item.Description.Substring(0, 50).ToString() + "...")</p>
+                            }
+                        }
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Salle.NoSalle)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Actif)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PlageHoraires[0].DateEtHeureDebut.Value.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PlageHoraires[0].DateEtHeureDebut.Value.Hour)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PlageHoraires[0].DateEtHeureFin.Value.Hour)
+                    </td>
+                    <td>
+                    <td>
+                        @Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.CongresRes.Edit, "Edit","Evenement", new { id = item.Id },null) |
+                        @Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.CongresRes.Details, "Details", "Evenement", new { id = item.Id }, null) |
+                        @Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.CongresRes.Delete, "Delete", "Evenement", new { id = item.Id }, null)
+                    </td>
+                </tr>
+                                }
+
+                            }
+
+    </table>
+
+</div>

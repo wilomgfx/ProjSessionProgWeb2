@@ -11,6 +11,7 @@ using ProjetSessionWebServ2.DAL;
 
 namespace ProjetSessionWebServ2.Controllers
 {
+    [Authorize]
     public class DimensionsController : Controller
     {
         //private ApplicationDbContext db = new ApplicationDbContext();
@@ -36,7 +37,7 @@ namespace ProjetSessionWebServ2.Controllers
             }
             return View(dimension);
         }
-
+        [CustomUserAttribute(Roles = "administrateur", AccessLevel = "Create")]
         // GET: Dimensions/Create
         public ActionResult Create()
         {
@@ -61,7 +62,7 @@ namespace ProjetSessionWebServ2.Controllers
 
             return View(dimension);
         }
-
+        [CustomUserAttribute(Roles = "administrateur", AccessLevel = "Edit")]
         // GET: Dimensions/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -94,7 +95,7 @@ namespace ProjetSessionWebServ2.Controllers
             }
             return View(dimension);
         }
-
+        [CustomUserAttribute(Roles = "administrateur", AccessLevel = "Delete")]
         // GET: Dimensions/Delete/5
         public ActionResult Delete(int? id)
         {

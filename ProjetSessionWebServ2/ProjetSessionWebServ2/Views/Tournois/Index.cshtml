@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ProjetSessionWebServ2.Models.Tournoi>
+﻿@model List<ProjetSessionWebServ2.Models.Tournoi>
 
 @{
     ViewBag.Title = "Index";
@@ -81,3 +81,5 @@
 }
 
 </table>
+
+@Html.Partial("~/Views/Congres/ListeEvenementTournoi.cshtml", (List<ProjetSessionWebServ2.Models.Tournoi>)Model)

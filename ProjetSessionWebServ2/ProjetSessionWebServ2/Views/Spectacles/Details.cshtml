@@ -50,6 +50,12 @@
             @Html.DisplayFor(model => model.Salle.NoSalle)
         </dd>
         <dt>
+            @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.SpectacleRes.Musicien)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Users.FirstOrDefault().UserName)
+        </dd>
+        <dt>
             @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.ConferenceRes.Date)
         </dt>
         <dd>

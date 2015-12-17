@@ -117,64 +117,106 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Actif" xml:space="preserve">
-    <value>Active</value>
+  <data name="Conferences" xml:space="preserve">
+    <value>Conferences</value>
   </data>
-  <data name="AreDelete" xml:space="preserve">
-    <value>Do you really want to delete this show ?</value>
+  <data name="CreateConferences" xml:space="preserve">
+    <value>Create Conferences</value>
   </data>
-  <data name="BackToList" xml:space="preserve">
-    <value>Back To List ?</value>
+  <data name="CreateCongres" xml:space="preserve">
+    <value>Create Congres</value>
   </data>
-  <data name="Create" xml:space="preserve">
-    <value>Create a Show</value>
+  <data name="CreateEventTypes" xml:space="preserve">
+    <value>Create Event Types</value>
   </data>
-  <data name="DateSpectacle" xml:space="preserve">
-    <value>Show Date</value>
+  <data name="CreateKiosk" xml:space="preserve">
+    <value>Create Kiosks</value>
   </data>
-  <data name="Delete" xml:space="preserve">
-    <value>Delete Show</value>
+  <data name="CreateOtherEvents" xml:space="preserve">
+    <value>Create Other Events</value>
   </data>
-  <data name="Edit" xml:space="preserve">
-    <value>Edit</value>
+  <data name="CreateRooms" xml:space="preserve">
+    <value>Create Rooms</value>
   </data>
-  <data name="HeureDebut" xml:space="preserve">
-    <value>Start Hour</value>
+  <data name="CreateSections" xml:space="preserve">
+    <value>Create Sections</value>
   </data>
-  <data name="HeureFin" xml:space="preserve">
-    <value>End Hour</value>
+  <data name="CreateShows" xml:space="preserve">
+    <value>Create Shows</value>
   </data>
-  <data name="Musicien" xml:space="preserve">
-    <value>Musician</value>
+  <data name="CreateTournaments" xml:space="preserve">
+    <value>Create Tournaments</value>
   </data>
-  <data name="Nom" xml:space="preserve">
-    <value>Name</value>
+  <data name="CreateTypeConferences" xml:space="preserve">
+    <value>Create Conferences Types</value>
   </data>
-  <data name="ParMusicien" xml:space="preserve">
-    <value>Par Musicien</value>
+  <data name="CreateTypeKiosques" xml:space="preserve">
+    <value>Create Kiosks Types</value>
   </data>
-  <data name="ParNom" xml:space="preserve">
-    <value>Par Nom</value>
+  <data name="CreateTypeShows" xml:space="preserve">
+    <value>Create Shows Types</value>
   </data>
-  <data name="ParTypeDeSpectacle" xml:space="preserve">
-    <value>Par Type de Spectacle</value>
+  <data name="CreateTypeTournaments" xml:space="preserve">
+    <value>Create Tournaments Types</value>
   </data>
-  <data name="Rechercher" xml:space="preserve">
-    <value>Search</value>
+  <data name="IndexConferences" xml:space="preserve">
+    <value>Index Conferences</value>
   </data>
-  <data name="Salle" xml:space="preserve">
+  <data name="IndexEventTypes" xml:space="preserve">
+    <value>Index Event Types</value>
+  </data>
+  <data name="IndexKiosk" xml:space="preserve">
+    <value>Index Kiosk</value>
+  </data>
+  <data name="IndexOtherEvents" xml:space="preserve">
+    <value>Index Other Events</value>
+  </data>
+  <data name="IndexRooms" xml:space="preserve">
+    <value>Index Rooms</value>
+  </data>
+  <data name="IndexSections" xml:space="preserve">
+    <value>Index Sections</value>
+  </data>
+  <data name="IndexShows" xml:space="preserve">
+    <value>Index Shows</value>
+  </data>
+  <data name="IndexTournaments" xml:space="preserve">
+    <value>Index Tournaments</value>
+  </data>
+  <data name="IndexTypeConferences" xml:space="preserve">
+    <value>Index Conferences Types</value>
+  </data>
+  <data name="IndexTypeKiosques" xml:space="preserve">
+    <value>Index Kiosks Types</value>
+  </data>
+  <data name="IndexTypeShows" xml:space="preserve">
+    <value>Index Shows Types</value>
+  </data>
+  <data name="IndexTypeTournaments" xml:space="preserve">
+    <value>Index Tournaments Types</value>
+  </data>
+  <data name="Kiosk" xml:space="preserve">
+    <value>Kiosks</value>
+  </data>
+  <data name="OtherEvents" xml:space="preserve">
+    <value>Other Events</value>
+  </data>
+  <data name="Rooms" xml:space="preserve">
     <value>Room</value>
   </data>
-  <data name="Save" xml:space="preserve">
-    <value>Save</value>
+  <data name="SalesReport" xml:space="preserve">
+    <value>Sales reports</value>
   </data>
-  <data name="Spectacle" xml:space="preserve">
-    <value>Show</value>
+  <data name="Sections" xml:space="preserve">
+    <value>Sections</value>
   </data>
-  <data name="TypeEvenement" xml:space="preserve">
-    <value>Event Type</value>
+  <data name="Shows" xml:space="preserve">
+    <value>Shows</value>
   </data>
-  <data name="TypeSpectacle" xml:space="preserve">
-    <value>Show Type</value>
+  <data name="Tournaments" xml:space="preserve">
+    <value>Tournaments</value>
+  </data>
+  <data name="ViewName" xml:space="preserve">
+    <value>Admin Pannel</value>
   </data>
 </root>

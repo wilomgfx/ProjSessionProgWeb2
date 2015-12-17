@@ -13,6 +13,7 @@ using System.Threading;
 
 namespace ProjetSessionWebServ2.Controllers
 {
+    [Authorize]
     public class CongresController : Controller
     {
         private UnitOfWork unitOfWork = new UnitOfWork();
@@ -25,7 +26,7 @@ namespace ProjetSessionWebServ2.Controllers
 
         public ActionResult HoraireCongres(int? id)
         {
-            List<PlageHoraire> plageHoraires = unitOfWork.PlageHoraireRepository.Get(c => c.Congres.Id == id).ToList();
+            List<PlageHoraire> plageHoraires = unitOfWork.PlageHoraireRepository.Get(c => c.Congres.Id == id,orderBy:p => p.OrderByDescending(d=>d.DateEtHeureDebut)).Where(e => e.Evenement.Actif == true).ToList();
             return View(plageHoraires);
         }
 
@@ -37,7 +38,12 @@ namespace ProjetSessionWebServ2.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Congres congres = unitOfWork.CongresRepository.ObtenirCongresParID(id);
-            
+
+            ViewBag.searchTypeConference = new SelectList(unitOfWork.TypeConferenceRepository.ObtenirTypeConferences(), "Nom", "Nom", string.Empty);
+            ViewBag.searchTypeKiosque = new SelectList(unitOfWork.TypeKiosqueRepository.ObtenirTypeKiosques(), "Nom", "Nom", string.Empty);
+            ViewBag.TypeSpectacles = new SelectList(unitOfWork.TypeSpectacleRepository.ObtenirTypeSpectacles(), "Nom", "Nom", string.Empty);
+            ViewBag.searchTypeTournoi = new SelectList(unitOfWork.TypeTournoiRepository.ObtenirTypeTournois(), "Nom", "Nom", string.Empty);
+
             ViewBag.ListeConference = unitOfWork.ConferenceRepository.ObtenirConferences().Where(u => u.Congres.Id.Equals(id)).ToList();// && u.Actif.Equals(true)).ToList();
             ViewBag.ListeSpectacle = unitOfWork.SpectacleRepository.ObtenirSpectacles().Where(u => u.Congres.Id.Equals(id)).ToList();// && u.Actif.Equals(true)).ToList();
             ViewBag.ListeKiosque = unitOfWork.KiosqueRepository.ObtenirKiosques().Where(u => u.Congres.Id.Equals(id)).ToList();// && u.Actif.Equals(true)).ToList();
@@ -108,7 +114,7 @@ namespace ProjetSessionWebServ2.Controllers
         }
 
         // GET: Congres/Delete/5
-
+        [CustomUserAttribute(Roles = "administrateur", AccessLevel = "Delete")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -122,12 +128,12 @@ namespace ProjetSessionWebServ2.Controllers
             }
             return View(congres);
         }
-        [Authorize(Roles = "administrateur")]
+        [CustomUserAttribute(Roles = "administrateur", AccessLevel = "RapportDesVentes")]
         public ActionResult RapportDesVentes()
         {      
             return View(unitOfWork.TransactionRepository.ObtenirTransactions());
         }
-        [Authorize(Roles = "administrateur")]
+        [CustomUserAttribute(Roles = "administrateur", AccessLevel = "AdminPanel")]
         public ActionResult AdminPanel()
         {
             return View();
