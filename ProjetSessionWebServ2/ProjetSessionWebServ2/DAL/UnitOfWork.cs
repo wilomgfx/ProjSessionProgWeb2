@@ -308,5 +308,39 @@ namespace ProjetSessionWebServ2.DAL
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
+        public bool IsRoomAvailableForTime(Evenement ev)
+        {
+            // Aller chercher les evenements du meme congrès qui se passe dans la même pièce.
+            List<Evenement> eventsInSameRoom = this.EvenementRepository.ObtenirEvenements().Where(e => ev.Congres.Id == e.Congres.Id && e.Salle.NoSalle.Equals(ev.Salle.NoSalle)).ToList();
+
+            // Assignation des plages horaire de l'évènement à vérifier à une variable temporaire.
+            List<PlageHoraire> timeForEvent = ev.PlageHoraires;
+
+            // Pour chaque evenement qui se passe dans la même pièce...
+            foreach (Evenement eve in eventsInSameRoom)
+            {
+                // On vérifis chaque plage horaire...
+                foreach (PlageHoraire time in eve.PlageHoraires)
+                {
+                    // Pour voir si il y a conflit avec l'évènement.
+                    foreach (PlageHoraire timeInCurrentEvent in timeForEvent)
+                    {
+                        // Si la date de début ou la date de fin d'une plage horaire de l'évènement courant
+                        // se trouve encapsuler dans une plage horaire d'un autre évènement, il y a présence de conflit.
+                        if((timeInCurrentEvent.DateEtHeureDebut > time.DateEtHeureDebut &&
+                            timeInCurrentEvent.DateEtHeureDebut < time.DateEtHeureFin) ||
+                            (timeInCurrentEvent.DateEtHeureFin > time.DateEtHeureDebut &&
+                            timeInCurrentEvent.DateEtHeureFin < time.DateEtHeureFin))
+                        {
+                            // Il y a conflit.
+                            return false;
+                        }
+                    }
+                }
+            }
+
+            return true;
+        }
     }
 }
