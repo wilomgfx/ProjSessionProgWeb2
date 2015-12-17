@@ -1,7 +1,7 @@
 ﻿@model List<ProjetSessionWebServ2.Models.Evenement>
 
 @{
-    ViewBag.Title = "Events du congres";
+    ViewBag.Title = ProjetSessionWebServ2.GlobalRessources.CongresRes.CongresEvents;
 }
 
 <script>
@@ -26,10 +26,10 @@
 </div>
 
 <div id="avantRechercheAutre">
-    <h1>Autres</h1>
+    <h1>@ProjetSessionWebServ2.GlobalRessources.CongresRes.Others</h1>
 
     <p>
-        @Html.ActionLink("Créer", "Create", "Evenement")
+        @Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.CongresRes.Create, "Create", "Evenement")
     </p>
     @{
         using (Html.BeginForm("Index", "Evenement", FormMethod.Get))
@@ -105,9 +105,9 @@
                     </td>
                     <td>
                     <td>
-                        @Html.ActionLink("Modifier", "Edit", "Evenement", new { id = item.Id }, null) |
-                        @Html.ActionLink("Voir Detail", "Details", "Evenement", new { id = item.Id }, null) |
-                        @Html.ActionLink("Supprimer", "Delete", "Evenement", new { id = item.Id }, null)
+                        @Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.CongresRes.Edit, "Edit", "Evenement", new { id = item.Id }, null) |
+                        @Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.CongresRes.Details, "Details", "Evenement", new { id = item.Id }, null) |
+                        @Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.CongresRes.Delete, "Delete", "Evenement", new { id = item.Id }, null)
                     </td>
                 </tr>
             }
@@ -148,9 +148,9 @@
                     </td>
                     <td>
                     <td>
-                        @Html.ActionLink("Modifier", "Edit","Evenement", new { id = item.Id },null) |
-                        @Html.ActionLink("Voir Detail", "Details", "Evenement", new { id = item.Id }, null) |
-                        @Html.ActionLink("Supprimer", "Delete", "Evenement", new { id = item.Id }, null)
+                        @Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.CongresRes.Edit, "Edit","Evenement", new { id = item.Id },null) |
+                        @Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.CongresRes.Details, "Details", "Evenement", new { id = item.Id }, null) |
+                        @Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.CongresRes.Delete, "Delete", "Evenement", new { id = item.Id }, null)
                     </td>
                 </tr>
                                 }

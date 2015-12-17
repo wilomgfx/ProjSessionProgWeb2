@@ -2,10 +2,10 @@
 @model IEnumerable<ProjetSessionWebServ2.Models.Transaction>
 
 @{
-    ViewBag.Title = "RapportDesVentes";
+    ViewBag.Title = ProjetSessionWebServ2.GlobalRessources.CongresRes.SalesReport;
 }
 
-<h2 style="margin-top:50px;">RapportDesVentes</h2>
+<h2 style="margin-top:50px;">@ProjetSessionWebServ2.GlobalRessources.CongresRes.SalesReport</h2>
 
 <table class="table">
     <tr>
@@ -37,7 +37,7 @@
             </td>
         </tr>
     }
-    <tr><td>Total : @total</td></tr>
+    <tr><td>@ProjetSessionWebServ2.GlobalRessources.CongresRes.Total : @total</td></tr>
 }
 
 </table>
