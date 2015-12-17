@@ -1,14 +1,14 @@
 ﻿@model ProjetSessionWebServ2.Models.Evenement
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = @ProjetSessionWebServ2.GlobalRessources.EvenementRes.Supprimer;
 }
 
-<h2>Supprimer</h2>
+<h2>@ProjetSessionWebServ2.GlobalRessources.EvenementRes.Supprimer</h2>
 
-<h3>Voulez-vous vraiment supprimer cet evenement?</h3>
+<h3>@ProjetSessionWebServ2.GlobalRessources.ConferenceRes.AreYouSureYouWantToDeleteThis</h3>
 <div>
-    <h4>Evenement</h4>
+    <h4>@ProjetSessionWebServ2.GlobalRessources.EvenementRes.Evenemenent</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -49,8 +49,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Retourner a la liste", "Index")
+            <input type="submit" value="@ProjetSessionWebServ2.GlobalRessources.EvenementRes.Supprimer" class="btn btn-default" /> |
+            @Html.ActionLink(@ProjetSessionWebServ2.GlobalRessources.EvenementRes.Retouralaliste, "Index")
         </div>
     }
 </div>

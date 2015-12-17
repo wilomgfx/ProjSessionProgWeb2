@@ -54,19 +54,19 @@
             @Html.DisplayFor(model => model.Actif)
         </dd>
         <dt>
-            @Html.DisplayName("Date")
+            @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.ConferenceRes.Date)
         </dt>
         <dd>
             @Html.DisplayFor(model => model.PlageHoraires[0].DateEtHeureDebut.Value.Date)
         </dd>
         <dt>
-            @Html.DisplayName("Heure Debut")
+            @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.ConferenceRes.HeureDebut)
         </dt>
         <dd>
             @Html.DisplayFor(model => model.PlageHoraires[0].DateEtHeureDebut.Value.Hour)
         </dd>
         <dt>
-            @Html.DisplayName("Heure Fin")
+            @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.ConferenceRes.HeureFin)
         </dt>
         <dd>
             @Html.DisplayFor(model => model.PlageHoraires[0].DateEtHeureFin.Value.Hour)
@@ -74,6 +74,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Modifier", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Retourner a la liste", "Index")
+    @Html.ActionLink(@ProjetSessionWebServ2.GlobalRessources.EvenementRes.Edit, "Edit", new { id = Model.Id }) |
+    @Html.ActionLink(@ProjetSessionWebServ2.GlobalRessources.EvenementRes.Retouralaliste, "Index")
 </p>
