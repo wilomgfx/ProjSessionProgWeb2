@@ -97,15 +97,6 @@ namespace ProjetSessionWebServ2.GlobalRessources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Créer Kiosques.
-        /// </summary>
-        public static string CreateKiosk {
-            get {
-                return ResourceManager.GetString("CreateKiosk", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Créer Autres Événements.
         /// </summary>
         public static string CreateOtherEvents {
@@ -142,6 +133,15 @@ namespace ProjetSessionWebServ2.GlobalRessources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Créer Kiosques.
+        /// </summary>
+        public static string CreateStands {
+            get {
+                return ResourceManager.GetString("CreateStands", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Créer Tournois.
         /// </summary>
         public static string CreateTournaments {
@@ -160,20 +160,20 @@ namespace ProjetSessionWebServ2.GlobalRessources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Créer Type Kiosques.
-        /// </summary>
-        public static string CreateTypeKiosques {
-            get {
-                return ResourceManager.GetString("CreateTypeKiosques", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Créer Type Spectacles.
         /// </summary>
         public static string CreateTypeShows {
             get {
                 return ResourceManager.GetString("CreateTypeShows", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Créer Type Kiosques.
+        /// </summary>
+        public static string CreateTypeStands {
+            get {
+                return ResourceManager.GetString("CreateTypeStands", resourceCulture);
             }
         }
         
@@ -201,15 +201,6 @@ namespace ProjetSessionWebServ2.GlobalRessources {
         public static string IndexEventTypes {
             get {
                 return ResourceManager.GetString("IndexEventTypes", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Index Kiosques.
-        /// </summary>
-        public static string IndexKiosk {
-            get {
-                return ResourceManager.GetString("IndexKiosk", resourceCulture);
             }
         }
         
@@ -250,6 +241,15 @@ namespace ProjetSessionWebServ2.GlobalRessources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Index Kiosques.
+        /// </summary>
+        public static string IndexStands {
+            get {
+                return ResourceManager.GetString("IndexStands", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Index Tournois.
         /// </summary>
         public static string IndexTournaments {
@@ -268,15 +268,6 @@ namespace ProjetSessionWebServ2.GlobalRessources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Index type Kiosques.
-        /// </summary>
-        public static string IndexTypeKiosques {
-            get {
-                return ResourceManager.GetString("IndexTypeKiosques", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Index type Spectacles.
         /// </summary>
         public static string IndexTypeShows {
@@ -286,20 +277,20 @@ namespace ProjetSessionWebServ2.GlobalRessources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Index type Kiosques.
+        /// </summary>
+        public static string IndexTypeStands {
+            get {
+                return ResourceManager.GetString("IndexTypeStands", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Index type Tournois.
         /// </summary>
         public static string IndexTypeTournaments {
             get {
                 return ResourceManager.GetString("IndexTypeTournaments", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Kiosques.
-        /// </summary>
-        public static string Kiosk {
-            get {
-                return ResourceManager.GetString("Kiosk", resourceCulture);
             }
         }
         
@@ -345,6 +336,15 @@ namespace ProjetSessionWebServ2.GlobalRessources {
         public static string Shows {
             get {
                 return ResourceManager.GetString("Shows", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kiosques.
+        /// </summary>
+        public static string Stands {
+            get {
+                return ResourceManager.GetString("Stands", resourceCulture);
             }
         }
         

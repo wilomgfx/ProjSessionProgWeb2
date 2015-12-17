@@ -20,7 +20,8 @@ namespace ProjetSessionWebServ2.Controllers
         // GET: Sections
         public ActionResult Index()
         {
-            return View(uow.SectionRepository.ObtenirSections().ToList());
+            List<Section> lstSections = uow.SectionRepository.ObtenirSections().ToList();
+            return View(lstSections);
         }
 
         // GET: Sections/Details/5

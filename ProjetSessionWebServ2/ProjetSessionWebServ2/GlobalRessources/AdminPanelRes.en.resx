@@ -129,9 +129,6 @@
   <data name="CreateEventTypes" xml:space="preserve">
     <value>Create Event Types</value>
   </data>
-  <data name="CreateKiosk" xml:space="preserve">
-    <value>Create Kiosks</value>
-  </data>
   <data name="CreateOtherEvents" xml:space="preserve">
     <value>Create Other Events</value>
   </data>
@@ -144,17 +141,20 @@
   <data name="CreateShows" xml:space="preserve">
     <value>Create Shows</value>
   </data>
+  <data name="CreateStands" xml:space="preserve">
+    <value>Create Stands</value>
+  </data>
   <data name="CreateTournaments" xml:space="preserve">
     <value>Create Tournaments</value>
   </data>
   <data name="CreateTypeConferences" xml:space="preserve">
     <value>Create Conferences Types</value>
   </data>
-  <data name="CreateTypeKiosques" xml:space="preserve">
-    <value>Create Kiosks Types</value>
-  </data>
   <data name="CreateTypeShows" xml:space="preserve">
     <value>Create Shows Types</value>
+  </data>
+  <data name="CreateTypeStands" xml:space="preserve">
+    <value>Create Stands Types</value>
   </data>
   <data name="CreateTypeTournaments" xml:space="preserve">
     <value>Create Tournaments Types</value>
@@ -164,9 +164,6 @@
   </data>
   <data name="IndexEventTypes" xml:space="preserve">
     <value>Index Event Types</value>
-  </data>
-  <data name="IndexKiosk" xml:space="preserve">
-    <value>Index Kiosk</value>
   </data>
   <data name="IndexOtherEvents" xml:space="preserve">
     <value>Index Other Events</value>
@@ -180,23 +177,23 @@
   <data name="IndexShows" xml:space="preserve">
     <value>Index Shows</value>
   </data>
+  <data name="IndexStands" xml:space="preserve">
+    <value>Index Stand</value>
+  </data>
   <data name="IndexTournaments" xml:space="preserve">
     <value>Index Tournaments</value>
   </data>
   <data name="IndexTypeConferences" xml:space="preserve">
     <value>Index Conferences Types</value>
   </data>
-  <data name="IndexTypeKiosques" xml:space="preserve">
-    <value>Index Kiosks Types</value>
-  </data>
   <data name="IndexTypeShows" xml:space="preserve">
     <value>Index Shows Types</value>
   </data>
+  <data name="IndexTypeStands" xml:space="preserve">
+    <value>Index Stands Types</value>
+  </data>
   <data name="IndexTypeTournaments" xml:space="preserve">
     <value>Index Tournaments Types</value>
-  </data>
-  <data name="Kiosk" xml:space="preserve">
-    <value>Kiosks</value>
   </data>
   <data name="OtherEvents" xml:space="preserve">
     <value>Other Events</value>
@@ -212,6 +209,9 @@
   </data>
   <data name="Shows" xml:space="preserve">
     <value>Shows</value>
+  </data>
+  <data name="Stands" xml:space="preserve">
+    <value>Stands</value>
   </data>
   <data name="Tournaments" xml:space="preserve">
     <value>Tournaments</value>
