@@ -13,6 +13,7 @@ using System.Threading;
 
 namespace ProjetSessionWebServ2.Controllers
 {
+    [Authorize]
     public class CongresController : Controller
     {
         private UnitOfWork unitOfWork = new UnitOfWork();
@@ -113,7 +114,7 @@ namespace ProjetSessionWebServ2.Controllers
         }
 
         // GET: Congres/Delete/5
-
+        [CustomUserAttribute(Roles = "administrateur", AccessLevel = "Delete")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -127,12 +128,12 @@ namespace ProjetSessionWebServ2.Controllers
             }
             return View(congres);
         }
-        [Authorize(Roles = "administrateur")]
+        [CustomUserAttribute(Roles = "administrateur", AccessLevel = "RapportDesVentes")]
         public ActionResult RapportDesVentes()
         {      
             return View(unitOfWork.TransactionRepository.ObtenirTransactions());
         }
-        [Authorize(Roles = "administrateur")]
+        [CustomUserAttribute(Roles = "administrateur", AccessLevel = "AdminPanel")]
         public ActionResult AdminPanel()
         {
             return View();

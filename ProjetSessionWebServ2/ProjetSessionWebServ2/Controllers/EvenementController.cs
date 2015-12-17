@@ -11,6 +11,7 @@ using ProjetSessionWebServ2.DAL;
 
 namespace ProjetSessionWebServ2.Controllers
 {
+    [Authorize]
     public class EvenementController : Controller
     {
         //private ApplicationDbContext db = new ApplicationDbContext();
@@ -56,7 +57,7 @@ namespace ProjetSessionWebServ2.Controllers
             }
             return View(evenement);
         }
-
+         [CustomUserAttribute(Roles = "administrateur", AccessLevel = "Create")]
         // GET: /Evenement/Create
         public ActionResult Create()
         {
@@ -67,7 +68,7 @@ namespace ProjetSessionWebServ2.Controllers
         // POST: /Evenement/Create
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost] [CustomUserAttribute(Roles = "administrateur", AccessLevel = "Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Nom,Description,Salle,Actif")] Evenement evenement, Salle salle, int Congres, string DateConference, string HeureDebut, string HeureFin)
         {
@@ -115,7 +116,7 @@ namespace ProjetSessionWebServ2.Controllers
 
             return View(evenement);
         }
-
+        [CustomUserAttribute(Roles = "administrateur", AccessLevel = "Edit")]
         // GET: /Evenement/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -153,7 +154,7 @@ namespace ProjetSessionWebServ2.Controllers
             }
             return View(evenement);
         }
-
+        [CustomUserAttribute(Roles = "administrateur", AccessLevel = "Delete")]
         // GET: /Evenement/Delete/5
         public ActionResult Delete(int? id)
         {

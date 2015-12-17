@@ -11,6 +11,7 @@ using ProjetSessionWebServ2.DAL;
 
 namespace ProjetSessionWebServ2.Controllers
 {
+    [CustomUserAttribute(Roles = "administrateur", AccessLevel = "Delete")]
     public class TypeConferencesController : Controller
     {
         private UnitOfWork unitOfWork = new UnitOfWork();
