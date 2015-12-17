@@ -37,7 +37,13 @@
         <dt>
             @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.KiosqueRes.Actif)
         </dt>
+        <dt>
+            Section
+        </dt>
 
+        <dd>
+            @Html.DisplayFor(model => model.Salle.NoSalle)
+        </dd>
         <dd>
             @Html.DisplayFor(model => model.Actif)
         </dd>

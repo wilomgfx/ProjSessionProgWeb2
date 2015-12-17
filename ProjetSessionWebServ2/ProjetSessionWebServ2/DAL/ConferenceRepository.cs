@@ -16,7 +16,7 @@ namespace ProjetSessionWebServ2.DAL
             }
         public IEnumerable<Conference> ObtenirConferences()
             {
-                return Get(null, null, "TypeConference,Users,Congres,PlageHoraires");
+                return Get(null, null, "TypeConference,Users,Congres,PlageHoraires,Salle");
             }
         public void InsertConference(Conference Conference) { Insert(Conference); }
         public void DeleteConference(Conference Conference) { Delete(Conference); }

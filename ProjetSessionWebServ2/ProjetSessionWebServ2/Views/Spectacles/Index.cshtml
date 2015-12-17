@@ -40,6 +40,9 @@
         <th>
             @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.SpectacleRes.HeureFin)
         </th>
+        <th>
+          Salle
+        </th>
         <th></th>
     </tr>
 
@@ -65,6 +68,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.PlageHoraires[0].DateEtHeureFin.Value.Hour)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Salle.NoSalle)
         </td>
         <td>
             @Html.ActionLink(@ProjetSessionWebServ2.GlobalRessources.SpectacleRes.Edit, "Edit", new { id=item.Id }) |

@@ -61,6 +61,8 @@ namespace ProjetSessionWebServ2.Controllers
             ViewBag.Congres = new SelectList(unitOfWork.CongresRepository.ObtenirCongres(), "Id", "Nom");
             SelectList TypeSpectacleId = new SelectList(unitOfWork.TypeSpectacleRepository.ObtenirTypeSpectacles(), "Id", "Nom");
             ViewBag.TypeSpectacleId = TypeSpectacleId;
+            SelectList SalleCongres = new SelectList(unitOfWork.SalleRepository.ObtenirSalles(), "Id", "NoSalle");
+            ViewBag.lstSalle = SalleCongres;
             return View();
         }
 
@@ -69,7 +71,7 @@ namespace ProjetSessionWebServ2.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeSpectacleId,Actif")] Spectacle spectacle, int Congres, string DateSpectacle, string HeureDebut, string HeureFin)
+        public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeSpectacleId,Actif,lstSalle")] Spectacle spectacle, int Congres, string DateSpectacle, string HeureDebut, string HeureFin,int? lstSalle)
         {
             DateTime dateSpectacle;
             int heureDebut;
@@ -97,6 +99,7 @@ namespace ProjetSessionWebServ2.Controllers
 
                 Congres congres = unitOfWork.CongresRepository.ObtenirCongres().Where(u => u.Id.Equals(Congres)).FirstOrDefault();
                 spectacle.Congres = congres;
+                spectacle.Salle = unitOfWork.SalleRepository.ObtenirSalleParID(lstSalle);
 
                 UserManager<ApplicationUser> UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(unitOfWork.context));
                 ApplicationUser utilisateur = UserManager.FindById(User.Identity.GetUserId());
@@ -172,6 +175,8 @@ namespace ProjetSessionWebServ2.Controllers
             ViewBag.Congres = new SelectList(unitOfWork.CongresRepository.ObtenirCongres(), "Id", "Nom");
             SelectList TypeSpectacleId = new SelectList(unitOfWork.TypeSpectacleRepository.ObtenirTypeSpectacles(), "Id", "Nom", spectacle.TypeSpectacleId);
             ViewBag.TypeSpectacleId = TypeSpectacleId;
+            SelectList SalleCongres = new SelectList(unitOfWork.SalleRepository.ObtenirSalles(), "Id", "NoSalle");
+            ViewBag.lstSalle = SalleCongres;
             return View(spectacle);
         }
 

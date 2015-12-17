@@ -95,8 +95,11 @@ namespace ProjetSessionWebServ2.Controllers
         public ActionResult Create()
         {
             ViewBag.Congres = new SelectList(unitOfWork.CongresRepository.ObtenirCongres(), "Id", "Nom");
+            ViewBag.lstSalle = new SelectList(unitOfWork.SalleRepository.ObtenirSalles(), "Id", "NoSalle");
             SelectList TypeConferenceId = new SelectList(unitOfWork.TypeConferenceRepository.ObtenirTypeConferences(), "Id", "Nom");
             ViewBag.TypeConferenceIdViewBag = TypeConferenceId;
+            SelectList lstSalle = new SelectList(unitOfWork.SalleRepository.ObtenirSalles(), "Id", "NoSalle");
+            ViewBag.lstSalle = lstSalle;
 
             return View();
         }
@@ -106,9 +109,9 @@ namespace ProjetSessionWebServ2.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeConferenceId")] Conference conference, int TypeConferenceIdViewBag, int Congres, string DateConference, string HeureDebut, string HeureFin)
+        public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeConferenceId,lstSalle")] Conference conference, int TypeConferenceIdViewBag, int Congres, string DateConference, string HeureDebut, string HeureFin,int? lstSalle)
         {
-
+            conference.Salle = unitOfWork.SalleRepository.ObtenirSalleParID(lstSalle);
             conference.TypeEvenement = Evenement.TypeEvent.TypeConference;
             
             conference.TypeConferenceId = TypeConferenceIdViewBag;
@@ -195,7 +198,9 @@ namespace ProjetSessionWebServ2.Controllers
             Conference conference = unitOfWork.ConferenceRepository.ObtenirConferenceParID(id);
 
             SelectList TypeConferenceId = new SelectList(unitOfWork.TypeConferenceRepository.ObtenirTypeConferences(), "Id", "Nom", conference.TypeConference.Id);
+            SelectList lstSalle = new SelectList(unitOfWork.SalleRepository.ObtenirSalles(), "Id", "Nom");
             ViewBag.TypeConferenceIdViewBag = TypeConferenceId;
+            ViewBag.lstSalle = lstSalle;
             if (conference == null)
             {
                 return HttpNotFound();
@@ -209,11 +214,12 @@ namespace ProjetSessionWebServ2.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "administrateur,conferencier")]
-        public ActionResult Edit([Bind(Include = "Id,Nom,Description,TypeEvenement,TypeConferenceId, Actif")] Conference conference, int TypeConferenceIdViewBag)
+        public ActionResult Edit([Bind(Include = "Id,Nom,Description,TypeEvenement,TypeConferenceId, Actif,lstSalle")] Conference conference, int TypeConferenceIdViewBag, int? lstSalle)
         {
             TypeConference typeConferenceRevenu = unitOfWork.TypeConferenceRepository.ObtenirTypeConferences().Where(u => u.Id.Equals(TypeConferenceIdViewBag)).FirstOrDefault();
             conference.TypeConferenceId = TypeConferenceIdViewBag;
             conference.TypeConference = typeConferenceRevenu;
+            conference.Salle = unitOfWork.SalleRepository.ObtenirSalleParID(lstSalle);
             if (ModelState.IsValid)
             {
                 unitOfWork.ConferenceRepository.UpdateConference(conference);

@@ -43,6 +43,9 @@
             @Html.DisplayName(@ProjetSessionWebServ2.GlobalRessources.ConferenceRes.Name)
         </th>
         <th>
+           NoSalle
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Description)
         </th>
         <th>
@@ -67,6 +70,9 @@
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Nom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Salle.NoSalle)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Description)
