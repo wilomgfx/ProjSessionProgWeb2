@@ -266,6 +266,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ConferenceRes.resx</DependentUpon>
     </Compile>
+    <Compile Include="GlobalRessources\NavbarRes.en.Designer.cs">
+      <DependentUpon>NavbarRes.en.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="GlobalRessources\NavbarRes.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NavbarRes.resx</DependentUpon>
+    </Compile>
     <Compile Include="GlobalRessources\TournoiRes.en.Designer.cs">
       <DependentUpon>TournoiRes.en.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -537,6 +547,14 @@
     <EmbeddedResource Include="GlobalRessources\ConferenceRes.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ConferenceRes.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GlobalRessources\NavbarRes.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>NavbarRes.en.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GlobalRessources\NavbarRes.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>NavbarRes.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="GlobalRessources\TournoiRes.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

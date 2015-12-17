@@ -117,31 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AdminPannelLink" xml:space="preserve">
+    <value>Panneau d'adminstration</value>
+  </data>
   <data name="ApplicationName" xml:space="preserve">
     <value>SuperCongrèsInfini! Wow!</value>
   </data>
-  <data name="AutorisationRequise" xml:space="preserve">
-    <value>Il semblerait que vous ne disposez pas des autorisations requises pour effectuer cette opération. Désolé.</value>
+  <data name="CongresLink" xml:space="preserve">
+    <value>Congrès</value>
   </data>
-  <data name="BadRoleError" xml:space="preserve">
-    <value>Erreur de role</value>
+  <data name="Connect" xml:space="preserve">
+    <value>Se connecter</value>
   </data>
-  <data name="Error" xml:space="preserve">
-    <value>Erreur.</value>
+  <data name="Disconnect" xml:space="preserve">
+    <value>Se déconnecter</value>
   </data>
-  <data name="ErrorOccured" xml:space="preserve">
-    <value>Une erreur s'est produite lors du traitement de la requête.</value>
+  <data name="Hi" xml:space="preserve">
+    <value>Bonjour </value>
   </data>
-  <data name="HomePage" xml:space="preserve">
-    <value>Accueil</value>
-  </data>
-  <data name="Locked" xml:space="preserve">
-    <value>Vérouillé.</value>
-  </data>
-  <data name="LockedTryAgain" xml:space="preserve">
-    <value>Ce compte a été verrouillé, veuillez réessayer.</value>
-  </data>
-  <data name="RealisePar" xml:space="preserve">
-    <value>Realise par l'equipe ASP.Biere</value>
+  <data name="Register" xml:space="preserve">
+    <value>S'inscrire</value>
   </data>
 </root>
