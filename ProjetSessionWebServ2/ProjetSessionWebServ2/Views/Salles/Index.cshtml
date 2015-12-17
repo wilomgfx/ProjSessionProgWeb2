@@ -7,7 +7,7 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Ajouter une nouvelle Salle", "Create")
+    @Html.ActionLink(@ProjetSessionWebServ2.GlobalRessources.SalleSectionRes.AddNewSalle, "Create")
 </p>
 <table class="table">
     <tr>
@@ -15,16 +15,16 @@
             @Html.DisplayNameFor(model => model.NoSalle)
         </th>
         <th>
-            Taille 
+            @ProjetSessionWebServ2.GlobalRessources.SalleSectionRes.Taille 
         </th>
         <th>
-            Largeur
+            @ProjetSessionWebServ2.GlobalRessources.SalleSectionRes.Largeur
         </th>
         <th>
-            Longueur
+            @ProjetSessionWebServ2.GlobalRessources.SalleSectionRes.Longueur
         </th>
         <th>
-            Disponible 
+            @ProjetSessionWebServ2.GlobalRessources.SalleSectionRes.Disponible 
         </th>
         <th></th>
     </tr>
@@ -44,10 +44,10 @@
             @Html.DisplayFor(modelItem => item.Dimension.Longueur)
         </td>
         <td>
-            @Html.ActionLink("voir Section", "Index","Sections") |
-            @Html.ActionLink("Modifier", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("voir Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Supprimer", "Delete", new { id=item.Id })
+            @Html.ActionLink(@ProjetSessionWebServ2.GlobalRessources.SalleSectionRes.VoirSection, "Index","Sections") |
+            @Html.ActionLink(@ProjetSessionWebServ2.GlobalRessources.SalleSectionRes.Edit, "Edit", new { id=item.Id }) |
+            @Html.ActionLink(@ProjetSessionWebServ2.GlobalRessources.SalleSectionRes.Details, "Details", new { id=item.Id }) |
+            @Html.ActionLink(@ProjetSessionWebServ2.GlobalRessources.SalleSectionRes.Delete, "Delete", new { id=item.Id })
         </td>
     </tr>
     foreach (var section in item.Sections)
@@ -66,9 +66,9 @@
                 @Html.DisplayFor(modelItem => section.Dimension.Longueur)
             </td>
             <td>
-                @Html.ActionLink("Modifier", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("voir Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Supprimer", "Delete", new { id = item.Id })
+                @Html.ActionLink(@ProjetSessionWebServ2.GlobalRessources.SalleSectionRes.Edit, "Edit", new { id = item.Id }) |
+                @Html.ActionLink(@ProjetSessionWebServ2.GlobalRessources.SalleSectionRes.Details, "Details", new { id = item.Id }) |
+                @Html.ActionLink(@ProjetSessionWebServ2.GlobalRessources.SalleSectionRes.Delete, "Delete", new { id = item.Id })
             </td>
         </tr>
     }

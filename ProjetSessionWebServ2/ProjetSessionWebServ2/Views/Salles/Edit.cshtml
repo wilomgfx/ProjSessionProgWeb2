@@ -1,10 +1,10 @@
 ﻿@model ProjetSessionWebServ2.Models.Salle
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = @ProjetSessionWebServ2.GlobalRessources.SalleSectionRes.Edit;
 }
 
-<h2>Modifier</h2>
+<h2>@ProjetSessionWebServ2.GlobalRessources.SalleSectionRes.Edit</h2>
 
 
 @using (Html.BeginForm())
@@ -12,7 +12,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Salle</h4>
+        <h4>@ProjetSessionWebServ2.GlobalRessources.SalleSectionRes.Salle</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
@@ -52,7 +52,7 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Save" class="btn btn-default" />
+                    <input type="submit" value="@ProjetSessionWebServ2.GlobalRessources.SalleSectionRes.Save" class="btn btn-default" />
                 </div>
             </div>
         </div>
@@ -60,7 +60,7 @@
 }
 
 <div>
-    @Html.ActionLink("Retour a la liste", "Index")
+    @Html.ActionLink(@ProjetSessionWebServ2.GlobalRessources.SalleSectionRes.Retouralaliste, "Index")
 </div>
 
 @section Scripts {

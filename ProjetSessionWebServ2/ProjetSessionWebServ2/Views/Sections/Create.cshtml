@@ -1,9 +1,9 @@
 ﻿@model ProjetSessionWebServ2.Models.Section
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = @ProjetSessionWebServ2.GlobalRessources.SalleSectionRes.Create;
 }
 
-<h2>Ajouter une sections</h2>
+<h2>@ProjetSessionWebServ2.GlobalRessources.SalleSectionRes.AddSection</h2>
 
 
 @using (Html.BeginForm()) 
@@ -11,7 +11,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Section</h4>
+        <h4>@ProjetSessionWebServ2.GlobalRessources.SalleSectionRes.Section</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -35,7 +35,7 @@
             <div class="col-md-10">
 
                 @*@Html.EditorFor(model => model.TailleSalle, new { htmlAttributes = new { @class = "form-control" } })*@
-                @Html.DropDownList("TailleSection", EnumHelper.GetSelectList(typeof(ProjetSessionWebServ2.Models.Taille)), "Selectionner la Taille", new { @class = "form-control" })
+                @Html.DropDownList("TailleSection", EnumHelper.GetSelectList(typeof(ProjetSessionWebServ2.Models.Taille)), @ProjetSessionWebServ2.GlobalRessources.SalleSectionRes.SelectionnerLaTaille, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.TailleSection, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -57,14 +57,14 @@
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="@ProjetSessionWebServ2.GlobalRessources.SalleSectionRes.Create" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Retour à la liste", "Index")
+    @Html.ActionLink(@ProjetSessionWebServ2.GlobalRessources.SalleSectionRes.Retouralaliste, "Index")
 </div>
 
 @section Scripts {

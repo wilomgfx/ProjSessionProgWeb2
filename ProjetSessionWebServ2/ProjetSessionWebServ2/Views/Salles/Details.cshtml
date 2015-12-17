@@ -1,13 +1,13 @@
 ﻿@model ProjetSessionWebServ2.Models.Salle
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = @ProjetSessionWebServ2.GlobalRessources.SalleSectionRes.Details;
 }
 
-<h2>Details</h2>
+<h2>@ProjetSessionWebServ2.GlobalRessources.SalleSectionRes.Details</h2>
 
 <div>
-    <h4>Salle</h4>
+    <h4>@ProjetSessionWebServ2.GlobalRessources.SalleSectionRes.Salle</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -53,7 +53,7 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Modifier", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Voir Sections", "Index","Sections") |
-    @Html.ActionLink("Retour a la liste", "Index")
+    @Html.ActionLink(@ProjetSessionWebServ2.GlobalRessources.SalleSectionRes.Edit, "Edit", new { id = Model.Id }) |
+    @Html.ActionLink(@ProjetSessionWebServ2.GlobalRessources.SalleSectionRes.VoirSection, "Index","Sections") |
+    @Html.ActionLink(@ProjetSessionWebServ2.GlobalRessources.SalleSectionRes.Retouralaliste, "Index")
 </p>

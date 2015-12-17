@@ -266,6 +266,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ConferenceRes.resx</DependentUpon>
     </Compile>
+    <Compile Include="GlobalRessources\SalleSectionRes.en.Designer.cs">
+      <DependentUpon>SalleSectionRes.en.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="GlobalRessources\SalleSectionRes.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SalleSectionRes.resx</DependentUpon>
+    </Compile>
     <Compile Include="GlobalRessources\TournoiRes.en.Designer.cs">
       <DependentUpon>TournoiRes.en.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -537,6 +547,14 @@
     <EmbeddedResource Include="GlobalRessources\ConferenceRes.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ConferenceRes.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GlobalRessources\SalleSectionRes.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SalleSectionRes.en.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GlobalRessources\SalleSectionRes.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SalleSectionRes.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="GlobalRessources\TournoiRes.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
