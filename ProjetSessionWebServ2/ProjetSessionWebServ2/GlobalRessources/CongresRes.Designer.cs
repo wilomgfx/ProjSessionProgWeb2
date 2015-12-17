@@ -205,7 +205,7 @@ namespace ProjetSessionWebServ2.GlobalRessources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Édit.
+        ///   Looks up a localized string similar to Modifier.
         /// </summary>
         public static string Edit {
             get {
