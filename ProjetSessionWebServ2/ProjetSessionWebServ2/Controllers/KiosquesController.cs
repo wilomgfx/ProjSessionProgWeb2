@@ -95,8 +95,11 @@ namespace ProjetSessionWebServ2.Controllers
         public ActionResult Create()
         {
             ViewBag.Congres = new SelectList(uow.CongresRepository.ObtenirCongres(), "Id", "Nom");
+            ViewBag.Section = new SelectList(uow.SectionRepository.ObtenirSections(), "Id", "Nom");
             SelectList TypeKiosqueId = new SelectList(uow.TypeKiosqueRepository.ObtenirTypeKiosques(), "Id", "Nom");
+            SelectList lstSection = new SelectList(uow.SectionRepository.ObtenirSections(), "Id", "Nom");
             ViewBag.TypeKiosqueId = TypeKiosqueId;
+            ViewBag.lstSection = lstSection;
             return View();
         }
 
@@ -105,7 +108,7 @@ namespace ProjetSessionWebServ2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeKiosqueId,Actif")] Kiosque Kiosque, FormCollection collection)
+        public ActionResult Create([Bind(Include = "Id,Nom,Description,TypeKiosqueId,Actif,lstSection")] Kiosque Kiosque, FormCollection collection,int? lstSection)
         {
             Kiosque.Actif = true;
 
@@ -147,6 +150,7 @@ namespace ProjetSessionWebServ2.Controllers
                 Kiosque.TypeEvenement = Evenement.TypeEvent.TypeKiosque;
                 Kiosque.Actif = true;
                 Kiosque.Congres = congres;
+                Kiosque.Salle = uow.SalleRepository.ObtenirSalleParID(lstSection);
 
                 uow.KiosqueRepository.InsertKiosque(Kiosque);
                 uow.Save();
@@ -194,7 +198,9 @@ namespace ProjetSessionWebServ2.Controllers
             }
 
             SelectList TypeKiosqueId = new SelectList(uow.TypeKiosqueRepository.ObtenirTypeKiosques(), "Id", "Nom", Kiosque.TypeKiosqueId);
+            SelectList lstSection = new SelectList(uow.SectionRepository.ObtenirSections(), "Id", "Nom");
             ViewBag.TypeKiosqueId = TypeKiosqueId;
+            ViewBag.Section = new SelectList(uow.SectionRepository.ObtenirSections(), "Id", "Nom");
 
             return View(Kiosque);
         }
@@ -204,7 +210,7 @@ namespace ProjetSessionWebServ2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nom,Description,TypeKiosqueId,Actif")] Kiosque Kiosque)
+        public ActionResult Edit([Bind(Include = "Id,Nom,Description,TypeKiosqueId,Actif,lstSections")] Kiosque Kiosque, int? lstSections)
         {
             if (ModelState.IsValid)
             {

@@ -30,7 +30,7 @@ namespace ProjetSessionWebServ2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Section section = uow.SectionRepository.ObtenirSectionParID(id);
+            Section section = uow.SectionRepository.ObtenirSections().Where(s => s.Id == id).FirstOrDefault();
             if (section == null)
             {
                 return HttpNotFound();
@@ -41,6 +41,8 @@ namespace ProjetSessionWebServ2.Controllers
         // GET: Sections/Create
         public ActionResult Create()
         {
+            SelectList SalleCongres = new SelectList(uow.SalleRepository.ObtenirSalles(), "Id", "NoSalle");
+            ViewBag.lstSalle = SalleCongres;
             return View();
         }
 
@@ -49,12 +51,13 @@ namespace ProjetSessionWebServ2.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nom,TailleSection")] Section section, Dimension Dimension/*, Taille TailleSection*/)
+        public ActionResult Create([Bind(Include = "Id,Nom,TailleSection,lstSalle")] Section section, Dimension Dimension, int? lstSalle)
         {
             if (ModelState.IsValid)
             {
                 //db.Sections.Add(section);
                 //db.SaveChanges
+                section.Salle = uow.SalleRepository.ObtenirSalleParID(lstSalle); 
                 section.Dimension = Dimension;
                 uow.SectionRepository.InsertSection(section);
                 uow.Save();

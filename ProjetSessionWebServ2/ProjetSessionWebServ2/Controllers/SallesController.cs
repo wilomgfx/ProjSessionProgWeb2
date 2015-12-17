@@ -45,6 +45,7 @@ namespace ProjetSessionWebServ2.Controllers
         {
             //SelectList TailleSalle = new SelectList(, "Id", "Nom");
             //ViewBag.TypeKiosqueId = TypeKiosqueId;
+
             return View();
         }
 
@@ -53,7 +54,7 @@ namespace ProjetSessionWebServ2.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,NoSalle,TailleSalle")] Salle salle, Dimension Dimension)
+        public ActionResult Create([Bind(Include = "Id,NoSalle,TailleSalle,lstSalle")] Salle salle, Dimension Dimension, int? lstSalle)
         {
             if (ModelState.IsValid)
             {
