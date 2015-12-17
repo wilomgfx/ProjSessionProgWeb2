@@ -44,6 +44,7 @@ namespace ProjetSessionWebServ2.Controllers
         {
             //SelectList TailleSalle = new SelectList(, "Id", "Nom");
             //ViewBag.TypeKiosqueId = TypeKiosqueId;
+
             return View();
         }
 
