@@ -14,6 +14,6 @@ namespace ProjetSessionWebServ2.Models
         public Nullable<int> EvenementId { get; set; }
         public Evenement Evenement { get; set; }
         public Dimension Dimension { get; set; }
-        public virtual Dimension Sections { get; set; }
+        //public virtual Dimension Sections { get; set; } <--- this should not exists, it fked up the db :(
     }
 }
