@@ -10,7 +10,7 @@ using ProjetSessionWebServ2.Models;
 
 namespace ProjetSessionWebServ2.DAL
 {
-    [CustomUserAttribute(Roles = "administrateur", AccessLevel = "Delete")]
+    [CustomUserAttribute(Roles = "administrateur", AccessLevel = "TypeSpectaclesController")]
     public class TypeSpectaclesController : Controller
     {
         private UnitOfWork unitOfWork = new UnitOfWork();

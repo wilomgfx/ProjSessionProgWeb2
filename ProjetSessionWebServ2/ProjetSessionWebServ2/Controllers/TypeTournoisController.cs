@@ -11,7 +11,7 @@ using ProjetSessionWebServ2.DAL;
 
 namespace ProjetSessionWebServ2.Controllers
 {
-    [CustomUserAttribute(Roles = "administrateur", AccessLevel = "Delete")]
+    [CustomUserAttribute(Roles = "administrateur", AccessLevel = "TypeTournoisController")]
     public class TypeTournoisController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
