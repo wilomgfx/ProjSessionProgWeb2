@@ -22,14 +22,14 @@ namespace ProjetSessionWebServ2.GlobalRessources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class HomeRes {
+    public class NavbarRes {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal HomeRes() {
+        internal NavbarRes() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace ProjetSessionWebServ2.GlobalRessources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ProjetSessionWebServ2.GlobalRessources.HomeRes", typeof(HomeRes).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ProjetSessionWebServ2.GlobalRessources.NavbarRes", typeof(NavbarRes).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,6 +61,15 @@ namespace ProjetSessionWebServ2.GlobalRessources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Panneau d&apos;adminstration.
+        /// </summary>
+        public static string AdminPannelLink {
+            get {
+                return ResourceManager.GetString("AdminPannelLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to SuperCongrèsInfini! Wow!.
         /// </summary>
         public static string ApplicationName {
@@ -70,74 +79,47 @@ namespace ProjetSessionWebServ2.GlobalRessources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Il semblerait que vous ne disposez pas des autorisations requises pour effectuer cette opération. Désolé..
+        ///   Looks up a localized string similar to Congrès.
         /// </summary>
-        public static string AutorisationRequise {
+        public static string CongresLink {
             get {
-                return ResourceManager.GetString("AutorisationRequise", resourceCulture);
+                return ResourceManager.GetString("CongresLink", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Erreur de role.
+        ///   Looks up a localized string similar to Se connecter.
         /// </summary>
-        public static string BadRoleError {
+        public static string Connect {
             get {
-                return ResourceManager.GetString("BadRoleError", resourceCulture);
+                return ResourceManager.GetString("Connect", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Erreur..
+        ///   Looks up a localized string similar to Se déconnecter.
         /// </summary>
-        public static string Error {
+        public static string Disconnect {
             get {
-                return ResourceManager.GetString("Error", resourceCulture);
+                return ResourceManager.GetString("Disconnect", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Une erreur s&apos;est produite lors du traitement de la requête..
+        ///   Looks up a localized string similar to Bonjour .
         /// </summary>
-        public static string ErrorOccured {
+        public static string Hi {
             get {
-                return ResourceManager.GetString("ErrorOccured", resourceCulture);
+                return ResourceManager.GetString("Hi", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Accueil.
+        ///   Looks up a localized string similar to S&apos;inscrire.
         /// </summary>
-        public static string HomePage {
+        public static string Register {
             get {
-                return ResourceManager.GetString("HomePage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Vérouillé..
-        /// </summary>
-        public static string Locked {
-            get {
-                return ResourceManager.GetString("Locked", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Ce compte a été verrouillé, veuillez réessayer..
-        /// </summary>
-        public static string LockedTryAgain {
-            get {
-                return ResourceManager.GetString("LockedTryAgain", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Realise par l&apos;equipe ASP.Biere.
-        /// </summary>
-        public static string RealisePar {
-            get {
-                return ResourceManager.GetString("RealisePar", resourceCulture);
+                return ResourceManager.GetString("Register", resourceCulture);
             }
         }
     }

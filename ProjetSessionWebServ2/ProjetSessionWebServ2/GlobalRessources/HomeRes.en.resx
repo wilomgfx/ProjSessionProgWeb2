@@ -117,12 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="a" xml:space="preserve">
-    <value />
-  </data>
-  <data name="abb" xml:space="preserve">
-    <value />
-  </data>
   <data name="AutorisationRequise" xml:space="preserve">
     <value> It looks like you don't have the required rights for this action. Sorry about that.</value>
   </data>
@@ -135,7 +129,19 @@
   <data name="RealisePar" xml:space="preserve">
     <value>Realised by the Team ASP.Biere</value>
   </data>
-  <data name="String1" xml:space="preserve">
-    <value />
+  <data name="ApplicationName" xml:space="preserve">
+    <value>SuperInfiniteCongres! Wow!</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error.</value>
+  </data>
+  <data name="ErrorOccured" xml:space="preserve">
+    <value>An error occured while threating your request.</value>
+  </data>
+  <data name="Locked" xml:space="preserve">
+    <value>Locked.</value>
+  </data>
+  <data name="LockedTryAgain" xml:space="preserve">
+    <value>This account has been locked. Please try again.</value>
   </data>
 </root>
