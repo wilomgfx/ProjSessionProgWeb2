@@ -132,7 +132,7 @@ namespace ProjetSessionWebServ2.Controllers
                 Transaction nouvelleTransaction = new Transaction();
                 nouvelleTransaction.DateAchat = DateTime.Now;
                 nouvelleTransaction.Montant = 1000;
-                nouvelleTransaction.TypeAchat = "Location pour un dateSpectacle";
+                nouvelleTransaction.TypeAchat = "Location pour un Spectacle";
                 unitOfWork.TransactionRepository.InsertTransaction(nouvelleTransaction);
                 unitOfWork.Save();
                 return RedirectToAction("Index");
