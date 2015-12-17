@@ -266,6 +266,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ConferenceRes.resx</DependentUpon>
     </Compile>
+    <Compile Include="GlobalRessources\PlageHoraireRes.en.Designer.cs">
+      <DependentUpon>PlageHoraireRes.en.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="GlobalRessources\PlageHoraireRes.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PlageHoraireRes.resx</DependentUpon>
+    </Compile>
     <Compile Include="GlobalRessources\SalleSectionRes.en.Designer.cs">
       <DependentUpon>SalleSectionRes.en.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -275,7 +285,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SalleSectionRes.resx</DependentUpon>
-	</Compile>
+    </Compile>
     <Compile Include="GlobalRessources\NavbarRes.en.Designer.cs">
       <DependentUpon>NavbarRes.en.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -558,6 +568,14 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ConferenceRes.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="GlobalRessources\PlageHoraireRes.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PlageHoraireRes.en.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GlobalRessources\PlageHoraireRes.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PlageHoraireRes.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="GlobalRessources\SalleSectionRes.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SalleSectionRes.en.Designer.cs</LastGenOutput>
@@ -565,7 +583,7 @@
     <EmbeddedResource Include="GlobalRessources\SalleSectionRes.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SalleSectionRes.Designer.cs</LastGenOutput>
-	 </EmbeddedResource>
+    </EmbeddedResource>
     <EmbeddedResource Include="GlobalRessources\NavbarRes.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>NavbarRes.en.Designer.cs</LastGenOutput>

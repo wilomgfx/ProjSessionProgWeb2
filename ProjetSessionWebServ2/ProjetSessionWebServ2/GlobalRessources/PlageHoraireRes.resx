@@ -117,88 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Active" xml:space="preserve">
-    <value>Active</value>
-  </data>
-  <data name="Address" xml:space="preserve">
-    <value>Address</value>
-  </data>
-  <data name="Amount" xml:space="preserve">
-    <value>Amount</value>
-  </data>
   <data name="BackToList" xml:space="preserve">
-    <value>Back to list</value>
+    <value>Retour à la liste</value>
   </data>
-  <data name="BeginDateAndHour" xml:space="preserve">
-    <value>Begin date and hour</value>
-  </data>
-  <data name="BoughtType" xml:space="preserve">
-    <value>BoughtType</value>
-  </data>
-  <data name="Conferences" xml:space="preserve">
-    <value>Conferences</value>
-  </data>
-  <data name="ConfirmDelete" xml:space="preserve">
-    <value>Are you sure you want to delete this?</value>
-  </data>
-  <data name="Congres" xml:space="preserve">
-    <value>Congres</value>
-  </data>
-  <data name="CongresEvents" xml:space="preserve">
-    <value>Congres events</value>
-  </data>
-  <data name="CongresSchedule" xml:space="preserve">
-    <value>Congres schedule</value>
-  </data>
-  <data name="CongresScheduleOrderDesc" xml:space="preserve">
-    <value>Congres schedule in descending order</value>
+  <data name="ControllerName" xml:space="preserve">
+    <value>PlageHoraire</value>
   </data>
   <data name="Create" xml:space="preserve">
-    <value>Create</value>
+    <value>Création</value>
   </data>
-  <data name="DateBought" xml:space="preserve">
-    <value>DateBought</value>
+  <data name="CreateNew" xml:space="preserve">
+    <value>Créer nouveau</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>Delete</value>
+    <value>Supprimer</value>
+  </data>
+  <data name="DeleteConfirm" xml:space="preserve">
+    <value>Êtes vous sure de vouloir supprimer ceci?</value>
   </data>
   <data name="Details" xml:space="preserve">
-    <value>Details</value>
+    <value>Détails</value>
   </data>
   <data name="Edit" xml:space="preserve">
-    <value>Edit</value>
-  </data>
-  <data name="EndDate" xml:space="preserve">
-    <value>End date</value>
-  </data>
-  <data name="EndDateAndHour" xml:space="preserve">
-    <value>End date and hour</value>
-  </data>
-  <data name="Kiosks" xml:space="preserve">
-    <value>Kiosks</value>
-  </data>
-  <data name="Name" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="Others" xml:space="preserve">
-    <value>Others</value>
-  </data>
-  <data name="SalesReport" xml:space="preserve">
-    <value>Sales report</value>
+    <value>Modifier</value>
   </data>
   <data name="Save" xml:space="preserve">
-    <value>Save</value>
-  </data>
-  <data name="SeeFullSchedule" xml:space="preserve">
-    <value>See full schedule</value>
-  </data>
-  <data name="Shows" xml:space="preserve">
-    <value>Spectacles</value>
-  </data>
-  <data name="StartDate" xml:space="preserve">
-    <value>Start date</value>
-  </data>
-  <data name="Tournaments" xml:space="preserve">
-    <value>Tournaments</value>
+    <value>Sauvegarder</value>
   </data>
 </root>
