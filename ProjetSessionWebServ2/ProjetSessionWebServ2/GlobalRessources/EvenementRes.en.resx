@@ -118,43 +118,43 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Active1" xml:space="preserve">
-    <value>Actif</value>
+    <value>Active</value>
   </data>
   <data name="AddEvent" xml:space="preserve">
-    <value>Ajouter un evenement au Congrès</value>
+    <value>Add an event to this congres</value>
   </data>
   <data name="Congres" xml:space="preserve">
-    <value>Congrès</value>
+    <value>Congres</value>
   </data>
   <data name="Create" xml:space="preserve">
-    <value>Creer</value>
+    <value>Create</value>
   </data>
   <data name="Edit" xml:space="preserve">
-    <value>Édit</value>
+    <value>Edit</value>
   </data>
   <data name="Evenemenent" xml:space="preserve">
     <value>Event</value>
   </data>
   <data name="EventType1" xml:space="preserve">
-    <value>Type evenement</value>
+    <value>Event  type</value>
   </data>
   <data name="Name1" xml:space="preserve">
-    <value>Nom evenement</value>
+    <value>Event name</value>
   </data>
   <data name="PlageHoraire" xml:space="preserve">
     <value>Schedule</value>
   </data>
   <data name="Retouralaliste" xml:space="preserve">
-    <value>Retour à la liste</value>
+    <value>Back to list</value>
   </data>
   <data name="Room1" xml:space="preserve">
-    <value>Salle</value>
+    <value>Room</value>
   </data>
   <data name="Save" xml:space="preserve">
-    <value>Sauvegarder</value>
+    <value>Save</value>
   </data>
   <data name="Supprimer" xml:space="preserve">
-    <value>Supprimer</value>
+    <value>Delete</value>
   </data>
   <data name="User" xml:space="preserve">
     <value>User</value>
