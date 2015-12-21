@@ -247,6 +247,36 @@ namespace ProjetSessionWebServ2.DAL
             }
         }
 
+        private EquipeAvancementRepository equipeAvancementRepository;
+
+        public EquipeAvancementRepository EquipeAvancementRepository
+        {
+            get
+            {
+
+                if (this.equipeAvancementRepository == null)
+                {
+                    this.equipeAvancementRepository = new EquipeAvancementRepository(context);
+                }
+                return equipeAvancementRepository;
+            }
+        }
+
+        private PartieRepository partieRepository;
+
+        public PartieRepository PartieRepository
+        {
+            get
+            {
+
+                if (this.partieRepository == null)
+                {
+                    this.partieRepository = new PartieRepository(context);
+                }
+                return partieRepository;
+            }
+        }
+
         //private ExempleRepo exempleRepository;
 
         //public ExempleRepo ExempleReposiroy

@@ -17,7 +17,7 @@ namespace ProjetSessionWebServ2.DAL
         }
         public IEnumerable<Equipe> ObtenirEquipes()
         {
-            return Get(null, null, "TypeEquipe");
+            return Get(null, null, "Joueurs");
         }
 
         public IEnumerable<Equipe> ObtenirEquipeParNom(string nom)
@@ -37,6 +37,11 @@ namespace ProjetSessionWebServ2.DAL
         public Equipe ObtenirEquipeCompletParId(int? id)
         {
             return Get(null, null, "Joueurs").Where(e => e.Id == id).SingleOrDefault();
+        }
+
+        public Equipe ObtenirEquipeCompleteParNom(string nom)
+        {
+            return Get(null, null, "Joueurs").Where(e => e.Nom.Equals(nom)).SingleOrDefault();
         }
     }
 }

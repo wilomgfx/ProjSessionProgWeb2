@@ -18,7 +18,7 @@ namespace ProjetSessionWebServ2.DAL
         }
         public IEnumerable<Tournoi> ObtenirTournois()
         {
-            return Get(null, null, "TypeTournoi,Congres,PlageHoraires,Salle");
+            return Get(null, null, "TypeTournoi,Congres,PlageHoraires,Salle,Equipes,Parties,Avancements");
         }
 
         public IEnumerable<Tournoi> ObtenirTournoiParType(Evenement.TypeEvent type)
@@ -52,7 +52,14 @@ namespace ProjetSessionWebServ2.DAL
 
         public Tournoi ObtenirTournoiCompletParId(int? id)
         {
-            return Get(null, null, "Equipes,Parties,Avancements,TypeTournoi").Where(e => e.Id == id).SingleOrDefault();
+            return Get(null, null, "Equipes,Parties,Avancements,TypeTournoi,Congres,PlageHoraires,Salle").Where(e => e.Id == id).SingleOrDefault();
         }
+
+        //public Tournoi ObtenirTournoiCompletParIdRecursif(int? id)
+        //{
+        //    Tournoi tournoi = Get(null, null, "Equipes,Parties,Avancements,TypeTournoi,Congres,PlageHoraires,Salle").Where(e => e.Id == id).SingleOrDefault();
+
+        //    tournoi.Equipes = context.Equipes.Fin
+        //}
     }
 }

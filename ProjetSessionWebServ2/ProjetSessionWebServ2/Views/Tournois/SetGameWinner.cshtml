@@ -1,0 +1,25 @@
+﻿@model ProjetSessionWebServ2.Models.Partie
+
+@{
+    ViewBag.Title = "SetGameWinner";
+}
+
+<h1>Choisissez un gagnant pour cette partie</h1>
+
+<table class="table">
+    <tr>
+        <th>
+            Équipe
+        </th>
+        <th></th>
+    </tr>
+    @foreach (ProjetSessionWebServ2.Models.Equipe eq in Model.Equipes)
+    {
+        <tr>
+            <td>@eq.Nom</td>
+            <td>@Html.ActionLink("Choisir comme gagnant", "ChooseWinner", new { id= Model.Id, eqid = eq.Id })</td>
+        </tr>      
+    }
+</table>
+
+@Html.ActionLink("Retour aux Parties du Tournoi", "TournamentGames", new { id = Model.Tournoi.Id })

@@ -12,5 +12,7 @@ namespace ProjetSessionWebServ2.Models
         public Equipe Equipe { get; set; }
 
         public int NbrDePoints { get; set; }
+
+        public virtual Tournoi Tournoi { get; set; }
     }
 }

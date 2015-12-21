@@ -1,0 +1,86 @@
+﻿@model ProjetSessionWebServ2.Models.Tournoi
+
+@{
+    ViewBag.Title = "Tournament Games";
+}
+
+<h1>Parties du Tournoi: @Model.Nom</h1>
+
+@Html.ActionLink("Ajouter une partie", "AddGame", new { id=Model.Id })
+<br />
+<br />
+
+<table class="table">
+    <tr>
+        <th>Équipes &nbsp;</th>
+        <th>Date et Heure</th>
+        <th>Gagnant</th>
+        <th></th>
+    </tr>
+    @foreach (ProjetSessionWebServ2.Models.Partie p in Model.Parties)
+    {
+        <tr>
+            <td>
+                @{
+                    // On va concatener les noms des equipes.
+                    string vs = "";
+                    for (int i = 0; i < p.Equipes.Count; i++)
+                    {
+                        ProjetSessionWebServ2.Models.Equipe e = p.Equipes[i];
+                        if(i != p.Equipes.Count - 1)
+                        {
+                            vs += e.Nom + " vs ";
+                        }
+                        else
+                        {
+                            vs += e.Nom;
+                        }
+                    }
+                    
+                    <p>@vs</p>
+                }
+            </td>
+            <td>
+                @{
+                    if(!p.Actif)
+                    {
+                        <p>Annulée</p>
+                    }
+                    else
+                    {
+                        <p>@p.DateEtHeureDebut à @p.DateEtHeureFin</p>
+                    }
+                }
+            </td>
+            <td>
+                @{
+                    if(p.Gagnant == null || p.Gagnant.Equals(""))
+                    {
+                        @Html.ActionLink("Choose Winner...", "SetGameWinner", new { id=p.Id })
+                    }
+                    else
+                    {
+                        <p>@p.Gagnant</p>
+                    }
+                }
+                
+            </td>
+            <td>
+                @{
+                    if(!p.Actif)
+                    {
+                        <p></p>
+                    }
+                    else
+                    {
+                        Html.ActionLink("Annuler", "CancelGame", new { id = p.Id, tournid = Model.Id });
+                    }
+                }
+                
+            </td>
+        </tr>
+    }
+</table>
+
+@Html.ActionLink("Retour au Tournoi", "Details", new { id = Model.Id })
+

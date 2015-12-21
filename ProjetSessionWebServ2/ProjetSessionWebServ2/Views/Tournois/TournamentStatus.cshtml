@@ -1,0 +1,46 @@
+﻿@model ProjetSessionWebServ2.ViewModels.Tournoi_EquipesPointages
+
+@{
+    ViewBag.Title = "Status";
+}
+
+<h1>Statut du Tournoi: @Model.Tournoi.Nom</h1>
+
+
+<h2>Classement</h2>
+<div>
+    <table class="table">
+        <tr>
+            <th>
+                Rang
+            </th>
+            <th>
+                Équipe
+            </th>
+            <th>
+                Pointage
+            </th>
+            <th></th>
+        </tr>
+        @{
+            int cpt = 1;
+            foreach (ProjetSessionWebServ2.Models.EquipeAvancement eq in Model.Equipes)
+            {
+                <tr>
+                    <td>@cpt</td>
+                    <td>@eq.Equipe.Nom</td>
+                    <td>@eq.NbrDePoints</td>
+                    <td>@Html.ActionLink("Détails", "DetailsForTeam", new { id = eq.Equipe.Id, tournid = Model.Tournoi.Id })</td>
+                </tr>
+
+                cpt++;
+            }
+        }
+    </table>
+</div>
+
+
+
+@Html.ActionLink("Retour au Tournoi", "Details", new { id = Model.Tournoi.Id })
+
+

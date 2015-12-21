@@ -231,6 +231,30 @@ namespace ProjetSessionWebServ2.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult AlreadyInTournament()
+        {
+            return View();
+        }
+
+        public ActionResult DetailsForTeam(int? id, int? tournid)
+        {
+            if (id == null || tournid == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            //Tournoi tournoi = db.Evenements.Find(id);
+            Equipe eq = unitOfWork.EquipeRepository.ObtenirEquipeCompletParId(id);
+
+            if (eq == null)
+            {
+                return HttpNotFound();
+            }
+
+            ViewData["TournID"] = tournid;
+            return View(eq);
+        }
+
+        [Authorize]
         public ActionResult Participate(int? tournamentId, int? teamid)
         {
             if (tournamentId == null)
@@ -241,6 +265,24 @@ namespace ProjetSessionWebServ2.Controllers
             if (tournoi == null)
             {
                 return HttpNotFound();
+            }
+
+            // On va chercher l'utilisateur courant.
+            UserManager<ApplicationUser> UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(unitOfWork.context));
+            ApplicationUser utilisateur = UserManager.FindById(User.Identity.GetUserId());
+
+            // On vérifis si l'utilisateur participe déjà au tournois. Si oui, on le redirige.
+            foreach (Equipe eq in tournoi.Equipes)
+            {
+                Equipe vraiEquipe = unitOfWork.EquipeRepository.ObtenirEquipeCompletParId(eq.Id);
+
+                foreach (ApplicationUser joueur in vraiEquipe.Joueurs)
+                {
+                    if(joueur.Email.Equals(utilisateur.Email) || joueur.UserName.Equals(utilisateur.UserName))
+                    {
+                        return RedirectToAction("AlreadyInTournament");
+                    }
+                }
             }
 
             Tournoi_Equipe model = new Tournoi_Equipe();
@@ -260,39 +302,54 @@ namespace ProjetSessionWebServ2.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         //[ValidateAntiForgeryToken]
         public ActionResult Participate(FormCollection formCollection)
         {
             Tournoi tourn = unitOfWork.TournoiRepository.ObtenirTournoiCompletParId(int.Parse(formCollection["tournamentid"]));
+            //On va chercher l'utilisateur courant.
+            UserManager<ApplicationUser> UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(unitOfWork.context));
+            ApplicationUser utilisateur = UserManager.FindById(User.Identity.GetUserId());
 
+            // On s'assure que le tournoi et ses champs sont initialisés.
+            if (tourn.Users == null)
+            {
+                tourn.Users = new List<ApplicationUser>();
+            }
+            
+            if(tourn.Equipes == null)
+            {
+                tourn.Equipes = new List<Equipe>();
+            }
+            if(tourn.Avancements == null)
+            {
+                tourn.Avancements = new List<EquipeAvancement>();
+            }
+            if(tourn.Parties == null)
+            {
+                tourn.Parties = new List<Partie>();
+            }
+
+            // Si on participe avec une nouvelle équipe...
             if(formCollection["teamid"].Equals("-1"))
             {
                 Equipe team = new Equipe();
                 team.Nom = formCollection["teamname"];
-
-                string id = User.Identity.GetUserId();
-
-                if (id != null)
-                {
-                    //TODO: Get current user. Might need a UserRepository or something.
-                    //UserManager<ApplicationUser> UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(uow.));
-                    //ApplicationUser user = UserManager.FindById(User.Identity.GetUserId());
-                    //ApplicationUser user = db.Users.Include(u => u.Cart).Where(u => u.Id.Equals(id)).FirstOrDefault();
-                }
-                //team.Joueurs.Add();
-
+            
                 team.Joueurs = new List<ApplicationUser>();
+                team.Joueurs.Add(utilisateur);
 
                 tourn.Equipes.Add(team);
 
                 unitOfWork.TournoiRepository.UpdateTournoi(tourn);
                 unitOfWork.Save();
             }
+                // Si on participe avec une équipe existante...
             else
             {
                 Equipe team = unitOfWork.EquipeRepository.ObtenirEquipeCompletParId(int.Parse(formCollection["teamid"]));
 
-                // TODO: Add player to team.
+                team.Joueurs.Add(utilisateur);
 
                 unitOfWork.TournoiRepository.UpdateTournoi(tourn);
                 unitOfWork.Save();
@@ -301,6 +358,312 @@ namespace ProjetSessionWebServ2.Controllers
             
 
             return RedirectToAction("Index");
+        }
+
+        public ActionResult TournamentStatus(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            // On va chercher le tournoi...
+            Tournoi tournoi = unitOfWork.TournoiRepository.ObtenirTournoiCompletParId(id);
+
+            if (tournoi == null)
+            {
+                return HttpNotFound();
+            }
+
+            // On initialise
+
+            // On va chercher les joueurs dans chaque équipe. Foutu Lazy Loading ne les charge pas correctement.
+            foreach (Equipe eq in tournoi.Equipes)
+            {
+                eq.Joueurs = unitOfWork.EquipeRepository.ObtenirEquipeCompletParId(eq.Id).Joueurs;
+            }
+
+            List<EquipeAvancement> equipeAvancement = unitOfWork.EquipeAvancementRepository.ObtenirEquipeAvancementsParTournoiTriee(id).ToList();
+
+            Tournoi_EquipesPointages viewModel = new Tournoi_EquipesPointages();
+            viewModel.Tournoi = tournoi;
+            viewModel.Equipes = equipeAvancement;
+
+            return View(viewModel);
+        }
+
+        public ActionResult TournamentGames(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            // On va chercher le tournoi...
+            Tournoi tournoi = unitOfWork.TournoiRepository.ObtenirTournoiCompletParId(id);
+
+            if (tournoi == null)
+            {
+                return HttpNotFound();
+            }
+
+            // On va chercher les parties du tournoi...
+            tournoi.Parties = unitOfWork.PartieRepository.ObtenirPartiesParTournoi(tournoi.Id).OrderByDescending(p => p.DateEtHeureDebut).ToList();
+
+            return View(tournoi);
+        }
+
+        public ActionResult AddGame(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            // On va chercher le tournoi...
+            Tournoi tournoi = unitOfWork.TournoiRepository.ObtenirTournoiCompletParId(id);
+
+            if (tournoi == null)
+            {
+                return HttpNotFound();
+            }
+
+            // infos pour la vue
+            ViewBag.NomTournoi = tournoi.Nom;
+            ViewBag.idTournoi = tournoi.Id;
+            ViewBag.Equipes = tournoi.Equipes;
+            
+
+            return View(new Partie());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddGame(FormCollection collection, int? NomRound)
+        {
+            // On prépare la vue, au cas où la création de partie ne fonctionne pas.
+            Tournoi tournoi = unitOfWork.TournoiRepository.ObtenirTournoiCompletParId(int.Parse(collection["tournid"]));
+
+            // Pour éviter le Lazy Loading
+            tournoi.Parties = unitOfWork.PartieRepository.ObtenirPartiesParTournoi(tournoi.Id).ToList();
+
+            if (tournoi == null)
+            {
+                return HttpNotFound();
+            }
+
+            ViewBag.NomTournoi = tournoi.Nom;
+            ViewBag.idTournoi = tournoi.Id;
+            ViewBag.Equipes = tournoi.Equipes;
+
+            // On créer notre partie.
+            Partie partie = new Partie();
+            // Elle est active.
+            partie.Actif = true;
+
+            // On essaye d'assigner une date à la partie.
+            DateTime datePartie;
+            int heureDebut;
+            int heureFin;
+            try
+            {
+                datePartie = DateTime.Parse(collection["DatePartie"]);
+                heureDebut = int.Parse(collection["HeureDebut"]);
+                heureFin = int.Parse(collection["HeureFin"]);
+            }
+            catch (Exception e)
+            {
+                // La date est mal formatée...
+                TempData["message"] = "La date de l'événement doit être une date valide sous le format AAAA-MM-JJ. L'heure de début et l'heure de fin doivent être des chiffres";
+                
+                return View(partie);
+            }
+            if (ModelState.IsValid)
+            {
+                // On assigne les équipes à la partie.
+                partie.Equipes = new List<Equipe>();
+
+                string equipesString = collection["Equipes"];
+
+                if(equipesString.Equals(""))
+                {
+                    // Il n'y a pas d'équipes de choisis...
+                    TempData["message"] = "Veuillez choisir des équipes pour cette partie.";
+
+                    return View(partie);
+                }
+
+                string[] equipeStringAr = equipesString.Split(',');
+
+                try
+                {
+                    // Avec les noms d'équipe, on va chercher les objets Equipes. On ajoute ces equipes à notre partie.
+                    for (int i = 0; i < equipeStringAr.Length; i++)
+                    {
+                        string teamName = equipeStringAr[i];
+
+                        // Dans le cas que la personne a mal formatté les équipes, et qu'il reste une ',' à la fin.
+                        if (teamName == "")
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            // Si la personne a formatté avec des espaces après les virgules, on enlève les espaces.
+                            if(teamName[0].ToString().Equals(" "))
+                            {
+                                teamName = teamName.Substring(1);
+                            }
+                            Equipe e = unitOfWork.EquipeRepository.ObtenirEquipeCompleteParNom(teamName);
+
+                            if(e == null)
+                            {
+                                throw new InvalidOperationException("Mauvaise Equipe");
+                            }
+
+                            partie.Equipes.Add(e);
+                        }
+                    }
+                }
+                catch(Exception e)
+                {
+                    // Les équipes sont mal formattés, ou une équipe n'existe pas.
+                    TempData["message"] = "Veuillez choisir des équipes valides pour cette partie, et vérifier le formattage.";
+
+                    return View(partie);
+                }
+
+                // Assignation de la date et heure
+
+                DateTime dateEtHeureDebut = datePartie.AddHours(heureDebut);
+                DateTime dateEtHeureFin = datePartie.AddHours(heureFin);
+                partie.DateEtHeureDebut = dateEtHeureDebut;
+                partie.DateEtHeureFin = dateEtHeureFin;
+
+                if(tournoi.Parties == null)
+                {
+                    tournoi.Parties = new List<Partie>();
+                }
+
+                tournoi.Parties.Add(partie);
+                unitOfWork.TournoiRepository.UpdateTournoi(tournoi);
+
+                //unitOfWork.PartieRepository.InsertPartie(partie);
+                unitOfWork.Save();
+
+
+
+                return RedirectToAction("TournamentGames", new { id=tournoi.Id });
+            }
+
+            return View(new Partie());
+        }
+
+        // Annule une partie
+        public ActionResult CancelGame(int? id, int? tournid)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            // On va chercher la partie...
+            Partie partie = unitOfWork.PartieRepository.ObtenirPartieCompletParId(id);
+
+            if (partie == null)
+            {
+                return HttpNotFound();
+            }
+
+            // On annule la partie.
+            partie.Actif = false;
+
+            unitOfWork.PartieRepository.UpdatePartie(partie);
+            unitOfWork.Save();
+
+            return RedirectToAction("TournamentGames", new { id=tournid });
+        }
+
+        // Amène vers la page qui permet de choisir un gagnant pour une partie
+        public ActionResult SetGameWinner(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            // On va chercher la partie...
+            Partie partie = unitOfWork.PartieRepository.ObtenirPartieCompletParId(id);
+
+            if (partie == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(partie);
+        }
+
+        // Assigne un gagnant à une partie
+        public ActionResult ChooseWinner(int? id, int? eqid)
+        {
+            if (id == null || eqid == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            // On va chercher la partie...
+            Partie partie = unitOfWork.PartieRepository.ObtenirPartieCompletParId(id);
+
+            if (partie == null)
+            {
+                return HttpNotFound();
+            }
+
+            // On va chercher l'équipe, si elle fait partie de celles inclues dans la partie...
+            Equipe eq = partie.Equipes.Find(e => e.Id == eqid);
+
+            if(eq == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            // On assigne le gagnant.
+            partie.Gagnant = eq.Nom;
+
+            // Il faut maintenant assigner les points à l'équipe gagnante.
+            Tournoi tournoi = partie.Tournoi;
+
+            EquipeAvancement avance = unitOfWork.EquipeAvancementRepository.ObtenirEquipeAvancementParIdEquipeParTournoi(eqid, tournoi.Id);
+
+            if(avance == null)
+            {
+                if(tournoi.Avancements == null)
+                {
+                    tournoi.Avancements = new List<EquipeAvancement>();
+                }
+
+                EquipeAvancement ava = new EquipeAvancement();
+
+                ava.Equipe = eq;
+                ava.NbrDePoints = 0;
+                ava.Tournoi = tournoi;
+
+                avance = ava;
+
+                tournoi.Avancements.Add(ava);
+
+                unitOfWork.TournoiRepository.UpdateTournoi(tournoi);
+                unitOfWork.Save();
+            }
+
+            // On ajoute un point.
+            avance.NbrDePoints += 1;
+
+            unitOfWork.PartieRepository.UpdatePartie(partie);
+            unitOfWork.EquipeAvancementRepository.UpdateEquipeAvancement(avance);
+            unitOfWork.Save();
+
+            return RedirectToAction("TournamentGames", new { id = tournoi.Id });
         }
 
         protected override void Dispose(bool disposing)

@@ -9,6 +9,12 @@
 <div>
     <h4>@ProjetSessionWebServ2.GlobalRessources.TournoiRes.NomController</h4>
     <hr />
+    @Html.ActionLink("Voir le statut du tournoi", "TournamentStatus", new { id=Model.Id })
+    <br />
+    <br />
+    @Html.ActionLink("Voir les parties du tournoi", "TournamentGames", new { id = Model.Id })
+    <br />
+    <br />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayName(ProjetSessionWebServ2.GlobalRessources.TournoiRes.NomTournoi)
@@ -69,6 +75,7 @@
                 @Html.DisplayName(ProjetSessionWebServ2.GlobalRessources.TournoiRes.Equipes)
             </th>
             <th></th>
+            <th></th>
         </tr>
 
         @Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.TournoiRes.JoinAsNewTeam, "Participate", new { tournamentId = Model.Id })
@@ -82,11 +89,14 @@
                 <td>
                     @Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.TournoiRes.JoindreEquipe, "Participate", new { tournamentId = Model.Id, teamid = item.Id })
                 </td>
+                <td>@Html.ActionLink("Détails", "DetailsForTeam", new { id=item.Id, tournid= Model.Id })</td>
             </tr>
         }
     </table>
 </div>
 
+
+<br />
 <p>
     @Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.TournoiRes.Edit, "Edit", new { id = Model.Id }) |
     @Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.TournoiRes.BackToList, "Index")

@@ -17,6 +17,8 @@ namespace ProjetSessionWebServ2.Models
         [Display(Name = "Equipes", ResourceType = typeof(GlobalRessources.TournoiRes))]
         public List<ApplicationUser> Joueurs { get; set; }
 
+        public virtual List<Partie> Parties { get; set; }
+
         //public int PointageTotal { get; set; }
     }
 }

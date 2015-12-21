@@ -194,6 +194,7 @@
     <Compile Include="DAL\CongresRepository.cs" />
     <Compile Include="DAL\CustomUserAttribute.cs" />
     <Compile Include="DAL\DimensionRepository.cs" />
+    <Compile Include="DAL\EquipeAvancementRepository.cs" />
     <Compile Include="DAL\EquipeRepository.cs" />
     <Compile Include="DAL\EvenementRepository.cs" />
     <Compile Include="DAL\ExempleRepo.cs" />
@@ -201,6 +202,7 @@
     <Compile Include="DAL\IGenericRepository.cs" />
     <Compile Include="DAL\IUnitOfWork.cs" />
     <Compile Include="DAL\KiosqueRepository.cs" />
+    <Compile Include="DAL\PartieRepository.cs" />
     <Compile Include="DAL\PlageHoraireRepository.cs" />
     <Compile Include="DAL\SalleRepository.cs" />
     <Compile Include="DAL\SectionRepository.cs" />
@@ -364,6 +366,7 @@
     <Compile Include="ViewModels\Tournoi_Equipe.cs" />
     <Compile Include="ViewModels\SalleVM.cs" />
     <Compile Include="ViewModels\TournoiVM.cs" />
+    <Compile Include="ViewModels\Tournoi_EquipesPointages.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -498,6 +501,12 @@
     <Content Include="Views\Congres\ListeEvenementKiosque.cshtml" />
     <Content Include="Views\Congres\ListeEvenementSpectacle.cshtml" />
     <Content Include="Views\Congres\ListeEvenementTournoi.cshtml" />
+    <Content Include="Views\Tournois\AlreadyInTournament.cshtml" />
+    <Content Include="Views\Tournois\DetailsForTeam.cshtml" />
+    <Content Include="Views\Tournois\TournamentStatus.cshtml" />
+    <Content Include="Views\Tournois\TournamentGames.cshtml" />
+    <Content Include="Views\Tournois\AddGame.cshtml" />
+    <Content Include="Views\Tournois\SetGameWinner.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Kiosques\Create.cshtml" />

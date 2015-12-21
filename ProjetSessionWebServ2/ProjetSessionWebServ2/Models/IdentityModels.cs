@@ -53,6 +53,10 @@ namespace ProjetSessionWebServ2.Models
 
         public System.Data.Entity.DbSet<ProjetSessionWebServ2.Models.TypeTournoi> TypeTournois { get; set; }
 
+        public System.Data.Entity.DbSet<ProjetSessionWebServ2.Models.Equipe> Equipes { get; set; }
+
+        public System.Data.Entity.DbSet<ProjetSessionWebServ2.Models.Partie> Parties { get; set; }
+
 
     }
 }

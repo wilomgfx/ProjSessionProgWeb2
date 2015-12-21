@@ -1,0 +1,24 @@
+﻿@model ProjetSessionWebServ2.Models.Equipe
+
+@{
+    ViewBag.Title = "DetailsForTeam";
+}
+
+<h1>Détails pour l'équipe: @Model.Nom</h1>
+
+<h2>Joueurs (@Model.Joueurs.Count)</h2>
+@{
+    <table class="table">
+        <tr>
+            <th>Nom</th>
+        </tr>             
+        @foreach (ProjetSessionWebServ2.Models.ApplicationUser joueur in Model.Joueurs)
+        {
+            <tr>
+                <td>@joueur.UserName</td>
+            </tr>            
+        }  
+    </table>    
+}
+@Html.ActionLink("Retour au Tournoi", "Details", new { id=ViewData["TournID"] })
+@*@Html.ActionLink("Retour à l'index des tournois", "Index")*@
