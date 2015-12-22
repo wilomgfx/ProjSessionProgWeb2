@@ -1,20 +1,20 @@
 ﻿@model ProjetSessionWebServ2.Models.Tournoi
 
 @{
-    ViewBag.Title = "Tournament Games";
+    ViewBag.Title = ProjetSessionWebServ2.GlobalRessources.TournoiRes.PartiesTournoi;
 }
 
-<h1>Parties du Tournoi: @Model.Nom</h1>
+<h1>@ProjetSessionWebServ2.GlobalRessources.TournoiRes.PartiesTournoi: @Model.Nom</h1>
 
-@Html.ActionLink("Ajouter une partie", "AddGame", new { id=Model.Id })
+@Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.TournoiRes.AjouterPartie, "AddGame", new { id=Model.Id })
 <br />
 <br />
 
 <table class="table">
     <tr>
-        <th>Équipes &nbsp;</th>
-        <th>Date et Heure</th>
-        <th>Gagnant</th>
+        <th>@ProjetSessionWebServ2.GlobalRessources.TournoiRes.Equipe &nbsp;</th>
+        <th>@ProjetSessionWebServ2.GlobalRessources.TournoiRes.DateHeure</th>
+        <th>@ProjetSessionWebServ2.GlobalRessources.TournoiRes.Gagnant</th>
         <th></th>
     </tr>
     @foreach (ProjetSessionWebServ2.Models.Partie p in Model.Parties)
@@ -44,11 +44,11 @@
                 @{
                     if(!p.Actif)
                     {
-                        <p>Annulée</p>
+                        <p>@ProjetSessionWebServ2.GlobalRessources.TournoiRes.Annulee</p>
                     }
                     else
                     {
-                        <p>@p.DateEtHeureDebut à @p.DateEtHeureFin</p>
+                        <p>@p.DateEtHeureDebut @ProjetSessionWebServ2.GlobalRessources.TournoiRes.A @p.DateEtHeureFin</p>
                     }
                 }
             </td>
@@ -56,7 +56,7 @@
                 @{
                     if(p.Gagnant == null || p.Gagnant.Equals(""))
                     {
-                        @Html.ActionLink("Choose Winner...", "SetGameWinner", new { id=p.Id })
+                        @Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.TournoiRes.ChoisirGagnant, "SetGameWinner", new { id=p.Id })
                     }
                     else
                     {
@@ -73,7 +73,7 @@
                     }
                     else
                     {
-                        Html.ActionLink("Annuler", "CancelGame", new { id = p.Id, tournid = Model.Id });
+                        Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.TournoiRes.Annuler, "CancelGame", new { id = p.Id, tournid = Model.Id });
                     }
                 }
                 
@@ -82,5 +82,5 @@
     }
 </table>
 
-@Html.ActionLink("Retour au Tournoi", "Details", new { id = Model.Id })
+@Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.TournoiRes.RetourAuTournoi, "Details", new { id = Model.Id })
 

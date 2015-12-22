@@ -213,4 +213,100 @@
   <data name="TypeTournoi" xml:space="preserve">
     <value>Tournament type</value>
   </data>
+  <data name="A" xml:space="preserve">
+    <value>To</value>
+  </data>
+  <data name="AjouterPartie" xml:space="preserve">
+    <value>Add a game</value>
+  </data>
+  <data name="AjouterUnePartieTournoi" xml:space="preserve">
+    <value>Add a game to the Tournament</value>
+  </data>
+  <data name="Annulee" xml:space="preserve">
+    <value>Cancelled</value>
+  </data>
+  <data name="Annuler" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="ChoisirCommeGagnant" xml:space="preserve">
+    <value>Choose as winner</value>
+  </data>
+  <data name="ChoisirGagnant" xml:space="preserve">
+    <value>Choose winner...</value>
+  </data>
+  <data name="Classement" xml:space="preserve">
+    <value>Ranking</value>
+  </data>
+  <data name="CreerPartie" xml:space="preserve">
+    <value>Create a game</value>
+  </data>
+  <data name="DateHeure" xml:space="preserve">
+    <value>Date and Time</value>
+  </data>
+  <data name="DatePartie" xml:space="preserve">
+    <value>Game's date</value>
+  </data>
+  <data name="DefinirGagnant" xml:space="preserve">
+    <value>Set game winner</value>
+  </data>
+  <data name="DefinirGagnantTexte" xml:space="preserve">
+    <value>Choose a winner for this game</value>
+  </data>
+  <data name="DejaParticipant" xml:space="preserve">
+    <value>Already participating</value>
+  </data>
+  <data name="DejaParticipantTexte" xml:space="preserve">
+    <value>It seems like you are already a member of a team in this tournament. You can only enter each tournament once.</value>
+  </data>
+  <data name="DetailsPourEquipe" xml:space="preserve">
+    <value>Details for team</value>
+  </data>
+  <data name="DetailsPourLequipe" xml:space="preserve">
+    <value>Détails for the team</value>
+  </data>
+  <data name="EquipesTournois" xml:space="preserve">
+    <value>List of tournament's teams</value>
+  </data>
+  <data name="EtesVousSurParticiper" xml:space="preserve">
+    <value>Are you sure you want to enter the tournament with this team?</value>
+  </data>
+  <data name="Gagnant" xml:space="preserve">
+    <value>Winner</value>
+  </data>
+  <data name="Oups" xml:space="preserve">
+    <value>Oops!</value>
+  </data>
+  <data name="Partie" xml:space="preserve">
+    <value>Game</value>
+  </data>
+  <data name="PartiesTournoi" xml:space="preserve">
+    <value>Tournament games</value>
+  </data>
+  <data name="Pointage" xml:space="preserve">
+    <value>Score</value>
+  </data>
+  <data name="Rang" xml:space="preserve">
+    <value>Rank</value>
+  </data>
+  <data name="RetourAuPartiesTournoi" xml:space="preserve">
+    <value>Back to Tournament Games</value>
+  </data>
+  <data name="RetourAuTournoi" xml:space="preserve">
+    <value>Back to tournament</value>
+  </data>
+  <data name="RetourIndexTournois" xml:space="preserve">
+    <value>Back to tournaments index</value>
+  </data>
+  <data name="StatutTournoi" xml:space="preserve">
+    <value>Tournament Status</value>
+  </data>
+  <data name="VoirPartiesTournoi" xml:space="preserve">
+    <value>See tournament's games</value>
+  </data>
+  <data name="VoirStatutTournoi" xml:space="preserve">
+    <value>See tournament's status</value>
+  </data>
+  <data name="EnterTeamsPlaceholder" xml:space="preserve">
+    <value>Type the names of your teams here, separated by commas</value>
+  </data>
 </root>

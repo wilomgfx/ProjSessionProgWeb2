@@ -151,10 +151,6 @@ namespace ProjetSessionWebServ2.Controllers
 
                 conference.Users.Add(utilisateur);
                 conference.Congres = congres;
-                unitOfWork.ConferenceRepository.InsertConference(conference);
-                
-                unitOfWork.Save();
-
 
 
                 PlageHoraire newPlageHoraire = new PlageHoraire();
@@ -164,6 +160,26 @@ namespace ProjetSessionWebServ2.Controllers
                 newPlageHoraire.DateEtHeureFin = dateEtHeureFin;
                 newPlageHoraire.Evenement = conference;
                 newPlageHoraire.Congres = congres;
+
+                List<PlageHoraire> lst = new List<PlageHoraire>();
+                lst.Add(newPlageHoraire);
+
+                if (!unitOfWork.IsRoomAvailableForTime(conference, lst))
+                {
+                    // Si la il y a conflit d'horaire pour une pièce....
+
+                    TempData["message"] = "Il y a conflit d'horaire pour la salle que vous essayez de choisir. Veuillez choisir une autre salle, ou faire votre évènement à un moment différent.";
+                    ViewBag.TypeConferenceIdViewBag = TypeConferenceId2;
+                    return View(conference);
+                }
+
+                unitOfWork.ConferenceRepository.InsertConference(conference);
+                
+                unitOfWork.Save();
+
+
+
+                
                 unitOfWork.PlageHoraireRepository.InsertPlageHoraire(newPlageHoraire);
                 unitOfWork.Save();
 

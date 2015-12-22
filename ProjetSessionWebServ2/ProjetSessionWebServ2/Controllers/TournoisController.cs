@@ -128,8 +128,6 @@ namespace ProjetSessionWebServ2.Controllers
                 tournoi.Avancements = new List<EquipeAvancement>();
                 tournoi.Parties = new List<Partie>();
                 tournoi.Congres = congres;
-                unitOfWork.TournoiRepository.InsertTournoi(tournoi);
-                unitOfWork.Save();
 
                 //Creating the plage horaire
                 PlageHoraire newPlageHoraire = new PlageHoraire();
@@ -139,6 +137,24 @@ namespace ProjetSessionWebServ2.Controllers
                 newPlageHoraire.DateEtHeureFin = dateEtHeureFin;
                 newPlageHoraire.Evenement = tournoi;
                 newPlageHoraire.Congres = congres;
+
+                List<PlageHoraire> lst = new List<PlageHoraire>();
+                lst.Add(newPlageHoraire);
+
+                if(!unitOfWork.IsRoomAvailableForTime(tournoi, lst))
+                {
+                    // Si la il y a conflit d'horaire pour une pièce....
+
+                    TempData["message"] = "Il y a conflit d'horaire pour la salle que vous essayez de choisir. Veuillez choisir une autre salle, ou faire votre évènement à un moment différent.";
+                    ViewBag.TypeTournoiId = TypeTournoiId;
+                    ViewBag.lstSalle = listSalle;
+                    return View(tournoi);
+                }
+
+                unitOfWork.TournoiRepository.InsertTournoi(tournoi);
+                unitOfWork.Save();
+
+               
                 unitOfWork.PlageHoraireRepository.InsertPlageHoraire(newPlageHoraire);
                 unitOfWork.Save();
 
@@ -413,6 +429,7 @@ namespace ProjetSessionWebServ2.Controllers
             return View(tournoi);
         }
 
+        [CustomUserAttribute(Roles = "administrateur", AccessLevel = "AddGame")]
         public ActionResult AddGame(int? id)
         {
             if (id == null)
@@ -439,6 +456,7 @@ namespace ProjetSessionWebServ2.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [CustomUserAttribute(Roles = "administrateur", AccessLevel = "AddGame")]
         public ActionResult AddGame(FormCollection collection, int? NomRound)
         {
             // On prépare la vue, au cas où la création de partie ne fonctionne pas.
@@ -537,6 +555,18 @@ namespace ProjetSessionWebServ2.Controllers
 
                 DateTime dateEtHeureDebut = datePartie.AddHours(heureDebut);
                 DateTime dateEtHeureFin = datePartie.AddHours(heureFin);
+
+                if(dateEtHeureDebut < tournoi.PlageHoraires.First().DateEtHeureDebut ||
+                   dateEtHeureFin > tournoi.PlageHoraires.First().DateEtHeureFin)
+                {
+                    PlageHoraire plage = tournoi.PlageHoraires.First();
+
+                    TempData["message"] = "La date de l'événement doit être une date valide pour la période du tournoi, c'est à dire entre le " + 
+                        plage.DateEtHeureDebut.ToString() + " et le " + plage.DateEtHeureFin.ToString();
+
+                    return View(partie);
+                }
+
                 partie.DateEtHeureDebut = dateEtHeureDebut;
                 partie.DateEtHeureFin = dateEtHeureFin;
 
@@ -560,6 +590,7 @@ namespace ProjetSessionWebServ2.Controllers
         }
 
         // Annule une partie
+        [CustomUserAttribute(Roles = "administrateur", AccessLevel = "CancelGame")]
         public ActionResult CancelGame(int? id, int? tournid)
         {
             if (id == null)
@@ -585,6 +616,7 @@ namespace ProjetSessionWebServ2.Controllers
         }
 
         // Amène vers la page qui permet de choisir un gagnant pour une partie
+        [CustomUserAttribute(Roles = "administrateur", AccessLevel = "SetGameWinner")]
         public ActionResult SetGameWinner(int? id)
         {
             if (id == null)
@@ -604,6 +636,7 @@ namespace ProjetSessionWebServ2.Controllers
         }
 
         // Assigne un gagnant à une partie
+        [CustomUserAttribute(Roles = "administrateur", AccessLevel = "ChooseWinner")]
         public ActionResult ChooseWinner(int? id, int? eqid)
         {
             if (id == null || eqid == null)

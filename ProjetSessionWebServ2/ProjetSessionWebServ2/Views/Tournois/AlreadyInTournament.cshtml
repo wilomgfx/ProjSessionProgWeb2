@@ -1,11 +1,11 @@
 ﻿
 @{
-    ViewBag.Title = "AlreadyInTournament";
+    ViewBag.Title = ProjetSessionWebServ2.GlobalRessources.TournoiRes.DejaParticipant;
 }
 
-<h1>Oups!</h1>
+<h1>@ProjetSessionWebServ2.GlobalRessources.TournoiRes.Oups</h1>
 
-<p>Il semblerait que vous soyez déjà un participant dans une équipe de ce tournois. Vous ne pouvez participer qu'une seule fois dans un tournois.</p>
+<p>@ProjetSessionWebServ2.GlobalRessources.TournoiRes.DejaParticipantTexte</p>
 
-@Html.ActionLink("Retour à l'index des tournois", "Index")
+@Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.TournoiRes.RetourIndexTournois, "Index")
 

@@ -213,4 +213,100 @@
   <data name="TypeTournoi" xml:space="preserve">
     <value>Type de tournoi</value>
   </data>
+  <data name="A" xml:space="preserve">
+    <value>À</value>
+  </data>
+  <data name="AjouterPartie" xml:space="preserve">
+    <value>Ajouter une partie</value>
+  </data>
+  <data name="AjouterUnePartieTournoi" xml:space="preserve">
+    <value>Ajouteur une partie au Tournoi</value>
+  </data>
+  <data name="Annulee" xml:space="preserve">
+    <value>Annulée</value>
+  </data>
+  <data name="Annuler" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="ChoisirCommeGagnant" xml:space="preserve">
+    <value>Choisir comme gagnant</value>
+  </data>
+  <data name="ChoisirGagnant" xml:space="preserve">
+    <value>Choisir un gagnant...</value>
+  </data>
+  <data name="Classement" xml:space="preserve">
+    <value>Classement</value>
+  </data>
+  <data name="CreerPartie" xml:space="preserve">
+    <value>Créer une partie</value>
+  </data>
+  <data name="DateHeure" xml:space="preserve">
+    <value>Date et Heure</value>
+  </data>
+  <data name="DatePartie" xml:space="preserve">
+    <value>Date de la partie</value>
+  </data>
+  <data name="DefinirGagnant" xml:space="preserve">
+    <value>Definir un gagnant</value>
+  </data>
+  <data name="DefinirGagnantTexte" xml:space="preserve">
+    <value>Choisissez un gagnant pour cette partie</value>
+  </data>
+  <data name="DejaParticipant" xml:space="preserve">
+    <value>Déjà participant</value>
+  </data>
+  <data name="DejaParticipantTexte" xml:space="preserve">
+    <value>Il semblerait que vous soyez déjà un participant dans une équipe de ce tournois. Vous ne pouvez participer qu'une seule fois dans un tournois.</value>
+  </data>
+  <data name="DetailsPourEquipe" xml:space="preserve">
+    <value>Détails pour une Équipe</value>
+  </data>
+  <data name="DetailsPourLequipe" xml:space="preserve">
+    <value>Détails pour l'équipe</value>
+  </data>
+  <data name="EquipesTournois" xml:space="preserve">
+    <value>Liste des équipes du Tournoi</value>
+  </data>
+  <data name="EtesVousSurParticiper" xml:space="preserve">
+    <value>Êtes vous sûr de vouloir participer au tournoi avec cette équipe?</value>
+  </data>
+  <data name="Gagnant" xml:space="preserve">
+    <value>Gagnant</value>
+  </data>
+  <data name="Oups" xml:space="preserve">
+    <value>Oups!</value>
+  </data>
+  <data name="Partie" xml:space="preserve">
+    <value>Partie</value>
+  </data>
+  <data name="PartiesTournoi" xml:space="preserve">
+    <value>Parties du Tournoi</value>
+  </data>
+  <data name="Pointage" xml:space="preserve">
+    <value>Pointage</value>
+  </data>
+  <data name="Rang" xml:space="preserve">
+    <value>Rang</value>
+  </data>
+  <data name="RetourAuPartiesTournoi" xml:space="preserve">
+    <value>Retour aux Parties du Tournoi</value>
+  </data>
+  <data name="RetourAuTournoi" xml:space="preserve">
+    <value>Retour au tournoi</value>
+  </data>
+  <data name="RetourIndexTournois" xml:space="preserve">
+    <value>Retour à l'index des Tournois</value>
+  </data>
+  <data name="StatutTournoi" xml:space="preserve">
+    <value>Statut du Tournoi</value>
+  </data>
+  <data name="VoirPartiesTournoi" xml:space="preserve">
+    <value>Voir les parties du tournoi</value>
+  </data>
+  <data name="VoirStatutTournoi" xml:space="preserve">
+    <value>Voir le statut du tournoi</value>
+  </data>
+  <data name="EnterTeamsPlaceholder" xml:space="preserve">
+    <value>Entrez vos équipes ici, séparés par des virgules</value>
+  </data>
 </root>

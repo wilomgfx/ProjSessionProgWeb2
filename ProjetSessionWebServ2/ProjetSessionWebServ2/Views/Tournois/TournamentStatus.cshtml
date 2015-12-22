@@ -1,24 +1,24 @@
 ﻿@model ProjetSessionWebServ2.ViewModels.Tournoi_EquipesPointages
 
 @{
-    ViewBag.Title = "Status";
+    ViewBag.Title = @ProjetSessionWebServ2.GlobalRessources.TournoiRes.StatutTournoi;
 }
 
-<h1>Statut du Tournoi: @Model.Tournoi.Nom</h1>
+<h1>@ProjetSessionWebServ2.GlobalRessources.TournoiRes.StatutTournoi: @Model.Tournoi.Nom</h1>
 
 
-<h2>Classement</h2>
+<h2>@ProjetSessionWebServ2.GlobalRessources.TournoiRes.Classement</h2>
 <div>
     <table class="table">
         <tr>
             <th>
-                Rang
+                @ProjetSessionWebServ2.GlobalRessources.TournoiRes.Rang
             </th>
             <th>
-                Équipe
+                @ProjetSessionWebServ2.GlobalRessources.TournoiRes.Equipe
             </th>
             <th>
-                Pointage
+                @ProjetSessionWebServ2.GlobalRessources.TournoiRes.Pointage
             </th>
             <th></th>
         </tr>
@@ -30,7 +30,7 @@
                     <td>@cpt</td>
                     <td>@eq.Equipe.Nom</td>
                     <td>@eq.NbrDePoints</td>
-                    <td>@Html.ActionLink("Détails", "DetailsForTeam", new { id = eq.Equipe.Id, tournid = Model.Tournoi.Id })</td>
+                    <td>@Html.ActionLink(@ProjetSessionWebServ2.GlobalRessources.TournoiRes.Details, "DetailsForTeam", new { id = eq.Equipe.Id, tournid = Model.Tournoi.Id })</td>
                 </tr>
 
                 cpt++;
@@ -41,6 +41,6 @@
 
 
 
-@Html.ActionLink("Retour au Tournoi", "Details", new { id = Model.Tournoi.Id })
+@Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.TournoiRes.RetourAuTournoi, "Details", new { id = Model.Tournoi.Id })
 
 

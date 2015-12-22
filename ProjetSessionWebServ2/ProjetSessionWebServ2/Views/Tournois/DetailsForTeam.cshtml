@@ -1,16 +1,16 @@
 ﻿@model ProjetSessionWebServ2.Models.Equipe
 
 @{
-    ViewBag.Title = "DetailsForTeam";
+    ViewBag.Title = ProjetSessionWebServ2.GlobalRessources.TournoiRes.DetailsPourEquipe;
 }
 
-<h1>Détails pour l'équipe: @Model.Nom</h1>
+<h1>@ProjetSessionWebServ2.GlobalRessources.TournoiRes.DetailsPourLequipe: @Model.Nom</h1>
 
-<h2>Joueurs (@Model.Joueurs.Count)</h2>
+<h2>@ProjetSessionWebServ2.GlobalRessources.TournoiRes.Joueurs (@Model.Joueurs.Count)</h2>
 @{
     <table class="table">
         <tr>
-            <th>Nom</th>
+            <th>@ProjetSessionWebServ2.GlobalRessources.TournoiRes.Nom</th>
         </tr>             
         @foreach (ProjetSessionWebServ2.Models.ApplicationUser joueur in Model.Joueurs)
         {
@@ -20,5 +20,5 @@
         }  
     </table>    
 }
-@Html.ActionLink("Retour au Tournoi", "Details", new { id=ViewData["TournID"] })
+@Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.TournoiRes.RetourAuTournoi, "Details", new { id=ViewData["TournID"] })
 @*@Html.ActionLink("Retour à l'index des tournois", "Index")*@

@@ -1,15 +1,15 @@
 ﻿@model ProjetSessionWebServ2.Models.Partie
 
 @{
-    ViewBag.Title = "SetGameWinner";
+    ViewBag.Title = ProjetSessionWebServ2.GlobalRessources.TournoiRes.DefinirGagnant;
 }
 
-<h1>Choisissez un gagnant pour cette partie</h1>
+<h1>@ProjetSessionWebServ2.GlobalRessources.TournoiRes.DefinirGagnantTexte</h1>
 
 <table class="table">
     <tr>
         <th>
-            Équipe
+            @ProjetSessionWebServ2.GlobalRessources.TournoiRes.Equipe
         </th>
         <th></th>
     </tr>
@@ -17,9 +17,9 @@
     {
         <tr>
             <td>@eq.Nom</td>
-            <td>@Html.ActionLink("Choisir comme gagnant", "ChooseWinner", new { id= Model.Id, eqid = eq.Id })</td>
+            <td>@Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.TournoiRes.ChoisirCommeGagnant, "ChooseWinner", new { id= Model.Id, eqid = eq.Id })</td>
         </tr>      
     }
 </table>
 
-@Html.ActionLink("Retour aux Parties du Tournoi", "TournamentGames", new { id = Model.Tournoi.Id })
+@Html.ActionLink(ProjetSessionWebServ2.GlobalRessources.TournoiRes.RetourAuPartiesTournoi, "TournamentGames", new { id = Model.Tournoi.Id })
